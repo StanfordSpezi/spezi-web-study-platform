@@ -10,5 +10,5 @@ SPDX-License-Identifier: MIT
 
 # Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 
-- [Arkadiusz Bachorski](https://github.com/arkadiuszbachorski)
+- [Michael Heckmann](https://github.com/michaelheckmann)
 - [Paul Schmiedmayer](https://github.com/PSchmiedmayer)
