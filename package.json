@@ -26,7 +26,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint --output-file eslint_report.json --format json .",
-    "test": "vitest run --coverage",
     "prepush": "npm run lint:fix && tsc --noEmit"
   },
   "dependencies": {

@@ -11,7 +11,6 @@ SPDX-License-Identifier: MIT
 # Stanford Biodesign Digital Health Spezi Web Study Platform Frontend
 
 [![Build and Test](https://github.com/StanfordSpezi/spezi-web-study-platform/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/StanfordSpezi/spezi-web-study-platform/actions/workflows/build-and-test.yml)
-[![codecov](https://codecov.io/gh/StanfordSpezi/spezi-web-study-platform/graph/badge.svg?token=PsKyNz7Woe)](https://codecov.io/gh/StanfordSpezi/spezi-web-study-platform)
 
 The goal of the project is to build an open-source platform that empowers researchers to manage simple studies without needing deep technical expertise.
 
