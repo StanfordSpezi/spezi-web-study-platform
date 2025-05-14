@@ -6,8 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { NotFound } from "@/components/NotFound/NotFound";
-import { routes } from "@/modules/routes";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -15,14 +13,6 @@ import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({
   routeTree,
-  defaultNotFoundComponent: () => (
-    <NotFound
-      backPage={{ name: "home", href: routes.home }}
-      entityName="page"
-    />
-  ),
-  defaultPendingMs: 300,
-  defaultPendingMinMs: 200,
 });
 
 declare module "@tanstack/react-router" {

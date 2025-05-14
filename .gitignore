@@ -10,9 +10,6 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
 
 # testing
 /coverage
@@ -30,13 +27,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
-# Firebase admin credentials
-admin-creds.json
-
-# vercel
-.vercel
+# env files
+.env
 
 # typescript
 *.tsbuildinfo
@@ -44,8 +36,6 @@ admin-creds.json
 # lint
 eslint_report.json
 
-# docs
-docs
-
 # editors
 .idea/
+.vscode/
