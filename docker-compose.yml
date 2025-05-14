@@ -1,8 +1,7 @@
 #
-# This source file is part of the Stanford Biodesign Digital Health Next.js Template open-source project
-# Based on the Apodini workflow found at: https://github.com/Apodini/ApodiniExample/docker-compose.yml
+# This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
 #
-# SPDX-FileCopyrightText: 2023 Stanford University and the project authors (see CONTRIBUTORS.md)
+# SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
 # SPDX-License-Identifier: MIT
 #
@@ -10,13 +9,15 @@
 version: '3.9'
 
 services:
-  # An Next.js Template
-  stanford-bdhg-nextjs-template:
-    container_name: 'stanford-bdhg-nextjs-template'
-    image: 'ghcr.io/stanfordbdhg/nextjstemplate:latest'
+  # ENGAGE-HF Web Frontend
+  stanford-spezi-web-template-application:
+    container_name: 'stanford-spezi-web-template-application'
+    image: 'ghcr.io/stanfordspezi/spezi-web-template-application:latest'
+    environment:
+      - VITE_PUBLIC_CHECK=${VITE_PUBLIC_CHECK}
     expose:
       - '80'
-    command: ['node', 'server.js']
+    command: [ 'node', 'server.js' ]
     labels:
       # The domain the service will respond to
       - 'traefik.http.routers.backend.rule=Host(`localhost`)'

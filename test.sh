@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# This source file is part of the Stanford Biodesign Digital Health Next.js Template open-source project
+# This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
 #
 # SPDX-FileCopyrightText: 2023 Stanford University
 #
@@ -11,6 +11,6 @@
 set -e
 
 CONTENT=$(curl --fail http://localhost)
-echo "$CONTENT" | grep "Welcome to the Stanford Biodesign Digital Health Next.js Template"
+echo "$CONTENT" | grep "Spezi Web Template Application"
 
 echo "✅ Test Passed!"
