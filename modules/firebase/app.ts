@@ -1,11 +1,21 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { env } from "@/env";
+import { firebaseConfig } from "@/modules/firebase/config";
+import {
+    getCallables,
+    getCollectionRefs,
+    getDocDataOrThrow,
+    getDocumentsRefs,
+} from "@/modules/firebase/utils";
+import { queryClient } from "@/modules/query/queryClient";
+import { routes } from "@/modules/routes";
 import { initializeApp } from "@firebase/app";
 import { connectFunctionsEmulator, getFunctions } from "@firebase/functions";
 import { type UserType } from "@stanfordbdhg/engagehf-models";
@@ -14,16 +24,6 @@ import { queryOptions } from "@tanstack/react-query";
 import { redirect } from "@tanstack/react-router";
 import { connectAuthEmulator, getAuth, OAuthProvider } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
-import { env } from "@/env";
-import { firebaseConfig } from "@/modules/firebase/config";
-import {
-  getCallables,
-  getCollectionRefs,
-  getDocDataOrThrow,
-  getDocumentsRefs,
-} from "@/modules/firebase/utils";
-import { queryClient } from "@/modules/query/queryClient";
-import { routes } from "@/modules/routes";
 
 const firebaseApp = initializeApp(firebaseConfig);
 

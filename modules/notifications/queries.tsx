@@ -1,18 +1,18 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { queryOptions, useQuery } from "@tanstack/react-query";
-import { query, orderBy } from "firebase/firestore";
 import { collectionRefs } from "@/modules/firebase/app";
 import { useUser } from "@/modules/firebase/UserProvider";
 import { getDocsData } from "@/modules/firebase/utils";
 import { filterUnreadNotifications } from "@/modules/notifications/helpers";
 import { queryClient } from "@/modules/query/queryClient";
+import { queryOptions, useQuery } from "@tanstack/react-query";
+import { orderBy, query } from "firebase/firestore";
 
 interface ListNotificationsPayload {
   userId: string;

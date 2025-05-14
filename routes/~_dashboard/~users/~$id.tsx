@@ -1,11 +1,25 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { NotFound } from "@/components/NotFound";
+import { callables, docRefs, ensureType } from "@/modules/firebase/app";
+import { getDocDataOrThrow } from "@/modules/firebase/utils";
+import { queryClient } from "@/modules/query/queryClient";
+import { routes } from "@/modules/routes";
+import {
+    getUserData,
+    parseUserId,
+    userOrganizationQueryOptions,
+} from "@/modules/user/queries";
+import {
+    UserForm,
+    type UserFormSchema,
+} from "@/routes/~_dashboard/~users/UserForm";
 import { updateDoc } from "@firebase/firestore";
 import { UserType } from "@stanfordbdhg/engagehf-models";
 import { toast } from "@stanfordspezi/spezi-web-design-system/components/Toaster";
@@ -14,20 +28,6 @@ import { PageTitle } from "@stanfordspezi/spezi-web-design-system/molecules/Dash
 import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { Users } from "lucide-react";
 import { Helmet } from "react-helmet";
-import { NotFound } from "@/components/NotFound";
-import { callables, docRefs, ensureType } from "@/modules/firebase/app";
-import { getDocDataOrThrow } from "@/modules/firebase/utils";
-import { queryClient } from "@/modules/query/queryClient";
-import { routes } from "@/modules/routes";
-import {
-  getUserData,
-  parseUserId,
-  userOrganizationQueryOptions,
-} from "@/modules/user/queries";
-import {
-  UserForm,
-  type UserFormSchema,
-} from "@/routes/~_dashboard/~users/UserForm";
 import { DashboardLayout } from "../DashboardLayout";
 
 const UserPage = () => {

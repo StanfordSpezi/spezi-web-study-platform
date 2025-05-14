@@ -1,5 +1,5 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
@@ -22,16 +22,16 @@
 
 import { Route as rootRoute } from './routes/~__root'
 import { Route as DashboardImport } from './routes/~_dashboard'
-import { Route as SignInIndexImport } from './routes/~sign-in/~index'
-import { Route as DashboardIndexImport } from './routes/~_dashboard/~index'
-import { Route as DashboardUsersInviteImport } from './routes/~_dashboard/~users/~invite'
-import { Route as DashboardUsersIdImport } from './routes/~_dashboard/~users/~$id'
-import { Route as DashboardPatientsInviteImport } from './routes/~_dashboard/~patients/~invite'
-import { Route as DashboardUsersIndexImport } from './routes/~_dashboard/~users/~index'
-import { Route as DashboardPatientsIndexImport } from './routes/~_dashboard/~patients/~index'
-import { Route as DashboardNotificationsIndexImport } from './routes/~_dashboard/~notifications/~index'
 import { Route as DashboardAdminIndexImport } from './routes/~_dashboard/~admin/~index'
+import { Route as DashboardIndexImport } from './routes/~_dashboard/~index'
+import { Route as DashboardNotificationsIndexImport } from './routes/~_dashboard/~notifications/~index'
 import { Route as DashboardPatientsIdIndexImport } from './routes/~_dashboard/~patients/~$id/~index'
+import { Route as DashboardPatientsIndexImport } from './routes/~_dashboard/~patients/~index'
+import { Route as DashboardPatientsInviteImport } from './routes/~_dashboard/~patients/~invite'
+import { Route as DashboardUsersIdImport } from './routes/~_dashboard/~users/~$id'
+import { Route as DashboardUsersIndexImport } from './routes/~_dashboard/~users/~index'
+import { Route as DashboardUsersInviteImport } from './routes/~_dashboard/~users/~invite'
+import { Route as SignInIndexImport } from './routes/~sign-in/~index'
 
 // Create/Update Routes
 

@@ -1,19 +1,19 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { callables } from "@/modules/firebase/app";
+import { useUser } from "@/modules/firebase/UserProvider";
+import { type SharedUser } from "@/modules/user/table";
 import { DropdownMenuItem } from "@stanfordspezi/spezi-web-design-system/components/DropdownMenu";
 import { toast } from "@stanfordspezi/spezi-web-design-system/components/Toaster";
 import { getUserName } from "@stanfordspezi/spezi-web-design-system/modules/auth";
 import { useRouter } from "@tanstack/react-router";
-import { ShieldX, ShieldCheck } from "lucide-react";
-import { callables } from "@/modules/firebase/app";
-import { useUser } from "@/modules/firebase/UserProvider";
-import { type SharedUser } from "@/modules/user/table";
+import { ShieldCheck, ShieldX } from "lucide-react";
 
 interface ToggleUserDisabledProps {
   user: SharedUser;

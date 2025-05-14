@@ -1,20 +1,20 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
-import { Tooltip } from "@stanfordspezi/spezi-web-design-system/components/Tooltip";
-import { useMutation } from "@tanstack/react-query";
-import { useMemo } from "react";
 import { callables } from "@/modules/firebase/app";
 import { type UserMessage } from "@/modules/firebase/models";
 import { useUser } from "@/modules/firebase/UserProvider";
 import { isMessageRead } from "@/modules/notifications/helpers";
 import { useNotificationActions } from "@/modules/notifications/queries";
+import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
+import { Tooltip } from "@stanfordspezi/spezi-web-design-system/components/Tooltip";
+import { useMutation } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 interface MarkAllAsReadButtonProps {
   notifications: UserMessage[];

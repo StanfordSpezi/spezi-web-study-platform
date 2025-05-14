@@ -1,29 +1,29 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { UserType } from "@stanfordbdhg/engagehf-models";
-import { queryOptions } from "@tanstack/react-query";
-import { query, where } from "firebase/firestore";
 import {
-  docRefs,
-  getCurrentUser,
-  collectionRefs,
+    collectionRefs,
+    docRefs,
+    getCurrentUser,
 } from "@/modules/firebase/app";
 import { type Invitation, type Organization } from "@/modules/firebase/models";
 import { mapAuthData } from "@/modules/firebase/user";
 import {
-  getDocData,
-  getDocDataOrThrow,
-  getDocsData,
-  type ResourceType,
-  type UserAuthenticationInformation,
+    getDocData,
+    getDocDataOrThrow,
+    getDocsData,
+    type ResourceType,
+    type UserAuthenticationInformation,
 } from "@/modules/firebase/utils";
 import { queryClient } from "@/modules/query/queryClient";
+import { UserType } from "@stanfordbdhg/engagehf-models";
+import { queryOptions } from "@tanstack/react-query";
+import { query, where } from "firebase/firestore";
 
 export const getNonAdminInvitationsQuery = (organizationIds: string[]) =>
   query(

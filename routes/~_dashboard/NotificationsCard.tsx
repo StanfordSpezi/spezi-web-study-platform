@@ -1,28 +1,28 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import {
-  Async,
-  queriesToAsyncProps,
-} from "@stanfordspezi/spezi-web-design-system/components/Async";
-import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-} from "@stanfordspezi/spezi-web-design-system/components/Card";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
 import { useUser } from "@/modules/firebase/UserProvider";
 import { filterUnreadNotifications } from "@/modules/notifications/helpers";
 import { Notification } from "@/modules/notifications/Notification";
 import { notificationQueries } from "@/modules/notifications/queries";
 import { routes } from "@/modules/routes";
+import {
+    Async,
+    queriesToAsyncProps,
+} from "@stanfordspezi/spezi-web-design-system/components/Async";
+import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+} from "@stanfordspezi/spezi-web-design-system/components/Card";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 
 export const NotificationsCard = () => {
   const { auth } = useUser();

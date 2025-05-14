@@ -1,5 +1,5 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
@@ -7,11 +7,11 @@
 //
 
 import {
-  type InferEncoded,
-  type invitationConverter,
-  type organizationConverter,
-  type userConverter,
-  type userMessageConverter,
+    type InferEncoded,
+    type invitationConverter,
+    type organizationConverter,
+    type userConverter,
+    type userMessageConverter,
 } from "@stanfordbdhg/engagehf-models";
 
 export type Organization = InferEncoded<typeof organizationConverter> & {

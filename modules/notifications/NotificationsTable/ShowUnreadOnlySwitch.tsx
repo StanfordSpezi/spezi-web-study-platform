@@ -1,15 +1,15 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { type UserMessage } from "@/modules/firebase/models";
 import { SideLabel } from "@stanfordspezi/spezi-web-design-system/components/SideLabel";
 import { Switch } from "@stanfordspezi/spezi-web-design-system/components/Switch";
 import { type Table } from "@tanstack/table-core";
-import { type UserMessage } from "@/modules/firebase/models";
 import { columnIds } from "./helpers";
 
 interface ShowUnreadOnlySwitchProps {

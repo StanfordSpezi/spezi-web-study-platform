@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+# This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 #
 # SPDX-FileCopyrightText: 2023 Stanford University
 #

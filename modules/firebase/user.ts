@@ -1,17 +1,17 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { callables } from "@/modules/firebase/app";
 import {
-  type GetUsersInformationInput,
-  type UserInformation,
+    type GetUsersInformationInput,
+    type UserInformation,
 } from "@stanfordbdhg/engagehf-models";
 import { chunk } from "es-toolkit";
-import { callables } from "@/modules/firebase/app";
 
 export const mapAuthData = async <T>(
   input: GetUsersInformationInput,

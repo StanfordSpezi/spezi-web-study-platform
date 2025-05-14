@@ -1,20 +1,20 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { currentUserQueryOptions } from "@/modules/firebase/UserProvider";
+import { DashboardLayout } from "@/routes/~_dashboard/DashboardLayout";
 import { PageTitle } from "@stanfordspezi/spezi-web-design-system/molecules/DashboardLayout";
 import {
-  NotFound as NotFoundBase,
-  type NotFoundProps,
+    NotFound as NotFoundBase,
+    type NotFoundProps,
 } from "@stanfordspezi/spezi-web-design-system/molecules/NotFound";
 import { useQuery } from "@tanstack/react-query";
 import { RouteOff } from "lucide-react";
-import { currentUserQueryOptions } from "@/modules/firebase/UserProvider";
-import { DashboardLayout } from "@/routes/~_dashboard/DashboardLayout";
 
 /**
  * NotFound component wrapped with DashboardLayout if user is signed in

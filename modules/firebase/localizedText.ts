@@ -1,18 +1,18 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { type LocalizedText } from "@/modules/firebase/models";
 import {
-  type Nil,
-  isObject,
+    type Nil,
+    isObject,
 } from "@stanfordspezi/spezi-web-design-system/utils/misc";
 import { getNavigatorLanguage } from "@stanfordspezi/spezi-web-design-system/utils/navigator";
 import { isNil } from "es-toolkit";
-import { type LocalizedText } from "@/modules/firebase/models";
 
 export const createLocalizationHelpers = (locale: string) => {
   const possibleLocalesToCheck = [

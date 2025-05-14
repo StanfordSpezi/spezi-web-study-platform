@@ -1,5 +1,5 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
@@ -8,9 +8,9 @@
 
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-import path from "node:path";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
+import path from "node:path";
 import { defineConfig } from "vite";
 import { viteEnvs } from "vite-envs";
 
@@ -24,7 +24,7 @@ export default defineConfig({
       generatedRouteTree: "./routeTree.gen.ts",
       routeTreeFileHeader: [
         `//
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //

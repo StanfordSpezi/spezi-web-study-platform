@@ -1,20 +1,20 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { currentUserQueryOptions } from "@/modules/firebase/UserProvider";
+import { queryClient } from "@/modules/query/queryClient";
+import { DashboardLayout } from "@/routes/~_dashboard/DashboardLayout";
 import { ErrorState } from "@stanfordspezi/spezi-web-design-system/components/ErrorState";
 import { Spinner } from "@stanfordspezi/spezi-web-design-system/components/Spinner";
 import { StateContainer } from "@stanfordspezi/spezi-web-design-system/components/StateContainer";
 import { PageTitle } from "@stanfordspezi/spezi-web-design-system/molecules/DashboardLayout";
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldX } from "lucide-react";
-import { currentUserQueryOptions } from "@/modules/firebase/UserProvider";
-import { queryClient } from "@/modules/query/queryClient";
-import { DashboardLayout } from "@/routes/~_dashboard/DashboardLayout";
 
 export const Route = createFileRoute("/_dashboard")({
   loader: () => queryClient.ensureQueryData(currentUserQueryOptions()),

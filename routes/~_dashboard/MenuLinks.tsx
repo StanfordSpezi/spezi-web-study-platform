@@ -1,17 +1,17 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { useHasUnreadNotification } from "@/modules/notifications/queries";
+import { routes } from "@/modules/routes";
 import { UserType } from "@stanfordbdhg/engagehf-models";
 import { MenuItem } from "@stanfordspezi/spezi-web-design-system/molecules/DashboardLayout";
 import { useLocation } from "@tanstack/react-router";
 import { Bell, Contact, Home, MonitorCog, Users } from "lucide-react";
-import { useHasUnreadNotification } from "@/modules/notifications/queries";
-import { routes } from "@/modules/routes";
 
 interface MenuLinksProps {
   userType: UserType;

@@ -1,18 +1,18 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { AsideLayout } from "@/components/AsideLayout";
+import { env } from "@/env";
+import { auth, authProvider } from "@/modules/firebase/app";
 import { SignInForm as AuthSignInForm } from "@stanfordspezi/spezi-web-design-system/modules/auth";
 import { createFileRoute } from "@tanstack/react-router";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { Helmet } from "react-helmet";
-import { AsideLayout } from "@/components/AsideLayout";
-import { env } from "@/env";
-import { auth, authProvider } from "@/modules/firebase/app";
 import stanfordLogoImg from "./stanfordLogo.png";
 
 const SignIn = () => (

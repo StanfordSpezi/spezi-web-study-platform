@@ -1,36 +1,36 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
-import {
-  Notification as NotificationBase,
-  NotificationActions,
-  NotificationContentContainer,
-  NotificationHeader,
-  NotificationImage,
-  NotificationLink,
-  NotificationMessage,
-  NotificationTime,
-  NotificationTitle,
-} from "@stanfordspezi/spezi-web-design-system/molecules/Notifications";
-import { useMutation } from "@tanstack/react-query";
 import { callables } from "@/modules/firebase/app";
 import {
-  parseLocalizedText,
-  parseNilLocalizedText,
+    parseLocalizedText,
+    parseNilLocalizedText,
 } from "@/modules/firebase/localizedText";
 import { type UserMessage } from "@/modules/firebase/models";
 import { useUser } from "@/modules/firebase/UserProvider";
 import {
-  isMessageRead,
-  parseMessageToLink,
+    isMessageRead,
+    parseMessageToLink,
 } from "@/modules/notifications/helpers";
 import { useNotificationActions } from "@/modules/notifications/queries";
+import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
+import {
+    NotificationActions,
+    Notification as NotificationBase,
+    NotificationContentContainer,
+    NotificationHeader,
+    NotificationImage,
+    NotificationLink,
+    NotificationMessage,
+    NotificationTime,
+    NotificationTitle,
+} from "@stanfordspezi/spezi-web-design-system/molecules/Notifications";
+import { useMutation } from "@tanstack/react-query";
 
 interface NotificationProps {
   notification: UserMessage;

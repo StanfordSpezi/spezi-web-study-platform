@@ -1,19 +1,11 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { UserType } from "@stanfordbdhg/engagehf-models";
-import {
-  DataTable,
-  type DataTableProps,
-} from "@stanfordspezi/spezi-web-design-system/components/DataTable";
-import { type RequiredSome } from "@stanfordspezi/spezi-web-design-system/utils/misc";
-import { createColumnHelper } from "@tanstack/table-core";
-import { useMemo } from "react";
 import { stringifyType } from "@/modules/firebase/role";
 import { useUser } from "@/modules/firebase/UserProvider";
 import { routes } from "@/modules/routes";
@@ -21,6 +13,14 @@ import { createSharedUserColumns, userColumnIds } from "@/modules/user/table";
 import { UserMenu } from "@/routes/~_dashboard/~users/UserMenu";
 import { type User } from "@/routes/~_dashboard/~users/~index";
 import { useNavigateOrOpen } from "@/utils/useNavigateOrOpen";
+import { UserType } from "@stanfordbdhg/engagehf-models";
+import {
+    DataTable,
+    type DataTableProps,
+} from "@stanfordspezi/spezi-web-design-system/components/DataTable";
+import { type RequiredSome } from "@stanfordspezi/spezi-web-design-system/utils/misc";
+import { createColumnHelper } from "@tanstack/table-core";
+import { useMemo } from "react";
 
 const columnHelper = createColumnHelper<User>();
 const userColumns = createSharedUserColumns<User>();

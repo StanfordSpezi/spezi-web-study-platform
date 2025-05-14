@@ -1,22 +1,22 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { getUserInfo } from "@stanfordspezi/spezi-web-design-system/modules/auth";
-import {
-  DashboardLayout as DashboardLayoutBase,
-  type DashboardLayoutProps as DashboardLayoutPropsBase,
-} from "@stanfordspezi/spezi-web-design-system/molecules/DashboardLayout";
-import { Link } from "@tanstack/react-router";
 import { Logo } from "@/components/icons/Logo";
 import { LogoType } from "@/components/icons/LogoType";
 import { useUser } from "@/modules/firebase/UserProvider";
 import { MenuLinks } from "@/routes/~_dashboard/MenuLinks";
 import { User } from "@/routes/~_dashboard/User";
+import { getUserInfo } from "@stanfordspezi/spezi-web-design-system/modules/auth";
+import {
+    DashboardLayout as DashboardLayoutBase,
+    type DashboardLayoutProps as DashboardLayoutPropsBase,
+} from "@stanfordspezi/spezi-web-design-system/molecules/DashboardLayout";
+import { Link } from "@tanstack/react-router";
 
 interface DashboardLayoutProps
   extends Omit<DashboardLayoutPropsBase, "aside" | "mobile"> {}

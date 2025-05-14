@@ -1,11 +1,16 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { callables, docRefs } from "@/modules/firebase/app";
+import { useUser } from "@/modules/firebase/UserProvider";
+import { routes } from "@/modules/routes";
+import { ToggleUserDisabled } from "@/modules/user/ToggleUserDisabled";
+import { type User } from "@/routes/~_dashboard/~users/~index";
 import { deleteDoc } from "@firebase/firestore";
 import { RowDropdownMenu } from "@stanfordspezi/spezi-web-design-system/components/DataTable";
 import { DropdownMenuItem } from "@stanfordspezi/spezi-web-design-system/components/DropdownMenu";
@@ -14,11 +19,6 @@ import { ConfirmDeleteDialog } from "@stanfordspezi/spezi-web-design-system/mole
 import { useOpenState } from "@stanfordspezi/spezi-web-design-system/utils/useOpenState";
 import { Link, useRouter } from "@tanstack/react-router";
 import { Pencil, Trash } from "lucide-react";
-import { callables, docRefs } from "@/modules/firebase/app";
-import { useUser } from "@/modules/firebase/UserProvider";
-import { routes } from "@/modules/routes";
-import { ToggleUserDisabled } from "@/modules/user/ToggleUserDisabled";
-import { type User } from "@/routes/~_dashboard/~users/~index";
 
 interface UserMenuProps {
   user: User;

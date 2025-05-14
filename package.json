@@ -1,24 +1,23 @@
 {
-  "name": "@stanfordspezi/spezi-web-template-application",
+  "name": "@stanfordspezi/spezi-web-study-platform",
   "version": "0.1.0",
   "license": "MIT",
-  "description": "Stanford Biodesign Digital Health Spezi Web Template Application Web Frontend",
+  "description": "Stanford Biodesign Digital Health Spezi Web Study Platform Frontend",
   "keywords": [
     "Stanford",
     "Biodesign",
     "Spezi",
     "Web",
-    "Template",
-    "Application",
-    "Framework",
-    "Boilerplate"
+    "Study",
+    "Platform",
+    "Frontend"
   ],
   "engines": {
     "node": "22"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/StanfordSpezi/spezi-web-template-application"
+    "url": "https://github.com/StanfordSpezi/spezi-web-study-platform"
   },
   "private": true,
   "scripts": {

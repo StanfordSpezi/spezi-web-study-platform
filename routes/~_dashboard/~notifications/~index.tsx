@@ -1,23 +1,23 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import {
+    currentUserQueryOptions,
+    useUser,
+} from "@/modules/firebase/UserProvider";
+import { NotificationsTable } from "@/modules/notifications/NotificationsTable";
+import { notificationQueries } from "@/modules/notifications/queries";
+import { queryClient } from "@/modules/query/queryClient";
 import { PageTitle } from "@stanfordspezi/spezi-web-design-system/molecules/DashboardLayout";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Bell } from "lucide-react";
 import { Helmet } from "react-helmet";
-import {
-  currentUserQueryOptions,
-  useUser,
-} from "@/modules/firebase/UserProvider";
-import { NotificationsTable } from "@/modules/notifications/NotificationsTable";
-import { notificationQueries } from "@/modules/notifications/queries";
-import { queryClient } from "@/modules/query/queryClient";
 import { DashboardLayout } from "../DashboardLayout";
 
 const NotificationsPage = () => {

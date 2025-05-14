@@ -1,30 +1,30 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import { type Organization, type User } from "@/modules/firebase/models";
+import { useUser } from "@/modules/firebase/UserProvider";
 import { UserType } from "@stanfordbdhg/engagehf-models";
 import { Button } from "@stanfordspezi/spezi-web-design-system/components/Button";
 import { Input } from "@stanfordspezi/spezi-web-design-system/components/Input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@stanfordspezi/spezi-web-design-system/components/Select";
 import {
-  Field,
-  FormError,
-  useForm,
+    Field,
+    FormError,
+    useForm,
 } from "@stanfordspezi/spezi-web-design-system/forms";
 import { type UserInfo } from "@stanfordspezi/spezi-web-design-system/modules/auth";
 import { z } from "zod";
-import { type Organization, type User } from "@/modules/firebase/models";
-import { useUser } from "@/modules/firebase/UserProvider";
 
 export const userFormSchema = z
   .object({

@@ -1,46 +1,46 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
+import {
+    type Invitation,
+    type Organization,
+    type User,
+    type UserMessage,
+} from "@/modules/firebase/models";
 import { type Functions, httpsCallable } from "@firebase/functions";
 import {
-  type CreateInvitationInput,
-  type CreateInvitationOutput,
-  type DeleteUserInput,
-  type DeleteUserOutput,
-  type DisableUserInput,
-  type DisableUserOutput,
-  type DismissMessageInput,
-  type DismissMessageOutput,
-  type DismissMessagesInput,
-  type DismissMessagesOutput,
-  type EnableUserInput,
-  type EnableUserOutput,
-  type GetUsersInformationInput,
-  type GetUsersInformationOutput,
-  type UpdateUserInformationInput,
-  type UpdateUserInformationOutput,
+    type CreateInvitationInput,
+    type CreateInvitationOutput,
+    type DeleteUserInput,
+    type DeleteUserOutput,
+    type DisableUserInput,
+    type DisableUserOutput,
+    type DismissMessageInput,
+    type DismissMessageOutput,
+    type DismissMessagesInput,
+    type DismissMessagesOutput,
+    type EnableUserInput,
+    type EnableUserOutput,
+    type GetUsersInformationInput,
+    type GetUsersInformationOutput,
+    type UpdateUserInformationInput,
+    type UpdateUserInformationOutput,
 } from "@stanfordbdhg/engagehf-models";
 import {
-  collection,
-  type CollectionReference,
-  doc,
-  type DocumentReference,
-  type Firestore,
-  getDoc,
-  getDocs,
-  type Query,
+    collection,
+    type CollectionReference,
+    doc,
+    type DocumentReference,
+    type Firestore,
+    getDoc,
+    getDocs,
+    type Query,
 } from "firebase/firestore";
-import {
-  type Invitation,
-  type Organization,
-  type User,
-  type UserMessage,
-} from "@/modules/firebase/models";
 
 export const collectionNames = {
   invitations: "invitations",

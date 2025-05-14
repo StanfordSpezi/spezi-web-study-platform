@@ -1,28 +1,28 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Template Application open-source project
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
 // SPDX-License-Identifier: MIT
 //
 
-import { Toaster } from "@stanfordspezi/spezi-web-design-system/components/Toaster";
-import { SpeziProvider } from "@stanfordspezi/spezi-web-design-system/SpeziProvider";
-import {
-  createRootRoute,
-  Link,
-  Outlet,
-  redirect,
-} from "@tanstack/react-router";
-import { type ComponentProps } from "react";
-import { Helmet } from "react-helmet";
 import { auth } from "@/modules/firebase/app";
 import {
-  AuthProvider,
-  isRouteProtected,
+    AuthProvider,
+    isRouteProtected,
 } from "@/modules/firebase/AuthProvider";
 import { ReactQueryClientProvider } from "@/modules/query/ReactQueryClientProvider";
 import { routes } from "@/modules/routes";
+import { Toaster } from "@stanfordspezi/spezi-web-design-system/components/Toaster";
+import { SpeziProvider } from "@stanfordspezi/spezi-web-design-system/SpeziProvider";
+import {
+    createRootRoute,
+    Link,
+    Outlet,
+    redirect,
+} from "@tanstack/react-router";
+import { type ComponentProps } from "react";
+import { Helmet } from "react-helmet";
 import "../modules/globals.css";
 
 const routerProps: ComponentProps<typeof SpeziProvider>["router"] = {
