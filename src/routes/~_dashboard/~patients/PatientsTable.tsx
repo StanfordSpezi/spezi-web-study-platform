@@ -6,20 +6,20 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { UserType } from "@stanfordbdhg/engagehf-models";
-import {
-  DataTable,
-  type DataTableProps,
-} from "@stanfordspezi/spezi-web-design-system/components/DataTable";
-import { type RequiredSome } from "@stanfordspezi/spezi-web-design-system/utils/misc";
-import { createColumnHelper } from "@tanstack/table-core";
-import { useMemo } from "react";
 import { useUser } from "@/modules/firebase/UserProvider";
 import { routes } from "@/modules/routes";
 import { createSharedUserColumns, userColumnIds } from "@/modules/user/table";
 import { PatientMenu } from "@/routes/~_dashboard/~patients/PatientMenu";
 import { type Patient } from "@/routes/~_dashboard/~patients/~index";
-import { useNavigateOrOpen } from "@/utils/useNavigateOrOpen";
+import { useNavigateOrOpen } from "@/src/utils/useNavigateOrOpen";
+import { UserType } from "@stanfordbdhg/engagehf-models";
+import {
+    DataTable,
+    type DataTableProps,
+} from "@stanfordspezi/spezi-web-design-system/components/DataTable";
+import { type RequiredSome } from "@stanfordspezi/spezi-web-design-system/utils/misc";
+import { createColumnHelper } from "@tanstack/table-core";
+import { useMemo } from "react";
 
 const columnHelper = createColumnHelper<Patient>();
 const userColumns = createSharedUserColumns<Patient>();

@@ -12,7 +12,7 @@ import { routes } from "@/modules/routes";
 import { createSharedUserColumns, userColumnIds } from "@/modules/user/table";
 import { UserMenu } from "@/routes/~_dashboard/~users/UserMenu";
 import { type User } from "@/routes/~_dashboard/~users/~index";
-import { useNavigateOrOpen } from "@/utils/useNavigateOrOpen";
+import { useNavigateOrOpen } from "@/src/utils/useNavigateOrOpen";
 import { UserType } from "@stanfordbdhg/engagehf-models";
 import {
     DataTable,
