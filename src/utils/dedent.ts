@@ -19,7 +19,10 @@ export const dedent = (
   ...values: unknown[]
 ): string => {
   // Combine the template string and values
-  let raw = strings.reduce((acc, str, i) => acc + str + (values[i] ?? ""), "");
+  const raw = strings.reduce(
+    (acc, str, i) => acc + str + String(values[i]),
+    "",
+  );
 
   // Split into lines, trim each line, and filter out empty lines
   return raw

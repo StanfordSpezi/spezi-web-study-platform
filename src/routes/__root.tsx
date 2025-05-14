@@ -4,9 +4,18 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 
-export interface RouterAppContext {}
+const RootComponent = () => {
+  return (
+    <>
+      <HeadContent />
+      <div className="grid h-svh grid-rows-[1fr]">
+        <Outlet />
+      </div>
+    </>
+  );
+};
 
-export const Route = createRootRouteWithContext<RouterAppContext>()({
+export const Route = createRootRouteWithContext()({
   component: RootComponent,
   head: () => ({
     meta: [
@@ -20,14 +29,3 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
     links: [{ rel: "icon", href: "favicon.ico" }],
   }),
 });
-
-function RootComponent() {
-  return (
-    <>
-      <HeadContent />
-      <div className="grid h-svh grid-rows-[1fr]">
-        <Outlet />
-      </div>
-    </>
-  );
-}
