@@ -28,7 +28,8 @@ export const dedent = (
 ): string => {
   // Combine the template string and values
   const raw = strings.reduce(
-    (acc, str, i) => acc + str + String(values[i]),
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    (acc, str, i) => acc + str + String(values[i] ?? ""),
     "",
   );
 
