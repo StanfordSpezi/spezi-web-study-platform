@@ -1,0 +1,41 @@
+//
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+//
+// SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+//
+// SPDX-License-Identifier: MIT
+//
+{
+  "Add license header (line comment)": {
+    "prefix": "license",
+    "description": "Add license header",
+    "scope": "javascript,typescript,javascriptreact,typescriptreact,dockerfile,yaml,jsonc",
+    "body": [
+      "$LINE_COMMENT",
+      "$LINE_COMMENT This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project",
+      "$LINE_COMMENT",
+      "$LINE_COMMENT SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)",
+      "$LINE_COMMENT",
+      "$LINE_COMMENT SPDX-License-Identifier: MIT",
+      "$LINE_COMMENT",
+      "",
+      "$1",
+    ],
+  },
+  "Add license header (block comment)": {
+    "prefix": "license",
+    "description": "Add license header",
+    "scope": "html,css,scss,sass,less,markdown,plaintext",
+    "body": [
+      "$BLOCK_COMMENT_START",
+      "This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project",
+      "",
+      "SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)",
+      "",
+      "SPDX-License-Identifier: MIT",
+      "$BLOCK_COMMENT_END",
+      "",
+      "$1",
+    ],
+  },
+}
