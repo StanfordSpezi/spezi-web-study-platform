@@ -1,3 +1,11 @@
+#
+# This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+#
+# SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
 # Simple workflow for deploying static content to GitHub Pages
 # Taken from: https://vite.dev/guide/static-deploy#github-pages
 name: Deploy static content to Pages
