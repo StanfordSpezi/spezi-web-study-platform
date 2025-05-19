@@ -14,6 +14,7 @@ import { dedent } from "./src/utils/dedent";
 
 export default defineConfig({
   root: ".",
+  base: "/spezi-web-study-platform/", // This is necessary for GitHub Pages
   plugins: [
     TanStackRouterVite({
       routeTreeFileHeader: [
