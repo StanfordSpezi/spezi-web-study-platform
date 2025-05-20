@@ -12,12 +12,20 @@ test("has title", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Spezi/);
 });
-test('displays Hello "/"! on root path', async ({ page }) => {
+test("displays appropriate text on root path", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText('Hello "/"!')).toBeVisible();
+  await expect(page.getByText("Study Home Route")).toBeVisible();
+  await expect(page.getByText("team-pine")).toBeVisible();
+  await expect(page.getByText("activity-study")).toBeVisible();
 });
 
-test('displays Hello "/about"! on about path', async ({ page }) => {
-  await page.goto("./about");
-  await expect(page.getByText('Hello "/about"!')).toBeVisible();
+test("navigates via links and displays correct route text", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.getByText("Study Home Route")).toBeVisible();
+
+  // Click on the "Configuration" link and check for "Configuration Route"
+  await page.getByRole("link", { name: "Configuration" }).click();
+  await expect(page.getByText("Configuration Route")).toBeVisible();
 });
