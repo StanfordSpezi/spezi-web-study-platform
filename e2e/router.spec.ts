@@ -27,5 +27,5 @@ test("navigates via links and displays correct route text", async ({
 
   // Click on the "Configuration" link and check for "Configuration Route"
   await page.getByRole("link", { name: "Configuration" }).click();
-  await expect(page.getByText("Configuration Route")).toBeVisible();
+  await expect(page.getByText("Study Configuration Route")).toBeVisible();
 });
