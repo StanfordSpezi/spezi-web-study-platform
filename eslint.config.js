@@ -6,6 +6,17 @@
 // SPDX-License-Identifier: MIT
 //
 
-const { getEslintConfig } = require("@stanfordspezi/spezi-web-configurations");
+import pkg from "@stanfordspezi/spezi-web-configurations";
 
-module.exports = getEslintConfig({ tsconfigRootDir: __dirname });
+const defaultConfig = pkg.getEslintConfig({
+  tsconfigRootDir: import.meta.dirname,
+});
+const config = [
+  ...defaultConfig,
+  // This is necessary to make sure that the import.meta.dirname is available in the config
+  // See https://github.com/eslint/eslint/discussions/16037
+  { languageOptions: { ecmaVersion: "latest", sourceType: "module" } },
+];
+
+// eslint-disable-next-line import/no-default-export
+export default config;

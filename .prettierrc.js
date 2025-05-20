@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-const { prettierConfig } = require("@stanfordspezi/spezi-web-configurations");
+import pkg from "@stanfordspezi/spezi-web-configurations";
 
-module.exports = prettierConfig;
+// eslint-disable-next-line import/no-default-export
+export default pkg.prettierConfig;

@@ -1,6 +1,7 @@
 {
   "name": "@stanfordspezi/spezi-web-study-platform",
   "version": "0.1.0",
+  "type": "module",
   "license": "MIT",
   "description": "Stanford Biodesign Digital Health Spezi Web Study Platform Frontend",
   "keywords": [
