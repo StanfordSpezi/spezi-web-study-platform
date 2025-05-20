@@ -38,7 +38,7 @@ eslint_report.json
 
 # editors
 .idea/
-.vscode/
+.vscode/settings.json
 
 # Playwright
 /test-results/
