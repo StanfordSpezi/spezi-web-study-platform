@@ -53,7 +53,7 @@ Once the deployment is successful:
 2. Navigate to "Pages" in the sidebar
 3. Find your site URL under "Your site is live at"
 
-Your app should now be available at: `https://<USERNAME>.github.io/spezi-web-study-platform/`
+Your app should now be available at: `https://<USERNAME>.github.io/spezi-web-study-platform/`.
 
 ## Troubleshooting
 

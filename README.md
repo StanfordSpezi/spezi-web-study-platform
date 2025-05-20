@@ -21,7 +21,7 @@ To get started with the project, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/StanfordSpezi/spezi-web-study-platform.git
-    cd spezi-web-study-platform
+   cd spezi-web-study-platform
    ```
 2. Install the dependencies:
    ```bash
@@ -38,7 +38,7 @@ For more detailed instructions, check out the [installation guide](docs/guides/i
 
 - [Install and run the project locally](docs/guides/installation.md)
 - [Contribute to the repo](docs/guides/contributing.md)
-- [Deploy to Github Pages](docs/guides/deploy-to-github-pages.md)
+- [Deploy to GitHub Pages](docs/guides/deploy-to-github-pages.md)
 - [Run the E2E tests locally](docs/guides/e2e-testing-local.md)
 
 ## Explanations
