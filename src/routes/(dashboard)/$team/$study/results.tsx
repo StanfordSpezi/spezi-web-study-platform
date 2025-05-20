@@ -8,8 +8,10 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 
-const RouteComponent = () => <div>Hello "/about"!</div>;
+const StudyResultsRoute = () => {
+  return <div>Study Results Route</div>;
+};
 
-export const Route = createFileRoute("/about")({
-  component: RouteComponent,
+export const Route = createFileRoute("/(dashboard)/$team/$study/results")({
+  component: StudyResultsRoute,
 });

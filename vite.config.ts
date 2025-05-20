@@ -18,6 +18,7 @@ export default defineConfig({
   base: "/spezi-web-study-platform/", // This is necessary for GitHub Pages
   plugins: [
     TanStackRouterVite({
+      routeToken: "layout",
       routeTreeFileHeader: [
         dedent`
         //

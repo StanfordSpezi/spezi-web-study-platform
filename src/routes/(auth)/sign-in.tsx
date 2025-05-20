@@ -8,8 +8,10 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 
-const RouteComponent = () => <div>Hello "/"!</div>;
+const SignInComponent = () => {
+  return <div>Sign in Route</div>;
+};
 
-export const Route = createFileRoute("/")({
-  component: RouteComponent,
+export const Route = createFileRoute("/(auth)/sign-in")({
+  component: SignInComponent,
 });
