@@ -30,9 +30,11 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.7",
     "@tanstack/react-router": "^1.117.1",
     "react": "^19",
-    "react-dom": "^19"
+    "react-dom": "^19",
+    "tailwindcss": "^4.1.7"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
