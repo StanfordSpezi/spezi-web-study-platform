@@ -12,6 +12,7 @@ import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({
+  basepath: "/spezi-web-study-platform", // This is necessary for GitHub Pages
   routeTree,
 });
 
