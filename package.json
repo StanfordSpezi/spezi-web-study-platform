@@ -21,12 +21,13 @@
   },
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "tsc && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint --output-file eslint_report.json --format json .",
-    "prepush": "npm run lint:fix && tsc --noEmit"
+    "prepush": "npm run lint:fix && tsc --noEmit",
+    "test": "playwright test"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.117.1",
@@ -34,6 +35,7 @@
     "react-dom": "^19"
   },
   "devDependencies": {
+    "@playwright/test": "^1.52.0",
     "@stanfordspezi/spezi-web-configurations": "^0.4.0",
     "@tanstack/router-plugin": "^1.117.2",
     "@total-typescript/ts-reset": "^0.6.1",
