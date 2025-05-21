@@ -38,7 +38,7 @@ For more detailed instructions, check out the [installation guide](docs/guides/i
 
 - [Install and run the project locally](docs/guides/installation.md)
 - [Contribute to the repo](docs/guides/contributing.md)
-- [Deploy to GitHub Pages](docs/guides/deploy-to-github-pages.md)
+- [Setup GitHub Pages deployment](docs/guides/setup-github-pages-deployment.md)
 - [Run the E2E tests locally](docs/guides/e2e-testing-local.md)
 
 ## Explanations
