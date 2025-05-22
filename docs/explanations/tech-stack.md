@@ -46,7 +46,7 @@ We use an internal package called [spezi-web-configurations](https://github.com/
 
 ## Spezi web design system
 
-We maintain a dedicated custom component library called `spezi-web-design-system`. It contains UI components built specifically for the Stanford Digital Health Spezi apps. Adopting our design system speeds up frontend development. It ensures a cohesive, consistent user experience across the platform and helps developers comply with our accessibility and usability standards more easily.
+We maintain a dedicated custom component library called [spezi-web-design-system](https://github.com/StanfordSpezi/spezi-web-design-system). It contains UI components built specifically for the Stanford Digital Health Spezi apps. Adopting our design system speeds up frontend development. It ensures a cohesive, consistent user experience across the platform and helps developers comply with our accessibility and usability standards more easily.
 
 ## Styling: Tailwind CSS
 
