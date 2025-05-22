@@ -18,5 +18,4 @@ const config = [
   { languageOptions: { ecmaVersion: "latest", sourceType: "module" } },
 ];
 
-// eslint-disable-next-line import/no-default-export
 export default config;

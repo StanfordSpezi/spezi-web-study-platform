@@ -8,5 +8,4 @@
 
 import pkg from "@stanfordspezi/spezi-web-configurations";
 
-// eslint-disable-next-line import/no-default-export
 export default pkg.prettierConfig;
