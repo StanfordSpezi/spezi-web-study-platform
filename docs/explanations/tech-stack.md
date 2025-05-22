@@ -66,7 +66,7 @@ For end-to-end testing, we chose Playwright. Playwright provides effective tests
 
 ## Hosting: GitHub Pages
 
-We currently host our frontend using GitHub Pages. Its direct integration into GitHub makes deployment straightforward. Simply committing to the source repository deploys the frontend. While other platforms like Netlify or Vercel offer additional server-side features, GitHub Pages provides a suitable level of simplicity and accessibility for our project's needs. Learn more about our deployment strategy in the [deployments documentation](https://github.com/StanfordSpezi/spezi-web-study-platform/blob/main/docs/explanations/deployment.md).
+We currently host our frontend using GitHub Pages. Its direct integration into GitHub makes deployment straightforward. Simply committing to the source repository deploys the frontend. While other platforms like Netlify or Vercel offer additional server-side features, GitHub Pages provides a suitable level of simplicity and accessibility for our project's needs. Learn more about our deployment strategy in the [deployments documentation](./deployment.md).
 
 ## CI/CD: GitHub Actions
 
