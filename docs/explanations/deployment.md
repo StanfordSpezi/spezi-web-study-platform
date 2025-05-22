@@ -18,7 +18,7 @@ We deploy the frontend as a static site using GitHub Pages, automated through Gi
 
 ## Why GitHub Pages?
 
-GitHub Pages was selected primarily due to its integration with GitHub Actions, minimal configuration, and straightforward deployment process. Since the project is a static site without complex backend requirements, GitHub Pages provides sufficient functionality without unnecessary complexity.
+GitHub Pages was selected primarily due to its integration with GitHub Actions, minimal configuration, and straightforward deployment process. Since the project is a static site without backend requirements, GitHub Pages provides sufficient functionality without unnecessary complexity.
 Learn more about GitHub Pages in the [GitHub Pages documentation](https://docs.github.com/en/pages).
 
 ## GitHub Actions workflow
