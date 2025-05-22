@@ -20,23 +20,17 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as dashboardIndexImport } from './routes/(dashboard)/index'
-import { Route as authSignInImport } from './routes/(auth)/sign-in'
-import { Route as dashboardTeamIndexImport } from './routes/(dashboard)/$team/index'
-import { Route as dashboardTeamStudyLayoutImport } from './routes/(dashboard)/$team/$study/layout'
-import { Route as dashboardTeamStudyIndexImport } from './routes/(dashboard)/$team/$study/index'
-import { Route as dashboardTeamStudyResultsImport } from './routes/(dashboard)/$team/$study/results'
-import { Route as dashboardTeamStudyParticipantsImport } from './routes/(dashboard)/$team/$study/participants'
-import { Route as dashboardTeamStudyConfigurationImport } from './routes/(dashboard)/$team/$study/configuration'
+import { Route as rootRoute } from './routes/~__root'
+import { Route as authSignInImport } from './routes/~(auth)/~sign-in'
+import { Route as dashboardIndexImport } from './routes/~(dashboard)/~index'
+import { Route as dashboardTeamStudyLayoutImport } from './routes/~(dashboard)/~$team/~$study/~layout'
+import { Route as dashboardTeamIndexImport } from './routes/~(dashboard)/~$team/~index'
+import { Route as dashboardTeamStudyResultsImport } from './routes/~(dashboard)/~$team/~$study/~results'
+import { Route as dashboardTeamStudyParticipantsImport } from './routes/~(dashboard)/~$team/~$study/~participants'
+import { Route as dashboardTeamStudyConfigurationImport } from './routes/~(dashboard)/~$team/~$study/~configuration'
+import { Route as dashboardTeamStudyIndexImport } from './routes/~(dashboard)/~$team/~$study/~index'
 
 // Create/Update Routes
-
-const dashboardIndexRoute = dashboardIndexImport.update({
-  id: '/(dashboard)/',
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const authSignInRoute = authSignInImport.update({
   id: '/(auth)/sign-in',
@@ -44,9 +38,9 @@ const authSignInRoute = authSignInImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const dashboardTeamIndexRoute = dashboardTeamIndexImport.update({
-  id: '/(dashboard)/$team/',
-  path: '/$team/',
+const dashboardIndexRoute = dashboardIndexImport.update({
+  id: '/(dashboard)/',
+  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -56,10 +50,10 @@ const dashboardTeamStudyLayoutRoute = dashboardTeamStudyLayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => dashboardTeamStudyLayoutRoute,
+const dashboardTeamIndexRoute = dashboardTeamIndexImport.update({
+  id: '/(dashboard)/$team/',
+  path: '/$team/',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const dashboardTeamStudyResultsRoute = dashboardTeamStudyResultsImport.update({
@@ -82,10 +76,23 @@ const dashboardTeamStudyConfigurationRoute =
     getParentRoute: () => dashboardTeamStudyLayoutRoute,
   } as any)
 
+const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => dashboardTeamStudyLayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(dashboard)/': {
+      id: '/(dashboard)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof dashboardIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/(auth)/sign-in': {
       id: '/(auth)/sign-in'
       path: '/sign-in'
@@ -93,11 +100,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignInImport
       parentRoute: typeof rootRoute
     }
-    '/(dashboard)/': {
-      id: '/(dashboard)/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof dashboardIndexImport
+    '/(dashboard)/$team/': {
+      id: '/(dashboard)/$team/'
+      path: '/$team'
+      fullPath: '/$team'
+      preLoaderRoute: typeof dashboardTeamIndexImport
       parentRoute: typeof rootRoute
     }
     '/(dashboard)/$team/$study': {
@@ -107,12 +114,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardTeamStudyLayoutImport
       parentRoute: typeof rootRoute
     }
-    '/(dashboard)/$team/': {
-      id: '/(dashboard)/$team/'
-      path: '/$team'
-      fullPath: '/$team'
-      preLoaderRoute: typeof dashboardTeamIndexImport
-      parentRoute: typeof rootRoute
+    '/(dashboard)/$team/$study/': {
+      id: '/(dashboard)/$team/$study/'
+      path: '/'
+      fullPath: '/$team/$study/'
+      preLoaderRoute: typeof dashboardTeamStudyIndexImport
+      parentRoute: typeof dashboardTeamStudyLayoutImport
     }
     '/(dashboard)/$team/$study/configuration': {
       id: '/(dashboard)/$team/$study/configuration'
@@ -135,31 +142,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardTeamStudyResultsImport
       parentRoute: typeof dashboardTeamStudyLayoutImport
     }
-    '/(dashboard)/$team/$study/': {
-      id: '/(dashboard)/$team/$study/'
-      path: '/'
-      fullPath: '/$team/$study/'
-      preLoaderRoute: typeof dashboardTeamStudyIndexImport
-      parentRoute: typeof dashboardTeamStudyLayoutImport
-    }
   }
 }
 
 // Create and export the route tree
 
 interface dashboardTeamStudyLayoutRouteChildren {
+  dashboardTeamStudyIndexRoute: typeof dashboardTeamStudyIndexRoute
   dashboardTeamStudyConfigurationRoute: typeof dashboardTeamStudyConfigurationRoute
   dashboardTeamStudyParticipantsRoute: typeof dashboardTeamStudyParticipantsRoute
   dashboardTeamStudyResultsRoute: typeof dashboardTeamStudyResultsRoute
-  dashboardTeamStudyIndexRoute: typeof dashboardTeamStudyIndexRoute
 }
 
 const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildren =
   {
+    dashboardTeamStudyIndexRoute: dashboardTeamStudyIndexRoute,
     dashboardTeamStudyConfigurationRoute: dashboardTeamStudyConfigurationRoute,
     dashboardTeamStudyParticipantsRoute: dashboardTeamStudyParticipantsRoute,
     dashboardTeamStudyResultsRoute: dashboardTeamStudyResultsRoute,
-    dashboardTeamStudyIndexRoute: dashboardTeamStudyIndexRoute,
   }
 
 const dashboardTeamStudyLayoutRouteWithChildren =
@@ -168,83 +168,83 @@ const dashboardTeamStudyLayoutRouteWithChildren =
   )
 
 export interface FileRoutesByFullPath {
-  '/sign-in': typeof authSignInRoute
   '/': typeof dashboardIndexRoute
-  '/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
+  '/sign-in': typeof authSignInRoute
   '/$team': typeof dashboardTeamIndexRoute
+  '/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
+  '/$team/$study/': typeof dashboardTeamStudyIndexRoute
   '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationRoute
   '/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
   '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
-  '/$team/$study/': typeof dashboardTeamStudyIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/sign-in': typeof authSignInRoute
   '/': typeof dashboardIndexRoute
+  '/sign-in': typeof authSignInRoute
   '/$team': typeof dashboardTeamIndexRoute
+  '/$team/$study': typeof dashboardTeamStudyIndexRoute
   '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationRoute
   '/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
   '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
-  '/$team/$study': typeof dashboardTeamStudyIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/(auth)/sign-in': typeof authSignInRoute
   '/(dashboard)/': typeof dashboardIndexRoute
-  '/(dashboard)/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
+  '/(auth)/sign-in': typeof authSignInRoute
   '/(dashboard)/$team/': typeof dashboardTeamIndexRoute
+  '/(dashboard)/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
+  '/(dashboard)/$team/$study/': typeof dashboardTeamStudyIndexRoute
   '/(dashboard)/$team/$study/configuration': typeof dashboardTeamStudyConfigurationRoute
   '/(dashboard)/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
   '/(dashboard)/$team/$study/results': typeof dashboardTeamStudyResultsRoute
-  '/(dashboard)/$team/$study/': typeof dashboardTeamStudyIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/sign-in'
     | '/'
-    | '/$team/$study'
+    | '/sign-in'
     | '/$team'
+    | '/$team/$study'
+    | '/$team/$study/'
     | '/$team/$study/configuration'
     | '/$team/$study/participants'
     | '/$team/$study/results'
-    | '/$team/$study/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/sign-in'
     | '/'
+    | '/sign-in'
     | '/$team'
+    | '/$team/$study'
     | '/$team/$study/configuration'
     | '/$team/$study/participants'
     | '/$team/$study/results'
-    | '/$team/$study'
   id:
     | '__root__'
-    | '/(auth)/sign-in'
     | '/(dashboard)/'
-    | '/(dashboard)/$team/$study'
+    | '/(auth)/sign-in'
     | '/(dashboard)/$team/'
+    | '/(dashboard)/$team/$study'
+    | '/(dashboard)/$team/$study/'
     | '/(dashboard)/$team/$study/configuration'
     | '/(dashboard)/$team/$study/participants'
     | '/(dashboard)/$team/$study/results'
-    | '/(dashboard)/$team/$study/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  authSignInRoute: typeof authSignInRoute
   dashboardIndexRoute: typeof dashboardIndexRoute
-  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
+  authSignInRoute: typeof authSignInRoute
   dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
+  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  authSignInRoute: authSignInRoute,
   dashboardIndexRoute: dashboardIndexRoute,
-  dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
+  authSignInRoute: authSignInRoute,
   dashboardTeamIndexRoute: dashboardTeamIndexRoute,
+  dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -255,46 +255,46 @@ export const routeTree = rootRoute
 {
   "routes": {
     "__root__": {
-      "filePath": "__root.tsx",
+      "filePath": "~__root.tsx",
       "children": [
-        "/(auth)/sign-in",
         "/(dashboard)/",
-        "/(dashboard)/$team/$study",
-        "/(dashboard)/$team/"
+        "/(auth)/sign-in",
+        "/(dashboard)/$team/",
+        "/(dashboard)/$team/$study"
       ]
-    },
-    "/(auth)/sign-in": {
-      "filePath": "(auth)/sign-in.tsx"
     },
     "/(dashboard)/": {
-      "filePath": "(dashboard)/index.tsx"
+      "filePath": "~(dashboard)/~index.tsx"
     },
-    "/(dashboard)/$team/$study": {
-      "filePath": "(dashboard)/$team/$study/layout.tsx",
-      "children": [
-        "/(dashboard)/$team/$study/configuration",
-        "/(dashboard)/$team/$study/participants",
-        "/(dashboard)/$team/$study/results",
-        "/(dashboard)/$team/$study/"
-      ]
+    "/(auth)/sign-in": {
+      "filePath": "~(auth)/~sign-in.tsx"
     },
     "/(dashboard)/$team/": {
-      "filePath": "(dashboard)/$team/index.tsx"
+      "filePath": "~(dashboard)/~$team/~index.tsx"
+    },
+    "/(dashboard)/$team/$study": {
+      "filePath": "~(dashboard)/~$team/~$study/~layout.tsx",
+      "children": [
+        "/(dashboard)/$team/$study/",
+        "/(dashboard)/$team/$study/configuration",
+        "/(dashboard)/$team/$study/participants",
+        "/(dashboard)/$team/$study/results"
+      ]
+    },
+    "/(dashboard)/$team/$study/": {
+      "filePath": "~(dashboard)/~$team/~$study/~index.tsx",
+      "parent": "/(dashboard)/$team/$study"
     },
     "/(dashboard)/$team/$study/configuration": {
-      "filePath": "(dashboard)/$team/$study/configuration.tsx",
+      "filePath": "~(dashboard)/~$team/~$study/~configuration.tsx",
       "parent": "/(dashboard)/$team/$study"
     },
     "/(dashboard)/$team/$study/participants": {
-      "filePath": "(dashboard)/$team/$study/participants.tsx",
+      "filePath": "~(dashboard)/~$team/~$study/~participants.tsx",
       "parent": "/(dashboard)/$team/$study"
     },
     "/(dashboard)/$team/$study/results": {
-      "filePath": "(dashboard)/$team/$study/results.tsx",
-      "parent": "/(dashboard)/$team/$study"
-    },
-    "/(dashboard)/$team/$study/": {
-      "filePath": "(dashboard)/$team/$study/index.tsx",
+      "filePath": "~(dashboard)/~$team/~$study/~results.tsx",
       "parent": "/(dashboard)/$team/$study"
     }
   }
