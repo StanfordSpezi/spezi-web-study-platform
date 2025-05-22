@@ -37,13 +37,16 @@ For more detailed instructions, check out the [installation guide](docs/guides/i
 ## Guides
 
 - [Install and run the project locally](docs/guides/installation.md)
-- [Contribute to the repo](docs/guides/contributing.md)
-- [Setup GitHub Pages deployment](docs/guides/setup-github-pages-deployment.md)
 - [Run the E2E tests locally](docs/guides/e2e-testing-local.md)
 
 ## Explanations
 
 - [About the tech stack](docs/explanations/tech-stack.md)
+- [About deployments](docs/explanations/deployment.md)
+
+## Contributing
+
+We welcome contributions! Please read our [contributing guidelines](https://github.com/StanfordSpezi/.github/blob/main/CONTRIBUTING.md) for more information on how to get started.
 
 ## License
 
