@@ -2,31 +2,31 @@
 applyTo: "docs/guides/**"
 ---
 
-- Use sentence case for all headings and titles (capitalize only the first word and proper nouns).
-- Start each instruction step with an imperative verb (e.g., “Click”, “Select”, “Enter”, “Check”).
-- Always use the same word for the same concept throughout the guide.
-- Write guides that help users achieve a specific, practical goal.
-- Always address a real-world problem or task from the user’s perspective—not from the perspective of the tool or system.
-- Avoid open-ended or overly broad topics. Focus on clear, well-defined outcomes.
-- Assume the user is already competent in the domain and knows what they want to do.
-- Do not include basic explanations or background knowledge; link to reference material if needed.
-- Start with a clear statement of what the guide will help the user accomplish.
-- Provide a logical, actionable sequence of steps that lead to the goal.
-- Each step should be an action (physical, mental, or judgment-based) that moves the user closer to the outcome.
-- Allow for real-world complexity: include forks, options, or adaptations where necessary.
-- Only include what is required to achieve the task; everything else should be referenced or omitted.
-- Ensure the sequence of steps matches the natural workflow and thinking of the user.
-- Minimize context-switching and unnecessary backtracking.
-- Maintain a smooth pace and rhythm in instructions.
-- Use precise, goal-oriented titles that state exactly what the guide achieves (e.g., "How to configure email notifications").
-- Avoid vague or generic titles.
-- Use direct, imperative language ("Do X to achieve Y").
-- Use conditional imperatives where relevant ("If you want X, do Y").
-- Avoid teaching, discussion, or background context within the guide.
-- Where possible, make the guide adaptable to similar but not identical use cases.
-- Recognize that not all real-world problems are linear or procedural; allow for judgment and adaptation.
-- Place warnings and important limitations before, not after, the related content.
-- Remove any content that makes users question if they're in the right place.
-- Structure content to match the user's state of mind, not the system's architecture.
-- Break long procedures at natural pause points where users might step away.
-- Include subtle contextual hints that help users confirm they're on the right track.
+- Use sentence case for all headings and titles (capitalize only the first word and proper nouns)
+- Start each instruction step with an imperative verb (e.g., “Click”, “Select”, “Enter”, “Check”)
+- Always use the same word for the same concept throughout the guide
+- Write guides that help users achieve a specific, practical goal
+- Always address a real-world problem or task from the user’s perspective—not from the perspective of the tool or system
+- Avoid open-ended or overly broad topics. Focus on clear, well-defined outcomes
+- Assume the user is already competent in the domain and knows what they want to do
+- Do not include basic explanations or background knowledge; link to reference material if needed
+- Start with a clear statement of what the guide will help the user accomplish
+- Provide a logical, actionable sequence of steps that lead to the goal
+- Each step should be an action (physical, mental, or judgment-based) that moves the user closer to the outcome
+- Allow for real-world complexity: include forks, options, or adaptations where necessary
+- Only include what is required to achieve the task; everything else should be referenced or omitted
+- Ensure the sequence of steps matches the natural workflow and thinking of the user
+- Minimize context-switching and unnecessary backtracking
+- Maintain a smooth pace and rhythm in instructions
+- Use precise, goal-oriented titles that state exactly what the guide achieves (e.g., "How to configure email notifications")
+- Avoid vague or generic titles
+- Use direct, imperative language ("Do X to achieve Y")
+- Use conditional imperatives where relevant ("If you want X, do Y")
+- Avoid teaching, discussion, or background context within the guide
+- Where possible, make the guide adaptable to similar but not identical use cases
+- Recognize that not all real-world problems are linear or procedural; allow for judgment and adaptation
+- Place warnings and important limitations before, not after, the related content
+- Remove any content that makes users question if they're in the right place
+- Structure content to match the user's state of mind, not the system's architecture
+- Break long procedures at natural pause points where users might step away
+- Include subtle contextual hints that help users confirm they're on the right track

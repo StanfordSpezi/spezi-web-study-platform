@@ -22,7 +22,7 @@ A monorepo (one repository containing frontend, backend, and other components) w
 
 We currently use `npm`, the default JavaScript package manager. It is familiar and widely used, making it straightforward and accessible for contributors less experienced in front-end development.
 
-Other package managers, like `pnpm` or `yarn`, can provide improved performance. But, they add complexity and require familiarity, creating a barrier for potential contributors.
+Other package managers, like `pnpm`, can provide improved performance. But, they add complexity and require familiarity, creating a barrier for potential contributors.
 
 ## Application approach: single-page application vs server-side rendering
 
@@ -36,9 +36,11 @@ We use React as it is well-established, scalable, and modular. For our developme
 
 We also adopt TypeScript. Its type-checking reduces potential runtime errors and makes codebase maintenance smoother over time, improving code quality and efficiency.
 
-## Routing: Tanstack Router
+## Routing: TanStack Router
 
-To handle routing, we use Tanstack Router. It integrates smoothly with React state patterns and data fetching libraries. This lets us manage routes more clearly and reduces the complexity involved in handling route-related data loading logic.
+We use TanStack Router for routing due to several advantages over alternatives like React Router. TanStack Router is file-based, simplifying route management by directly mapping filesystem structure to application routes. It provides built-in mechanisms for data loading and error handling, reducing boilerplate and improving maintainability. Additionally, TanStack Router includes dedicated DevTools.
+
+Most importantly, it is designed with full end-to-end type safety covering routes, parameters, search parameters, and data loaders. This comprehensive type safety significantly improves developer experience, reduces runtime errors, and ultimately contributes to a more robust application.
 
 ## Spezi web configurations
 
@@ -64,7 +66,7 @@ For end-to-end testing, we chose Playwright. Playwright provides effective tests
 
 ## Hosting: GitHub Pages
 
-We currently host our frontend using GitHub Pages. Its direct integration into GitHub makes deployment straightforward. Simply committing to the source repository deploys the frontend. While other platforms like Netlify or Vercel offer additional server-side features, GitHub Pages provides a suitable level of simplicity and accessibility for our project's needs.
+We currently host our frontend using GitHub Pages. Its direct integration into GitHub makes deployment straightforward. Simply committing to the source repository deploys the frontend. While other platforms like Netlify or Vercel offer additional server-side features, GitHub Pages provides a suitable level of simplicity and accessibility for our project's needs. Learn more about our deployment strategy in the [deployments documentation](https://github.com/StanfordSpezi/spezi-web-study-platform/blob/main/docs/explanations/deployment.md).
 
 ## CI/CD: GitHub Actions
 
