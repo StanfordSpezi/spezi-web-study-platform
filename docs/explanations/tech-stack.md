@@ -42,7 +42,7 @@ To handle routing, we use Tanstack Router. It integrates smoothly with React sta
 
 ## Spezi web configurations
 
-We use an internal package called `spezi-web-configurations` to centralize formatting and linting settings across all Spezi web applications. This helps ensure consistency across related projects developed within the Stanford Digital Health ecosystem.
+We use an internal package called [spezi-web-configurations](https://github.com/StanfordSpezi/spezi-web-configurations) to centralize formatting and linting settings across all Spezi web applications. This helps ensure consistency across related projects developed within the Stanford Digital Health ecosystem.
 
 ## Spezi web design system
 
