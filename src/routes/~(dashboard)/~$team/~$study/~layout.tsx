@@ -8,12 +8,7 @@
 
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/(dashboard)/$team/$study")({
-  component: DashboardLayout,
-});
-
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
-function DashboardLayout() {
+const DashboardLayout = () => {
   const params = Route.useParams();
   return (
     <div className="flex">
@@ -36,4 +31,8 @@ function DashboardLayout() {
       </div>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/(dashboard)/$team/$study")({
+  component: DashboardLayout,
+});

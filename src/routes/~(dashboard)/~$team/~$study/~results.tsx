@@ -8,11 +8,10 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 
+const StudyResultsRoute = () => {
+  return <div>Study Results Route</div>;
+};
+
 export const Route = createFileRoute("/(dashboard)/$team/$study/results")({
   component: StudyResultsRoute,
 });
-
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
-function StudyResultsRoute() {
-  return <div>Study Results Route</div>;
-}

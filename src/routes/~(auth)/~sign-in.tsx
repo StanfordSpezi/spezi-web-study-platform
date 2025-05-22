@@ -8,11 +8,10 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 
+const SignInComponent = () => {
+  return <div>Sign in Route</div>;
+};
+
 export const Route = createFileRoute("/(auth)/sign-in")({
   component: SignInComponent,
 });
-
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
-function SignInComponent() {
-  return <div>Sign in Route</div>;
-}

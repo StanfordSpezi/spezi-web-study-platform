@@ -9,12 +9,7 @@
 import { Button } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/(dashboard)/$team/$study/")({
-  component: StudyHomeRoute,
-});
-
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
-function StudyHomeRoute() {
+const StudyHomeRoute = () => {
   const { team, study } = Route.useParams();
   return (
     <div>
@@ -24,4 +19,8 @@ function StudyHomeRoute() {
       <Button>Click me</Button>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/(dashboard)/$team/$study/")({
+  component: StudyHomeRoute,
+});

@@ -15,6 +15,23 @@ import {
 } from "@tanstack/react-router";
 import type { ComponentProps } from "react";
 
+const routerProps: ComponentProps<typeof SpeziProvider>["router"] = {
+  Link: ({ href, ...props }) => <Link to={href} {...props} />,
+};
+
+const RootComponent = () => {
+  return (
+    <>
+      <HeadContent />
+      <SpeziProvider router={routerProps}>
+        <div className="grid h-svh grid-rows-[1fr]">
+          <Outlet />
+        </div>
+      </SpeziProvider>
+    </>
+  );
+};
+
 export const Route = createRootRouteWithContext()({
   component: RootComponent,
   head: () => ({
@@ -29,21 +46,3 @@ export const Route = createRootRouteWithContext()({
     links: [{ rel: "icon", href: "favicon.ico" }],
   }),
 });
-
-const routerProps: ComponentProps<typeof SpeziProvider>["router"] = {
-  Link: ({ href, ...props }) => <Link to={href} {...props} />,
-};
-
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
-function RootComponent() {
-  return (
-    <>
-      <HeadContent />
-      <SpeziProvider router={routerProps}>
-        <div className="grid h-svh grid-rows-[1fr]">
-          <Outlet />
-        </div>
-      </SpeziProvider>
-    </>
-  );
-}
