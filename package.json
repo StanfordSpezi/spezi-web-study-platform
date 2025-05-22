@@ -1,6 +1,7 @@
 {
   "name": "@stanfordspezi/spezi-web-study-platform",
   "version": "0.1.0",
+  "type": "module",
   "license": "MIT",
   "description": "Stanford Biodesign Digital Health Spezi Web Study Platform Frontend",
   "keywords": [
@@ -30,13 +31,16 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "@stanfordspezi/spezi-web-design-system": "^0.12.0",
+    "@tailwindcss/vite": "^4.1.7",
     "@tanstack/react-router": "^1.117.1",
     "react": "^19",
-    "react-dom": "^19"
+    "react-dom": "^19",
+    "tailwindcss": "^4.1.7"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
-    "@stanfordspezi/spezi-web-configurations": "^0.4.0",
+    "@stanfordspezi/spezi-web-configurations": "^0.5.0",
     "@tanstack/router-plugin": "^1.117.2",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/node": "^22",

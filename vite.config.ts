@@ -7,6 +7,7 @@
 //
 
 import path from "node:path";
+import tailwindcss from "@tailwindcss/vite";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -17,6 +18,8 @@ export default defineConfig({
   base: "/spezi-web-study-platform/", // This is necessary for GitHub Pages
   plugins: [
     TanStackRouterVite({
+      routeToken: "layout",
+      routeFilePrefix: "~",
       routeTreeFileHeader: [
         dedent`
         //
@@ -34,6 +37,7 @@ export default defineConfig({
       ],
     }),
     react(),
+    tailwindcss(),
   ],
   resolve: {
     alias: {

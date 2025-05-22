@@ -6,6 +6,4 @@
 // SPDX-License-Identifier: MIT
 //
 
-import pkg from "@stanfordspezi/spezi-web-configurations";
-
-export default pkg.prettierConfig;
+/// <reference types="vite/client" />
