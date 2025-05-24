@@ -12,11 +12,13 @@ import { createFileRoute } from "@tanstack/react-router";
 const StudyHomeRoute = () => {
   const { team, study } = Route.useParams();
   return (
-    <div>
-      <p>Study Home Route</p>
-      <p>Team: {team}</p>
-      <p>Study: {study}</p>
-      <Button>Click me</Button>
+    <div className="flex-center size-full">
+      <div>
+        <p>Study Home Route</p>
+        <p>Team: {team}</p>
+        <p>Study: {study}</p>
+        <Button>Click me</Button>
+      </div>
     </div>
   );
 };

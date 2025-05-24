@@ -36,6 +36,7 @@
     "@tanstack/react-router": "^1.117.1",
     "react": "^19",
     "react-dom": "^19",
+    "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7"
   },
   "devDependencies": {

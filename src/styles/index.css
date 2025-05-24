@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 @import "@stanfordspezi/spezi-web-design-system/base.css";
 @import "./color.css";
 
-@source "../node_modules/@stanfordspezi/spezi-web-design-system/dist/**/*.js";
+@source "../../node_modules/@stanfordspezi/spezi-web-design-system/dist/**/*.js";
 
 :root {
   -webkit-font-smoothing: antialiased;

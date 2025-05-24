@@ -9,7 +9,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 const StudyParticipantsRoute = () => {
-  return <div>Study Participants Route</div>;
+  return <div className="flex-center size-full">Study Participants Route</div>;
 };
 
 export const Route = createFileRoute("/(dashboard)/$team/$study/participants")({
