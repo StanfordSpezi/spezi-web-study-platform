@@ -1,0 +1,186 @@
+/* Extending the primitive color tokens with the help of https://fullwindcss.com */
+:root {
+  --color-zinc-10: oklch(99.7% 0 none);
+  --color-zinc-50: oklch(98.51% 0 none);
+  --color-zinc-100: oklch(96.74% 0 287.3deg);
+  --color-zinc-150: oklch(94.36% 0 286.82deg);
+  --color-zinc-200: oklch(91.97% 0 286.61deg);
+  --color-zinc-250: oklch(89.54% 0 286.55deg);
+  --color-zinc-300: oklch(87.11% 0.01 286.49deg);
+  --color-zinc-350: oklch(79.15% 0.01 286.4deg);
+  --color-zinc-400: oklch(71.18% 0.01 286.14deg);
+  --color-zinc-450: oklch(63.17% 0.01 286.09deg);
+  --color-zinc-500: oklch(55.17% 0.01 285.99deg);
+  --color-zinc-550: oklch(49.68% 0.01 285.93deg);
+  --color-zinc-600: oklch(44.19% 0.01 285.82deg);
+  --color-zinc-650: oklch(40.61% 0.01 285.83deg);
+  --color-zinc-700: oklch(37.03% 0.01 285.84deg);
+  --color-zinc-750: oklch(32.21% 0.01 285.99deg);
+  --color-zinc-800: oklch(27.39% 0.01 286.1deg);
+  --color-zinc-850: oklch(24.21% 0.01 286.04deg);
+  --color-zinc-900: oklch(21.03% 0.01 285.93deg);
+  --color-zinc-950: oklch(14.08% 0 285.86deg);
+  --color-zinc-990: oklch(8.23% 0 285.86deg);
+
+  --color-brand-10: oklch(99.64% 0 155.22);
+  --color-brand-50: oklch(97.13% 0.019 167.94);
+  --color-brand-100: oklch(94.37% 0.038 164.87);
+  --color-brand-200: oklch(88.13% 0.085 162.99);
+  --color-brand-300: oklch(81.31% 0.132 160.4);
+  --color-brand-400: oklch(73.28% 0.163 156.54);
+  --color-brand-450: oklch(69.33% 0.151 156.68);
+  --color-brand-500: oklch(64.33% 0.141 156.81);
+  --color-brand-600: oklch(59.45% 0.13 156.82);
+  --color-brand-700: oklch(54.46% 0.118 156.84);
+  --color-brand-800: oklch(46.94% 0.1 157.56);
+  --color-brand-900: oklch(37.78% 0.078 157.64);
+  --color-brand-950: oklch(29.82% 0.058 158.28);
+
+  --color-green-10: oklch(99.64% 0 155.22);
+  --color-yellow-10: oklch(99.75% 0.01 100);
+  --color-red-10: oklch(99.41% 0 18.09);
+}
+
+/*
+    Semantic color tokens, inspired by https://polaris-react.shopify.com/tokens/color
+    color-[concept?]-[element]-[role?]-[prominence?]-[state?]
+    Concept: nav, sidebar
+    Element: bg, surface, fill, border, text, icon
+    Role: default, brand, info, success, caution, warning, critical, magic, emphasis, transparent, inverse
+    Prominence: primary, secondary, tertiary
+    State: hover, active, selected, disabled, focus
+*/
+:root {
+  /* Background */
+  --bg: var(--color-zinc-50);
+  --bg-hover: var(--color-zinc-100);
+  --bg-active: var(--color-zinc-200);
+  --bg-secondary: var(--color-zinc-150);
+  --bg-secondary-hover: var(--color-zinc-200);
+  --bg-tertiary: var(--color-zinc-250);
+  --bg-tertiary-hover: var(--color-zinc-300);
+
+  /* Surface */
+  --surface: var(--color-zinc-10);
+  --surface-hover: var(--color-zinc-100);
+
+  /* Fill */
+  --fill: var(--color-zinc-10);
+  --fill-brand: var(--color-brand-500);
+  --fill-brand-hover: var(--color-brand-450);
+  --fill-inverted: var(--color-zinc-900);
+  --fill-success: var(--color-green-700);
+  --fill-warning: var(--color-yellow-500);
+  --fill-critical: var(--color-red-600);
+
+  /* Border */
+  --border: var(--color-zinc-200);
+  --border-secondary: var(--color-zinc-300);
+  --border-tertiary: var(--color-zinc-400);
+  --border-focus: oklch(50.4% 0.199 259);
+  /* The border color to be used on elements with a shadow. If we were to use a regular shadow, it would look muddy.
+  See https://x.com/steveschoger/status/1695139153753604384 for a visual example */
+  --border-shadow: oklch(0% 0 0 / 5%);
+
+  /* Text */
+  --text: var(--color-zinc-700);
+  --text-secondary: var(--color-zinc-600);
+  --text-tertiary: var(--color-zinc-500);
+  --text-on-fill: var(--color-zinc-900);
+  --text-brand-on-fill: var(--color-brand-10);
+  --text-inverted-on-fill: var(--color-zinc-100);
+  --text-success-on-fill: var(--color-green-10);
+  --text-warning-on-fill: var(--color-yellow-10);
+  --text-critical-on-fill: var(--color-red-10);
+
+  /* Icon */
+  --icon: var(--color-zinc-900);
+  --icon-secondary: var(--color-zinc-600);
+  --icon-tertiary: var(--color-zinc-500);
+}
+
+/* Spezi Web Design System */
+:root {
+  --color-surface: var(--bg); /* "rgb(250 250 249)", */
+  --color-surface-primary: var(--bg); /* "rgb(255 255 255)", */
+  --color-foreground: var(--text); /* "rgb(9 4 4)", */
+  --color-card: var(--surface); /* "rgb(255 255 255)", */
+  --color-card-foreground: var(--text); /* "rgb(9 4 4)", */
+  --color-popover: var(--surface); /* "rgb(255 255 255)", */
+  --color-popover-foreground: var(--text); /* "rgb(9 4 4)", */
+  --color-primary: var(--fill-brand); /* "rgb(62 176 85)", */
+  --color-primary-foreground: var(
+    --text-brand-on-fill
+  ); /* "rgb(243 243 243)", */
+  --color-secondary: var(--fill-inverted); /* "rgb(242 240 240)", */
+  --color-secondary-foreground: var(
+    --text-inverted-on-fill
+  ); /* "rgb(30 15 15)", */
+  --color-muted: var(--bg-secondary); /* "rgb(242 240 240)", */
+  --color-muted-foreground: var(--text-secondary); /* "rgb(159 159 159)", */
+  --color-accent: var(--fill-brand); /* "rgb(242 240 240)", */
+  --color-accent-foreground: var(--text-brand-on-fill); /* "rgb(30 15 15)", */
+  /* --color-border: var(--border); "rgb(232 215 221)", */
+  --color-input: var(--border); /* "rgb(232 215 221)", */
+  --color-destructive: var(--fill-critical); /* "rgb(222 65 38)", */
+  --color-destructive-foreground: var(
+    --text-critical-on-fill
+  ); /* "rgb(243 243 243)", */
+  --color-success: var(--fill-success); /* "rgb(34 197 94)", */
+  --color-success-foreground: var(
+    --text-success-on-fill
+  ); /* "rgb(243 243 243)", */
+  --color-warning: var(--fill-warning); /* "rgb(252 211 3)", */
+  --color-warning-dark: var(--fill-warning); /* "rgb(153 101 21)", */
+  --color-warning-foreground: var(--text-warning-on-fill); /* "rgb(9 4 4)", */
+  --color-ring: var(--border-tertiary); /* "rgb(62 176 85)", */
+}
+
+@theme inline {
+  /* Background */
+  --color-bg: var(--bg);
+  --color-bg-hover: var(--bg-hover);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-secondary-hover: var(--bg-secondary-hover);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-tertiary-hover: var(--bg-tertiary-hover);
+
+  /* Surface */
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+
+  /* Fill */
+  --color-fill: var(--fill);
+  --color-fill-brand: var(--fill-brand);
+  --color-fill-brand-hover: var(--fill-brand-hover);
+  --color-fill-inverted: var(--fill-inverted);
+  --color-fill-success: var(--fill-success);
+  --color-fill-warning: var(--fill-warning);
+  --color-fill-critical: var(--fill-critical);
+
+  /* Border */
+  --color-border: var(--border);
+  --color-border-secondary: var(--border-secondary);
+  --color-border-tertiary: var(--border-tertiary);
+  --color-border-focus: var(--border-focus);
+  --color-border-shadow: var(--border-shadow);
+
+  /* Text */
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-brand-on-fill: var(--text-brand-on-fill);
+  --color-text-on-fill: var(--text-on-fill);
+  --color-text-inverted-on-fill: var(--text-inverted-on-fill);
+  --color-text-success-on-fill: var(--text-success-on-fill);
+  --color-text-warning-on-fill: var(--text-warning-on-fill);
+  --color-text-critical-on-fill: var(--text-critical-on-fill);
+
+  /* Icon */
+  --color-icon: var(--icon);
+  --color-icon-secondary: var(--icon-secondary);
+  --color-icon-tertiary: var(--icon-tertiary);
+
+  /* The Spezi Web Design System theme definitions are already
+  loaded by spezi-web-design-system/tailwind.css in index.css */
+}

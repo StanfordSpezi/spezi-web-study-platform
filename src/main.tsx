@@ -11,7 +11,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
-import "./index.css";
+import "./styles/index.css";
 
 const router = createRouter({
   basepath: "/spezi-web-study-platform", // This is necessary for GitHub Pages
