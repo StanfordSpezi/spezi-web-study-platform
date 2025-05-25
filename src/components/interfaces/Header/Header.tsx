@@ -1,4 +1,8 @@
 import { cn } from "@/utils/cn";
+import { Notifications } from "./Notifications";
+import { StudySelector } from "./StudySelector";
+import { TeamSelector } from "./TeamSelector";
+import { UserDropdown } from "./UserDropdown";
 
 export const Header = () => {
   return (
@@ -10,13 +14,13 @@ export const Header = () => {
       )}
     >
       <div className="flex items-center gap-3">
-        <div>team</div>
+        <TeamSelector />
         <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
-        <div>study</div>
+        <StudySelector />
       </div>
       <div className="flex items-center gap-2">
-        <div className="text-muted-foreground text-sm">User Name</div>
-        <div className="bg-fill-brand h-8 w-8 rounded-full"></div>
+        <Notifications />
+        <UserDropdown />
       </div>
     </header>
   );

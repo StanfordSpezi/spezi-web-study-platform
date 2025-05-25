@@ -271,7 +271,7 @@ const SidebarTrigger = ({
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
-      size="default" // Has "icon" as value from shadcn/ui
+      size="icon"
       className={cn("text-muted-foreground size-7", className)}
       onClick={(event) => {
         onClick?.(event);
