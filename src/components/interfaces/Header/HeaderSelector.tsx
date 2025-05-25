@@ -63,7 +63,7 @@ export const HeaderSelector = ({
             "flex h-8 items-center gap-3 rounded-md p-2.5 text-left text-sm outline-hidden",
             "hover:bg-bg-hover",
             "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
-            "focus-visible:ring-2",
+            "focus-visible:ring-border-focus focus-visible:ring-2",
             "[&>span:last-child]:truncate",
             "[&>svg]:size-3.5 [&>svg]:shrink-0",
           )}

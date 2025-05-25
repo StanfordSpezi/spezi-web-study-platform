@@ -77,10 +77,11 @@
   --border: var(--color-zinc-200);
   --border-secondary: var(--color-zinc-300);
   --border-tertiary: var(--color-zinc-400);
-  --border-focus: oklch(50.4% 0.199 259);
+  --border-focus: var(--color-brand-500);
   /* The border color to be used on elements with a shadow. If we were to use a regular shadow, it would look muddy.
   See https://x.com/steveschoger/status/1695139153753604384 for a visual example */
   --border-shadow: oklch(0% 0 0 / 5%);
+  --border-brand: var(--color-brand-600);
 
   /* Text */
   --text: var(--color-zinc-700);
@@ -164,6 +165,7 @@
   --color-border-tertiary: var(--border-tertiary);
   --color-border-focus: var(--border-focus);
   --color-border-shadow: var(--border-shadow);
+  --color-border-brand: var(--border-brand);
 
   /* Text */
   --color-text: var(--text);

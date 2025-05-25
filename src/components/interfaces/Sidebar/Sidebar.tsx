@@ -482,11 +482,11 @@ const SidebarMenuItem = ({ className, ...props }: ComponentProps<"li">) => {
 const sidebarMenuButtonVariants = cva(
   `peer/menu-button flex w-full items-center gap-2.5 overflow-hidden rounded-md p-2.5 text-left text-sm outline-hidden ring-border-tertiary transition-[width,height,padding,background-color]
   hover:bg-bg-hover hover:text-text-secondary
-  focus-visible:ring-2
+  focus-visible:ring-2 focus-visible:ring-border-focus
   active:bg-bg-active active:text-text-secondary
   disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50
   group-has-data-[sidebar=menu-action]/menu-item:pr-8
-  data-[active=true]:bg-fill data-[active=true]:ring-border-shadow data-[active=true]:ring data-[active=true]:shadow-xs data-[active=true]:text-text-secondary
+  data-[active=true]:bg-fill data-[active=true]:ring-border-shadow data-[active=true]:ring data-[active=true]:shadow-xs data-[active=true]:text-text-secondary data-[active=true]:focus-visible:ring-2 data-[active=true]:focus-visible:ring-border-focus
   data-[state=open]:hover:bg-bg-hover data-[state=open]:hover:text-text-secondary
   group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!
   [&>span:last-child]:truncate [&>svg]:size-3.5 [&>svg]:shrink-0`,
