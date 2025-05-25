@@ -68,6 +68,7 @@
   --fill: var(--color-zinc-10);
   --fill-brand: var(--color-brand-500);
   --fill-brand-hover: var(--color-brand-450);
+  --fill-brand-active: var(--color-brand-400);
   --fill-inverted: var(--color-zinc-900);
   --fill-success: var(--color-green-700);
   --fill-warning: var(--color-yellow-500);
@@ -155,6 +156,7 @@
   --color-fill: var(--fill);
   --color-fill-brand: var(--fill-brand);
   --color-fill-brand-hover: var(--fill-brand-hover);
+  --color-fill-brand-active: var(--fill-brand-active);
   --color-fill-inverted: var(--fill-inverted);
   --color-fill-success: var(--fill-success);
   --color-fill-warning: var(--fill-warning);
