@@ -60,7 +60,7 @@ export const HeaderSelector = ({
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "flex h-8 items-center gap-3 rounded-md p-2.5 text-left text-sm outline-hidden",
+            "flex h-8 items-center gap-3 rounded-md p-2.5 text-left text-sm outline-hidden transition-colors",
             "hover:bg-bg-hover",
             "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
             "focus-visible:ring-border-focus focus-visible:ring-2",

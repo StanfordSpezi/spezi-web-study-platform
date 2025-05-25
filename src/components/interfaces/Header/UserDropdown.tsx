@@ -56,7 +56,7 @@ export const UserDropdown = () => {
         sideOffset={4}
       >
         <DropdownMenuLabel>
-          <div className="text-text-secondary">{session.user.name}</div>
+          <div>{session.user.name}</div>
           <div className="text-text-tertiary truncate">
             {session.user.email}
           </div>

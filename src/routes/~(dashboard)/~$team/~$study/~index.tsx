@@ -14,12 +14,10 @@ const StudyHomeRoute = () => {
   return (
     <div className="flex-center size-full">
       <div>
-        <p>Study Home Route</p>
-        <p>Team: {team}</p>
+        <p className="text-text">Study Home Route</p>
+        <p className="text-text-secondary">Team: {team}</p>
         <p>Study: {study}</p>
-        <div className="space-x-4">
-          <Button>Click me</Button>
-        </div>
+        <Button>Click me</Button>
       </div>
     </div>
   );

@@ -2,25 +2,25 @@
 :root {
   --color-zinc-10: oklch(99.7% 0 none);
   --color-zinc-50: oklch(98.51% 0 none);
-  --color-zinc-100: oklch(96.74% 0 287.3deg);
-  --color-zinc-150: oklch(94.36% 0 286.82deg);
-  --color-zinc-200: oklch(91.97% 0 286.61deg);
-  --color-zinc-250: oklch(89.54% 0 286.55deg);
-  --color-zinc-300: oklch(87.11% 0.01 286.49deg);
-  --color-zinc-350: oklch(79.15% 0.01 286.4deg);
-  --color-zinc-400: oklch(71.18% 0.01 286.14deg);
-  --color-zinc-450: oklch(63.17% 0.01 286.09deg);
-  --color-zinc-500: oklch(55.17% 0.01 285.99deg);
-  --color-zinc-550: oklch(49.68% 0.01 285.93deg);
-  --color-zinc-600: oklch(44.19% 0.01 285.82deg);
-  --color-zinc-650: oklch(40.61% 0.01 285.83deg);
-  --color-zinc-700: oklch(37.03% 0.01 285.84deg);
-  --color-zinc-750: oklch(32.21% 0.01 285.99deg);
-  --color-zinc-800: oklch(27.39% 0.01 286.1deg);
-  --color-zinc-850: oklch(24.21% 0.01 286.04deg);
-  --color-zinc-900: oklch(21.03% 0.01 285.93deg);
-  --color-zinc-950: oklch(14.08% 0 285.86deg);
-  --color-zinc-990: oklch(8.23% 0 285.86deg);
+  --color-zinc-100: oklch(96.74% 0 287.3);
+  --color-zinc-150: oklch(94.36% 0 286.82);
+  --color-zinc-200: oklch(91.97% 0 286.61);
+  --color-zinc-250: oklch(89.54% 0 286.55);
+  --color-zinc-300: oklch(87.11% 0.01 286.49);
+  --color-zinc-350: oklch(79.15% 0.01 286.4);
+  --color-zinc-400: oklch(71.18% 0.01 286.14);
+  --color-zinc-450: oklch(63.17% 0.01 286.09);
+  --color-zinc-500: oklch(55.17% 0.01 285.99);
+  --color-zinc-550: oklch(49.68% 0.01 285.93);
+  --color-zinc-600: oklch(44.19% 0.01 285.82);
+  --color-zinc-650: oklch(40.61% 0.01 285.83);
+  --color-zinc-700: oklch(37.03% 0.01 285.84);
+  --color-zinc-750: oklch(32.21% 0.01 285.99);
+  --color-zinc-800: oklch(27.39% 0.01 286.1);
+  --color-zinc-850: oklch(24.21% 0.01 286.04);
+  --color-zinc-900: oklch(21.03% 0.01 285.93);
+  --color-zinc-950: oklch(14.08% 0 285.86);
+  --color-zinc-990: oklch(8.23% 0 285.86);
 
   --color-brand-10: oklch(99.64% 0 155.22);
   --color-brand-50: oklch(97.13% 0.019 167.94);
@@ -84,8 +84,8 @@
   --border-brand: var(--color-brand-600);
 
   /* Text */
-  --text: var(--color-zinc-700);
-  --text-secondary: var(--color-zinc-600);
+  --text: var(--color-zinc-900);
+  --text-secondary: var(--color-zinc-700);
   --text-tertiary: var(--color-zinc-500);
   --text-on-fill: var(--color-zinc-900);
   --text-brand-on-fill: var(--color-brand-10);
@@ -104,11 +104,11 @@
 :root {
   --color-surface: var(--bg); /* "rgb(250 250 249)", */
   --color-surface-primary: var(--bg); /* "rgb(255 255 255)", */
-  --color-foreground: var(--text); /* "rgb(9 4 4)", */
+  --color-foreground: var(--text-secondary); /* "rgb(9 4 4)", */
   --color-card: var(--surface); /* "rgb(255 255 255)", */
-  --color-card-foreground: var(--text); /* "rgb(9 4 4)", */
+  --color-card-foreground: var(--text-secondary); /* "rgb(9 4 4)", */
   --color-popover: var(--surface); /* "rgb(255 255 255)", */
-  --color-popover-foreground: var(--text); /* "rgb(9 4 4)", */
+  --color-popover-foreground: var(--text-secondary); /* "rgb(9 4 4)", */
   --color-primary: var(--fill-brand); /* "rgb(62 176 85)", */
   --color-primary-foreground: var(
     --text-brand-on-fill
@@ -141,6 +141,7 @@
   /* Background */
   --color-bg: var(--bg);
   --color-bg-hover: var(--bg-hover);
+  --color-bg-active: var(--bg-active);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-secondary-hover: var(--bg-secondary-hover);
   --color-bg-tertiary: var(--bg-tertiary);
