@@ -1,3 +1,12 @@
+//
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+//
+// SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+//
+// SPDX-License-Identifier: MIT
+//
+
+// Adapted from shadcn/ui
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 import type { ComponentProps } from "react";

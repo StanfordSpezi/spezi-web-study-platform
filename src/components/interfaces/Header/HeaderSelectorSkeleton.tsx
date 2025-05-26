@@ -1,3 +1,11 @@
+//
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+//
+// SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+//
+// SPDX-License-Identifier: MIT
+//
+
 import { ChevronsUpDown } from "lucide-react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { cn } from "@/utils/cn";
