@@ -16,11 +16,11 @@ import {
   SidebarSeparator,
 } from "./Sidebar";
 
-interface Props {
+interface AppSidebarProps {
   className?: string;
 }
 
-export const AppSidebar = ({ className }: Props) => {
+export const AppSidebar = ({ className }: AppSidebarProps) => {
   return (
     <Sidebar collapsible="icon" className={className}>
       <SidebarContent>

@@ -23,7 +23,7 @@ export const HeaderSelectorSkeleton = ({ hasIcon }: { hasIcon: boolean }) => {
       )}
     >
       {hasIcon && (
-        <div className="bg-surface ring-border-shadow -ml-1.5 flex aspect-square size-6 items-center justify-center rounded-md shadow-xs ring">
+        <div className="bg-surface ring-border-shadow flex-center -ml-1.5 aspect-square size-6 rounded-md shadow-xs ring">
           <div className="size-3.5" />
         </div>
       )}

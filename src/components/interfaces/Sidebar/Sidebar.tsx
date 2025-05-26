@@ -440,7 +440,7 @@ const SidebarGroupAction = ({
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       className={cn(
-        "ring-border-tertiary hover:bg-bg-hover absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "ring-border-tertiary hover:bg-bg-hover flex-center absolute top-3.5 right-3 aspect-square w-5 rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 md:after:hidden",
         "group-data-[collapsible=icon]:hidden",
@@ -576,7 +576,7 @@ const SidebarMenuAction = ({
       data-slot="sidebar-menu-action"
       data-sidebar="menu-action"
       className={cn(
-        "ring-border-tertiary hover:bg-bg-hover peer-hover/menu-button:text-text-secondary absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "ring-border-tertiary hover:bg-bg-hover peer-hover/menu-button:text-text-secondary flex-center absolute top-1.5 right-1 aspect-square w-5 rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 md:after:hidden",
         "peer-data-[size=sm]/menu-button:top-1",
@@ -598,7 +598,7 @@ const SidebarMenuBadge = ({ className, ...props }: ComponentProps<"div">) => {
       data-slot="sidebar-menu-badge"
       data-sidebar="menu-badge"
       className={cn(
-        "pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none",
+        "flex-center pointer-events-none absolute right-1 h-5 min-w-5 rounded-md px-1 text-xs font-medium tabular-nums select-none",
         "peer-hover/menu-button:text-text-secondary peer-data-[active=true]/menu-button:text-text-secondary",
         "peer-data-[size=sm]/menu-button:top-1",
         "peer-data-[size=default]/menu-button:top-1.5",

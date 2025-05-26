@@ -11,11 +11,11 @@ import { Header } from "../interfaces/Header/Header";
 import { AppSidebar } from "../interfaces/Sidebar/AppSidebar";
 import { SidebarInset, SidebarProvider } from "../interfaces/Sidebar/Sidebar";
 
-interface Props {
+interface DashboardLayoutProps {
   children: ReactNode | ReactNode[];
 }
 
-export const DashboardLayout = ({ children }: Props) => {
+export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
       <SidebarProvider className="flex flex-col">

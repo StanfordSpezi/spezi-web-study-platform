@@ -12,7 +12,7 @@ import {
   type ValidateLinkOptions,
 } from "@tanstack/react-router";
 import { ChevronsUpDown, type LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
+import type { ComponentProps, ComponentType, ReactNode } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,14 +39,14 @@ export const HeaderSelectorMenuItem = <
   linkOptions,
 }: {
   children: ReactNode;
-  icon?: LucideIcon;
+  icon?: ComponentType<ComponentProps<"svg">>;
   linkOptions: ValidateLinkOptions<TRouter, TOptions>;
 }) => {
   return (
     <DropdownMenuItem className="gap-2 p-2!" asChild>
       <Link {...linkOptions}>
         {Icon && (
-          <div className="flex size-6 items-center justify-center rounded-sm border">
+          <div className="flex-center size-6 rounded-sm border">
             <Icon className="size-4 shrink-0" />
           </div>
         )}
@@ -77,7 +77,7 @@ export const HeaderSelector = ({
           )}
         >
           {selectedItem.icon && (
-            <div className="bg-surface ring-border-shadow -ml-1.5 flex aspect-square size-6 items-center justify-center rounded-md shadow-xs ring">
+            <div className="bg-surface ring-border-shadow flex-center -ml-1.5 aspect-square size-6 rounded-md shadow-xs ring">
               <selectedItem.icon className="size-3.5" strokeWidth={2} />
             </div>
           )}
