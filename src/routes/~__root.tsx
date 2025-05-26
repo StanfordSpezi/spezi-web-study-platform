@@ -6,28 +6,19 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { SpeziProvider } from "@stanfordspezi/spezi-web-design-system";
 import {
   createRootRouteWithContext,
   HeadContent,
-  Link,
   Outlet,
 } from "@tanstack/react-router";
-import type { ComponentProps } from "react";
-
-const routerProps: ComponentProps<typeof SpeziProvider>["router"] = {
-  Link: ({ href, ...props }) => <Link to={href} {...props} />,
-};
 
 const RootComponent = () => {
   return (
     <>
       <HeadContent />
-      <SpeziProvider router={routerProps}>
-        <div className="grid h-svh grid-rows-[1fr]">
-          <Outlet />
-        </div>
-      </SpeziProvider>
+      <div className="grid h-svh grid-rows-[1fr]">
+        <Outlet />
+      </div>
     </>
   );
 };
