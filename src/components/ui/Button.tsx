@@ -10,6 +10,7 @@
 // override the default styles without using a bunch of !important flags
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import type { ComponentProps } from "react";
 import { cn } from "@/utils/cn";
 
 const buttonVariants = cva(
@@ -48,7 +49,7 @@ const Button = ({
   size,
   asChild = false,
   ...props
-}: React.ComponentProps<"button"> &
+}: ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
   }) => {

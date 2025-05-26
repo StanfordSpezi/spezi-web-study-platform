@@ -18,6 +18,7 @@ import {
   useMemo,
   useState,
   type ComponentProps,
+  type CSSProperties,
 } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -149,7 +150,7 @@ const SidebarProvider = ({
               "--sidebar-width": SIDEBAR_WIDTH,
               "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
               ...style,
-            } as React.CSSProperties
+            } as CSSProperties
           }
           className={cn(
             "group/sidebar-wrapper has-data-[variant=inset]:bg-bg flex min-h-svh w-full",
@@ -204,7 +205,7 @@ const Sidebar = ({
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
+            } as CSSProperties
           }
           side={side}
         >
@@ -641,7 +642,7 @@ const SidebarMenuSkeleton = ({
         style={
           {
             "--skeleton-width": width,
-          } as React.CSSProperties
+          } as CSSProperties
         }
       />
     </div>

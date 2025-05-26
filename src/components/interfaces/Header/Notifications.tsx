@@ -30,7 +30,7 @@ export const Notifications = () => {
           <Bell />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right">
+      <SheetContent>
         <SheetHeader>
           <SheetTitle>Notifications</SheetTitle>
           <SheetDescription>You have no new notifications.</SheetDescription>

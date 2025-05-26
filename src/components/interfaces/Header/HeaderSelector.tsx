@@ -35,19 +35,19 @@ export const HeaderSelectorMenuItem = <
   TOptions = unknown,
 >({
   children,
-  icon: LucideIcon,
+  icon: Icon,
   linkOptions,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   icon?: LucideIcon;
   linkOptions: ValidateLinkOptions<TRouter, TOptions>;
 }) => {
   return (
     <DropdownMenuItem className="gap-2 p-2!" asChild>
       <Link {...linkOptions}>
-        {LucideIcon && (
+        {Icon && (
           <div className="flex size-6 items-center justify-center rounded-sm border">
-            <LucideIcon className="size-4 shrink-0" />
+            <Icon className="size-4 shrink-0" />
           </div>
         )}
         {children}
@@ -61,7 +61,7 @@ export const HeaderSelector = ({
   children,
 }: {
   selectedItem: { title: string; icon?: LucideIcon };
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   return (
     <DropdownMenu modal={false}>
