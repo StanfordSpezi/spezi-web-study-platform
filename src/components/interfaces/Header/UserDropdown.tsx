@@ -45,8 +45,6 @@ export const UserDropdown = () => {
           )}
         >
           <Avatar
-            // I need to add the "important" flag because the Spezi components don't allow
-            // you to overwrite tailwind classes
             className="bg-surface ring-border-shadow size-6.5! rounded-full shadow-xs ring"
             src={session.user.image}
             fallback={

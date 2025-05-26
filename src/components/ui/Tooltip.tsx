@@ -8,9 +8,7 @@
 
 import {
   Tooltip as _Tooltip,
-  TooltipContent,
   TooltipProvider,
-  TooltipTrigger,
 } from "@stanfordspezi/spezi-web-design-system";
 import type { ComponentProps } from "react";
 import { cn } from "@/utils/cn";
@@ -27,4 +25,4 @@ const Tooltip = ({ className, ...props }: ComponentProps<typeof _Tooltip>) => {
   );
 };
 
-export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
+export { Tooltip, TooltipProvider };

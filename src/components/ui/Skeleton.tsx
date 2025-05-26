@@ -6,6 +6,4 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Skeleton } from "@stanfordspezi/spezi-web-design-system";
-
-export { Skeleton };
+export * from "@stanfordspezi/spezi-web-design-system/components/Skeleton";

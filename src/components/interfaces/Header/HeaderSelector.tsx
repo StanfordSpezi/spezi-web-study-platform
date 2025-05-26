@@ -88,8 +88,6 @@ export const HeaderSelector = ({
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        // I need to add the "important" flag because the Spezi components don't allow
-        // you to overwrite tailwind classes
         className="min-w-60! rounded-lg"
         align="start"
         side="bottom"

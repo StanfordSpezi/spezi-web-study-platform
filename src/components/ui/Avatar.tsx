@@ -6,6 +6,4 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Avatar } from "@stanfordspezi/spezi-web-design-system";
-
-export { Avatar };
+export * from "@stanfordspezi/spezi-web-design-system/components/Avatar";

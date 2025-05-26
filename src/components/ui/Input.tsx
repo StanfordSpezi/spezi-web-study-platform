@@ -6,6 +6,4 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Input } from "@stanfordspezi/spezi-web-design-system";
-
-export { Input };
+export * from "@stanfordspezi/spezi-web-design-system/components/Input";

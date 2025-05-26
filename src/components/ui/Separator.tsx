@@ -5,6 +5,5 @@
 //
 // SPDX-License-Identifier: MIT
 //
-import { Separator } from "@stanfordspezi/spezi-web-design-system";
 
-export { Separator };
+export * from "@stanfordspezi/spezi-web-design-system/components/Separator";
