@@ -16,12 +16,12 @@ import {
   TreePine,
   type LucideIcon,
 } from "lucide-react";
-import { DropdownMenuSeparator } from "@/components/ui/DropdownMenu";
 import {
   HeaderSelector,
   HeaderSelectorMenuItem,
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
+import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 // import { DropdownSelectorSkeleton } from "./DropdownSelectorSkeleton";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -92,8 +92,12 @@ export const TeamSelector = () => {
         </HeaderSelectorMenuItem>
       ))}
       <DropdownMenuSeparator />
-      <HeaderSelectorMenuItem icon={Plus} linkOptions={{ to: "." }}>
-        <span className="text-muted-foreground">Add Team</span>
+      <HeaderSelectorMenuItem
+        icon={Plus}
+        linkOptions={{ to: "." }}
+        className="text-text-tertiary"
+      >
+        Add Team
       </HeaderSelectorMenuItem>
     </HeaderSelector>
   );

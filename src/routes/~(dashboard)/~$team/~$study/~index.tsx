@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { Button } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@/components/ui/Button";
 
 const StudyHomeRoute = () => {
   const { team, study } = Route.useParams();

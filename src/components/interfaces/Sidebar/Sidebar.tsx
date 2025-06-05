@@ -20,9 +20,6 @@ import {
   type ComponentProps,
   type CSSProperties,
 } from "react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Separator } from "@/components/ui/Separator";
 import {
   Sheet,
   SheetContent,
@@ -30,10 +27,16 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/Sheet";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { Tooltip, TooltipProvider } from "@/components/ui/Tooltip";
 import { cn } from "@/utils/cn";
 import { useIsMobile } from "@/utils/useIsMobile";
+import {
+  Button,
+  Input,
+  Separator,
+  Skeleton,
+  Tooltip,
+  TooltipProvider,
+} from "@stanfordspezi/spezi-web-design-system";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -279,7 +282,7 @@ const SidebarTrigger = ({
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
-      size="icon"
+      size="default"
       className={cn("text-muted-foreground size-7", className)}
       onClick={(event) => {
         onClick?.(event);

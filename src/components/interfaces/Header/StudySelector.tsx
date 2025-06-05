@@ -8,12 +8,12 @@
 
 import { useParams } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
-import { DropdownMenuSeparator } from "@/components/ui/DropdownMenu";
 import {
   HeaderSelector,
   HeaderSelectorMenuItem,
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
+import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 
 const studies = [
   {
@@ -80,7 +80,11 @@ export const StudySelector = () => {
         </HeaderSelectorMenuItem>
       ))}
       <DropdownMenuSeparator />
-      <HeaderSelectorMenuItem icon={Plus} linkOptions={{ to: "." }}>
+      <HeaderSelectorMenuItem
+        icon={Plus}
+        linkOptions={{ to: "." }}
+        className="text-text-tertiary"
+      >
         Add Study
       </HeaderSelectorMenuItem>
     </HeaderSelector>

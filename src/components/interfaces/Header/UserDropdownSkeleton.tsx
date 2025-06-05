@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Avatar } from "@/components/ui/Avatar";
 import { cn } from "@/utils/cn";
+import { Avatar } from "@stanfordspezi/spezi-web-design-system";
 
 export const UserDropdownSkeleton = () => {
   return (

@@ -13,14 +13,14 @@ import {
 } from "@tanstack/react-router";
 import { ChevronsUpDown, type LucideIcon } from "lucide-react";
 import type { ComponentProps, ComponentType, ReactNode } from "react";
+import { cn } from "@/utils/cn";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
-import { cn } from "@/utils/cn";
+} from "@stanfordspezi/spezi-web-design-system";
 
 export const HeaderSelectorMenuLabel = ({
   children,
@@ -37,13 +37,15 @@ export const HeaderSelectorMenuItem = <
   children,
   icon: Icon,
   linkOptions,
+  className,
 }: {
   children: ReactNode;
   icon?: ComponentType<ComponentProps<"svg">>;
   linkOptions: ValidateLinkOptions<TRouter, TOptions>;
+  className?: string;
 }) => {
   return (
-    <DropdownMenuItem className="gap-2 p-2!" asChild>
+    <DropdownMenuItem className={cn("gap-2 p-2!", className)} asChild>
       <Link {...linkOptions}>
         {Icon && (
           <div className="flex-center size-6 rounded-sm border">

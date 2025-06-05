@@ -7,8 +7,9 @@
 //
 
 import { Layers2, LogOut, User } from "lucide-react";
-import { Avatar } from "@/components/ui/Avatar";
+import { cn } from "@/utils/cn";
 import {
+  Avatar,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -16,8 +17,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
-import { cn } from "@/utils/cn";
+} from "@stanfordspezi/spezi-web-design-system";
 // import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 const session = {

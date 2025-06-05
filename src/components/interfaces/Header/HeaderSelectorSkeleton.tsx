@@ -7,8 +7,8 @@
 //
 
 import { ChevronsUpDown } from "lucide-react";
-import { Skeleton } from "@/components/ui/Skeleton";
 import { cn } from "@/utils/cn";
+import { Skeleton } from "@stanfordspezi/spezi-web-design-system";
 
 export const HeaderSelectorSkeleton = ({ hasIcon }: { hasIcon: boolean }) => {
   return (

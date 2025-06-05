@@ -7,7 +7,6 @@
 //
 
 import { Bell } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import {
   Sheet,
   SheetContent,
@@ -16,6 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/Sheet";
+import { Button } from "@stanfordspezi/spezi-web-design-system";
 
 export const Notifications = () => {
   return (
@@ -23,11 +23,10 @@ export const Notifications = () => {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
           aria-label="Notifications"
-          className="size-8"
+          className="size-8! p-0!"
         >
-          <Bell />
+          <Bell className="size-4" />
         </Button>
       </SheetTrigger>
       <SheetContent>
