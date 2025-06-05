@@ -6,8 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Layers2, LogOut, User } from "lucide-react";
-import { cn } from "@/utils/cn";
 import {
   Avatar,
   DropdownMenu,
@@ -18,6 +16,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@stanfordspezi/spezi-web-design-system";
+import { Layers2, LogOut, User } from "lucide-react";
+import { cn } from "@/utils/cn";
 // import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 const session = {

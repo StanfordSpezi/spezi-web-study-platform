@@ -7,6 +7,13 @@
 //
 
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@stanfordspezi/spezi-web-design-system";
+import {
   Link,
   type RegisteredRouter,
   type ValidateLinkOptions,
@@ -14,13 +21,6 @@ import {
 import { ChevronsUpDown, type LucideIcon } from "lucide-react";
 import type { ComponentProps, ComponentType, ReactNode } from "react";
 import { cn } from "@/utils/cn";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@stanfordspezi/spezi-web-design-system";
 
 export const HeaderSelectorMenuLabel = ({
   children,

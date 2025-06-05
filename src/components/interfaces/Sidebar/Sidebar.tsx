@@ -8,6 +8,20 @@
 
 // Adapted from shadcn/ui
 import { Slot } from "@radix-ui/react-slot";
+import {
+  Button,
+  Input,
+  Separator,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  Skeleton,
+  Tooltip,
+  TooltipProvider,
+  useIsScreen,
+} from "@stanfordspezi/spezi-web-design-system";
 import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 import {
@@ -20,23 +34,7 @@ import {
   type ComponentProps,
   type CSSProperties,
 } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/Sheet";
 import { cn } from "@/utils/cn";
-import { useIsMobile } from "@/utils/useIsMobile";
-import {
-  Button,
-  Input,
-  Separator,
-  Skeleton,
-  Tooltip,
-  TooltipProvider,
-} from "@stanfordspezi/spezi-web-design-system";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -79,7 +77,7 @@ const SidebarProvider = ({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) => {
-  const isMobile = useIsMobile();
+  const isDesktop = useIsScreen("lg");
   const [openMobile, setOpenMobile] = useState(false);
 
   // This is the internal state of the sidebar.
@@ -103,12 +101,12 @@ const SidebarProvider = ({
 
   // Helper to toggle the sidebar.
   const toggleSidebar = useCallback(() => {
-    if (isMobile) {
+    if (!isDesktop) {
       setOpenMobile((open) => !open);
     } else {
       setOpen((open) => !open);
     }
-  }, [isMobile, setOpen, setOpenMobile]);
+  }, [isDesktop, setOpen, setOpenMobile]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
   useEffect(() => {
@@ -135,12 +133,12 @@ const SidebarProvider = ({
       state,
       open,
       setOpen,
-      isMobile,
+      isMobile: !isDesktop,
       openMobile,
       setOpenMobile,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar],
+    [state, open, setOpen, isDesktop, openMobile, setOpenMobile, toggleSidebar],
   );
 
   return (

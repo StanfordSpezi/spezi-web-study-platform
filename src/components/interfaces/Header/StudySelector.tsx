@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 import { useParams } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import {
@@ -13,7 +14,6 @@ import {
   HeaderSelectorMenuItem,
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
-import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 
 const studies = [
   {

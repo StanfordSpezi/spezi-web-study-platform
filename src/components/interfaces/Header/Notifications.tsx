@@ -6,16 +6,16 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Bell } from "lucide-react";
 import {
+  Button,
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/Sheet";
-import { Button } from "@stanfordspezi/spezi-web-design-system";
+} from "@stanfordspezi/spezi-web-design-system";
+import { Bell } from "lucide-react";
 
 export const Notifications = () => {
   return (

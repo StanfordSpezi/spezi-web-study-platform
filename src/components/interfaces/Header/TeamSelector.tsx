@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 import { useParams } from "@tanstack/react-router";
 import {
   Flower,
@@ -21,7 +22,6 @@ import {
   HeaderSelectorMenuItem,
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
-import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 // import { DropdownSelectorSkeleton } from "./DropdownSelectorSkeleton";
 
 const iconMap: Record<string, LucideIcon> = {

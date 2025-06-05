@@ -6,9 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { Skeleton } from "@stanfordspezi/spezi-web-design-system";
 import { ChevronsUpDown } from "lucide-react";
 import { cn } from "@/utils/cn";
-import { Skeleton } from "@stanfordspezi/spezi-web-design-system";
 
 export const HeaderSelectorSkeleton = ({ hasIcon }: { hasIcon: boolean }) => {
   return (
