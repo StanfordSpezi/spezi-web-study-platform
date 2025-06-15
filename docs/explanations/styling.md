@@ -49,7 +49,7 @@ To keep intent explicit the platform adopts a semantic token hierarchy, inspired
 - The color’s purpose (brand, success, warning, neutral, etc.).
 - Optional interaction states (hover, active, disabled) and prominence levels (primary, secondary, tertiary).
 
-Learn more about each individual token in the [color token reference](../reference//color-tokens.md).
+Learn more about each individual token in the [color token reference](../reference/color-tokens.md).
 
 ### Naming convention
 
