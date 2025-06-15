@@ -47,7 +47,7 @@ Choosing between "use the default" and "customize" can be confusing, especially 
 | 1. Accept the default      | The SWDS component meets functional needs. Minor spacing or color tweaks are cosmetic.                     | Use as-is, adding only utility classes or small CSS overrides. | Lowest maintenance cost.                                |
 | 2. Accept a minor mismatch | The default feels slightly off but still achieves the user outcome (e.g., dropdown alignment preferences). | Live with the discrepancy, document the friction.              | Upgrades remain trivial, avoid premature customization. |
 | 3. Improve for everyone    | A local variant is clearly better and useful beyond this project (e.g., an improved button shadow model).  | Implement locally and open an upstream proposal to SWDS.       | Keeps the ecosystem coherent and reduces future drift.  |
-| 4. Fork deliberately       | Requirement is unique or fundamentally different (e.g., a highly specialised sidebar component).           | Copy the component into the repo, own the code.                | Makes the fork explicit and contained.                  |
+| 4. Fork deliberately       | Requirement is unique or fundamentally different (e.g., a highly specialized sidebar component).           | Copy the component into the repo, own the code.                | Makes the fork explicit and contained.                  |
 
 Placing "accept the mismatch" before "improve for everyone" ensures that we don't chase micro-optimisations that add long-term cost.
 
