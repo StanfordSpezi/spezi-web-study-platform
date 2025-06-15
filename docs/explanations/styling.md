@@ -92,4 +92,4 @@ Contributors must learn a larger vocabulary of colors than the standard SWDS pal
 
 ## Conclusion
 
-The styling approach adopted by the study platform balances consistency, maintainability, and flexibility. By building upon the existing Spezi Web Design System (SWDS) and extending it only when necessary, the platform ensures alignment with established design patterns while accommodating specific usability requirements. The semantic token system, central to this approach, explicitly encodes design intent, facilitating clearer communication among designers and developers, easier theming, and systematic accessibility checks. Although this introduces an initial learning curve and increased cognitive load, the long-term benefits of predictability, reduced maintenance complexity, and adaptability to future design changes justify the investment.
+The styling approach adopted by the study platform balances consistency, maintainability, and flexibility. By building upon the existing SWDS and extending it only when necessary, the platform ensures alignment with established design patterns while accommodating specific usability requirements.
