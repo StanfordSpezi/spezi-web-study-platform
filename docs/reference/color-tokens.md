@@ -12,19 +12,21 @@ SPDX-License-Identifier: MIT
 
 This document provides a reference for the semantic color tokens used in the study platform. Each token is designed to express a specific visual intent, ensuring consistency and clarity across the user interface. Learn more about the design of the [semantic color token system](../explanations/styling.md#semantic-color-tokens).
 
-## Tokens
+## Global Tokens
 
 ### Background
 
 These styles apply to the background color of an element, typically used for larger areas like the main content area or sidebars.
 
-#### Primary
+#### Default
+
+##### Primary
 
 - `bg`: Used for the main background of the application, providing a neutral base for content.
 - `bg-hover`: Used to style the hover state of elements that sit on the primary background.
 - `bg-active`: Used to style the active state of elements that sit on the primary background.
 
-#### Secondary
+##### Secondary
 
 - `bg-secondary`: Used for secondary backgrounds, such as sidebars or secondary content areas, providing a subtle yet distinct visual separation from the primary background.
 - `bg-secondary-hover`: Used to style the hover state of elements that sit on a secondary background.
@@ -47,7 +49,9 @@ These styles apply to the background color of an element, typically used for lar
 
 These styles apply to larger elements that sit on top of the background, such as cards, panels, or other "container-like" UI components that require a distinct visual separation from the background.
 
-#### Primary
+#### Default
+
+##### Primary
 
 - `surface`: Used for elements that sit on the primary background, such as cards or panels, providing a subtle elevation effect.
 - `surface-hover`: Used to style the hover state of elements that sit on the primary surface.
@@ -68,9 +72,13 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 #### Default
 
+##### Primary
+
 - `fill`: Used for elements that require a solid neutral fill color that does not express a specific intent and does not fit a particular role.
 
 #### Brand
+
+##### Primary
 
 - `fill-brand`: Used for elements that require a solid fill color that draws a lot of attention to an element without conveying a specific context, such as an error or success state.
 - `fill-brand-hover`: Used to style the hover state of elements that use the brand fill color.
@@ -78,13 +86,19 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 #### Success
 
+##### Primary
+
 - `fill-success`: Used for elements that require a solid fill color that indicates a successful or positive action or state, such as a completed task or successful submission.
 
 #### Warning
 
+##### Primary
+
 - `fill-warning`: Used for elements that require a solid fill color that indicates a warning action or pending state, such as a potential issue or caution.
 
 #### Critical
+
+##### Primary
 
 - `fill-critical`: Used for elements that require a solid fill color that indicates an error or high importance state, such as a failed action or critical alert.
 
@@ -128,13 +142,12 @@ These styles apply to the border or ring color of elements, typically used for o
 
 #### Default
 
+##### Primary
+
 - `border`: Used for elements that require an unopinionated strong border color to provide visual separation or emphasis without conveying a specific intent.
-
-##### Focus
-
 - `border-focus`: Used to style the border color of elements when they are focused, ensuring good visibility and accessibility.
 
-##### Examples
+#### Examples
 
 ```tsx
 <Card className="border-border border">
@@ -150,24 +163,46 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 
 #### Default
 
-###### Primary
+##### Primary
 
 - `text`: Used for the emphasized texts, such as headings or important labels, providing a strong visual presence.
 
-###### Secondary
+##### Secondary
 
 - `text-secondary`: Used for basic text around the application, such as body text. This is the default text color for most text elements, providing a neutral and readable appearance.
 
-###### Tertiary
+##### Tertiary
 
 - `text-tertiary`: Used for less emphasized text, such as captions or secondary information, providing a subtler contrast.
 
 #### On Fill
 
+##### Primary
+
 - `text-on-fill`: Used for text that appears on elements with a neutral fill color.
+
+#### Brand
+
+##### Primary
+
 - `text-brand-on-fill`: Used for text that appears on elements with a brand fill color.
+
+#### Success
+
+##### Primary
+
 - `text-success-on-fill`: Used for text that appears on elements with a success fill color.
+
+#### Warning
+
+##### Primary
+
 - `text-warning-on-fill`: Used for text that appears on elements with a warning fill color.
+
+#### Critical
+
+##### Primary
+
 - `text-critical-on-fill`: Used for text that appears on elements with a critical fill color.
 
 ##### Examples
@@ -210,15 +245,17 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 
 These styles apply to the fill or stroke color of icons, ensuring they are visually distinct and consistent with the overall design.
 
-#### Primary
+#### Default
+
+##### Primary
 
 - `icon`: Used for emphasized icons that require a strong visual presence. Mirrors the `text` token, providing a strong contrast against the background.
 
-#### Secondary
+##### Secondary
 
 - `icon-secondary`: Used for basic icons. This is the default choice for most icon elements. Mirrors the `text-secondary` token, providing a neutral and readable appearance.
 
-#### Tertiary
+##### Tertiary
 
 - `icon-tertiary`: Used for less emphasized icons, such as decorative or secondary icons. Mirrors the `text-tertiary` token, providing a subtler contrast.
 
