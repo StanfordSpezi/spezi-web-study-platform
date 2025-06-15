@@ -40,7 +40,7 @@ If a default component is slightly off but still functional, live with the discr
 
 ## Component integration guidelines
 
-Choosing between “use the default” and “customize” can be confusing, especially for new contributors. The framework below maps common scenarios to clear actions.
+Choosing between "use the default" and "customize" can be confusing, especially for new contributors. The framework below maps common scenarios to clear actions. The order reflects precedence: always consider the less disruptive option first.
 
 | Scenario                   | Signs you are in this scenario                                                                             | Recommended action                                             | Rationale                                               |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------- |
@@ -49,9 +49,9 @@ Choosing between “use the default” and “customize” can be confusing, esp
 | 3. Improve for everyone    | A local variant is clearly better and useful beyond this project (e.g., an improved button shadow model).  | Implement locally and open an upstream proposal to SWDS.       | Keeps the ecosystem coherent and reduces future drift.  |
 | 4. Fork deliberately       | Requirement is unique or fundamentally different (e.g., a highly specialised sidebar component).           | Copy the component into the repo, own the code.                | Makes the fork explicit and contained.                  |
 
-Placing “accept the mismatch” before “improve for everyone” ensures that we don't chase micro-optimisations that add long-term cost.
+Placing "accept the mismatch" before "improve for everyone" ensures that we don't chase micro-optimisations that add long-term cost.
 
-## Known limitations and how they are handled
+## Limitations and how they are handled
 
 Even with these rules in place, certain drawbacks remain. The list that follows describes those constraints, why they are acceptable, and strategies to mitigate their impact.
 

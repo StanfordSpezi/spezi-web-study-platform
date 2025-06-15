@@ -27,7 +27,7 @@ The following principles guide the design and implementation of the platform’s
 
 ### 1. State intent first
 
-Name design primitives by purpose (“emphasis text”, “brand fill”) before assigning concrete values. This keeps future theme changes predictable.
+Name design primitives by purpose ("secondary icon", "brand fill") rather than appearance ("blue", "large"). This makes the intent of each token explicit and reduces cognitive load when reading code.
 
 ### 2. Single source of design data
 
@@ -78,7 +78,7 @@ This repository re-maps essential SWDS tokens ( `--color-surface`, `--color-prim
 
 The cost is a steeper learning curve: contributors must grasp more design tokens to work effectively. The project considers this an upfront investment that prevents brittle hacks later.
 
-## Known limitations and how they are handled
+## Limitations and how they are handled
 
 Even with these rules in place, certain drawbacks remain. The list that follows describes those constraints, why they are acceptable, and strategies to mitigate their impact.
 
