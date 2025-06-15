@@ -1,0 +1,244 @@
+<!--
+
+This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+
+SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+
+SPDX-License-Identifier: MIT
+
+-->
+
+# Color tokens reference
+
+This document provides a reference for the semantic color tokens used in the study platform. Each token is designed to express a specific visual intent, ensuring consistency and clarity across the user interface. Learn more about the design of the [semantic color token system](../explanations/styling.md#semantic-color-tokens).
+
+## Tokens
+
+### Background
+
+These styles apply to the background color of an element, typically used for larger areas like the main content area or sidebars.
+
+#### Primary
+
+- `bg`: Used for the main background of the application, providing a neutral base for content.
+- `bg-hover`: Used to style the hover state of elements that sit on the primary background.
+- `bg-active`: Used to style the active state of elements that sit on the primary background.
+
+#### Secondary
+
+- `bg-secondary`: Used for secondary backgrounds, such as sidebars or secondary content areas, providing a subtle yet distinct visual separation from the primary background.
+- `bg-secondary-hover`: Used to style the hover state of elements that sit on a secondary background.
+- `bg-secondary-active`: Used to style the active state of elements that sit on a secondary background.
+
+#### Examples
+
+```tsx
+<Layout>
+  <Sidebar className="bg-bg-secondary">
+    <SidebarItem className="hover:bg-bg-secondary-hover active:bg-bg-secondary-active" />
+  </Sidebar>
+  <MainContent className="bg-bg">
+    <GhostButton className="hover:bg-bg-hover active:bg-bg-active" />
+  </MainContent>
+</Layout>
+```
+
+### Surface
+
+These styles apply to larger elements that sit on top of the background, such as cards, panels, or other "container-like" UI components that require a distinct visual separation from the background.
+
+#### Primary
+
+- `surface`: Used for elements that sit on the primary background, such as cards or panels, providing a subtle elevation effect.
+- `surface-hover`: Used to style the hover state of elements that sit on the primary surface.
+
+#### Examples
+
+```tsx
+<Background className="bg-bg">
+  <Card className="bg-surface">
+    <GhostButton className="hover:bg-surface-hover" />
+  </Card>
+</Background>
+```
+
+### Fill
+
+These styles apply to smaller elements that require a solid fill color, such as buttons or badges. Fills come with their explicit text and icon colors, called `on-fill` tokens, to ensure good contrast and readability.
+
+#### Default
+
+- `fill`: Used for elements that require a solid neutral fill color that does not express a specific intent and does not fit a particular role.
+
+#### Brand
+
+- `fill-brand`: Used for elements that require a solid fill color that draws a lot of attention to an element without conveying a specific context, such as an error or success state.
+- `fill-brand-hover`: Used to style the hover state of elements that use the brand fill color.
+- `fill-brand-active`: Used to style the active state of elements that use the brand fill color.
+
+#### Success
+
+- `fill-success`: Used for elements that require a solid fill color that indicates a successful or positive action or state, such as a completed task or successful submission.
+
+#### Warning
+
+- `fill-warning`: Used for elements that require a solid fill color that indicates a warning action or pending state, such as a potential issue or caution.
+
+#### Critical
+
+- `fill-critical`: Used for elements that require a solid fill color that indicates an error or high importance state, such as a failed action or critical alert.
+
+#### Examples
+
+```tsx
+<Table>
+  <TableHeader className="bg-fill" />
+</Table>
+```
+
+```tsx
+<ModalFooter>
+  <Button className="bg-fill-brand hover:bg-fill-brand-hover active:bg-fill-brand-active">
+    New Study
+  </Button>
+</ModalFooter>
+```
+
+```tsx
+<CardHeader>
+  <Badge className="bg-fill-success">Completed</Badge>
+</CardHeader>
+```
+
+```tsx
+<Banner>
+  <BannerHeader className="bg-fill-warning">Maintenance Notice</BannerHeader>
+</Banner>
+```
+
+```tsx
+<Popover>
+  <PopoverContent className="bg-fill-critical">Error occurred</PopoverContent>
+</Popover>
+```
+
+### Border
+
+These styles apply to the border or ring color of elements, typically used for outlines or borders around cards, buttons, and other UI components.
+
+#### Default
+
+- `border`: Used for elements that require an unopinionated strong border color to provide visual separation or emphasis without conveying a specific intent.
+
+##### Focus
+
+- `border-focus`: Used to style the border color of elements when they are focused, ensuring good visibility and accessibility.
+
+##### Examples
+
+```tsx
+<Card className="border-border border">
+  <CardHeader className="border-border border-b">
+    <Button className="focus-visible:ring-border-focus focus-visible:ring-2" />
+  </CardHeader>
+</Card>
+```
+
+### Text
+
+These styles apply to the text color of elements, ensuring good contrast and readability.
+
+#### Default
+
+###### Primary
+
+- `text`: Used for the emphasized texts, such as headings or important labels, providing a strong visual presence.
+
+###### Secondary
+
+- `text-secondary`: Used for basic text around the application, such as body text. This is the default text color for most text elements, providing a neutral and readable appearance.
+
+###### Tertiary
+
+- `text-tertiary`: Used for less emphasized text, such as captions or secondary information, providing a subtler contrast.
+
+#### On Fill
+
+- `text-on-fill`: Used for text that appears on elements with a neutral fill color.
+- `text-brand-on-fill`: Used for text that appears on elements with a brand fill color.
+- `text-success-on-fill`: Used for text that appears on elements with a success fill color.
+- `text-warning-on-fill`: Used for text that appears on elements with a warning fill color.
+- `text-critical-on-fill`: Used for text that appears on elements with a critical fill color.
+
+##### Examples
+
+```tsx
+<Card>
+  <Heading className="text-text">Welcome to the Study Platform</Heading>
+  <Paragraph className="text-text-secondary">
+    Login to access your studies and data.
+  </Paragraph>
+  <Caption className="text-text-tertiary">
+    Don't have an account? <Link className="text-text">Sign up</Link>
+  </Caption>
+</Card>
+```
+
+```tsx
+<Tag className="bg-fill text-on-fill" />
+```
+
+```tsx
+<Pagination>
+  <ActivePage className="bg-fill-brand text-brand-on-fill">1</ActivePage>
+</Pagination>
+```
+
+```tsx
+<CopyButton className="data-[copied=true]:bg-fill-success data-[copied=true]:text-success-on-fill" />
+```
+
+```tsx
+<Badge className="bg-fill-warning text-warning-on-fill">Check your input</Badge>
+```
+
+```tsx
+<Button className="bg-fill-critical text-critical-on-fill">Delete Study</Button>
+```
+
+### Icon
+
+These styles apply to the fill or stroke color of icons, ensuring they are visually distinct and consistent with the overall design.
+
+#### Primary
+
+- `icon`: Used for emphasized icons that require a strong visual presence. Mirrors the `text` token, providing a strong contrast against the background.
+
+#### Secondary
+
+- `icon-secondary`: Used for basic icons. This is the default choice for most icon elements. Mirrors the `text-secondary` token, providing a neutral and readable appearance.
+
+#### Tertiary
+
+- `icon-tertiary`: Used for less emphasized icons, such as decorative or secondary icons. Mirrors the `text-tertiary` token, providing a subtler contrast.
+
+#### Examples
+
+```tsx
+<Card>
+  <Heading className="text-text">
+    <Icon className="text-icon" />
+    Welcome to the Study Platform
+  </Heading>
+  <Paragraph className="text-text-secondary">
+    <Icon className="text-icon-secondary" />
+    Login to access your studies and data.
+  </Paragraph>
+  <Caption className="text-text-tertiary">
+    <Icon className="text-icon-tertiary" />
+    Don't have an account? <Link className="text-text">Sign up</Link>
+  </Caption>
+</Card>
+```
+
+>
