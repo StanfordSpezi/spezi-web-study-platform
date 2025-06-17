@@ -25,10 +25,15 @@ export const Route = createFileRoute("/(dashboard)/$team/$study")({
     try {
       // We validate that the `params.team` and `params.study` exist before
       // loading the dashboard, so we can redirect to the error page if they don't.
-      await Promise.all([
-        queryClient.ensureQueryData(teamDetailQueryOptions(params.team)),
-        queryClient.ensureQueryData(studyDetailQueryOptions(params.study)),
+      const [teamData, studyData] = await Promise.all([
+        queryClient.fetchQuery(teamDetailQueryOptions(params.team)),
+        queryClient.fetchQuery(studyDetailQueryOptions(params.study)),
       ]);
+      if (studyData.teamId !== teamData.id) {
+        throw new Error(
+          `Study ${params.study} does not belong to team ${params.team}.`,
+        );
+      }
     } catch (error) {
       console.error(
         `Error ensuring query data for team ${params.team} and study ${params.study}:`,
