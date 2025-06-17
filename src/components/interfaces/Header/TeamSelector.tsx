@@ -7,6 +7,7 @@
 //
 
 import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import {
   Flower,
@@ -17,12 +18,13 @@ import {
   TreePine,
   type LucideIcon,
 } from "lucide-react";
+import { teamListQueryOptions } from "@/lib/queries/team";
 import {
   HeaderSelector,
   HeaderSelectorMenuItem,
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
-// import { DropdownSelectorSkeleton } from "./DropdownSelectorSkeleton";
+import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
 
 const iconMap: Record<string, LucideIcon> = {
   TreePine: TreePine,
@@ -32,47 +34,20 @@ const iconMap: Record<string, LucideIcon> = {
   Mountain: Mountain,
 };
 
-const teams = [
-  {
-    id: "team-pine",
-    name: "Team Pine",
-    icon: "TreePine",
-  },
-  {
-    id: "team-tree",
-    name: "Team Tree",
-    icon: "TentTree",
-  },
-  {
-    id: "team-palm",
-    name: "Team Palm",
-    icon: "TreePalm",
-  },
-  {
-    id: "team-flower",
-    name: "Team Flower",
-    icon: "Flower",
-  },
-  {
-    id: "team-mountain",
-    name: "Team Mountain",
-    icon: "Mountain",
-  },
-];
-
 export const TeamSelector = () => {
-  const { team } = useParams({ from: "/(dashboard)/$team/$study" });
-  const selectedTeam = teams.find((t) => t.id === team);
+  const params = useParams({ from: "/(dashboard)/$team/$study" });
+  const { data: teams } = useQuery(teamListQueryOptions());
+  const selectedTeam = teams?.find((t) => t.id === params.team);
 
-  //   if (!teams) {
-  //     return <HeaderSelectorSkeleton hasIcon={true} />;
-  //   }
+  if (!teams || !selectedTeam) {
+    return <HeaderSelectorSkeleton hasIcon={true} />;
+  }
 
   return (
     <HeaderSelector
       selectedItem={{
-        title: selectedTeam?.name ?? teams[0].name,
-        icon: iconMap[selectedTeam?.icon ?? teams[0].icon] ?? TreePine,
+        title: selectedTeam.name,
+        icon: iconMap[selectedTeam.icon] ?? TreePine,
       }}
     >
       <HeaderSelectorMenuLabel>Teams</HeaderSelectorMenuLabel>
@@ -81,10 +56,9 @@ export const TeamSelector = () => {
           key={team.id}
           icon={iconMap[team.icon] ?? TreePine}
           linkOptions={{
-            to: "/$team/$study",
+            to: "/$team",
             params: {
               team: team.id,
-              study: "activity-study", // Todo: This should be dynamic based on the selected team
             },
           }}
         >

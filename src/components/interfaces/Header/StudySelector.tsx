@@ -7,63 +7,30 @@
 //
 
 import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
+import { studyListQueryOptions } from "@/lib/queries/study";
 import {
   HeaderSelector,
   HeaderSelectorMenuItem,
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
-
-const studies = [
-  {
-    id: "activity-study",
-    title: "Activity Study",
-    shortTitle: "Activity",
-    explanation: "This is a study about activity.",
-    shortExplanation: "Study about activity.",
-    participationCriteria: "Must be over 18 years old.",
-  },
-  {
-    id: "health-study",
-    title: "Health Study",
-    shortTitle: "Health",
-    explanation: "This is a study about health.",
-    shortExplanation: "Study about health.",
-    participationCriteria: null,
-  },
-  {
-    id: "brain-study",
-    title: "Brain Study",
-    shortTitle: "Brain",
-    explanation: "This is a study about the brain.",
-    shortExplanation: "Study about the brain.",
-    participationCriteria: null,
-  },
-  {
-    id: "dna-study",
-    title: "DNA Study",
-    shortTitle: "DNA",
-    explanation: "This is a study about DNA.",
-    shortExplanation: "Study about DNA.",
-    participationCriteria: null,
-  },
-];
+import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
 
 export const StudySelector = () => {
-  const { team, study } = useParams({ from: "/(dashboard)/$team/$study" });
-  const selectedStudy = studies.find((s) => s.id === study);
+  const params = useParams({ from: "/(dashboard)/$team/$study" });
+  const { data: studies } = useQuery(
+    studyListQueryOptions({ teamId: params.team }),
+  );
+  const selectedStudy = studies?.find((s) => s.id === params.study);
 
-  // if (!studies) {
-  //   return <HeaderSelectorSkeleton hasIcon={false} />
-  // }
+  if (!studies || !selectedStudy) {
+    return <HeaderSelectorSkeleton hasIcon={false} />;
+  }
 
   return (
-    <HeaderSelector
-      selectedItem={{
-        title: selectedStudy?.title ?? studies[0].title,
-      }}
-    >
+    <HeaderSelector selectedItem={{ title: selectedStudy.title }}>
       <HeaderSelectorMenuLabel>Studies</HeaderSelectorMenuLabel>
       {studies.map((study) => (
         <HeaderSelectorMenuItem
@@ -71,7 +38,7 @@ export const StudySelector = () => {
           linkOptions={{
             to: "/$team/$study",
             params: {
-              team,
+              team: params.team,
               study: study.id,
             },
           }}
