@@ -18,7 +18,7 @@ export const Header = () => {
       className={cn(
         "fixed top-0 z-10",
         "flex h-14 w-full items-center justify-between gap-2 pr-3 pl-2",
-        "bg-bg border-border border-b",
+        "bg-bg-secondary border-border-secondary border-b",
       )}
     >
       <div className="flex items-center gap-3">

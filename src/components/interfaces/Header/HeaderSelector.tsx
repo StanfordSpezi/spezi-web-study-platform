@@ -71,7 +71,7 @@ export const HeaderSelector = ({
         <button
           className={cn(
             "flex h-8 items-center gap-3 rounded-md p-2.5 text-left text-sm outline-hidden transition-colors",
-            "hover:bg-bg-hover",
+            "hover:bg-bg-secondary-hover",
             "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
             "focus-visible:ring-border-focus focus-visible:ring-2",
             "[&>span:last-child]:truncate",
@@ -79,7 +79,7 @@ export const HeaderSelector = ({
           )}
         >
           {selectedItem.icon && (
-            <div className="bg-surface ring-border-shadow flex-center -ml-1.5 aspect-square size-6 rounded-md shadow-xs ring">
+            <div className="bg-surface border-border-secondary flex-center -ml-1.5 aspect-square size-6 rounded-md border bg-clip-padding shadow-xs">
               <selectedItem.icon className="size-3.5" strokeWidth={2} />
             </div>
           )}

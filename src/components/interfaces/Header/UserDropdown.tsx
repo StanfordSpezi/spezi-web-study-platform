@@ -39,13 +39,13 @@ export const UserDropdown = () => {
         <button
           className={cn(
             "flex h-8 items-center gap-3 rounded-md p-1 text-left text-sm outline-hidden",
-            "hover:bg-bg-hover",
+            "hover:bg-bg-secondary-hover",
             "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
             "focus-visible:ring-border-focus focus-visible:ring-2",
           )}
         >
           <Avatar
-            className="bg-surface ring-border-shadow size-6.5! rounded-full shadow-xs ring"
+            className="bg-surface border-border-secondary size-6.5! rounded-full border bg-clip-padding shadow-xs"
             src={session.user.image}
             fallback={
               <div className="bg-surface flex-center size-full rounded-full text-xs">
