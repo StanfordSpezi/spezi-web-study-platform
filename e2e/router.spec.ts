@@ -129,3 +129,69 @@ test.describe("Router Tests", () => {
     }
   });
 });
+
+test("displays error page when navigating to non-existent team", async ({
+  page,
+}) => {
+  const invalidTeamId = "invalid-team";
+
+  await page.goto(`./${invalidTeamId}`);
+  await expect(page.getByText("Error")).toBeVisible();
+  await expect(
+    page.getByText(`Team with id ${invalidTeamId} not found`),
+  ).toBeVisible();
+});
+
+test("displays error page when navigating to non-existent study", async ({
+  page,
+}) => {
+  const [team] = mockApi.team.list();
+  const invalidStudyId = "invalid-study";
+
+  await page.goto(`./${team.id}/${invalidStudyId}`);
+  await expect(page.getByText("Error")).toBeVisible();
+  await expect(
+    page.getByText(`Study with id ${invalidStudyId} not found`),
+  ).toBeVisible();
+});
+
+test("team selector displays dynamic teams from mock API", async ({ page }) => {
+  const teams = mockApi.team.list();
+
+  await page.goto("/");
+
+  // Click on the team selector to open the dropdown
+  await page.getByRole("button", { name: teams[0].name }).click();
+
+  // Verify that all teams from the mock API are displayed
+  for (const team of teams) {
+    await expect(page.getByRole("menuitem", { name: team.name })).toBeVisible();
+  }
+});
+
+test("study selector displays dynamic studies from mock API", async ({
+  page,
+}) => {
+  const teams = mockApi.team.list();
+  const studies = mockApi.study.list({ teamId: teams[0].id });
+  const otherStudies = mockApi.study.list({ teamId: teams[1].id });
+
+  await page.goto(`./${teams[0].id}/${studies[0].id}`);
+
+  // Click on the study selector to open the dropdown
+  await page.getByRole("button", { name: studies[0].title }).click();
+
+  // Verify that studies for the current team are displayed
+  for (const study of studies) {
+    await expect(
+      page.getByRole("menuitem", { name: study.title }),
+    ).toBeVisible();
+  }
+
+  // Verify that studies from other teams are not displayed
+  for (const otherStudy of otherStudies) {
+    await expect(
+      page.getByRole("menuitem", { name: otherStudy.title }),
+    ).not.toBeVisible();
+  }
+});
