@@ -6,8 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { DashboardLayout } from "@/components/layouts/DashboardLayout";
+import { studyDetailQueryOptions } from "@/lib/queries/study";
+import { teamDetailQueryOptions } from "@/lib/queries/team";
 
 const DashboardLayoutRoute = () => {
   return (
@@ -19,4 +21,28 @@ const DashboardLayoutRoute = () => {
 
 export const Route = createFileRoute("/(dashboard)/$team/$study")({
   component: DashboardLayoutRoute,
+  beforeLoad: async ({ context: { queryClient }, params }) => {
+    try {
+      // We validate that the `params.team` and `params.study` exist before
+      // loading the dashboard, so we can redirect to the error page if they don't.
+      await Promise.all([
+        queryClient.ensureQueryData(teamDetailQueryOptions(params.team)),
+        queryClient.ensureQueryData(studyDetailQueryOptions(params.study)),
+      ]);
+    } catch (error) {
+      console.error(
+        `Error ensuring query data for team ${params.team} and study ${params.study}:`,
+        error,
+      );
+
+      const message =
+        error instanceof Error ?
+          error.message
+        : `Error ensuring query data for team ${params.team} and study ${params.study}`;
+      throw redirect({
+        to: "/error",
+        search: { message },
+      });
+    }
+  },
 });
