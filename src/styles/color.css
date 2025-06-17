@@ -1,0 +1,133 @@
+/*
+
+This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+
+SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+
+SPDX-License-Identifier: MIT
+
+*/
+
+/* Extending the primitive color tokens with the help of https://fullwindcss.com */
+@theme inline {
+  --color-zinc-10: oklch(99.7% 0 0);
+  --color-zinc-50: oklch(98.81% 0 0);
+  --color-zinc-80: oklch(97.45% 0 287.99);
+  --color-zinc-100: oklch(96.74% 0 287.3);
+  --color-zinc-150: oklch(94.36% 0 286.82);
+  --color-zinc-200: oklch(91.97% 0 286.61);
+  --color-zinc-250: oklch(89.54% 0 286.55);
+  --color-zinc-300: oklch(87.11% 0.01 286.49);
+  --color-zinc-350: oklch(79.15% 0.01 286.4);
+  --color-zinc-400: oklch(71.18% 0.01 286.14);
+  --color-zinc-450: oklch(63.17% 0.01 286.09);
+  --color-zinc-500: oklch(55.17% 0.01 285.99);
+  --color-zinc-550: oklch(49.68% 0.01 285.93);
+  --color-zinc-600: oklch(44.19% 0.01 285.82);
+  --color-zinc-650: oklch(40.61% 0.01 285.83);
+  --color-zinc-700: oklch(37.03% 0.01 285.84);
+  --color-zinc-750: oklch(32.21% 0.01 285.99);
+  --color-zinc-800: oklch(27.39% 0.01 286.1);
+  --color-zinc-850: oklch(24.21% 0.01 286.04);
+  --color-zinc-900: oklch(21.03% 0.01 285.93);
+  --color-zinc-950: oklch(14.08% 0 285.86);
+  --color-zinc-990: oklch(8.23% 0 285.86);
+
+  --color-brand-10: oklch(99.64% 0 155.22);
+  --color-brand-50: oklch(97.13% 0.019 167.94);
+  --color-brand-100: oklch(94.37% 0.038 164.87);
+  --color-brand-200: oklch(88.13% 0.085 162.99);
+  --color-brand-300: oklch(81.31% 0.132 160.4);
+  --color-brand-400: oklch(73.28% 0.163 156.54);
+  --color-brand-450: oklch(69.33% 0.151 156.68);
+  --color-brand-500: oklch(64.33% 0.141 156.81);
+  --color-brand-600: oklch(59.45% 0.13 156.82);
+  --color-brand-700: oklch(54.46% 0.118 156.84);
+  --color-brand-800: oklch(46.94% 0.1 157.56);
+  --color-brand-900: oklch(37.78% 0.078 157.64);
+  --color-brand-950: oklch(29.82% 0.058 158.28);
+
+  --color-green-10: oklch(99.64% 0 155.22);
+  --color-yellow-10: oklch(99.75% 0.01 100);
+  --color-red-10: oklch(99.41% 0 18.09);
+}
+
+/*
+    Semantic color tokens, inspired by https://polaris-react.shopify.com/tokens/color
+    color-[concept?]-[element]-[role?]-[prominence?]-[state?]
+    Concept: nav, sidebar
+    Element: bg, surface, fill, border, text, icon
+    Role: default, brand, info, success, caution, warning, critical, magic, emphasis, transparent, inverse
+    Prominence: primary, secondary, tertiary
+    State: hover, active, selected, disabled, focus
+*/
+@theme inline {
+  /* Background */
+  --color-bg: var(--color-zinc-50);
+  --color-bg-hover: var(--color-zinc-100);
+  --color-bg-active: var(--color-zinc-200);
+  --color-bg-secondary: var(--color-zinc-80);
+  --color-bg-secondary-hover: var(--color-zinc-150);
+  --color-bg-secondary-active: var(--color-zinc-200);
+
+  /* Surface */
+  --color-surface: var(--color-zinc-10);
+  --color-surface-hover: var(--color-zinc-100);
+
+  /* Fill */
+  --color-fill: var(--color-zinc-10);
+  --color-fill-brand: var(--color-brand-500);
+  --color-fill-brand-hover: var(--color-brand-450);
+  --color-fill-brand-active: var(--color-brand-400);
+  --color-fill-success: var(--color-green-700);
+  --color-fill-warning: var(--color-yellow-500);
+  --color-fill-critical: var(--color-red-600);
+
+  /* Border */
+  --color-border: oklch(0% 0 0 / 10%);
+  --color-border-secondary: oklch(0% 0 0 / 8%);
+  --color-border-focus: var(--color-brand-500);
+
+  /* Text */
+  --color-text: var(--color-zinc-900);
+  --color-text-secondary: var(--color-zinc-700);
+  --color-text-tertiary: var(--color-zinc-500);
+  --color-text-on-fill: var(--color-zinc-900);
+  --color-text-brand-on-fill: var(--color-brand-10);
+  --color-text-success-on-fill: var(--color-green-10);
+  --color-text-warning-on-fill: var(--color-yellow-10);
+  --color-text-critical-on-fill: var(--color-red-10);
+
+  /* Icon */
+  --color-icon: var(--color-zinc-900);
+  --color-icon-secondary: var(--color-zinc-600);
+  --color-icon-tertiary: var(--color-zinc-500);
+}
+
+/* Redefining the Spezi Web Design System color tokens */
+@theme inline {
+  --color-surface: var(--color-bg);
+  --color-surface-primary: var(--color-bg);
+  --color-foreground: var(--color-text-secondary);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text-secondary);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text-secondary);
+  --color-primary: var(--color-fill-brand);
+  --color-primary-foreground: var(--color-text-brand-on-fill);
+  --color-secondary: var(--color-fill);
+  --color-secondary-foreground: var(--color-text-on-fill);
+  --color-muted: var(--color-bg-secondary);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-bg-secondary-hover);
+  --color-accent-foreground: var(--color-text-secondary);
+  --color-input: var(--color-border);
+  --color-destructive: var(--color-fill-critical);
+  --color-destructive-foreground: var(--color-text-critical-on-fill);
+  --color-success: var(--color-fill-success);
+  --color-success-foreground: var(--color-text-success-on-fill);
+  --color-warning: var(--color-fill-warning);
+  --color-warning-dark: var(--color-fill-warning);
+  --color-warning-foreground: var(--color-text-warning-on-fill);
+  --color-ring: var(--color-border-secondary);
+}
