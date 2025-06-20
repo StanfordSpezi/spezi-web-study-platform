@@ -7,18 +7,20 @@
 //
 
 import { Button } from "@stanfordspezi/spezi-web-design-system";
+import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserQueryOptions } from "@/lib/queries/currentUser";
-import { queryClient } from "@/lib/queryClient";
 
 const SignInComponent = () => {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
+  const queryClient = useQueryClient();
 
   const handleSignIn = async () => {
     mockApi.auth.signIn();
+    await queryClient.invalidateQueries(currentUserQueryOptions());
     await navigate({ to: search.redirect ?? "/" });
   };
 
@@ -35,7 +37,7 @@ export const Route = createFileRoute("/(auth)/sign-in")({
   validateSearch: z.object({
     redirect: z.string().optional(),
   }),
-  beforeLoad: async ({ search }) => {
+  beforeLoad: async ({ context: { queryClient }, search }) => {
     try {
       // Check if the user is already authenticated
       // if so, redirect them to the specified path or home
