@@ -38,6 +38,11 @@ const dashboardLayoutRoute = dashboardLayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
+const dashboardLayoutRoute = dashboardLayoutImport.update({
+  id: "/(dashboard)",
+  getParentRoute: () => rootRoute,
+} as any);
+
 const authSignInRoute = authSignInImport.update({
   id: "/(auth)/sign-in",
   path: "/sign-in",
@@ -179,6 +184,22 @@ const dashboardTeamStudyLayoutRouteWithChildren =
   dashboardTeamStudyLayoutRoute._addFileChildren(
     dashboardTeamStudyLayoutRouteChildren,
   );
+
+interface dashboardLayoutRouteChildren {
+  dashboardIndexRoute: typeof dashboardIndexRoute;
+  dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute;
+  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren;
+}
+
+const dashboardLayoutRouteChildren: dashboardLayoutRouteChildren = {
+  dashboardIndexRoute: dashboardIndexRoute,
+  dashboardTeamIndexRoute: dashboardTeamIndexRoute,
+  dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
+};
+
+const dashboardLayoutRouteWithChildren = dashboardLayoutRoute._addFileChildren(
+  dashboardLayoutRouteChildren,
+);
 
 interface dashboardLayoutRouteChildren {
   dashboardIndexRoute: typeof dashboardIndexRoute;
