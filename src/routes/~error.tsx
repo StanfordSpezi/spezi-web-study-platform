@@ -7,6 +7,7 @@
 //
 
 import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
 
 const ErrorRoute = () => {
   const { message } = Route.useSearch();
@@ -20,12 +21,7 @@ const ErrorRoute = () => {
 
 export const Route = createFileRoute("/error")({
   component: ErrorRoute,
-  validateSearch: (search) => {
-    return {
-      message:
-        search.message && typeof search.message === "string" ?
-          search.message
-        : "An unexpected error occurred",
-    };
-  },
+  validateSearch: z.object({
+    message: z.string().optional().catch("An unexpected error occurred"),
+  }),
 });

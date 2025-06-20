@@ -74,7 +74,7 @@ const MainNavButton = ({ item }: { item: NavBarItem }) => {
         tooltip={item.title}
         isActive={!!matchRoute({ to: item.linkOptions.to })}
       >
-        <Link {...item.linkOptions}>
+        <Link from="/" {...item.linkOptions}>
           {item.icon && <item.icon />}
           <span>{item.title}</span>
         </Link>
