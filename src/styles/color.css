@@ -89,7 +89,7 @@ SPDX-License-Identifier: MIT
   --color-border-focus: var(--color-brand-500);
 
   /* Text */
-  --color-text: var(--color-zinc-900);
+  --color-text: var(--color-zinc-800);
   --color-text-secondary: var(--color-zinc-700);
   --color-text-tertiary: var(--color-zinc-500);
   --color-text-on-fill: var(--color-zinc-900);

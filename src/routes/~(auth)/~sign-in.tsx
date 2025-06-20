@@ -15,6 +15,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
+import { IconContainer } from "@/components/ui/IconContainer";
 
 const SignInComponent = () => {
   const search = Route.useSearch();
@@ -28,9 +29,47 @@ const SignInComponent = () => {
   };
 
   return (
-    <div className="flex-center size-full flex-col">
-      <h1 className="text-text pb-4 text-lg">Sign into the study platform</h1>
-      <Button onClick={handleSignIn}>Sign in</Button>
+    <div className="flex-center size-full flex-col gap-10">
+      <div className="flex -space-x-2">
+        <IconContainer className="translate-y-1 -rotate-12">
+          <div className="flex-center size-full bg-orange-500 text-orange-100 inset-shadow-sm">
+            <div className="scale-y-110 font-serif text-2xl font-semibold text-shadow-xs">
+              B
+            </div>
+          </div>
+        </IconContainer>
+        <IconContainer className="z-10">
+          <div className="flex-center bg-brand-500 text-brand-50 size-full inset-shadow-sm">
+            <div className="scale-y-110 font-serif text-2xl font-semibold text-shadow-xs">
+              P
+            </div>
+          </div>
+        </IconContainer>
+        <IconContainer className="translate-y-1 rotate-12">
+          <div className="flex-center size-full bg-red-500 text-red-100 inset-shadow-sm">
+            <div className="scale-y-110 font-serif text-2xl font-semibold text-shadow-xs">
+              S
+            </div>
+          </div>
+        </IconContainer>
+      </div>
+      <div className="flex-center flex-col gap-6">
+        <h1 className="text-text max-w-48 text-center text-xl/snug font-medium text-balance">
+          Welcome to the Spezi Study Platform
+        </h1>
+        <p className="text-text-secondary max-w-96 text-center text-balance">
+          Create, manage, and analyze research studies together with your team.
+        </p>
+      </div>
+      <Button onClick={handleSignIn} size="lg" variant="outline">
+        Sign into the dashboard
+      </Button>
+      <a
+        href="https://github.com/StanfordSpezi/spezi-web-study-platform/issues"
+        className="text-text-tertiary text-sm"
+      >
+        Trouble signing in?
+      </a>
     </div>
   );
 };
