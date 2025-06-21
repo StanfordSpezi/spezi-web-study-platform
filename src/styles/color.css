@@ -47,9 +47,10 @@ SPDX-License-Identifier: MIT
   --color-brand-900: oklch(37.78% 0.078 157.64);
   --color-brand-950: oklch(29.82% 0.058 158.28);
 
-  --color-green-10: oklch(99.64% 0 155.22);
+  --color-blue-10: oklch(99.41% 0.01 255.2);
+  --color-green-10: oklch(99.64% 0.01 155.22);
   --color-yellow-10: oklch(99.75% 0.01 100);
-  --color-red-10: oklch(99.41% 0 18.09);
+  --color-red-10: oklch(99.41% 0.01 18.09);
 }
 
 /*
@@ -79,6 +80,7 @@ SPDX-License-Identifier: MIT
   --color-fill-brand: var(--color-brand-500);
   --color-fill-brand-hover: var(--color-brand-450);
   --color-fill-brand-active: var(--color-brand-400);
+  --color-fill-info: var(--color-blue-500);
   --color-fill-success: var(--color-green-700);
   --color-fill-warning: var(--color-yellow-500);
   --color-fill-critical: var(--color-red-600);
@@ -89,19 +91,15 @@ SPDX-License-Identifier: MIT
   --color-border-focus: var(--color-brand-500);
 
   /* Text */
-  --color-text: var(--color-zinc-900);
+  --color-text: var(--color-zinc-800);
   --color-text-secondary: var(--color-zinc-700);
   --color-text-tertiary: var(--color-zinc-500);
   --color-text-on-fill: var(--color-zinc-900);
+  --color-text-info-on-fill: var(--color-blue-10);
   --color-text-brand-on-fill: var(--color-brand-10);
   --color-text-success-on-fill: var(--color-green-10);
   --color-text-warning-on-fill: var(--color-yellow-10);
   --color-text-critical-on-fill: var(--color-red-10);
-
-  /* Icon */
-  --color-icon: var(--color-zinc-900);
-  --color-icon-secondary: var(--color-zinc-600);
-  --color-icon-tertiary: var(--color-zinc-500);
 }
 
 /* Redefining the Spezi Web Design System color tokens */
@@ -129,5 +127,5 @@ SPDX-License-Identifier: MIT
   --color-warning: var(--color-fill-warning);
   --color-warning-dark: var(--color-fill-warning);
   --color-warning-foreground: var(--color-text-warning-on-fill);
-  --color-ring: var(--color-border-secondary);
+  --color-ring: var(--color-border-focus);
 }
