@@ -43,6 +43,12 @@ For more detailed instructions, check out the [installation guide](docs/guides/i
 
 - [About the tech stack](docs/explanations/tech-stack.md)
 - [About deployments](docs/explanations/deployment.md)
+- [About styling and visual grammar](docs/explanations/styling.md)
+- [About the integration with the spezi web design system components](docs/explanations/design-system-components.md)
+
+## Reference
+
+- [Color tokens reference](docs/reference/color-tokens.md)
 
 ## Contributing
 
