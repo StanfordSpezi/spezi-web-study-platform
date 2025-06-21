@@ -6,13 +6,17 @@
 // SPDX-License-Identifier: MIT
 //
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  imageUrl?: string;
-  role: "admin" | "user";
-}
+import { z } from "zod";
+
+export const userSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+  imageUrl: z.string().optional(),
+  role: z.enum(["admin", "user"]),
+});
+
+type User = z.infer<typeof userSchema>;
 
 export const mockAdminUser: User = {
   id: "admin-1",

@@ -7,48 +7,8 @@
 //
 
 import { createMockApi, MockApiError } from "@/utils/createMockApi";
-import { mockStudies } from "./study";
-import { mockTeams, mockUserTeams } from "./team";
-import { mockAdminUser, mockCurrentUser, mockUsers } from "./user";
-
-// If you make changes to the mock API database, please make sure to
-// to update / clear the mock database in the localStorage as well.
-// By default, the mock database is persisted in localStorage and not recreated
-// on every page load to simulate a more realistic environment.
-export const mockDatabase = {
-  // Auth
-  currentUser: mockCurrentUser,
-  // Entities
-  teams: mockTeams,
-  studies: mockStudies,
-  users: mockUsers,
-  // Relationships
-  userTeams: mockUserTeams,
-};
-
-/**
- * The mock database is stored in localStorage to persist across page reloads.
- * This allows the mock API to simulate a more realistic environment.
- */
-const getMockDatabase = () => {
-  const mockApi = localStorage.getItem("mock-api");
-  if (mockApi) {
-    return JSON.parse(mockApi) as typeof mockDatabase;
-  }
-  localStorage.setItem("mock-api", JSON.stringify(mockDatabase));
-  return mockDatabase;
-};
-
-/**
- * Updates the mock database in localStorage.
- * This function merges the provided data with the existing mock database.
- */
-const setMockDatabase = (data: Partial<typeof mockDatabase>) => {
-  const currentData = getMockDatabase();
-  const updatedData = { ...currentData, ...data };
-  localStorage.setItem("mock-api", JSON.stringify(updatedData));
-  return updatedData;
-};
+import { getMockDatabase, setMockDatabase } from "./mockDatabase";
+import { mockAdminUser } from "./mockDatabase/user";
 
 /**
  * Mock API for simulating backend interactions.
