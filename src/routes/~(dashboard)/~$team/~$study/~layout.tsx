@@ -44,7 +44,7 @@ export const Route = createFileRoute("/(dashboard)/$team/$study")({
         error instanceof Error ?
           error.message
         : `Error ensuring query data for team ${params.team} and study ${params.study}`;
-      throw redirect({
+      return redirect({
         to: "/error",
         search: { message },
       });

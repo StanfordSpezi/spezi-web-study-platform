@@ -22,12 +22,18 @@ export const teamListQueryOptions = () => {
     queryKey: teamQueryKeys.list(),
     queryFn: async () => {
       await sleep(100);
-      const teams = mockApi.team.list();
-      if (teams.length === 0) {
-        throw new Error("No teams found");
+      const response = mockApi.team.list();
+      if (!response.success) {
+        const { message, status } = response.error;
+        if (status === 404) {
+          return [];
+        }
+        if (status === 401) {
+          throw new Error("Unauthorized");
+        }
+        throw new Error(message);
       }
-
-      return teams;
+      return response.data;
     },
   });
 };
@@ -40,11 +46,15 @@ export const teamDetailQueryOptions = (teamId: string) => {
     queryKey: teamQueryKeys.detail(teamId),
     queryFn: async () => {
       await sleep(100);
-      const team = mockApi.team.detail(teamId);
-      if (!team) {
-        throw new Error(`Team with id ${teamId} not found`);
+      const response = mockApi.team.detail(teamId);
+      if (!response.success) {
+        const { message, status } = response.error;
+        if (status === 401) {
+          throw new Error("Unauthorized");
+        }
+        throw new Error(message);
       }
-      return team;
+      return response.data;
     },
   });
 };

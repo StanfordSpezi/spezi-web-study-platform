@@ -26,11 +26,18 @@ export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
     queryKey: studyQueryKeys.list(params),
     queryFn: async () => {
       await sleep(100);
-      const studies = mockApi.study.list(params);
-      if (studies.length === 0) {
-        throw new Error("No studies found");
+      const response = mockApi.study.list(params);
+      if (!response.success) {
+        const { message, status } = response.error;
+        if (status === 404) {
+          return [];
+        }
+        if (status === 401) {
+          throw new Error("Unauthorized");
+        }
+        throw new Error(message);
       }
-      return studies;
+      return response.data;
     },
   });
 };
@@ -43,11 +50,15 @@ export const studyDetailQueryOptions = (studyId: string) => {
     queryKey: studyQueryKeys.detail(studyId),
     queryFn: async () => {
       await sleep(100);
-      const study = mockApi.study.detail(studyId);
-      if (!study) {
-        throw new Error(`Study with id ${studyId} not found`);
+      const response = mockApi.study.detail(studyId);
+      if (!response.success) {
+        const { message, status } = response.error;
+        if (status === 401) {
+          throw new Error("Unauthorized");
+        }
+        throw new Error(message);
       }
-      return study;
+      return response.data;
     },
   });
 };
