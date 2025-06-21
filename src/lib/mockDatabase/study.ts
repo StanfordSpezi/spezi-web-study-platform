@@ -6,11 +6,15 @@
 // SPDX-License-Identifier: MIT
 //
 
-interface Study {
-  id: string;
-  title: string;
-  teamId: string;
-}
+import { z } from "zod";
+
+export const studySchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  teamId: z.string(),
+});
+
+type Study = z.infer<typeof studySchema>;
 
 export const mockStudies: Study[] = [
   {
