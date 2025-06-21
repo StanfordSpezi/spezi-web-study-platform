@@ -16,7 +16,7 @@ export const IconContainer = ({ children, className }: IconContainerProps) => {
         className,
       )}
     >
-      <div className="size-full overflow-hidden rounded-[calc(var(--container-radius)-var(--container-padding))] bg-blue-500">
+      <div className="size-full overflow-hidden rounded-[calc(var(--container-radius)-var(--container-padding))]">
         {children}
       </div>
     </div>

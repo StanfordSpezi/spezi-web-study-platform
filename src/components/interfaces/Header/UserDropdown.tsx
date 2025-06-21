@@ -7,7 +7,6 @@
 //
 
 import {
-  Avatar,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -22,6 +21,7 @@ import { Layers2, LogOut, User } from "lucide-react";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
 import { cn } from "@/utils/cn";
+import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 export const UserDropdown = () => {
@@ -51,15 +51,7 @@ export const UserDropdown = () => {
             "focus-visible:ring-border-focus focus-visible:ring-2",
           )}
         >
-          <Avatar
-            className="bg-surface border-border-secondary size-6.5! rounded-full border bg-clip-padding shadow-xs"
-            src={user.imageUrl}
-            fallback={
-              <div className="bg-surface flex-center size-full rounded-full text-xs">
-                {user.name[0].toUpperCase()}
-              </div>
-            }
-          />
+          <UserAvatar user={user} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -69,8 +61,18 @@ export const UserDropdown = () => {
         sideOffset={4}
       >
         <DropdownMenuLabel>
-          <div>{user.name}</div>
-          <div className="text-text-tertiary truncate">{user.email}</div>
+          <div className="flex items-center gap-4 font-normal">
+            <UserAvatar
+              user={user}
+              wrapperClassName="[--avatar-size:--spacing(8)]"
+            />
+            <div>
+              <div className="text-sm">{user.name}</div>
+              <div className="text-text-tertiary text-xs">
+                {user.role === "admin" ? "Administrator" : "User"}
+              </div>
+            </div>
+          </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
