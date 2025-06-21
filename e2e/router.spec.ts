@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { mockDatabase } from "@/lib/mockApi";
+import { mockDatabase } from "@/lib/mockDatabase";
 import { expect, test } from "@/lib/playwrightFixtures";
 
 test.describe("Router Tests", () => {

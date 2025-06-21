@@ -6,11 +6,15 @@
 // SPDX-License-Identifier: MIT
 //
 
-interface Team {
-  id: string;
-  name: string;
-  icon: string;
-}
+import { z } from "zod";
+
+export const teamSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  icon: z.string(),
+});
+
+type Team = z.infer<typeof teamSchema>;
 
 export const mockTeams: Team[] = [
   {
@@ -40,10 +44,12 @@ export const mockTeams: Team[] = [
   },
 ];
 
-interface UserTeam {
-  userId: string;
-  teamId: string;
-}
+export const userTeamSchema = z.object({
+  userId: z.string(),
+  teamId: z.string(),
+});
+
+type UserTeam = z.infer<typeof userTeamSchema>;
 
 export const mockUserTeams: UserTeam[] = [
   { userId: "user-1", teamId: "team-pine" },
