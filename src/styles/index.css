@@ -14,6 +14,20 @@ SPDX-License-Identifier: MIT
 
 @source "../../node_modules/@stanfordspezi/spezi-web-design-system/dist/**/*.js";
 
+@utility bg-dots {
+  --dot-color: var(--dot-bg-color, var(--color-zinc-300));
+  --dot-size: var(--dot-bg-size, 1px);
+  --dot-spacing: var(--dot-bg-spacing, 16px);
+
+  /* Dots grid pattern using CSS variables */
+  background-image: radial-gradient(
+    circle,
+    var(--dot-color) var(--dot-size),
+    transparent var(--dot-size)
+  );
+  background-size: var(--dot-spacing) var(--dot-spacing);
+}
+
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
