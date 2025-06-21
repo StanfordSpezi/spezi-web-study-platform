@@ -68,7 +68,7 @@ These styles apply to larger elements that sit on top of the background, such as
 
 ### Fill
 
-These styles apply to smaller elements that require a solid fill color, such as buttons or badges. Fills come with their explicit text and icon colors, called `on-fill` tokens, to ensure good contrast and readability.
+These styles apply to smaller elements that require a solid fill color, such as buttons or badges. Fills come with their explicit text colors, called `on-fill` tokens, to ensure good contrast and readability.
 
 #### Default
 
@@ -83,6 +83,12 @@ These styles apply to smaller elements that require a solid fill color, such as 
 - `fill-brand`: Used for elements that require a solid fill color that draws a lot of attention to an element without conveying a specific context, such as an error or success state.
 - `fill-brand-hover`: Used to style the hover state of elements that use the brand fill color.
 - `fill-brand-active`: Used to style the active state of elements that use the brand fill color.
+
+#### Info
+
+##### Primary
+
+- `fill-info`: Used for elements that require a solid fill color that indicates informational content or commands a little bit of attention. It should be used to put emphasis on elements that don't require action but still need to be noticed.
 
 #### Success
 
@@ -119,6 +125,12 @@ These styles apply to smaller elements that require a solid fill color, such as 
 ```
 
 ```tsx
+<AvatarRole>
+  <AdminIcon className="bg-fill-info" />
+</AvatarRole>
+```
+
+```tsx
 <CardHeader>
   <Badge className="bg-fill-success">Completed</Badge>
 </CardHeader>
@@ -147,11 +159,15 @@ These styles apply to the border or ring color of elements, typically used for o
 - `border`: Used for elements that require an unopinionated strong border color to provide visual separation or emphasis without conveying a specific intent.
 - `border-focus`: Used to style the border color of elements when they are focused, ensuring good visibility and accessibility.
 
+##### Secondary
+
+- `border-secondary`: Used for elements that require an unopinionated border color that is less prominent than the primary border, providing a subtle visual separation.
+
 #### Examples
 
 ```tsx
 <Card className="border-border border">
-  <CardHeader className="border-border border-b">
+  <CardHeader className="border-border-secondary border-b">
     <Button className="focus-visible:ring-border-focus focus-visible:ring-2" />
   </CardHeader>
 </Card>
@@ -159,7 +175,7 @@ These styles apply to the border or ring color of elements, typically used for o
 
 ### Text
 
-These styles apply to the text color of elements, ensuring good contrast and readability.
+These styles apply to the text color of elements, ensuring good contrast and readability. It should also be used to style the fill or stroke colors of icons and other text-like elements.
 
 #### Default
 
@@ -177,31 +193,39 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 
 #### On Fill
 
-##### Primary
+##### Default
+
+###### Primary
 
 - `text-on-fill`: Used for text that appears on elements with a neutral fill color.
 
-#### Brand
+##### Info
 
-##### Primary
+###### Primary
+
+- `text-info-on-fill`: Used for text that appears on elements with a brand fill color.
+
+##### Brand
+
+###### Primary
 
 - `text-brand-on-fill`: Used for text that appears on elements with a brand fill color.
 
-#### Success
+##### Success
 
-##### Primary
+###### Primary
 
 - `text-success-on-fill`: Used for text that appears on elements with a success fill color.
 
-#### Warning
+##### Warning
 
-##### Primary
+###### Primary
 
 - `text-warning-on-fill`: Used for text that appears on elements with a warning fill color.
 
-#### Critical
+##### Critical
 
-##### Primary
+###### Primary
 
 - `text-critical-on-fill`: Used for text that appears on elements with a critical fill color.
 
@@ -224,6 +248,14 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 ```
 
 ```tsx
+<Calendar>
+  <CurrentDay>
+    <NextEvent className="bg-fill-info text-info-on-fill" />
+  </CurrentDay>
+</Calendar>
+```
+
+```tsx
 <Pagination>
   <ActivePage className="bg-fill-brand text-brand-on-fill">1</ActivePage>
 </Pagination>
@@ -240,42 +272,3 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 ```tsx
 <Button className="bg-fill-critical text-critical-on-fill">Delete Study</Button>
 ```
-
-### Icon
-
-These styles apply to the fill or stroke color of icons, ensuring they are visually distinct and consistent with the overall design.
-
-#### Default
-
-##### Primary
-
-- `icon`: Used for emphasized icons that require a strong visual presence. Mirrors the `text` token, providing a strong contrast against the background.
-
-##### Secondary
-
-- `icon-secondary`: Used for basic icons. This is the default choice for most icon elements. Mirrors the `text-secondary` token, providing a neutral and readable appearance.
-
-##### Tertiary
-
-- `icon-tertiary`: Used for less emphasized icons, such as decorative or secondary icons. Mirrors the `text-tertiary` token, providing a subtler contrast.
-
-#### Examples
-
-```tsx
-<Card>
-  <Heading className="text-text">
-    <Icon className="text-icon" />
-    Welcome to the Study Platform
-  </Heading>
-  <Paragraph className="text-text-secondary">
-    <Icon className="text-icon-secondary" />
-    Login to access your studies and data.
-  </Paragraph>
-  <Caption className="text-text-tertiary">
-    <Icon className="text-icon-tertiary" />
-    Don't have an account? <Link className="text-text">Sign up</Link>
-  </Caption>
-</Card>
-```
-
->
