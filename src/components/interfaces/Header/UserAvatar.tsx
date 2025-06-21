@@ -17,7 +17,7 @@ interface UserAvatarProps {
   };
   className?: string;
   /**
-   * Use this to style tne sizing of the avatar and badge.
+   * Use this to style the sizing of the avatar and badge.
    * You need to set the `--avatar-size` CSS variable in the wrapper.
    * Example: `wrapperClassName="[--avatar-size:--spacing(6.5)]"`
    */
