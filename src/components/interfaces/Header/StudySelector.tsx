@@ -23,7 +23,7 @@ export const StudySelector = () => {
   const { data: studies } = useQuery(
     studyListQueryOptions({ teamId: params.team }),
   );
-  const selectedStudy = studies?.find((s) => s.id === params.study);
+  const selectedStudy = studies?.find((study) => study.id === params.study);
 
   if (!studies || !selectedStudy) {
     return <HeaderSelectorSkeleton hasIcon={false} />;

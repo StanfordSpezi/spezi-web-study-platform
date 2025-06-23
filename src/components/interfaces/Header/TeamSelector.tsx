@@ -37,7 +37,7 @@ const iconMap: Record<string, LucideIcon> = {
 export const TeamSelector = () => {
   const params = useParams({ from: "/(dashboard)/$team/$study" });
   const { data: teams } = useQuery(teamListQueryOptions());
-  const selectedTeam = teams?.find((t) => t.id === params.team);
+  const selectedTeam = teams?.find((team) => team.id === params.team);
 
   if (!teams || !selectedTeam) {
     return <HeaderSelectorSkeleton hasIcon={true} />;
