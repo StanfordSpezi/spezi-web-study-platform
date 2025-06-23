@@ -70,13 +70,16 @@ A token therefore reads like a sentence. Example:
 
 This repository re-maps essential SWDS tokens ( `--color-surface`, `--color-primary`, …) to the new variables. This keeps SWDS components functional out-of-the-box while granting the study platform finer control where needed.
 
-### Benefits and trade-offs
+### Benefits
 
 - Predictability: Designers and engineers can infer the intent of a color from its name alone.
 - Accessibility: By pairing text tokens (on-fill variants) with their corresponding backgrounds, color-contrast rules can be audited systematically.
 - Easier theming: Theming changes require changing token definitions, not refactoring every component.
 
-The cost is a steeper learning curve: contributors must grasp more design tokens to work effectively. The project considers this an upfront investment that prevents brittle hacks later.
+### Trade-offs
+
+- Centralization reduces modularity: Centralizing tokens ensures consistency, accessibility, and easier theming across the platform, but it makes components more interdependent.
+- Steeper learning curve: Contributors must grasp more design tokens to work effectively. This upfront investment reduces ambiguity and prevents inconsistencies in design and styling patterns.
 
 ## Limitations and how they are handled
 
