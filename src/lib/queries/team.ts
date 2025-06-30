@@ -28,10 +28,6 @@ export const teamListQueryOptions = () => {
     queryFn: async () => {
       await sleep(100);
       const teams = mockApi.team.list();
-      if (teams.length === 0) {
-        throw new Error("No teams found");
-      }
-
       return teams;
     },
   });

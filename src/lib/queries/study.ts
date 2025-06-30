@@ -32,9 +32,6 @@ export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
     queryFn: async () => {
       await sleep(100);
       const studies = mockApi.study.list(params);
-      if (studies.length === 0) {
-        throw new Error("No studies found");
-      }
       return studies;
     },
   });
