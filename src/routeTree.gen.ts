@@ -21,7 +21,6 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/~__root'
-import { Route as ErrorImport } from './routes/~error'
 import { Route as authSignInImport } from './routes/~(auth)/~sign-in'
 import { Route as dashboardIndexImport } from './routes/~(dashboard)/~index'
 import { Route as dashboardTeamStudyLayoutImport } from './routes/~(dashboard)/~$team/~$study/~layout'
@@ -32,12 +31,6 @@ import { Route as dashboardTeamStudyConfigurationImport } from './routes/~(dashb
 import { Route as dashboardTeamStudyIndexImport } from './routes/~(dashboard)/~$team/~$study/~index'
 
 // Create/Update Routes
-
-const ErrorRoute = ErrorImport.update({
-  id: '/error',
-  path: '/error',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const authSignInRoute = authSignInImport.update({
   id: '/(auth)/sign-in',
@@ -93,13 +86,6 @@ const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/error': {
-      id: '/error'
-      path: '/error'
-      fullPath: '/error'
-      preLoaderRoute: typeof ErrorImport
-      parentRoute: typeof rootRoute
-    }
     '/(dashboard)/': {
       id: '/(dashboard)/'
       path: '/'
@@ -182,7 +168,6 @@ const dashboardTeamStudyLayoutRouteWithChildren =
   )
 
 export interface FileRoutesByFullPath {
-  '/error': typeof ErrorRoute
   '/': typeof dashboardIndexRoute
   '/sign-in': typeof authSignInRoute
   '/$team': typeof dashboardTeamIndexRoute
@@ -194,7 +179,6 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/error': typeof ErrorRoute
   '/': typeof dashboardIndexRoute
   '/sign-in': typeof authSignInRoute
   '/$team': typeof dashboardTeamIndexRoute
@@ -206,7 +190,6 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/error': typeof ErrorRoute
   '/(dashboard)/': typeof dashboardIndexRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/(dashboard)/$team/': typeof dashboardTeamIndexRoute
@@ -220,7 +203,6 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/error'
     | '/'
     | '/sign-in'
     | '/$team'
@@ -231,7 +213,6 @@ export interface FileRouteTypes {
     | '/$team/$study/results'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/error'
     | '/'
     | '/sign-in'
     | '/$team'
@@ -241,7 +222,6 @@ export interface FileRouteTypes {
     | '/$team/$study/results'
   id:
     | '__root__'
-    | '/error'
     | '/(dashboard)/'
     | '/(auth)/sign-in'
     | '/(dashboard)/$team/'
@@ -254,7 +234,6 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  ErrorRoute: typeof ErrorRoute
   dashboardIndexRoute: typeof dashboardIndexRoute
   authSignInRoute: typeof authSignInRoute
   dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
@@ -262,7 +241,6 @@ export interface RootRouteChildren {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  ErrorRoute: ErrorRoute,
   dashboardIndexRoute: dashboardIndexRoute,
   authSignInRoute: authSignInRoute,
   dashboardTeamIndexRoute: dashboardTeamIndexRoute,
@@ -279,15 +257,11 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "~__root.tsx",
       "children": [
-        "/error",
         "/(dashboard)/",
         "/(auth)/sign-in",
         "/(dashboard)/$team/",
         "/(dashboard)/$team/$study"
       ]
-    },
-    "/error": {
-      "filePath": "~error.tsx"
     },
     "/(dashboard)/": {
       "filePath": "~(dashboard)/~index.tsx"

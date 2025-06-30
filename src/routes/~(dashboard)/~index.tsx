@@ -18,41 +18,28 @@ import { teamListQueryOptions } from "@/lib/queries/team";
  */
 export const Route = createFileRoute("/(dashboard)/")({
   beforeLoad: async ({ context: { queryClient } }) => {
-    try {
-      const teams = await queryClient.fetchQuery(teamListQueryOptions());
-      const firstTeam = teams.at(0);
+    const teams = await queryClient.fetchQuery(teamListQueryOptions());
+    const firstTeam = teams.at(0);
 
-      if (!firstTeam) {
-        throw new Error("No teams found");
-      }
-
-      const studies = await queryClient.fetchQuery(
-        studyListQueryOptions({ teamId: firstTeam.id }),
-      );
-      const firstStudy = studies.at(0);
-
-      if (!firstStudy) {
-        throw new Error(`No studies found for team ${firstTeam.id}`);
-      }
-
-      return redirect({
-        to: "/$team/$study",
-        params: {
-          team: firstTeam.id,
-          study: firstStudy.id,
-        },
-      });
-    } catch (error) {
-      console.error("Error redirecting to a team and study:", error);
-
-      const message =
-        error instanceof Error ?
-          error.message
-        : "Error redirecting to a team and study";
-      return redirect({
-        to: "/error",
-        search: { message },
-      });
+    if (!firstTeam) {
+      throw new Error("No teams found");
     }
+
+    const studies = await queryClient.fetchQuery(
+      studyListQueryOptions({ teamId: firstTeam.id }),
+    );
+    const firstStudy = studies.at(0);
+
+    if (!firstStudy) {
+      throw new Error(`No studies found for team ${firstTeam.id}`);
+    }
+
+    return redirect({
+      to: "/$team/$study",
+      params: {
+        team: firstTeam.id,
+        study: firstStudy.id,
+      },
+    });
   },
 });

@@ -8,11 +8,16 @@
 
 import { sleep } from "@stanfordspezi/spezi-web-design-system";
 import { queryOptions } from "@tanstack/react-query";
-import { queryKeysFactory } from "@/utils/queryKeysFactory";
 import { mockApi } from "../mockApi";
 
-const STUDY_QUERY_KEY = "study" as const;
-export const studyQueryKeys = queryKeysFactory(STUDY_QUERY_KEY);
+export const studyQueryKeys = {
+  list: (params: StudyListQueryOptionsParams) => ["study", "list", params],
+  retrieve: (params: StudyRetrieveQueryOptionsParams) => [
+    "study",
+    "retrieve",
+    params,
+  ],
+};
 
 interface StudyListQueryOptionsParams {
   teamId?: string;
@@ -35,17 +40,23 @@ export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
   });
 };
 
+interface StudyRetrieveQueryOptionsParams {
+  studyId: string;
+}
+
 /**
  * Query options for fetching a specific study by id.
  */
-export const studyDetailQueryOptions = (studyId: string) => {
+export const studyRetrieveQueryOptions = (
+  params: StudyRetrieveQueryOptionsParams,
+) => {
   return queryOptions({
-    queryKey: studyQueryKeys.detail(studyId),
+    queryKey: studyQueryKeys.retrieve(params),
     queryFn: async () => {
       await sleep(100);
-      const study = mockApi.study.detail(studyId);
+      const study = mockApi.study.detail(params.studyId);
       if (!study) {
-        throw new Error(`Study with id ${studyId} not found`);
+        throw new Error(`Study with id ${params.studyId} not found`);
       }
       return study;
     },

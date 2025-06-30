@@ -8,11 +8,16 @@
 
 import { sleep } from "@stanfordspezi/spezi-web-design-system";
 import { queryOptions } from "@tanstack/react-query";
-import { queryKeysFactory } from "@/utils/queryKeysFactory";
 import { mockApi } from "../mockApi";
 
-const TEAM_QUERY_KEY = "team" as const;
-export const teamQueryKeys = queryKeysFactory(TEAM_QUERY_KEY);
+export const teamQueryKeys = {
+  list: () => ["team", "list"],
+  retrieve: (params: TeamRetrieveQueryOptionsParams) => [
+    "team",
+    "retrieve",
+    params,
+  ],
+};
 
 /**
  * Query options for fetching all teams.
@@ -32,17 +37,23 @@ export const teamListQueryOptions = () => {
   });
 };
 
+interface TeamRetrieveQueryOptionsParams {
+  teamId: string;
+}
+
 /**
  * Query options for fetching a specific team by id.
  */
-export const teamDetailQueryOptions = (teamId: string) => {
+export const teamRetrieveQueryOptions = (
+  params: TeamRetrieveQueryOptionsParams,
+) => {
   return queryOptions({
-    queryKey: teamQueryKeys.detail(teamId),
+    queryKey: teamQueryKeys.retrieve(params),
     queryFn: async () => {
       await sleep(100);
-      const team = mockApi.team.detail(teamId);
+      const team = mockApi.team.detail(params.teamId);
       if (!team) {
-        throw new Error(`Team with id ${teamId} not found`);
+        throw new Error(`Team with id ${params.teamId} not found`);
       }
       return team;
     },
