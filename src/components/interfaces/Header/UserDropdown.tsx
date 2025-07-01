@@ -20,14 +20,12 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Layers2, LogOut, User } from "lucide-react";
 import { mockApi } from "@/lib/mockApi";
-import { currentUserQueryOptions } from "@/lib/queries/currentUser";
+import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
 import { cn } from "@/utils/cn";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
-// import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
-
 export const UserDropdown = () => {
-  const { data: user } = useQuery(currentUserQueryOptions());
+  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

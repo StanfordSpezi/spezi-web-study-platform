@@ -61,7 +61,7 @@ export const studyRetrieveQueryOptions = (
     queryKey: studyQueryKeys.retrieve(params),
     queryFn: async () => {
       await sleep(100);
-      const response = mockApi.study.detail(params.studyId);
+      const response = mockApi.study.retrieve(params);
       if (!response.success) {
         const { message, status } = response.error;
         if (status === 401) {

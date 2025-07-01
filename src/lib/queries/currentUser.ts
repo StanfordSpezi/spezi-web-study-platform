@@ -10,14 +10,16 @@ import { sleep } from "@stanfordspezi/spezi-web-design-system";
 import { queryOptions } from "@tanstack/react-query";
 import { mockApi } from "../mockApi";
 
-const CURRENT_USER_QUERY_KEY = "currentUser" as const;
+export const currentUserQueryKeys = {
+  retrieve: () => ["currentUser"],
+};
 
 /**
  * Query options for fetching the current user.
  */
-export const currentUserQueryOptions = () => {
+export const currentUserRetrieveQueryOptions = () => {
   return queryOptions({
-    queryKey: [CURRENT_USER_QUERY_KEY],
+    queryKey: currentUserQueryKeys.retrieve(),
     queryFn: async () => {
       await sleep(100);
       const response = mockApi.auth.getCurrentUser();

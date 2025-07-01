@@ -57,7 +57,7 @@ export const teamRetrieveQueryOptions = (
     queryKey: teamQueryKeys.retrieve(params),
     queryFn: async () => {
       await sleep(100);
-      const response = mockApi.team.detail(params.teamId);
+      const response = mockApi.team.retrieve(params);
       if (!response.success) {
         const { message, status } = response.error;
         if (status === 401) {

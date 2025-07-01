@@ -6,12 +6,15 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Button } from "@stanfordspezi/spezi-web-design-system";
+import {
+  Button,
+  parseUnknownError,
+} from "@stanfordspezi/spezi-web-design-system";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { mockApi } from "@/lib/mockApi";
-import { currentUserQueryOptions } from "@/lib/queries/currentUser";
+import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
 
 const SignInComponent = () => {
   const search = Route.useSearch();
@@ -20,7 +23,7 @@ const SignInComponent = () => {
 
   const handleSignIn = async () => {
     mockApi.auth.signIn();
-    await queryClient.invalidateQueries(currentUserQueryOptions());
+    await queryClient.invalidateQueries(currentUserRetrieveQueryOptions());
     await navigate({ to: search.redirect ?? "/" });
   };
 
@@ -41,26 +44,15 @@ export const Route = createFileRoute("/(auth)/sign-in")({
     try {
       // Check if the user is already authenticated
       // if so, redirect them to the specified path or home
-      await queryClient.ensureQueryData(currentUserQueryOptions());
+      await queryClient.ensureQueryData(currentUserRetrieveQueryOptions());
       return redirect({ to: search.redirect ?? "/" });
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Unauthorized") {
-          // User is not authenticated, allow the sign-in page to load.
-          return;
-        }
+      if (parseUnknownError(error) === "Unauthorized") {
+        // User is not authenticated, allow the sign-in page to load.
+        return;
       }
 
-      console.error("Error checking authentication status:", error);
-
-      const message =
-        error instanceof Error ?
-          error.message
-        : "An unexpected error occurred while checking authentication status";
-      return redirect({
-        to: "/error",
-        search: { message },
-      });
+      throw error;
     }
   },
 });

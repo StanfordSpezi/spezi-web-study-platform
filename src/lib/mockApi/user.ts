@@ -17,7 +17,7 @@ interface User {
 export const mockAdminUser: User = {
   id: "admin-1",
   name: "Naomi Price",
-  email: "naomiprice@domain.tld",
+  email: "naomiprice@example.com",
   role: "admin",
 };
 
@@ -26,7 +26,7 @@ export const mockUsers: User[] = [
   {
     id: "user-1",
     name: "Vincent Orlowski",
-    email: "vincent_00@domain.tld",
+    email: "vincent_00@example.com",
     imageUrl: "https://avatars.githubusercontent.com/u/133281989?s=200&v=4",
     role: "user",
   },

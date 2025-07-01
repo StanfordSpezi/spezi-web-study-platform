@@ -71,14 +71,14 @@ export const mockApi = createMockApi({
         ),
       );
     },
-    detail: (teamId: string) => {
+    retrieve: (query: { teamId: string }) => {
       const { currentUser, teams, userTeams } = getMockDatabase();
       if (!currentUser) {
         throw new MockApiError("No current user found", 401);
       }
-      const team = teams.find((t) => t.id === teamId);
+      const team = teams.find((t) => t.id === query.teamId);
       if (!team) {
-        throw new MockApiError(`Team with id ${teamId} not found`, 404);
+        throw new MockApiError(`Team with id ${query.teamId} not found`, 404);
       }
       if (currentUser.role === "admin") {
         return team;
@@ -104,9 +104,6 @@ export const mockApi = createMockApi({
           (s) => s.teamId === query.teamId,
         );
       }
-      if (!selectedStudies.length) {
-        throw new MockApiError("No studies found", 404);
-      }
       if (currentUser.role === "admin") {
         return selectedStudies;
       }
@@ -116,19 +113,16 @@ export const mockApi = createMockApi({
       const filtered = selectedStudies.filter((s) =>
         teamIds.includes(s.teamId),
       );
-      if (!filtered.length) {
-        throw new MockApiError("No studies found for user's teams", 404);
-      }
       return filtered;
     },
-    detail: (studyId: string) => {
+    retrieve: (query: { studyId: string }) => {
       const { currentUser, userTeams, studies } = getMockDatabase();
       if (!currentUser) {
         throw new MockApiError("No current user found", 401);
       }
-      const study = studies.find((s) => s.id === studyId);
+      const study = studies.find((s) => s.id === query.studyId);
       if (!study) {
-        throw new MockApiError(`Study with id ${studyId} not found`, 404);
+        throw new MockApiError(`Study with id ${query.studyId} not found`, 404);
       }
       if (currentUser.role === "admin") {
         return study;
