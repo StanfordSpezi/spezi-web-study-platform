@@ -8,6 +8,7 @@
 
 import {
   Avatar,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -42,15 +43,7 @@ export const UserDropdown = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <button
-          aria-label="User menu"
-          className={cn(
-            "flex h-8 items-center gap-3 rounded-md p-1 text-left text-sm outline-hidden",
-            "hover:bg-bg-secondary-hover",
-            "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
-            "focus-visible:ring-border-focus focus-visible:ring-2",
-          )}
-        >
+        <Button variant="ghost" size={null} className="rounded-md p-1">
           <Avatar
             className="bg-surface border-border-secondary size-6.5! rounded-full border bg-clip-padding shadow-xs"
             src={user.imageUrl}
@@ -60,7 +53,7 @@ export const UserDropdown = () => {
               </div>
             }
           />
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="min-w-60! rounded-lg"
