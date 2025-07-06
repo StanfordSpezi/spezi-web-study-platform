@@ -21,6 +21,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/~__root'
+import { Route as dashboardLayoutImport } from './routes/~(dashboard)/~layout'
 import { Route as authSignInImport } from './routes/~(auth)/~sign-in'
 import { Route as dashboardIndexImport } from './routes/~(dashboard)/~index'
 import { Route as dashboardTeamStudyLayoutImport } from './routes/~(dashboard)/~$team/~$study/~layout'
@@ -32,6 +33,11 @@ import { Route as dashboardTeamStudyIndexImport } from './routes/~(dashboard)/~$
 
 // Create/Update Routes
 
+const dashboardLayoutRoute = dashboardLayoutImport.update({
+  id: '/(dashboard)',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const authSignInRoute = authSignInImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
@@ -39,21 +45,21 @@ const authSignInRoute = authSignInImport.update({
 } as any)
 
 const dashboardIndexRoute = dashboardIndexImport.update({
-  id: '/(dashboard)/',
+  id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardLayoutRoute,
 } as any)
 
 const dashboardTeamStudyLayoutRoute = dashboardTeamStudyLayoutImport.update({
-  id: '/(dashboard)/$team/$study',
+  id: '/$team/$study',
   path: '/$team/$study',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardLayoutRoute,
 } as any)
 
 const dashboardTeamIndexRoute = dashboardTeamIndexImport.update({
-  id: '/(dashboard)/$team/',
+  id: '/$team/',
   path: '/$team/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardLayoutRoute,
 } as any)
 
 const dashboardTeamStudyResultsRoute = dashboardTeamStudyResultsImport.update({
@@ -86,12 +92,19 @@ const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(dashboard)': {
+      id: '/(dashboard)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof dashboardLayoutImport
+      parentRoute: typeof rootRoute
+    }
     '/(dashboard)/': {
       id: '/(dashboard)/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof dashboardIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof dashboardLayoutImport
     }
     '/(auth)/sign-in': {
       id: '/(auth)/sign-in'
@@ -105,14 +118,14 @@ declare module '@tanstack/react-router' {
       path: '/$team'
       fullPath: '/$team'
       preLoaderRoute: typeof dashboardTeamIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof dashboardLayoutImport
     }
     '/(dashboard)/$team/$study': {
       id: '/(dashboard)/$team/$study'
       path: '/$team/$study'
       fullPath: '/$team/$study'
       preLoaderRoute: typeof dashboardTeamStudyLayoutImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof dashboardLayoutImport
     }
     '/(dashboard)/$team/$study/': {
       id: '/(dashboard)/$team/$study/'
@@ -167,6 +180,22 @@ const dashboardTeamStudyLayoutRouteWithChildren =
     dashboardTeamStudyLayoutRouteChildren,
   )
 
+interface dashboardLayoutRouteChildren {
+  dashboardIndexRoute: typeof dashboardIndexRoute
+  dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
+  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
+}
+
+const dashboardLayoutRouteChildren: dashboardLayoutRouteChildren = {
+  dashboardIndexRoute: dashboardIndexRoute,
+  dashboardTeamIndexRoute: dashboardTeamIndexRoute,
+  dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
+}
+
+const dashboardLayoutRouteWithChildren = dashboardLayoutRoute._addFileChildren(
+  dashboardLayoutRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof dashboardIndexRoute
   '/sign-in': typeof authSignInRoute
@@ -190,6 +219,7 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/(dashboard)': typeof dashboardLayoutRouteWithChildren
   '/(dashboard)/': typeof dashboardIndexRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/(dashboard)/$team/': typeof dashboardTeamIndexRoute
@@ -222,6 +252,7 @@ export interface FileRouteTypes {
     | '/$team/$study/results'
   id:
     | '__root__'
+    | '/(dashboard)'
     | '/(dashboard)/'
     | '/(auth)/sign-in'
     | '/(dashboard)/$team/'
@@ -234,17 +265,13 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  dashboardIndexRoute: typeof dashboardIndexRoute
+  dashboardLayoutRoute: typeof dashboardLayoutRouteWithChildren
   authSignInRoute: typeof authSignInRoute
-  dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
-  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  dashboardIndexRoute: dashboardIndexRoute,
+  dashboardLayoutRoute: dashboardLayoutRouteWithChildren,
   authSignInRoute: authSignInRoute,
-  dashboardTeamIndexRoute: dashboardTeamIndexRoute,
-  dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -257,23 +284,32 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "~__root.tsx",
       "children": [
+        "/(dashboard)",
+        "/(auth)/sign-in"
+      ]
+    },
+    "/(dashboard)": {
+      "filePath": "~(dashboard)/~layout.tsx",
+      "children": [
         "/(dashboard)/",
-        "/(auth)/sign-in",
         "/(dashboard)/$team/",
         "/(dashboard)/$team/$study"
       ]
     },
     "/(dashboard)/": {
-      "filePath": "~(dashboard)/~index.tsx"
+      "filePath": "~(dashboard)/~index.tsx",
+      "parent": "/(dashboard)"
     },
     "/(auth)/sign-in": {
       "filePath": "~(auth)/~sign-in.tsx"
     },
     "/(dashboard)/$team/": {
-      "filePath": "~(dashboard)/~$team/~index.tsx"
+      "filePath": "~(dashboard)/~$team/~index.tsx",
+      "parent": "/(dashboard)"
     },
     "/(dashboard)/$team/$study": {
       "filePath": "~(dashboard)/~$team/~$study/~layout.tsx",
+      "parent": "/(dashboard)",
       "children": [
         "/(dashboard)/$team/$study/",
         "/(dashboard)/$team/$study/configuration",

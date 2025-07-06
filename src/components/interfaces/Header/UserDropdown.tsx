@@ -16,27 +16,34 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@stanfordspezi/spezi-web-design-system";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { Layers2, LogOut, User } from "lucide-react";
+import { mockApi } from "@/lib/mockApi";
+import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
 import { cn } from "@/utils/cn";
-// import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
-
-const session = {
-  user: {
-    name: "John Doe",
-    email: "john@example.com",
-    image: undefined,
-  },
-};
+import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 export const UserDropdown = () => {
-  // if (!session) {
-  //   return <UserDropdownSkeleton />;
-  // }
+  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    mockApi.auth.signOut();
+    queryClient.clear();
+    await navigate({ to: "/sign-in" });
+  };
+
+  if (!user) {
+    return <UserDropdownSkeleton />;
+  }
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <button
+          aria-label="User menu"
           className={cn(
             "flex h-8 items-center gap-3 rounded-md p-1 text-left text-sm outline-hidden",
             "hover:bg-bg-secondary-hover",
@@ -46,10 +53,10 @@ export const UserDropdown = () => {
         >
           <Avatar
             className="bg-surface border-border-secondary size-6.5! rounded-full border bg-clip-padding shadow-xs"
-            src={session.user.image}
+            src={user.imageUrl}
             fallback={
               <div className="bg-surface flex-center size-full rounded-full text-xs">
-                {session.user.name[0].toUpperCase()}
+                {user.name[0].toUpperCase()}
               </div>
             }
           />
@@ -62,10 +69,8 @@ export const UserDropdown = () => {
         sideOffset={4}
       >
         <DropdownMenuLabel>
-          <div>{session.user.name}</div>
-          <div className="text-text-tertiary truncate">
-            {session.user.email}
-          </div>
+          <div>{user.name}</div>
+          <div className="text-text-tertiary truncate">{user.email}</div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -79,9 +84,9 @@ export const UserDropdown = () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSignOut}>
           <LogOut />
-          Log out
+          Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

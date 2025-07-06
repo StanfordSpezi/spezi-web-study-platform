@@ -27,8 +27,18 @@ export const teamListQueryOptions = () => {
     queryKey: teamQueryKeys.list(),
     queryFn: async () => {
       await sleep(100);
-      const teams = mockApi.team.list();
-      return teams;
+      const response = mockApi.team.list();
+      if (!response.success) {
+        const { message, status } = response.error;
+        if (status === 404) {
+          return [];
+        }
+        if (status === 401) {
+          throw new Error("Unauthorized");
+        }
+        throw new Error(message);
+      }
+      return response.data;
     },
   });
 };
@@ -47,11 +57,15 @@ export const teamRetrieveQueryOptions = (
     queryKey: teamQueryKeys.retrieve(params),
     queryFn: async () => {
       await sleep(100);
-      const team = mockApi.team.detail(params.teamId);
-      if (!team) {
-        throw new Error(`Team with id ${params.teamId} not found`);
+      const response = mockApi.team.retrieve(params);
+      if (!response.success) {
+        const { message, status } = response.error;
+        if (status === 401) {
+          throw new Error("Unauthorized");
+        }
+        throw new Error(message);
       }
-      return team;
+      return response.data;
     },
   });
 };

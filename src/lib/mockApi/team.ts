@@ -39,3 +39,13 @@ export const mockTeams: Team[] = [
     icon: "Mountain",
   },
 ];
+
+interface UserTeam {
+  userId: string;
+  teamId: string;
+}
+
+export const mockUserTeams: UserTeam[] = [
+  { userId: "user-1", teamId: "team-pine" },
+  { userId: "user-1", teamId: "team-tree" },
+];
