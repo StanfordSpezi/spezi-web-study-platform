@@ -43,7 +43,12 @@ export const UserDropdown = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size={null} className="rounded-md p-1">
+        <Button
+          variant="ghost"
+          size={null}
+          className="rounded-md p-1"
+          aria-label="User menu"
+        >
           <Avatar
             className="bg-surface border-border-secondary size-6.5! rounded-full border bg-clip-padding shadow-xs"
             src={user.imageUrl}
