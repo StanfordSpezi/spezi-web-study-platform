@@ -7,6 +7,7 @@
 //
 
 import { SpeziProvider } from "@stanfordspezi/spezi-web-design-system";
+import type { QueryClient } from "@tanstack/react-query";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -14,6 +15,10 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import type { ComponentProps } from "react";
+
+export interface RouterAppContext {
+  queryClient: QueryClient;
+}
 
 const routerProps: ComponentProps<typeof SpeziProvider>["router"] = {
   Link: ({ href, ...props }) => <Link to={href} {...props} />,
@@ -32,7 +37,7 @@ const RootComponent = () => {
   );
 };
 
-export const Route = createRootRouteWithContext()({
+export const Route = createRootRouteWithContext<RouterAppContext>()({
   component: RootComponent,
   head: () => ({
     meta: [
