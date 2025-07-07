@@ -6,15 +6,22 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { type ReactNode } from "react";
+import { type ComponentProps } from "react";
 import { cn } from "@/utils/cn";
 
-interface IconContainerProps {
-  children: ReactNode;
-  className?: string;
-}
-
-export const IconContainer = ({ children, className }: IconContainerProps) => {
+interface FeaturedIconContainerProps extends ComponentProps<"div"> {}
+/**
+ * This component uses CSS variables to ensure that the nested container's rounded corners
+ * are proportional to the border radius and padding of the outer container.
+ *
+ * Overwrite these variables to customize the appearance.
+ * - `--container-padding`: Sets the padding of the outer container. Default: `--spacing(0.5)`.
+ * - `--container-radius`: Sets the border radius of the outer container. Default: `var(--radius-xl)`.
+ */
+export const FeaturedIconContainer = ({
+  children,
+  className,
+}: FeaturedIconContainerProps) => {
   return (
     <div
       className={cn(

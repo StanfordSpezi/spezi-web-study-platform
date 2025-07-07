@@ -25,9 +25,9 @@ import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 export const UserDropdown = () => {
-  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
 
   const handleSignOut = async () => {
     mockApi.auth.signOut();

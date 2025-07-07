@@ -15,14 +15,14 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import speziImage from "@/assets/spezi.webp";
 import stanfordImage from "@/assets/stanford.webp";
-import { IconContainer } from "@/components/ui/IconContainer";
+import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
 
 const SignInComponent = () => {
-  const search = Route.useSearch();
-  const navigate = Route.useNavigate();
   const queryClient = useQueryClient();
+  const navigate = Route.useNavigate();
+  const search = Route.useSearch();
 
   const handleSignIn = async () => {
     mockApi.auth.signIn();
@@ -35,24 +35,24 @@ const SignInComponent = () => {
       <div className="bg-dots absolute inset-0 -z-10" />
       <div className="bg-bg absolute inset-0 -z-10 mask-radial-from-10% mask-radial-to-140%" />
       <div className="flex -space-x-2">
-        <IconContainer className="translate-y-1 -rotate-12">
+        <FeaturedIconContainer className="translate-y-1 -rotate-12">
           <div className="flex-center size-full inset-shadow-sm">
             {/* Compensate the round Spezi Image */}
             <img src={speziImage} alt="Spezi Logo" className="scale-125" />
           </div>
-        </IconContainer>
-        <IconContainer className="z-10">
+        </FeaturedIconContainer>
+        <FeaturedIconContainer className="z-10">
           <div className="flex-center bg-brand-500 text-brand-50 size-full inset-shadow-sm">
             <div className="scale-y-110 font-serif text-2xl font-semibold text-shadow-xs">
               S
             </div>
           </div>
-        </IconContainer>
-        <IconContainer className="translate-y-1 rotate-12">
+        </FeaturedIconContainer>
+        <FeaturedIconContainer className="translate-y-1 rotate-12">
           <div className="flex-center bg-bg size-full inset-shadow-sm">
             <img src={stanfordImage} alt="Stanford Logo" />
           </div>
-        </IconContainer>
+        </FeaturedIconContainer>
       </div>
       <div className="flex-center flex-col gap-6">
         <h1 className="text-text max-w-48 text-center text-xl/snug font-medium text-balance">
@@ -65,12 +65,16 @@ const SignInComponent = () => {
       <Button onClick={handleSignIn} size="lg" variant="outline">
         Sign into the dashboard
       </Button>
-      <a
-        href="https://github.com/StanfordSpezi/spezi-web-study-platform/issues"
-        className="text-text-tertiary hover:bg-bg-hover active:bg-bg-active rounded px-2 py-1 text-sm transition-colors"
+      <Button
+        variant="ghost"
+        size="sm"
+        className="text-text-tertiary text-sm"
+        asChild
       >
-        Trouble signing in?
-      </a>
+        <a href="https://github.com/StanfordSpezi/spezi-web-study-platform/issues">
+          Trouble signing in?
+        </a>
+      </Button>
     </div>
   );
 };
