@@ -52,7 +52,7 @@ test.describe("Router Tests", () => {
     await expect(page.getByText("Study Home Route")).toBeVisible();
 
     await page.getByRole("link", { name: "Configuration" }).click();
-    await expect(page.getByText("Study Configuration Route")).toBeVisible();
+    await expect(page.getByText("Study Configuration")).toBeVisible();
   });
 
   test("displays error when navigating to non-existent team", async ({
