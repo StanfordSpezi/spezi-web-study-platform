@@ -12,12 +12,14 @@ test.describe("Authentication Flows", () => {
   test("redirects to sign-in when not authenticated", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveURL(/\/sign-in/);
-    await expect(page.getByText("Sign into the study platform")).toBeVisible();
+    await expect(
+      page.getByText("Welcome to the Spezi Study Platform"),
+    ).toBeVisible();
   });
 
   test("can sign in and access protected route", async ({ page }) => {
     await page.goto("/sign-in");
-    await page.getByRole("button", { name: /sign in/i }).click();
+    await page.getByRole("button", { name: /sign into/i }).click();
     await expect(page).not.toHaveURL(/\/sign-in/);
     await page.goto("/");
     await expect(page).not.toHaveURL(/\/sign-in/);
