@@ -23,11 +23,11 @@ export const Header = () => {
       )}
     >
       <div className="flex items-center gap-3">
-        <div className="pr-1 pl-1">
+        <div className="px-1">
           <div className="bg-surface border-border-secondary flex-center aspect-square size-6.5 rounded-md border bg-clip-padding p-1 shadow-xs">
             <img
               src={orgLogo}
-              alt="Organization Logo"
+              alt="Stanford Logo"
               className="size-full object-contain"
             />
           </div>
