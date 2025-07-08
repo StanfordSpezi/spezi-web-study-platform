@@ -8,8 +8,8 @@
 
 /* eslint-disable react-hooks/rules-of-hooks */
 import { test as base, type Page } from "@playwright/test";
-import { mockDatabase } from "@/lib/mockApi";
-import { mockAdminUser } from "@/lib/mockApi/user";
+import { mockDatabase } from "@/lib/mockDatabase";
+import { mockAdminUser } from "@/lib/mockDatabase/user";
 
 type CustomPage = Page & {
   /**
