@@ -29,7 +29,7 @@ export const StatusBadge = ({ isPublished }: StatusBadgeProps) => {
           style={{ boxShadow: "0 0 6px 6px var(--tw-shadow-color)" }}
         />
       </div>
-      <span className="">{isPublished ? "Published" : "Draft"}</span>
+      <span>{isPublished ? "Published" : "Draft"}</span>
     </Badge>
   );
 };
