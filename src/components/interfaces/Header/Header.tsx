@@ -6,12 +6,12 @@
 // SPDX-License-Identifier: MIT
 //
 
+import orgLogo from "@/assets/org-logo.webp";
 import { cn } from "@/utils/cn";
 import { Notifications } from "./Notifications";
 import { StudySelector } from "./StudySelector";
 import { TeamSelector } from "./TeamSelector";
 import { UserDropdown } from "./UserDropdown";
-import orgLogo from "@/assets/org-logo.webp";
 
 export const Header = () => {
   return (
