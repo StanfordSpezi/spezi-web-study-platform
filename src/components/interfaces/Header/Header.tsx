@@ -11,6 +11,7 @@ import { Notifications } from "./Notifications";
 import { StudySelector } from "./StudySelector";
 import { TeamSelector } from "./TeamSelector";
 import { UserDropdown } from "./UserDropdown";
+import orgLogo from "@/assets/org-logo.webp";
 
 export const Header = () => {
   return (
@@ -22,6 +23,16 @@ export const Header = () => {
       )}
     >
       <div className="flex items-center gap-3">
+        <div className="pr-1 pl-1">
+          <div className="bg-surface border-border-secondary flex-center aspect-square size-6.5 rounded-md border bg-clip-padding p-1 shadow-xs">
+            <img
+              src={orgLogo}
+              alt="Organization Logo"
+              className="size-full object-contain"
+            />
+          </div>
+        </div>
+        <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
         <TeamSelector />
         <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
         <StudySelector />
