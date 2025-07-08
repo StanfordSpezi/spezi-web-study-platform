@@ -39,7 +39,7 @@ export const BasicInformationCard = ({
         },
         {
           key: "Icon",
-          tooltip: "The icon representing your study?.",
+          tooltip: "The icon representing your study.",
           value: study?.icon,
         },
         {

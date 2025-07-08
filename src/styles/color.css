@@ -77,11 +77,12 @@ SPDX-License-Identifier: MIT
 
   /* Fill */
   --color-fill: var(--color-zinc-10);
+  --color-fill-secondary: var(--color-zinc-400);
   --color-fill-brand: var(--color-brand-500);
   --color-fill-brand-hover: var(--color-brand-450);
   --color-fill-brand-active: var(--color-brand-400);
   --color-fill-info: var(--color-blue-500);
-  --color-fill-success: var(--color-green-700);
+  --color-fill-success: var(--color-green-500);
   --color-fill-warning: var(--color-yellow-500);
   --color-fill-critical: var(--color-red-600);
 

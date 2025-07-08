@@ -6,14 +6,14 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { cn } from "@/utils/cn";
 import { Skeleton, Tooltip } from "@stanfordspezi/spezi-web-design-system";
-import React from "react";
+import type { ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
 interface KeyValueCardProps {
   title: string;
   description: string;
-  actions?: React.ReactNode;
+  actions?: ReactNode | ReactNode[];
   isLoading?: boolean;
   items: Array<{
     key: string;
@@ -76,7 +76,9 @@ export const KeyValueCard = ({
             </div>
             <div className="flex flex-1 items-center text-sm">
               {isLoading && <Skeleton className="h-4 w-full" />}
-              {!isLoading && <p>{item.value ?? "---"}</p>}
+              {!isLoading && (
+                <p className="line-clamp-2">{item.value ?? "---"}</p>
+              )}
             </div>
           </li>
         ))}

@@ -6,10 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { cn } from "@/utils/cn";
 import { Button } from "@stanfordspezi/spezi-web-design-system";
 import { Edit } from "lucide-react";
 import type { ComponentProps } from "react";
+import { cn } from "@/utils/cn";
 
 type EditButtonProps = Omit<ComponentProps<"button">, "children">;
 

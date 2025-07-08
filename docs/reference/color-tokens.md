@@ -76,6 +76,10 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 - `fill`: Used for elements that require a solid neutral fill color that does not express a specific intent and does not fit a particular role.
 
+##### Secondary
+
+- `fill-secondary`: Used for elements that require a solid neutral fill color that does not express a specific intent and is darker than the primary fill color.
+
 #### Brand
 
 ##### Primary
@@ -112,7 +116,8 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 ```tsx
 <Table>
-  <TableHeader className="bg-fill" />
+  <TableRow className="bg-fill" />
+  <TableRow className="bg-fill-secondary" />
 </Table>
 ```
 

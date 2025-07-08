@@ -11,6 +11,7 @@ import { z } from "zod";
 export const studySchema = z.object({
   id: z.string(),
   teamId: z.string(),
+  isPublished: z.boolean().optional(),
   title: z.string(),
   shortTitle: z.string().optional(),
   icon: z.string().optional(),
@@ -35,8 +36,9 @@ export const mockStudies: Study[] = [
     title: "Activity Study",
     shortTitle: "Activity",
     explanation:
-      "A study focused on physical activity and health. In this study, participants will engage in various physical activities and report their experiences.",
-    shortExplanation: "Physical activity and health study.",
+      "A study focused on physical activity and health. In this study, participants will engage in various physical activities and report their experiences. The study aims to understand the impact of physical activity on health outcomes. Participants will be asked to log their daily activities, complete surveys, and may also wear activity trackers to monitor their physical activity levels. The study will run for one year, with participants enrolling at different times throughout the year.",
+    shortExplanation:
+      "Physical activity and health study. In this study, participants will engage in various physical activities and report their experiences.",
     enrollmentPeriod: {
       start: "2025-01-01",
       end: "2025-12-31",
