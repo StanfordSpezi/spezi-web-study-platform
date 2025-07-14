@@ -8,9 +8,11 @@
 
 import { isEmpty } from "@stanfordspezi/spezi-web-design-system";
 
+type DateInput = Date | string | number;
+
 interface DateRange {
-  start?: string;
-  end?: string;
+  start?: DateInput;
+  end?: DateInput;
 }
 
 /**
