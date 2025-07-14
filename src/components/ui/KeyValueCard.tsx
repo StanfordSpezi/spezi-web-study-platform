@@ -9,11 +9,12 @@
 import { Skeleton, Tooltip } from "@stanfordspezi/spezi-web-design-system";
 import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
+import { Card, CardHeader } from "./Card";
 
 interface KeyValueCardProps {
   title: string;
   description: string;
-  actions?: ReactNode | ReactNode[];
+  actions?: ReactNode;
   isLoading?: boolean;
   items: Array<{
     key: string;
@@ -30,21 +31,10 @@ export const KeyValueCard = ({
   items,
 }: KeyValueCardProps) => {
   return (
-    <div
-      className={cn(
-        "[--card-padding:--spacing(5)]",
-        "bg-layer flex w-full max-w-6xl flex-col rounded-xl border",
-        "bg-clip-padding",
-        "shadow-lg shadow-black/4",
-      )}
-    >
-      <div className="flex w-full items-center justify-between border-b p-(--card-padding)">
-        <div>
-          <h2 className="text-text">{title}</h2>
-          <p className="text-text-tertiary text-sm">{description}</p>
-        </div>
-        <div>{actions}</div>
-      </div>
+    <Card>
+      <CardHeader title={title} description={description}>
+        {actions}
+      </CardHeader>
       <ul
         className={cn(
           "[--row-py:--spacing(4)]",
@@ -75,14 +65,13 @@ export const KeyValueCard = ({
               </Tooltip>
             </div>
             <div className="flex flex-1 items-center text-sm">
-              {isLoading && <Skeleton className="h-4 w-full" />}
-              {!isLoading && (
-                <p className="line-clamp-2">{item.value ?? "---"}</p>
-              )}
+              {isLoading ?
+                <Skeleton className="h-4 w-full" />
+              : <p className="line-clamp-2">{item.value ?? "---"}</p>}
             </div>
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 };

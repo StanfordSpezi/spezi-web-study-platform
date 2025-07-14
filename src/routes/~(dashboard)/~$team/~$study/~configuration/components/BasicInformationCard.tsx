@@ -9,6 +9,7 @@
 import { KeyValueCard } from "@/components/ui/KeyValueCard";
 import type { Study } from "@/lib/mockDatabase/study";
 import { EditButton } from "./EditButton";
+import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
 
 interface BasicInformationCardProps {
   study?: Study;
@@ -23,7 +24,7 @@ export const BasicInformationCard = ({
     <KeyValueCard
       title="Basic Information"
       description="Set your study's title, description, and how it appears to participants."
-      actions={<EditButton />}
+      actions={<EditButton onClick={notImplementedAlert} />}
       isLoading={isLoading}
       items={[
         {
