@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import orgLogo from "@/assets/org-logo.webp";
 import { cn } from "@/utils/cn";
 import { Notifications } from "./Notifications";
 import { StudySelector } from "./StudySelector";
@@ -22,6 +23,14 @@ export const Header = () => {
       )}
     >
       <div className="flex items-center gap-3">
+        <div className="bg-surface border-border-secondary flex-center mx-1 size-6.5 rounded-md border bg-clip-padding p-1 shadow-xs">
+          <img
+            src={orgLogo}
+            alt="Stanford Logo"
+            className="size-full object-contain"
+          />
+        </div>
+        <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
         <TeamSelector />
         <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
         <StudySelector />
