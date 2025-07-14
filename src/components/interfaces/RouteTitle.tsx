@@ -6,13 +6,13 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { cn } from "@stanfordspezi/spezi-web-design-system";
 import { type ReactNode } from "react";
+import { DashedSeparator } from "../ui/DashedSeparator";
 
 interface RouteTitleProps {
-  title: string;
-  description?: string;
-  accessory?: ReactNode | ReactNode[];
+  title: ReactNode;
+  description: ReactNode;
+  accessory?: ReactNode;
 }
 
 export const RouteTitle = ({
@@ -29,17 +29,7 @@ export const RouteTitle = ({
         </div>
         {accessory && <div>{accessory}</div>}
       </div>
-      <div
-        className={cn(
-          "h-px w-full",
-          "[--dash-color:var(--color-border)] [--dash-size:--spacing(2)]",
-        )}
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, var(--dash-color), var(--dash-color) 75%, transparent 75%, transparent 100%)",
-          backgroundSize: "var(--dash-size) 1px",
-        }}
-      ></div>
+      <DashedSeparator />
     </div>
   );
 };
