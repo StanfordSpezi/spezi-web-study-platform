@@ -11,7 +11,7 @@ SPDX-License-Identifier: MIT
 /* Extending the primitive color tokens with the help of https://fullwindcss.com */
 @theme inline {
   --color-zinc-10: oklch(99.7% 0 0);
-  --color-zinc-50: oklch(98.81% 0 0);
+  --color-zinc-50: oklch(98.5% 0 0);
   --color-zinc-80: oklch(97.45% 0 287.99);
   --color-zinc-100: oklch(96.74% 0 287.3);
   --color-zinc-150: oklch(94.36% 0 286.82);
@@ -71,23 +71,25 @@ SPDX-License-Identifier: MIT
   --color-bg-secondary-hover: var(--color-zinc-150);
   --color-bg-secondary-active: var(--color-zinc-200);
 
-  /* Surface */
-  --color-surface: var(--color-zinc-10);
-  --color-surface-hover: var(--color-zinc-100);
+  /* Layer */
+  --color-layer: var(--color-zinc-10);
+  --color-layer-hover: var(--color-zinc-100);
 
   /* Fill */
   --color-fill: var(--color-zinc-10);
+  --color-fill-secondary: var(--color-zinc-400);
   --color-fill-brand: var(--color-brand-500);
   --color-fill-brand-hover: var(--color-brand-450);
   --color-fill-brand-active: var(--color-brand-400);
   --color-fill-info: var(--color-blue-500);
-  --color-fill-success: var(--color-green-700);
+  --color-fill-success: var(--color-green-500);
   --color-fill-warning: var(--color-yellow-500);
   --color-fill-critical: var(--color-red-600);
 
   /* Border */
   --color-border: oklch(0% 0 0 / 10%);
   --color-border-secondary: oklch(0% 0 0 / 8%);
+  --color-border-tertiary: oklch(0% 0 0 / 6%);
   --color-border-focus: var(--color-brand-500);
 
   /* Text */
@@ -107,9 +109,9 @@ SPDX-License-Identifier: MIT
   --color-surface: var(--color-bg);
   --color-surface-primary: var(--color-bg);
   --color-foreground: var(--color-text-secondary);
-  --color-card: var(--color-surface);
+  --color-card: var(--color-layer);
   --color-card-foreground: var(--color-text-secondary);
-  --color-popover: var(--color-surface);
+  --color-popover: var(--color-layer);
   --color-popover-foreground: var(--color-text-secondary);
   --color-primary: var(--color-fill-brand);
   --color-primary-foreground: var(--color-text-brand-on-fill);
