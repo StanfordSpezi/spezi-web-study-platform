@@ -37,8 +37,9 @@ export const UserAvatar = ({
       )}
     >
       <Avatar
+        size={null}
         className={cn(
-          "bg-surface border-border-secondary size-(--avatar-size)! rounded-full border bg-clip-padding p-0.5 shadow-xs",
+          "bg-surface border-border-secondary size-(--avatar-size) rounded-full border bg-clip-padding p-0.5 shadow-xs",
           className,
         )}
         src={user.imageUrl}
