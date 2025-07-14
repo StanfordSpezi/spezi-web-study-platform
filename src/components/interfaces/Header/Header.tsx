@@ -23,14 +23,12 @@ export const Header = () => {
       )}
     >
       <div className="flex items-center gap-3">
-        <div className="px-1">
-          <div className="bg-surface border-border-secondary flex-center aspect-square size-6.5 rounded-md border bg-clip-padding p-1 shadow-xs">
-            <img
-              src={orgLogo}
-              alt="Stanford Logo"
-              className="size-full object-contain"
-            />
-          </div>
+        <div className="bg-surface border-border-secondary flex-center mx-1 size-6.5 rounded-md border bg-clip-padding p-1 shadow-xs">
+          <img
+            src={orgLogo}
+            alt="Stanford Logo"
+            className="size-full object-contain"
+          />
         </div>
         <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
         <TeamSelector />
