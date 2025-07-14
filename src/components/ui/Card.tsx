@@ -37,14 +37,12 @@ export const CardHeader = ({
   children,
 }: CardHeaderProps) => {
   return (
-    <Card>
-      <div className="flex w-full items-center justify-between border-b p-(--card-padding)">
-        <div>
-          <h2 className="text-text">{title}</h2>
-          <p className="text-text-tertiary text-sm">{description}</p>
-        </div>
-        <div>{children}</div>
+    <div className="flex w-full items-center justify-between border-b p-(--card-padding)">
+      <div>
+        <h2 className="text-text">{title}</h2>
+        <p className="text-text-tertiary text-sm">{description}</p>
       </div>
-    </Card>
+      <div>{children}</div>
+    </div>
   );
 };

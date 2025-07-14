@@ -15,18 +15,18 @@ import { EnrollmentCard } from "./components/EnrollmentCard";
 import { StatusBadge } from "./components/StatusBadge";
 
 const StudyConfigurationRoute = () => {
-  const { study: studyId } = Route.useParams();
+  const params = Route.useParams();
   const { data: study, isLoading } = useQuery(
-    studyRetrieveQueryOptions({ studyId }),
+    studyRetrieveQueryOptions({ studyId: params.study }),
   );
   return (
-    <div className="size-full">
+    <div>
       <RouteTitle
         title="Study Configuration"
         description="Configure your study and everything related to it."
         accessory={<StatusBadge isPublished={study?.isPublished} />}
       />
-      <div className="flex size-full flex-col gap-14 p-6">
+      <div className="flex flex-col gap-14 p-6">
         <BasicInformationCard study={study} isLoading={isLoading} />
         <EnrollmentCard study={study} isLoading={isLoading} />
       </div>

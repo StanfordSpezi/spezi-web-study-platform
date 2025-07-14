@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
 import { KeyValueCard } from "@/components/ui/KeyValueCard";
 import type { Study } from "@/lib/mockDatabase/study";
 import { formatBoolean, formatDateRange } from "@/utils/formatValue";
@@ -21,7 +22,9 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
     <KeyValueCard
       title="Enrollment"
       description="Control who can join your study and how they get access."
-      actions={<EditButton />}
+      actions={
+        <EditButton onClick={() => (notImplementedAlert as () => void)()} />
+      }
       isLoading={isLoading}
       items={[
         {
