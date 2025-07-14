@@ -9,18 +9,12 @@
 import { Button } from "@stanfordspezi/spezi-web-design-system";
 import { Edit } from "lucide-react";
 import type { ComponentProps } from "react";
-import { cn } from "@/utils/cn";
 
 type EditButtonProps = Omit<ComponentProps<"button">, "children">;
 
-export const EditButton = ({ className, ...props }: EditButtonProps) => {
+export const EditButton = (props: EditButtonProps) => {
   return (
-    <Button
-      size={null}
-      variant="outline"
-      className={cn("h-8 gap-2 rounded px-3 text-sm font-medium", className)}
-      {...props}
-    >
+    <Button size="sm" variant="outline" {...props}>
       <Edit className="size-3.5" />
       Edit
     </Button>
