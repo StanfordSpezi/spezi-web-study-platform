@@ -22,9 +22,10 @@ export const Notifications = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
+          size={null}
           variant="ghost"
           aria-label="Notifications"
-          className="size-8! p-0!"
+          className="size-8 rounded-md"
         >
           <Bell className="size-4" />
         </Button>
