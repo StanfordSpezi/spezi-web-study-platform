@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/utils/cn";
 
 interface CardProps extends ComponentProps<"div"> {}
@@ -26,18 +26,26 @@ export const Card = ({ className, ...props }: CardProps) => {
   );
 };
 
-interface CardHeaderProps extends ComponentProps<"div"> {
-  title: string;
-  description: string;
+interface CardHeaderProps extends Omit<ComponentProps<"div">, "title"> {
+  title: ReactNode;
+  description: ReactNode;
 }
 
 export const CardHeader = ({
   title,
   description,
+  className,
   children,
+  ...props
 }: CardHeaderProps) => {
   return (
-    <div className="flex w-full items-center justify-between border-b p-(--card-padding)">
+    <div
+      className={cn(
+        "flex w-full items-center justify-between border-b p-(--card-padding)",
+        className,
+      )}
+      {...props}
+    >
       <div>
         <h2 className="text-text">{title}</h2>
         <p className="text-text-tertiary text-sm">{description}</p>

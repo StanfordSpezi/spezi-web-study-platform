@@ -12,7 +12,8 @@ import { cn } from "@/utils/cn";
 interface DashedSeparatorProps extends ComponentProps<"div"> {}
 
 /**
- * Renders a horizontal dashed separator line.
+ * Renders a horizontal dashed separator line. Use this component instead of Tailwind's `border-b border-dashed`
+ * when you need more control over the appearance of the dashes, such as customizing the dash length, color or spacing.
  *
  * @remarks
  * The appearance of the dashes can be customized using the following CSS variables:
