@@ -45,7 +45,7 @@ These styles apply to the background color of an element, typically used for lar
 </Layout>
 ```
 
-### Surface
+### Layer
 
 These styles apply to larger elements that sit on top of the background, such as cards, panels, or other "container-like" UI components that require a distinct visual separation from the background.
 
@@ -53,15 +53,15 @@ These styles apply to larger elements that sit on top of the background, such as
 
 ##### Primary
 
-- `surface`: Used for elements that sit on the primary background, such as cards or panels, providing a subtle elevation effect.
-- `surface-hover`: Used to style the hover state of elements that sit on the primary surface.
+- `layer`: Used for elements that sit on the primary background, such as cards or panels, providing a subtle elevation effect.
+- `layer-hover`: Used to style the hover state of elements that sit on the primary layer.
 
 #### Examples
 
 ```tsx
 <Background className="bg-bg">
-  <Card className="bg-surface">
-    <GhostButton className="hover:bg-surface-hover" />
+  <Card className="bg-layer">
+    <GhostButton className="hover:bg-layer-hover" />
   </Card>
 </Background>
 ```
@@ -75,6 +75,10 @@ These styles apply to smaller elements that require a solid fill color, such as 
 ##### Primary
 
 - `fill`: Used for elements that require a solid neutral fill color that does not express a specific intent and does not fit a particular role.
+
+##### Secondary
+
+- `fill-secondary`: Used for elements that require a solid neutral fill color that does not express a specific intent and is darker than the primary fill color.
 
 #### Brand
 
@@ -112,7 +116,8 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 ```tsx
 <Table>
-  <TableHeader className="bg-fill" />
+  <TableRow className="bg-fill" />
+  <TableRow className="bg-fill-secondary" />
 </Table>
 ```
 
@@ -163,6 +168,10 @@ These styles apply to the border or ring color of elements, typically used for o
 
 - `border-secondary`: Used for elements that require an unopinionated border color that is less prominent than the primary border, providing a subtle visual separation.
 
+##### Tertiary
+
+- `border-tertiary`: Used for elements that require an unopinionated border color that is even less prominent than the secondary border.
+
 #### Examples
 
 ```tsx
@@ -170,6 +179,7 @@ These styles apply to the border or ring color of elements, typically used for o
   <CardHeader className="border-border-secondary border-b">
     <Button className="focus-visible:ring-border-focus focus-visible:ring-2" />
   </CardHeader>
+  <Table className="divide-border-tertiary divide-y" />
 </Card>
 ```
 

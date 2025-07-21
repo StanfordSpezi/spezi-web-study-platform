@@ -15,6 +15,7 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import type { ComponentProps } from "react";
+import { unsetSpeziProviderTheme } from "@/utils/unsetSpeziProviderTheme";
 
 export interface RouterAppContext {
   queryClient: QueryClient;
@@ -28,7 +29,7 @@ const RootComponent = () => {
   return (
     <>
       <HeadContent />
-      <SpeziProvider router={routerProps}>
+      <SpeziProvider theme={unsetSpeziProviderTheme()} router={routerProps}>
         <div className="grid h-svh grid-rows-[1fr]">
           <Outlet />
         </div>
