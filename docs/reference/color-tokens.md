@@ -200,6 +200,7 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 ##### Tertiary
 
 - `text-tertiary`: Used for less emphasized text, such as captions or secondary information, providing a subtler contrast.
+- `text-tertiary-hover`: Used for less emphasized text when it is hovered, providing a subtle visual change.
 
 #### On Fill
 
@@ -247,7 +248,7 @@ These styles apply to the text color of elements, ensuring good contrast and rea
   <Paragraph className="text-text-secondary">
     Login to access your studies and data.
   </Paragraph>
-  <Caption className="text-text-tertiary">
+  <Caption className="text-text-tertiary hover:text-text-tertiary-hover">
     Don't have an account? <Link className="text-text">Sign up</Link>
   </Caption>
 </Card>
