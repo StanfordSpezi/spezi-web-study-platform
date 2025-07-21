@@ -25,7 +25,7 @@ export const Notifications = () => {
           size={null}
           variant="ghost"
           aria-label="Notifications"
-          className="size-8 rounded-md p-0"
+          className="size-8 rounded-md"
         >
           <Bell className="size-4" />
         </Button>
