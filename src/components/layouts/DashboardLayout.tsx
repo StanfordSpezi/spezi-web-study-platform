@@ -17,7 +17,7 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="[--header-height:calc(--spacing(14))]">
+    <div className="[--header-height:--spacing(14)]">
       <SidebarProvider className="flex flex-col">
         <Header />
         <div className="flex flex-1">
