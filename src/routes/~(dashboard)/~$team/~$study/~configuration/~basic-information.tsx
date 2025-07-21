@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute } from "@tanstack/react-router";
 import { Card } from "@/components/ui/Card";
 import { BasicInfoForm } from "./components/BasicInfoForm";
@@ -15,8 +16,8 @@ import { useBasicInfoForm } from "./lib/useBasicInfoForm";
 const BasicInformationRouteComponent = () => {
   const form = useBasicInfoForm();
 
-  const handleSave = form.handleSubmit((data) => {
-    console.log(data);
+  const handleSave = form.handleSubmit(() => {
+    (notImplementedAlert as () => void)();
   });
 
   return (
