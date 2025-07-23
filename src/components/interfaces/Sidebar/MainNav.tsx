@@ -24,6 +24,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "./Sidebar";
 
 interface NavBarItem {
@@ -31,6 +34,7 @@ interface NavBarItem {
   title: string;
   linkOptions?: ValidateLinkOptions;
   icon?: LucideIcon;
+  subMenu?: NavBarItem[];
 }
 
 const navBarItems: NavBarItem[] = [
@@ -50,6 +54,20 @@ const navBarItems: NavBarItem[] = [
     title: "Configuration",
     icon: Bolt,
     linkOptions: { to: "/$team/$study/configuration" },
+    subMenu: [
+      {
+        id: "basic-information",
+        title: "Basic Information",
+      },
+      {
+        id: "enrollment",
+        title: "Enrollment",
+      },
+      {
+        id: "components",
+        title: "Components",
+      },
+    ],
   },
   {
     id: "participants",
@@ -65,11 +83,18 @@ const navBarItems: NavBarItem[] = [
   },
 ];
 
-const MainNavButton = ({ item }: { item: NavBarItem }) => {
+const MainNavButton = ({
+  item,
+  isSubMenu,
+}: {
+  item: NavBarItem;
+  isSubMenu?: boolean;
+}) => {
   const matchRoute = useMatchRoute();
+  const Comp = isSubMenu ? SidebarMenuSubButton : SidebarMenuButton;
   if (item.linkOptions) {
     return (
-      <SidebarMenuButton
+      <Comp
         asChild
         tooltip={item.title}
         isActive={!!matchRoute({ to: item.linkOptions.to })}
@@ -78,15 +103,15 @@ const MainNavButton = ({ item }: { item: NavBarItem }) => {
           {item.icon && <item.icon />}
           <span>{item.title}</span>
         </Link>
-      </SidebarMenuButton>
+      </Comp>
     );
   }
 
   return (
-    <SidebarMenuButton tooltip={item.title}>
+    <Comp tooltip={item.title}>
       {item.icon && <item.icon />}
       <span>{item.title}</span>
-    </SidebarMenuButton>
+    </Comp>
   );
 };
 
@@ -97,6 +122,15 @@ export const MainNav = () => {
         {navBarItems.map((item) => (
           <SidebarMenuItem key={item.id}>
             <MainNavButton item={item} />
+            {item.subMenu && (
+              <SidebarMenuSub>
+                {item.subMenu.map((subItem) => (
+                  <SidebarMenuSubItem key={subItem.id}>
+                    <MainNavButton item={subItem} isSubMenu />
+                  </SidebarMenuSubItem>
+                ))}
+              </SidebarMenuSub>
+            )}
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
