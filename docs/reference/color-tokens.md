@@ -112,12 +112,6 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 - `fill-critical`: Used for elements that require a solid fill color that indicates an error or high importance state, such as a failed action or critical alert.
 
-#### Inverted
-
-##### Primary
-
-- `fill-inverted`: Used for elements that need to stand out against the default background, such as tooltips or small popups. It provides a solid fill color that contrasts well with the primary background.
-
 #### Examples
 
 ```tsx
@@ -157,12 +151,6 @@ These styles apply to smaller elements that require a solid fill color, such as 
 <Popover>
   <PopoverContent className="bg-fill-critical">Error occurred</PopoverContent>
 </Popover>
-```
-
-```tsx
-<Tooltip>
-  <TooltipContent className="bg-fill-inverted">Tooltip</TooltipContent>
-</Tooltip>
 ```
 
 ### Border
@@ -251,12 +239,6 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 
 - `text-critical-on-fill`: Used for text that appears on elements with a critical fill color.
 
-##### Inverted
-
-###### Primary
-
-- `text-inverted-on-fill`: Used for text that appears on elements with an inverted fill color.
-
 ##### Examples
 
 ```tsx
@@ -303,12 +285,4 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 <Button className="bg-fill-critical text-text-critical-on-fill">
   Delete Study
 </Button>
-```
-
-```tsx
-<Tooltip>
-  <TooltipContent className="bg-fill-inverted text-text-inverted-on-fill">
-    Tooltip
-  </TooltipContent>
-</Tooltip>
 ```
