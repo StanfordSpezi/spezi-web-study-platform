@@ -85,6 +85,7 @@ SPDX-License-Identifier: MIT
   --color-fill-success: var(--color-green-500);
   --color-fill-warning: var(--color-yellow-500);
   --color-fill-critical: var(--color-red-600);
+  --color-fill-inverted: var(--color-zinc-800);
 
   /* Border */
   --color-border: oklch(0% 0 0 / 10%);
@@ -102,6 +103,7 @@ SPDX-License-Identifier: MIT
   --color-text-success-on-fill: var(--color-green-10);
   --color-text-warning-on-fill: var(--color-yellow-10);
   --color-text-critical-on-fill: var(--color-red-10);
+  --color-text-inverted-on-fill: var(--color-zinc-50);
 }
 
 /* Redefining the Spezi Web Design System color tokens */
