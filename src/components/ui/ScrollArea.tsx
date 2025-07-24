@@ -13,7 +13,6 @@ export const ScrollArea = ({
   scrollViewRef,
   className,
   children,
-  onScroll,
   ...props
 }: React.ComponentProps<typeof ScrollAreaPrimitive.Root> & {
   scrollViewRef?: React.RefObject<HTMLDivElement | null>;
@@ -28,7 +27,6 @@ export const ScrollArea = ({
         ref={scrollViewRef}
         data-slot="scroll-area-viewport"
         className="focus-visible:ring-border-focus size-full rounded-[inherit] transition-colors outline-none focus-visible:ring-2"
-        onScroll={onScroll}
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
