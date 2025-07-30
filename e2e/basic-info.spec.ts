@@ -21,7 +21,9 @@ test.describe("Study Configuration Basic Information Tests", () => {
   });
 
   test("displays basic information configuration page", async ({ page }) => {
-    await expect(page.getByText("Basic Information")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Basic Information" }),
+    ).toBeVisible();
   });
 
   test("displays the study's current basic information", async ({ page }) => {
