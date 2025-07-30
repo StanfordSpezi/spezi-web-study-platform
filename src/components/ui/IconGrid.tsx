@@ -6,7 +6,12 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Skeleton } from "@stanfordspezi/spezi-web-design-system";
+import {
+  EmptyState,
+  Skeleton,
+  times,
+  upperFirst,
+} from "@stanfordspezi/spezi-web-design-system";
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { matchSorter } from "match-sorter";
 import { memo, useState, useMemo, useEffect, useRef } from "react";
@@ -34,8 +39,8 @@ const IconGridSkeleton = () => {
           gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
         }}
       >
-        {Array.from({ length: gridColumns * visibleRows }).map((_, i) => (
-          <Skeleton key={i} className="h-7 w-10 rounded-md" />
+        {times(gridColumns * visibleRows, (index) => (
+          <Skeleton key={index} className="h-7 w-10 rounded-md" />
         ))}
       </div>
     </div>
@@ -92,8 +97,8 @@ const IconRow = memo(({ icons, onValueChange }: IconRowProps) => {
       {icons.map((icon) => (
         <button
           key={icon.name}
-          title={icon.name.split("-").join(" ")}
-          className="flex-center group hover:bg-layer-hover focus:bg-layer-hover rounded-md transition-colors outline-none"
+          title={upperFirst(icon.name.split("-").join(" "))}
+          className="flex-center hover:bg-layer-hover focus:bg-layer-hover rounded-md transition outline-none"
           onClick={() => onValueChange?.(icon.name as IconName)}
         >
           <IconRenderer name={icon.name as IconName} />
@@ -117,7 +122,7 @@ export const IconGrid = ({
   onValueChange,
 }: IconGridProps) => {
   const { icons, isLoading: isIconsLoading } = useIconsData();
-  const iconsToUse = useMemo(() => iconsList ?? icons, [iconsList, icons]);
+  const iconsToUse = iconsList ?? icons;
 
   const filteredIcons = useMemo(() => {
     if (search.trim() === "") return iconsToUse;
@@ -135,12 +140,11 @@ export const IconGrid = ({
 
   if (filteredIcons.length === 0) {
     return (
-      <div
-        className="flex-center text-text-tertiary"
+      <EmptyState
+        entityName="icon"
+        className="flex-center"
         style={{ height: rowHeight * visibleRows }}
-      >
-        No icon found
-      </div>
+      />
     );
   }
 
@@ -160,7 +164,7 @@ export const IconGrid = ({
         {(index) => {
           return (
             <IconRow
-              key={`${index * 8}-${index * 8 + 8}`}
+              key={index}
               icons={filteredIcons.slice(index * 8, index * 8 + 8)}
               onValueChange={onValueChange}
             />
