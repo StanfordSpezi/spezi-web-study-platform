@@ -254,31 +254,35 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 ```
 
 ```tsx
-<Tag className="bg-fill text-on-fill" />
+<Tag className="bg-fill text-text-on-fill" />
 ```
 
 ```tsx
 <Calendar>
   <CurrentDay>
-    <NextEvent className="bg-fill-info text-info-on-fill" />
+    <NextEvent className="bg-fill-info text-text-info-on-fill" />
   </CurrentDay>
 </Calendar>
 ```
 
 ```tsx
 <Pagination>
-  <ActivePage className="bg-fill-brand text-brand-on-fill">1</ActivePage>
+  <ActivePage className="bg-fill-brand text-text-brand-on-fill">1</ActivePage>
 </Pagination>
 ```
 
 ```tsx
-<CopyButton className="data-[copied=true]:bg-fill-success data-[copied=true]:text-success-on-fill" />
+<CopyButton className="data-[copied=true]:bg-fill-success data-[copied=true]:text-text-success-on-fill" />
 ```
 
 ```tsx
-<Badge className="bg-fill-warning text-warning-on-fill">Check your input</Badge>
+<Badge className="bg-fill-warning text-text-warning-on-fill">
+  Check your input
+</Badge>
 ```
 
 ```tsx
-<Button className="bg-fill-critical text-critical-on-fill">Delete Study</Button>
+<Button className="bg-fill-critical text-text-critical-on-fill">
+  Delete Study
+</Button>
 ```
