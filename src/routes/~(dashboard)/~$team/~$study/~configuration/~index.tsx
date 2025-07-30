@@ -8,9 +8,9 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { RouteTitle } from "@/components/interfaces/RouteTitle";
+import { RouteHeader } from "@/components/ui/RouteHeader";
 import { studyRetrieveQueryOptions } from "@/lib/queries/study";
-import { BasicInformationCard } from "./components/BasicInformationCard";
+import { BasicInfoCard } from "./components/BasicInfoCard";
 import { EnrollmentCard } from "./components/EnrollmentCard";
 import { StatusBadge } from "./components/StatusBadge";
 
@@ -21,13 +21,13 @@ const StudyConfigurationRoute = () => {
   );
   return (
     <div>
-      <RouteTitle
+      <RouteHeader
         title="Study Configuration"
         description="Configure your study and everything related to it."
-        accessory={<StatusBadge isPublished={study?.isPublished} />}
+        accessoryRight={<StatusBadge isPublished={study?.isPublished} />}
       />
-      <div className="flex flex-col gap-14 p-6">
-        <BasicInformationCard study={study} isLoading={isLoading} />
+      <div className="flex max-w-7xl flex-col gap-14 p-6">
+        <BasicInfoCard study={study} isLoading={isLoading} />
         <EnrollmentCard study={study} isLoading={isLoading} />
       </div>
     </div>

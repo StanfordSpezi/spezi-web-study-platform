@@ -6,26 +6,32 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
-import { KeyValueCard } from "@/components/ui/KeyValueCard";
+import { useParams } from "@tanstack/react-router";
+import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
+import { EditButtonLink } from "@/components/ui/EditButton";
 import type { Study } from "@/lib/mockDatabase/study";
-import { EditButton } from "./EditButton";
 
-interface BasicInformationCardProps {
+interface BasicInfoCardProps {
   study?: Study;
   isLoading?: boolean;
 }
 
-export const BasicInformationCard = ({
-  study,
-  isLoading,
-}: BasicInformationCardProps) => {
+export const BasicInfoCard = ({ study, isLoading }: BasicInfoCardProps) => {
+  const params = useParams({
+    from: "/(dashboard)/$team/$study/configuration/",
+  });
   return (
     <KeyValueCard
       title="Basic Information"
       description="Set your study's title, description, and how it appears to participants."
       actions={
-        <EditButton onClick={() => (notImplementedAlert as () => void)()} />
+        <EditButtonLink
+          aria-label="Edit Basic Information"
+          data-testid="edit-basic-information"
+          from="/"
+          to="/$team/$study/configuration/basic-information"
+          params={params}
+        />
       }
       isLoading={isLoading}
       items={[

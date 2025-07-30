@@ -29,6 +29,7 @@ import { Route as dashboardTeamIndexImport } from "./routes/~(dashboard)/~$team/
 import { Route as dashboardTeamStudyResultsImport } from "./routes/~(dashboard)/~$team/~$study/~results";
 import { Route as dashboardTeamStudyParticipantsImport } from "./routes/~(dashboard)/~$team/~$study/~participants";
 import { Route as dashboardTeamStudyIndexImport } from "./routes/~(dashboard)/~$team/~$study/~index";
+import { Route as dashboardTeamStudyConfigurationBasicInformationImport } from "./routes/~(dashboard)/~$team/~$study/~configuration/~basic-information";
 import { Route as dashboardTeamStudyConfigurationIndexImport } from "./routes/~(dashboard)/~$team/~$study/~configuration/~index";
 
 // Create/Update Routes
@@ -80,6 +81,13 @@ const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexImport.update({
   path: "/",
   getParentRoute: () => dashboardTeamStudyLayoutRoute,
 } as any);
+
+const dashboardTeamStudyConfigurationBasicInformationRoute =
+  dashboardTeamStudyConfigurationBasicInformationImport.update({
+    id: "/configuration/basic-information",
+    path: "/configuration/basic-information",
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any);
 
 const dashboardTeamStudyConfigurationIndexRoute =
   dashboardTeamStudyConfigurationIndexImport.update({
@@ -155,6 +163,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof dashboardTeamStudyConfigurationIndexImport;
       parentRoute: typeof dashboardTeamStudyLayoutImport;
     };
+    "/(dashboard)/$team/$study/configuration/basic-information": {
+      id: "/(dashboard)/$team/$study/configuration/basic-information";
+      path: "/configuration/basic-information";
+      fullPath: "/$team/$study/configuration/basic-information";
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationBasicInformationImport;
+      parentRoute: typeof dashboardTeamStudyLayoutImport;
+    };
   }
 }
 
@@ -165,6 +180,7 @@ interface dashboardTeamStudyLayoutRouteChildren {
   dashboardTeamStudyParticipantsRoute: typeof dashboardTeamStudyParticipantsRoute;
   dashboardTeamStudyResultsRoute: typeof dashboardTeamStudyResultsRoute;
   dashboardTeamStudyConfigurationIndexRoute: typeof dashboardTeamStudyConfigurationIndexRoute;
+  dashboardTeamStudyConfigurationBasicInformationRoute: typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildren =
@@ -174,6 +190,8 @@ const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildr
     dashboardTeamStudyResultsRoute: dashboardTeamStudyResultsRoute,
     dashboardTeamStudyConfigurationIndexRoute:
       dashboardTeamStudyConfigurationIndexRoute,
+    dashboardTeamStudyConfigurationBasicInformationRoute:
+      dashboardTeamStudyConfigurationBasicInformationRoute,
   };
 
 const dashboardTeamStudyLayoutRouteWithChildren =
@@ -206,6 +224,7 @@ export interface FileRoutesByFullPath {
   "/$team/$study/participants": typeof dashboardTeamStudyParticipantsRoute;
   "/$team/$study/results": typeof dashboardTeamStudyResultsRoute;
   "/$team/$study/configuration": typeof dashboardTeamStudyConfigurationIndexRoute;
+  "/$team/$study/configuration/basic-information": typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 export interface FileRoutesByTo {
@@ -216,6 +235,7 @@ export interface FileRoutesByTo {
   "/$team/$study/participants": typeof dashboardTeamStudyParticipantsRoute;
   "/$team/$study/results": typeof dashboardTeamStudyResultsRoute;
   "/$team/$study/configuration": typeof dashboardTeamStudyConfigurationIndexRoute;
+  "/$team/$study/configuration/basic-information": typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 export interface FileRoutesById {
@@ -229,6 +249,7 @@ export interface FileRoutesById {
   "/(dashboard)/$team/$study/participants": typeof dashboardTeamStudyParticipantsRoute;
   "/(dashboard)/$team/$study/results": typeof dashboardTeamStudyResultsRoute;
   "/(dashboard)/$team/$study/configuration/": typeof dashboardTeamStudyConfigurationIndexRoute;
+  "/(dashboard)/$team/$study/configuration/basic-information": typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 export interface FileRouteTypes {
@@ -241,7 +262,8 @@ export interface FileRouteTypes {
     | "/$team/$study/"
     | "/$team/$study/participants"
     | "/$team/$study/results"
-    | "/$team/$study/configuration";
+    | "/$team/$study/configuration"
+    | "/$team/$study/configuration/basic-information";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/"
@@ -250,7 +272,8 @@ export interface FileRouteTypes {
     | "/$team/$study"
     | "/$team/$study/participants"
     | "/$team/$study/results"
-    | "/$team/$study/configuration";
+    | "/$team/$study/configuration"
+    | "/$team/$study/configuration/basic-information";
   id:
     | "__root__"
     | "/(dashboard)"
@@ -261,7 +284,8 @@ export interface FileRouteTypes {
     | "/(dashboard)/$team/$study/"
     | "/(dashboard)/$team/$study/participants"
     | "/(dashboard)/$team/$study/results"
-    | "/(dashboard)/$team/$study/configuration/";
+    | "/(dashboard)/$team/$study/configuration/"
+    | "/(dashboard)/$team/$study/configuration/basic-information";
   fileRoutesById: FileRoutesById;
 }
 
@@ -315,7 +339,8 @@ export const routeTree = rootRoute
         "/(dashboard)/$team/$study/",
         "/(dashboard)/$team/$study/participants",
         "/(dashboard)/$team/$study/results",
-        "/(dashboard)/$team/$study/configuration/"
+        "/(dashboard)/$team/$study/configuration/",
+        "/(dashboard)/$team/$study/configuration/basic-information"
       ]
     },
     "/(dashboard)/$team/$study/": {
@@ -332,6 +357,10 @@ export const routeTree = rootRoute
     },
     "/(dashboard)/$team/$study/configuration/": {
       "filePath": "~(dashboard)/~$team/~$study/~configuration/~index.tsx",
+      "parent": "/(dashboard)/$team/$study"
+    },
+    "/(dashboard)/$team/$study/configuration/basic-information": {
+      "filePath": "~(dashboard)/~$team/~$study/~configuration/~basic-information.tsx",
       "parent": "/(dashboard)/$team/$study"
     }
   }

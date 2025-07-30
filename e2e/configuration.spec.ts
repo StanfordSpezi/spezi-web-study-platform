@@ -28,4 +28,15 @@ test.describe("Study Configuration Tests", () => {
     const statusText = study.isPublished ? "Published" : "Draft";
     await expect(page.getByText(statusText)).toBeVisible();
   });
+
+  test("allows the user to navigate to the basic information configuration page", async ({
+    page,
+  }) => {
+    await page.getByTestId("edit-basic-information").click();
+    await expect(page).toHaveURL((url) =>
+      url.pathname.endsWith(
+        `/${team.id}/${study.id}/configuration/basic-information`,
+      ),
+    );
+  });
 });

@@ -7,10 +7,10 @@
 //
 
 import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
-import { KeyValueCard } from "@/components/ui/KeyValueCard";
+import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
+import { EditButton } from "@/components/ui/EditButton";
 import type { Study } from "@/lib/mockDatabase/study";
 import { formatBoolean, formatDateRange } from "@/utils/formatValue";
-import { EditButton } from "./EditButton";
 
 interface EnrollmentCardProps {
   study?: Study;
@@ -22,9 +22,7 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
     <KeyValueCard
       title="Enrollment"
       description="Control who can join your study and how they get access."
-      actions={
-        <EditButton onClick={() => (notImplementedAlert as () => void)()} />
-      }
+      actions={<EditButton onClick={notImplementedAlert} />}
       isLoading={isLoading}
       items={[
         {
