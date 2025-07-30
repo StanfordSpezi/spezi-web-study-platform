@@ -8,15 +8,13 @@
 
 import { Button, buttonVariance } from "@stanfordspezi/spezi-web-design-system";
 import { createLink } from "@tanstack/react-router";
+import type { VariantProps } from "class-variance-authority";
 import { Edit } from "lucide-react";
-import {
-  forwardRef,
-  type AnchorHTMLAttributes,
-  type ComponentProps,
-} from "react";
+import { type ComponentProps } from "react";
 import { cn } from "@/utils/cn";
 
-type EditButtonProps = Omit<ComponentProps<typeof Button>, "children">;
+interface EditButtonProps
+  extends Omit<ComponentProps<typeof Button>, "children"> {}
 
 export const EditButton = ({
   size = "sm",
@@ -31,27 +29,22 @@ export const EditButton = ({
   );
 };
 
-type BasicEditButtonLinkProps = Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  "children"
-> &
-  Parameters<typeof buttonVariance>[0];
+interface BasicEditButtonLinkProps
+  extends Omit<ComponentProps<"a">, "children">,
+    VariantProps<typeof buttonVariance> {}
 
-const BasicEditButtonLink = forwardRef<
-  HTMLAnchorElement,
-  BasicEditButtonLinkProps
->(({ className, size = "sm", variant = "outline", ...props }, ref) => {
+const BasicEditButtonLink = ({
+  className,
+  size = "sm",
+  variant = "outline",
+  ...props
+}: BasicEditButtonLinkProps) => {
   return (
-    <a
-      ref={ref}
-      className={cn(buttonVariance({ variant, size }), className)}
-      {...props}
-    >
+    <a className={cn(buttonVariance({ variant, size }), className)} {...props}>
       <Edit className="size-3.5" />
       Edit
     </a>
   );
-});
-BasicEditButtonLink.displayName = "BasicEditButtonLink";
+};
 
 export const EditButtonLink = createLink(BasicEditButtonLink);

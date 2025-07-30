@@ -12,11 +12,12 @@ import type { BasicInfoForm as BasicInfoFormType } from "../lib/useBasicInfoForm
 
 interface BasicInfoFormProps {
   form: BasicInfoFormType;
+  onSave: () => void;
 }
 
-export const BasicInfoForm = ({ form }: BasicInfoFormProps) => {
+export const BasicInfoForm = ({ form, onSave }: BasicInfoFormProps) => {
   return (
-    <form className="py-6">
+    <form onSubmit={onSave} className="py-6">
       <Field
         control={form.control}
         name="title"
@@ -26,7 +27,7 @@ export const BasicInfoForm = ({ form }: BasicInfoFormProps) => {
             description="Be descriptive but keep it under 100 characters."
           />
         }
-        render={({ field }) => <Input type="text" {...field} />}
+        render={({ field }) => <Input {...field} />}
         className="border-border-tertiary border-b px-6"
       />
       <Field
@@ -38,7 +39,7 @@ export const BasicInfoForm = ({ form }: BasicInfoFormProps) => {
             description="Used in tight spaces where the full title won't fit."
           />
         }
-        render={({ field }) => <Input type="text" {...field} />}
+        render={({ field }) => <Input {...field} />}
         className="border-border-tertiary border-b px-6 pt-6"
       />
       <Field

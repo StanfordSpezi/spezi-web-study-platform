@@ -6,9 +6,11 @@
 // SPDX-License-Identifier: MIT
 //
 
+import type { ReactNode } from "react";
+
 interface FieldLabelProps {
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
 }
 
 export const FieldLabel = ({ title, description }: FieldLabelProps) => {

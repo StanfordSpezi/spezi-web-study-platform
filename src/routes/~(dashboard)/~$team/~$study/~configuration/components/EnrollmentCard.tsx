@@ -22,9 +22,7 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
     <KeyValueCard
       title="Enrollment"
       description="Control who can join your study and how they get access."
-      actions={
-        <EditButton onClick={() => (notImplementedAlert as () => void)()} />
-      }
+      actions={<EditButton onClick={notImplementedAlert} />}
       isLoading={isLoading}
       items={[
         {

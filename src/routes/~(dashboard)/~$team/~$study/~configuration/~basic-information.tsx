@@ -16,15 +16,13 @@ import { useBasicInfoForm } from "./lib/useBasicInfoForm";
 const BasicInformationRouteComponent = () => {
   const form = useBasicInfoForm();
 
-  const handleSave = form.handleSubmit(() => {
-    (notImplementedAlert as () => void)();
-  });
+  const handleSave = form.handleSubmit(notImplementedAlert);
 
   return (
     <BasicInfoLayout onSave={handleSave}>
       <div className="max-w-7xl p-6">
         <Card>
-          <BasicInfoForm form={form} />
+          <BasicInfoForm form={form} onSave={handleSave} />
         </Card>
       </div>
     </BasicInfoLayout>

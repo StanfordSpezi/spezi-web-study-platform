@@ -31,7 +31,7 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@stanfordspezi/spezi-web-design-system": "^0.14.0",
+    "@stanfordspezi/spezi-web-design-system": "^0.15.0",
     "@tailwindcss/vite": "^4.1.7",
     "@tanstack/react-query": "^5.80.7",
     "@tanstack/react-router": "^1.117.1",

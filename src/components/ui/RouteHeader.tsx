@@ -9,7 +9,7 @@
 import { cn } from "@stanfordspezi/spezi-web-design-system";
 import { createLink, type LinkComponentProps } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { forwardRef, type AnchorHTMLAttributes, type ReactNode } from "react";
+import { type ComponentProps, type ReactNode } from "react";
 import { useIsScrolled } from "@/utils/useIsScrolled";
 import { DashedSeparator } from "./DashedSeparator";
 
@@ -20,48 +20,44 @@ interface RouteHeaderProps {
   accessoryRight?: ReactNode;
 }
 
-export const RouteHeader = forwardRef<HTMLDivElement, RouteHeaderProps>(
-  ({ title, description, accessoryLeft, accessoryRight }, ref) => {
-    const isScrolled = useIsScrolled();
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "bg-bg/80 sticky top-(--header-height) backdrop-blur-md transition-shadow duration-200",
-          isScrolled && "shadow-lg shadow-black/2",
-        )}
-      >
-        <div className="flex max-w-7xl items-center justify-between p-6">
-          <div className="flex gap-6">
-            {accessoryLeft}
-            <div className="space-y-1">
-              <h1 className="text-text leading-none font-medium">{title}</h1>
-              <p className="text-text-tertiary text-sm">{description}</p>
-            </div>
+export const RouteHeader = ({
+  title,
+  description,
+  accessoryLeft,
+  accessoryRight,
+}: RouteHeaderProps) => {
+  const isScrolled = useIsScrolled();
+  return (
+    <div
+      className={cn(
+        "bg-bg/80 sticky top-(--header-height) backdrop-blur-md transition-shadow duration-200",
+        isScrolled && "shadow-lg shadow-black/2",
+      )}
+    >
+      <div className="flex max-w-7xl items-center justify-between p-6">
+        <div className="flex gap-6">
+          {accessoryLeft}
+          <div className="space-y-1">
+            <h1 className="text-text leading-none font-medium">{title}</h1>
+            <p className="text-text-tertiary text-sm">{description}</p>
           </div>
-          {accessoryRight}
         </div>
-        <DashedSeparator />
+        {accessoryRight}
       </div>
-    );
-  },
-);
+      <DashedSeparator />
+    </div>
+  );
+};
 
-RouteHeader.displayName = "RouteHeader";
+interface BasicRouteHeaderBackLinkProps extends ComponentProps<"a"> {}
 
-interface BasicRouteHeaderBackLinkProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  toX?: string;
-  to: never;
-}
-
-const BasicRouteHeaderBackLink = forwardRef<
-  HTMLAnchorElement,
-  BasicRouteHeaderBackLinkProps
->(({ className, children = "Back", ...props }, ref) => {
+const BasicRouteHeaderBackLink = ({
+  className,
+  children = "Back",
+  ...props
+}: BasicRouteHeaderBackLinkProps) => {
   return (
     <a
-      ref={ref}
       className={cn(
         "text-text-tertiary hover:text-text-tertiary-hover text-sm transition-colors duration-200",
         className,
@@ -74,8 +70,7 @@ const BasicRouteHeaderBackLink = forwardRef<
       </div>
     </a>
   );
-});
-BasicRouteHeaderBackLink.displayName = "BasicRouteHeaderBackLink";
+};
 
 const CreatedRouteHeaderBackLink = createLink(BasicRouteHeaderBackLink);
 
