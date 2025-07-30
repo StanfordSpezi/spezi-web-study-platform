@@ -28,6 +28,10 @@ SPDX-License-Identifier: MIT
   background-size: var(--dot-spacing) var(--dot-spacing);
 }
 
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+}
+
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
