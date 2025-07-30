@@ -8,13 +8,16 @@
 
 import {
   EmptyState,
+  Input,
   Skeleton,
   times,
   upperFirst,
 } from "@stanfordspezi/spezi-web-design-system";
+import { useQuery } from "@tanstack/react-query";
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { matchSorter } from "match-sorter";
-import { memo, useState, useMemo, useEffect, useRef } from "react";
+import { memo, useMemo, useRef } from "react";
+import { useDebounceValue } from "usehooks-ts";
 import { Virtualizer } from "virtua";
 import type { iconsData } from "@/utils/iconsData";
 import { ScrollArea } from "./ScrollArea";
@@ -45,39 +48,6 @@ const IconGridSkeleton = () => {
       </div>
     </div>
   );
-};
-
-const useIconsData = () => {
-  const [icons, setIcons] = useState<IconData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadIcons = async () => {
-      try {
-        setIsLoading(true);
-        const { iconsData } = await import("../../utils/iconsData");
-        if (!cancelled) {
-          setIcons(iconsData);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        if (!cancelled) {
-          console.error("Failed to load icons data:", error);
-          setIsLoading(false);
-        }
-      }
-    };
-
-    void loadIcons();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  return { icons, isLoading };
 };
 
 interface IconRowProps {
@@ -111,30 +81,39 @@ const IconRow = memo(({ icons, onValueChange }: IconRowProps) => {
 IconRow.displayName = "IconRow";
 
 interface IconGridProps {
-  search?: string;
+  searchTerm?: string;
   iconsList?: IconData[];
   onValueChange?: (value: IconName) => void;
 }
 
 export const IconGrid = ({
-  search = "",
+  searchTerm = "",
   iconsList,
   onValueChange,
 }: IconGridProps) => {
-  const { icons, isLoading: isIconsLoading } = useIconsData();
+  const { data: icons, isLoading } = useQuery({
+    queryKey: ["icons-data"],
+    queryFn: async () => {
+      const { iconsData } = await import("../../utils/iconsData");
+      return iconsData;
+    },
+    staleTime: "static",
+    enabled: !iconsList,
+  });
   const iconsToUse = iconsList ?? icons;
 
   const filteredIcons = useMemo(() => {
-    if (search.trim() === "") return iconsToUse;
-    return matchSorter(iconsToUse, search, {
+    if (!iconsToUse) return [];
+    if (searchTerm.trim() === "") return iconsToUse;
+    return matchSorter(iconsToUse, searchTerm, {
       keys: ["name", "tags", "categories"],
       threshold: matchSorter.rankings.CONTAINS,
     });
-  }, [search, iconsToUse]);
+  }, [searchTerm, iconsToUse]);
 
   const scrollViewRef = useRef<HTMLDivElement>(null);
 
-  if (isIconsLoading) {
+  if (isLoading) {
     return <IconGridSkeleton />;
   }
 
@@ -172,5 +151,37 @@ export const IconGrid = ({
         }}
       </Virtualizer>
     </ScrollArea>
+  );
+};
+
+interface IconSearchGridProps {
+  searchPlaceholder: string;
+  iconsList?: IconData[];
+  onValueChange?: (value: IconName) => void;
+}
+
+export const IconSearchGrid = ({
+  searchPlaceholder,
+  iconsList,
+  onValueChange,
+}: IconSearchGridProps) => {
+  const [searchTerm, setSearchTerm] = useDebounceValue("", 200);
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="pr-2">
+        <Input
+          type="search"
+          aria-label="Search icons"
+          placeholder={searchPlaceholder}
+          onChange={(event) => setSearchTerm(event.target.value)}
+          className="[&::-webkit-search-cancel-button]:appearance-none"
+        />
+      </div>
+      <IconGrid
+        searchTerm={searchTerm}
+        iconsList={iconsList}
+        onValueChange={onValueChange}
+      />
+    </div>
   );
 };

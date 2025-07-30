@@ -8,11 +8,9 @@
 
 import {
   Button,
-  Input,
   PopoverContent,
   PopoverRoot,
   PopoverTrigger,
-  TooltipProvider,
   upperFirst,
 } from "@stanfordspezi/spezi-web-design-system";
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
@@ -22,9 +20,8 @@ import {
   type ComponentPropsWithoutRef,
   type ComponentProps,
 } from "react";
-import { useDebounceValue } from "usehooks-ts";
 import type { iconsData } from "@/utils/iconsData";
-import { IconGrid } from "./IconGrid";
+import { IconSearchGrid } from "./IconGrid";
 
 export type IconData = (typeof iconsData)[number];
 
@@ -37,7 +34,6 @@ interface IconPickerProps
   value?: IconName;
   defaultValue?: IconName;
   onValueChange?: (value: IconName) => void;
-  searchable?: boolean;
   searchPlaceholder?: string;
   triggerPlaceholder?: string;
   iconsList?: IconData[];
@@ -51,7 +47,6 @@ export const IconPicker = ({
   defaultOpen = false,
   onOpenChange,
   children,
-  searchable = true,
   searchPlaceholder = "Search for an icon...",
   triggerPlaceholder = "Select an icon",
   iconsList,
@@ -62,7 +57,6 @@ export const IconPicker = ({
     defaultValue,
   );
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const [search, setSearch] = useDebounceValue("", 200);
 
   const isControlled = value !== undefined;
   const currentIcon = isControlled ? value : selectedIcon;
@@ -70,13 +64,12 @@ export const IconPicker = ({
 
   const handleOpenChange = useCallback(
     (newOpen: boolean) => {
-      setSearch("");
       if (open === undefined) {
         setIsOpen(newOpen);
       }
       onOpenChange?.(newOpen);
     },
-    [setSearch, open, onOpenChange],
+    [open, onOpenChange],
   );
 
   const handleValueChange = useCallback(
@@ -86,9 +79,8 @@ export const IconPicker = ({
       }
       onValueChange?.(icon);
       setIsOpen(false);
-      setSearch("");
     },
-    [isControlled, onValueChange, setSearch],
+    [isControlled, onValueChange],
   );
 
   return (
@@ -113,26 +105,11 @@ export const IconPicker = ({
         )}
       </PopoverTrigger>
       <PopoverContent className="w-96 rounded-xl bg-clip-padding pr-2 shadow-xl shadow-black/5">
-        <div className="flex flex-col gap-4">
-          {searchable && (
-            <div className="pr-2">
-              <Input
-                type="search"
-                aria-label="Search icons"
-                placeholder={searchPlaceholder}
-                onChange={(event) => setSearch(event.target.value)}
-                className="[&::-webkit-search-cancel-button]:appearance-none"
-              />
-            </div>
-          )}
-          <TooltipProvider>
-            <IconGrid
-              search={search}
-              iconsList={iconsList}
-              onValueChange={handleValueChange}
-            />
-          </TooltipProvider>
-        </div>
+        <IconSearchGrid
+          searchPlaceholder={searchPlaceholder}
+          iconsList={iconsList}
+          onValueChange={handleValueChange}
+        />
       </PopoverContent>
     </PopoverRoot>
   );
