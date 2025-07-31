@@ -86,6 +86,7 @@ export const PhoneMockup = ({ children }: PhoneMockupProps) => {
     <div ref={parentRef} className="flex-center size-full px-6">
       <div
         ref={innerRef}
+        data-testid="phone-mockup"
         className={cn(
           "[--phone-top-bar-content-height:calc(0.08*var(--phone-height))] [--phone-top-bar-padding-top:calc(0.02*var(--phone-height))]",
           "[--phone-top-bar-height:calc(var(--phone-top-bar-content-height)+var(--phone-top-bar-padding-top))]",
