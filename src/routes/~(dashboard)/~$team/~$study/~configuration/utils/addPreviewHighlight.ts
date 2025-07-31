@@ -6,12 +6,14 @@
 // SPDX-License-Identifier: MIT
 //
 
+const highlightExtension = 10; // Percentage to extend highlight beyond target element
+const borderWidth = 1.5; // Border width in pixels
+const borderRadius = 0.03; // Border radius in percent of phone width
+
 interface CreateHighlightElementParams {
   id: string;
   highlightColor: string;
   borderColor: string;
-  borderWidthInPixels: number;
-  borderRadiusInPercent: number;
 }
 
 /**
@@ -25,21 +27,19 @@ const createHighlightElement = ({
   id,
   highlightColor,
   borderColor,
-  borderWidthInPixels,
-  borderRadiusInPercent,
 }: CreateHighlightElementParams) => {
   const highlight = document.createElement("div");
 
   Object.assign(highlight.style, {
     position: "absolute",
-    top: "-10%",
-    left: "-10%",
-    width: "120%",
-    height: "120%",
+    top: `-${highlightExtension}%`,
+    left: `-${highlightExtension}%`,
+    width: `${100 + highlightExtension * 2}%`,
+    height: `${100 + highlightExtension * 2}%`,
     pointerEvents: "none",
     backgroundColor: highlightColor,
-    border: `${borderWidthInPixels}px solid ${borderColor}`,
-    borderRadius: `calc(var(--phone-width) * ${borderRadiusInPercent / 100})`,
+    border: `${borderWidth}px solid ${borderColor}`,
+    borderRadius: `calc(var(--phone-width) * ${borderRadius})`,
   });
 
   highlight.id = id;
@@ -47,16 +47,15 @@ const createHighlightElement = ({
 };
 
 interface HighlightConfig {
-  targetIdPrefix: string;
+  targetIdPrefix?: string;
   highlightColor?: string;
   borderColor?: string;
-  borderWidthInPixels?: number;
-  borderRadiusInPercent?: number;
 }
 
 /**
  * Adds preview highlight functionality to a form field by creating visual highlight overlays
  * when the field gains focus and removing them when it loses focus.
+ *
  * @example
  * ```typescript
  * const field = { id: "username", onBlur: () => console.log("blur") };
@@ -68,15 +67,14 @@ interface HighlightConfig {
  */
 export const addPreviewHighlight = (
   field: { id: string; onBlur: () => void },
-  config: HighlightConfig = { targetIdPrefix: "phone" },
+  config: HighlightConfig = {},
 ) => {
   const {
-    targetIdPrefix,
+    targetIdPrefix = "phone",
     highlightColor = "color-mix(in oklab, var(--color-fill-info) 5%, transparent)",
     borderColor = "var(--color-border-info)",
-    borderWidthInPixels = 1.5,
-    borderRadiusInPercent = 3,
   } = config;
+
   const targetElementId = `${targetIdPrefix}-${field.id}`;
   const highlightElementId = `${targetIdPrefix}-preview-highlight`;
 
@@ -87,7 +85,6 @@ export const addPreviewHighlight = (
       return;
     }
 
-    // Remove any existing highlight
     const existingHighlight = document.getElementById(highlightElementId);
     existingHighlight?.remove();
 
@@ -96,8 +93,6 @@ export const addPreviewHighlight = (
       id: highlightElementId,
       highlightColor,
       borderColor,
-      borderWidthInPixels,
-      borderRadiusInPercent,
     });
 
     targetElement.style.position = "relative";
@@ -112,9 +107,5 @@ export const addPreviewHighlight = (
     }
   };
 
-  return {
-    ...field,
-    onFocus,
-    onBlur,
-  };
+  return { ...field, onFocus, onBlur };
 };
