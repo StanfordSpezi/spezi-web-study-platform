@@ -9,6 +9,7 @@
 import { Input, Field, Textarea } from "@stanfordspezi/spezi-web-design-system";
 import { FieldLabel } from "@/components/ui/FieldLabel";
 import type { BasicInfoForm as BasicInfoFormType } from "../lib/useBasicInfoForm";
+import { addPreviewHighlight } from "../utils/addPreviewHighlight";
 
 interface BasicInfoFormProps {
   form: BasicInfoFormType;
@@ -27,7 +28,12 @@ export const BasicInfoForm = ({ form, onSave }: BasicInfoFormProps) => {
             description="Be descriptive but keep it under 100 characters."
           />
         }
-        render={({ field }) => <Input {...field} />}
+        render={({ field }) => (
+          <Input
+            className="focus:ring-border-info"
+            {...addPreviewHighlight(field)}
+          />
+        )}
         className="border-border-tertiary border-b px-6"
       />
       <Field
@@ -51,7 +57,12 @@ export const BasicInfoForm = ({ form, onSave }: BasicInfoFormProps) => {
             description="This helps participants decide if they want to join."
           />
         }
-        render={({ field }) => <Textarea {...field} />}
+        render={({ field }) => (
+          <Textarea
+            className="focus:ring-border-info"
+            {...addPreviewHighlight(field)}
+          />
+        )}
         className="border-border-tertiary border-b px-6 pt-6"
       />
       <Field
