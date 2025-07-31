@@ -13,7 +13,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { dedent } from "./src/utils/dedent";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   root: ".",
   base: "/spezi-web-study-platform/", // This is necessary for GitHub Pages
   plugins: [
@@ -39,9 +39,12 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  esbuild: {
+    drop: mode === "production" ? ["console"] : [],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+}));
