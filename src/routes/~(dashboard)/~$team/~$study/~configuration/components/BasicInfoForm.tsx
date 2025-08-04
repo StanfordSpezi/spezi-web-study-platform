@@ -9,14 +9,20 @@
 import { Input, Field, Textarea } from "@stanfordspezi/spezi-web-design-system";
 import { FieldLabel } from "@/components/ui/FieldLabel";
 import type { BasicInfoForm as BasicInfoFormType } from "../lib/useBasicInfoForm";
-import { addPreviewHighlight } from "../utils/addPreviewHighlight";
 
 interface BasicInfoFormProps {
   form: BasicInfoFormType;
   onSave: () => void;
+  onFieldFocus?: (fieldName: string) => void;
+  onFieldBlur?: () => void;
 }
 
-export const BasicInfoForm = ({ form, onSave }: BasicInfoFormProps) => {
+export const BasicInfoForm = ({
+  form,
+  onSave,
+  onFieldFocus,
+  onFieldBlur,
+}: BasicInfoFormProps) => {
   return (
     <form onSubmit={onSave} className="py-6">
       <Field
@@ -28,10 +34,15 @@ export const BasicInfoForm = ({ form, onSave }: BasicInfoFormProps) => {
             description="Be descriptive but keep it under 100 characters."
           />
         }
-        render={({ field }) => (
+        render={({ field: { onBlur, ...field } }) => (
           <Input
             className="focus:ring-border-info"
-            {...addPreviewHighlight(field)}
+            onFocus={() => onFieldFocus?.("title")}
+            onBlur={() => {
+              onBlur();
+              onFieldBlur?.();
+            }}
+            {...field}
           />
         )}
         className="border-border-tertiary border-b px-6"
@@ -57,10 +68,15 @@ export const BasicInfoForm = ({ form, onSave }: BasicInfoFormProps) => {
             description="This helps participants decide if they want to join."
           />
         }
-        render={({ field }) => (
+        render={({ field: { onBlur, ...field } }) => (
           <Textarea
             className="focus:ring-border-info"
-            {...addPreviewHighlight(field)}
+            onFocus={() => onFieldFocus?.("explanation")}
+            onBlur={() => {
+              onBlur();
+              onFieldBlur?.();
+            }}
+            {...field}
           />
         )}
         className="border-border-tertiary border-b px-6 pt-6"

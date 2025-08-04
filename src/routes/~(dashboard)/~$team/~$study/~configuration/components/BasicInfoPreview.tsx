@@ -11,9 +11,24 @@ import type { BasicInfoForm } from "../lib/useBasicInfoForm";
 
 interface BasicInfoPreviewProps {
   form: BasicInfoForm;
+  highlightedField?: string;
 }
 
-export const BasicInfoPreview = ({ form }: BasicInfoPreviewProps) => {
+const HighlightOverlay = () => (
+  <div
+    data-testid="phone-preview-highlight"
+    className={cn(
+      "[--offset:10%]",
+      "absolute -top-(--offset) -left-(--offset)",
+      "bg-fill-info/5 border-border-info pointer-events-none size-[calc(100%+var(--offset)*2)] rounded-[calc(var(--phone-width)*0.03)] border-[1.5px]",
+    )}
+  />
+);
+
+export const BasicInfoPreview = ({
+  form,
+  highlightedField,
+}: BasicInfoPreviewProps) => {
   const title = form.watch("title");
   const explanation = form.watch("explanation");
   return (
@@ -21,17 +36,21 @@ export const BasicInfoPreview = ({ form }: BasicInfoPreviewProps) => {
       <div className="bg-bg-secondary flex-center absolute top-0 left-0 h-1/2 w-full flex-col gap-[8%] px-[10%] pt-(--phone-top-bar-height)">
         <div className="bg-surface aspect-square h-2/5 rounded-[10%] shadow-md"></div>
         <div
-          id="phone-title"
+          data-testid="phone-title"
           className={cn(
-            "max-w-full text-center text-[calc(var(--phone-width)*0.07)] leading-tight break-words",
+            "relative max-w-full text-center text-[calc(var(--phone-width)*0.07)] leading-tight break-words",
             !title && "text-text-tertiary",
           )}
         >
+          {highlightedField === "title" && <HighlightOverlay />}
           <span>{title || "Title"}</span>
         </div>
       </div>
       <div className="absolute top-1/2 left-0 h-1/2 w-full p-[10%]">
-        <div id="phone-explanation" className="flex size-full flex-col">
+        <div
+          data-testid="phone-explanation"
+          className="relative flex size-full flex-col"
+        >
           <div className="text-[calc(var(--phone-width)*0.05)] font-medium">
             Explanation
           </div>
@@ -42,6 +61,7 @@ export const BasicInfoPreview = ({ form }: BasicInfoPreviewProps) => {
               !explanation && "text-text-tertiary",
             )}
           >
+            {highlightedField === "explanation" && <HighlightOverlay />}
             <span>{explanation || "Explanation"}</span>
           </div>
         </div>

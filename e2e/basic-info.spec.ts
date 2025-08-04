@@ -9,12 +9,6 @@
 import { mockDatabase } from "@/lib/mockDatabase";
 import { expect, test } from "@/lib/playwrightFixtures";
 
-const locators = {
-  phoneTitle: "#phone-title",
-  phoneExplanation: "#phone-explanation",
-  phonePreviewHighlight: "#phone-preview-highlight",
-};
-
 const [team] = mockDatabase.teams;
 const [study] = mockDatabase.studies.filter(
   (study) => study.teamId === team.id,
@@ -61,11 +55,11 @@ test.describe("Study Configuration Basic Information Tests", () => {
     });
 
     test("displays current study data in phone preview", async ({ page }) => {
-      const phoneTitle = page.locator(locators.phoneTitle);
+      const phoneTitle = page.getByTestId("phone-title");
       await expect(phoneTitle).toContainText(study.title);
 
       if (study.explanation) {
-        const phoneExplanation = page.locator(locators.phoneExplanation);
+        const phoneExplanation = page.getByTestId("phone-explanation");
         await expect(phoneExplanation).toContainText(study.explanation);
       }
     });
@@ -86,10 +80,10 @@ test.describe("Study Configuration Basic Information Tests", () => {
       await explanationTextarea.clear();
       await explanationTextarea.fill(newExplanation);
 
-      const phoneTitle = page.locator(locators.phoneTitle);
+      const phoneTitle = page.getByTestId("phone-title");
       await expect(phoneTitle).toContainText(newTitle);
 
-      const phoneExplanation = page.locator(locators.phoneExplanation);
+      const phoneExplanation = page.getByTestId("phone-explanation");
       await expect(phoneExplanation).toContainText(newExplanation);
     });
 
@@ -106,10 +100,10 @@ test.describe("Study Configuration Basic Information Tests", () => {
       });
       await explanationTextarea.clear();
 
-      const phoneTitle = page.locator(locators.phoneTitle);
+      const phoneTitle = page.getByTestId("phone-title");
       await expect(phoneTitle).toContainText("Title");
 
-      const phoneExplanation = page.locator(locators.phoneExplanation);
+      const phoneExplanation = page.getByTestId("phone-explanation");
       await expect(phoneExplanation).toContainText("Explanation");
     });
   });
@@ -123,7 +117,7 @@ test.describe("Study Configuration Basic Information Tests", () => {
       });
       await titleInput.focus();
 
-      const highlightElement = page.locator(locators.phonePreviewHighlight);
+      const highlightElement = page.getByTestId("phone-preview-highlight");
       await expect(highlightElement).toBeVisible();
 
       await titleInput.blur();
@@ -140,7 +134,7 @@ test.describe("Study Configuration Basic Information Tests", () => {
       const explanationTextarea = page.getByRole("textbox", {
         name: /^explanation/i,
       });
-      const highlightElement = page.locator(locators.phonePreviewHighlight);
+      const highlightElement = page.getByTestId("phone-preview-highlight");
 
       await titleInput.focus();
       await expect(highlightElement).toBeVisible();
@@ -161,7 +155,7 @@ test.describe("Study Configuration Basic Information Tests", () => {
       });
       await shortTitleInput.focus();
 
-      const highlightElement = page.locator(locators.phonePreviewHighlight);
+      const highlightElement = page.getByTestId("phone-preview-highlight");
       await expect(highlightElement).not.toBeVisible();
     });
   });
