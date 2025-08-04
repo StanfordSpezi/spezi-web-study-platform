@@ -11,7 +11,10 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 const PhoneTopBar = () => {
   return (
-    <div className="absolute top-(--phone-top-bar-padding-top) left-0 flex h-(--phone-top-bar-content-height) w-full items-center justify-between">
+    <div
+      aria-hidden
+      className="absolute top-(--phone-top-bar-padding-top) left-0 flex h-(--phone-top-bar-content-height) w-full items-center justify-between"
+    >
       <div className="flex h-full flex-1 items-center justify-start pl-[8%]">
         <div className="bg-fill-secondary h-1/3 w-1/2 rounded-full" />
       </div>

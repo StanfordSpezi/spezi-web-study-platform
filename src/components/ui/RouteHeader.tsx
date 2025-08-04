@@ -9,11 +9,11 @@
 import { cn } from "@stanfordspezi/spezi-web-design-system";
 import { createLink, type LinkComponentProps } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { type ComponentProps, type ReactNode, type RefAttributes } from "react";
+import { type ComponentProps, type ReactNode } from "react";
 import { useIsScrolled } from "@/utils/useIsScrolled";
 import { DashedSeparator } from "./DashedSeparator";
 
-interface RouteHeaderProps extends RefAttributes<HTMLDivElement> {
+interface RouteHeaderProps extends Pick<ComponentProps<"div">, "ref"> {
   title: ReactNode;
   description: ReactNode;
   accessoryLeft?: ReactNode;
