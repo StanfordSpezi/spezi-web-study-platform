@@ -20,7 +20,7 @@ export const StatusBadge = ({ isPublished }: StatusBadgeProps) => {
           <div
             className={cn(
               "size-full rounded-full",
-              isPublished ? "bg-fill-success" : "bg-fill-secondary",
+              isPublished ? "bg-fill-success" : "bg-fill-tertiary",
               isPublished && "shadow-fill-success/5",
             )}
             style={{ boxShadow: "0 0 6px 6px var(--tw-shadow-color)" }}

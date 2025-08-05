@@ -80,6 +80,10 @@ These styles apply to smaller elements that require a solid fill color, such as 
 
 - `fill-secondary`: Used for elements that require a solid neutral fill color that does not express a specific intent and is darker than the primary fill color.
 
+##### Tertiary
+
+- `fill-tertiary`: Used for elements that require a solid neutral fill color that does not express a specific intent and is darker than the secondary fill color.
+
 #### Brand
 
 ##### Primary
@@ -118,6 +122,7 @@ These styles apply to smaller elements that require a solid fill color, such as 
 <Table>
   <TableRow className="bg-fill" />
   <TableRow className="bg-fill-secondary" />
+  <TableFooter className="bg-fill-tertiary" />
 </Table>
 ```
 
@@ -172,6 +177,12 @@ These styles apply to the border or ring color of elements, typically used for o
 
 - `border-tertiary`: Used for elements that require an unopinionated border color that is even less prominent than the secondary border.
 
+#### Info
+
+##### Primary
+
+- `border-info`: Used for elements that require a border color that indicates informational content or commands a little bit of attention, such as an informational card or alert.
+
 #### Examples
 
 ```tsx
@@ -181,6 +192,10 @@ These styles apply to the border or ring color of elements, typically used for o
   </CardHeader>
   <Table className="divide-border-tertiary divide-y" />
 </Card>
+```
+
+```tsx
+<Alert className="border-border-info border" />
 ```
 
 ### Text
