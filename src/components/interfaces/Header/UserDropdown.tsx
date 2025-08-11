@@ -21,7 +21,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { Layers2, LogOut, User } from "lucide-react";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
-import { cn } from "@/utils/cn";
 import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
@@ -46,7 +45,7 @@ export const UserDropdown = () => {
         <Button
           variant="ghost"
           size={null}
-          className="rounded-md p-1"
+          className="size-8 rounded-md"
           aria-label="User menu"
         >
           <UserAvatar user={user} />
