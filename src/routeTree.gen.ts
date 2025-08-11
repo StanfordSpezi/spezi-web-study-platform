@@ -20,263 +20,288 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/~__root'
-import { Route as dashboardLayoutImport } from './routes/~(dashboard)/~layout'
-import { Route as authSignInImport } from './routes/~(auth)/~sign-in'
-import { Route as dashboardIndexImport } from './routes/~(dashboard)/~index'
-import { Route as dashboardTeamStudyLayoutImport } from './routes/~(dashboard)/~$team/~$study/~layout'
-import { Route as dashboardTeamIndexImport } from './routes/~(dashboard)/~$team/~index'
-import { Route as dashboardTeamStudyResultsImport } from './routes/~(dashboard)/~$team/~$study/~results'
-import { Route as dashboardTeamStudyParticipantsImport } from './routes/~(dashboard)/~$team/~$study/~participants'
-import { Route as dashboardTeamStudyConfigurationImport } from './routes/~(dashboard)/~$team/~$study/~configuration'
-import { Route as dashboardTeamStudyIndexImport } from './routes/~(dashboard)/~$team/~$study/~index'
+import { Route as rootRoute } from "./routes/~__root";
+import { Route as dashboardLayoutImport } from "./routes/~(dashboard)/~layout";
+import { Route as authSignInImport } from "./routes/~(auth)/~sign-in";
+import { Route as dashboardIndexImport } from "./routes/~(dashboard)/~index";
+import { Route as dashboardTeamStudyLayoutImport } from "./routes/~(dashboard)/~$team/~$study/~layout";
+import { Route as dashboardTeamIndexImport } from "./routes/~(dashboard)/~$team/~index";
+import { Route as dashboardTeamStudyResultsImport } from "./routes/~(dashboard)/~$team/~$study/~results";
+import { Route as dashboardTeamStudyParticipantsImport } from "./routes/~(dashboard)/~$team/~$study/~participants";
+import { Route as dashboardTeamStudyIndexImport } from "./routes/~(dashboard)/~$team/~$study/~index";
+import { Route as dashboardTeamStudyConfigurationBasicInformationImport } from "./routes/~(dashboard)/~$team/~$study/~configuration/~basic-information";
+import { Route as dashboardTeamStudyConfigurationIndexImport } from "./routes/~(dashboard)/~$team/~$study/~configuration/~index";
 
 // Create/Update Routes
 
 const dashboardLayoutRoute = dashboardLayoutImport.update({
-  id: '/(dashboard)',
+  id: "/(dashboard)",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const authSignInRoute = authSignInImport.update({
-  id: '/(auth)/sign-in',
-  path: '/sign-in',
+  id: "/(auth)/sign-in",
+  path: "/sign-in",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const dashboardIndexRoute = dashboardIndexImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => dashboardLayoutRoute,
-} as any)
+} as any);
 
 const dashboardTeamStudyLayoutRoute = dashboardTeamStudyLayoutImport.update({
-  id: '/$team/$study',
-  path: '/$team/$study',
+  id: "/$team/$study",
+  path: "/$team/$study",
   getParentRoute: () => dashboardLayoutRoute,
-} as any)
+} as any);
 
 const dashboardTeamIndexRoute = dashboardTeamIndexImport.update({
-  id: '/$team/',
-  path: '/$team/',
+  id: "/$team/",
+  path: "/$team/",
   getParentRoute: () => dashboardLayoutRoute,
-} as any)
+} as any);
 
 const dashboardTeamStudyResultsRoute = dashboardTeamStudyResultsImport.update({
-  id: '/results',
-  path: '/results',
+  id: "/results",
+  path: "/results",
   getParentRoute: () => dashboardTeamStudyLayoutRoute,
-} as any)
+} as any);
 
 const dashboardTeamStudyParticipantsRoute =
   dashboardTeamStudyParticipantsImport.update({
-    id: '/participants',
-    path: '/participants',
+    id: "/participants",
+    path: "/participants",
     getParentRoute: () => dashboardTeamStudyLayoutRoute,
-  } as any)
-
-const dashboardTeamStudyConfigurationRoute =
-  dashboardTeamStudyConfigurationImport.update({
-    id: '/configuration',
-    path: '/configuration',
-    getParentRoute: () => dashboardTeamStudyLayoutRoute,
-  } as any)
+  } as any);
 
 const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => dashboardTeamStudyLayoutRoute,
-} as any)
+} as any);
+
+const dashboardTeamStudyConfigurationBasicInformationRoute =
+  dashboardTeamStudyConfigurationBasicInformationImport.update({
+    id: "/configuration/basic-information",
+    path: "/configuration/basic-information",
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any);
+
+const dashboardTeamStudyConfigurationIndexRoute =
+  dashboardTeamStudyConfigurationIndexImport.update({
+    id: "/configuration/",
+    path: "/configuration/",
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/(dashboard)': {
-      id: '/(dashboard)'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof dashboardLayoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/(dashboard)/': {
-      id: '/(dashboard)/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof dashboardIndexImport
-      parentRoute: typeof dashboardLayoutImport
-    }
-    '/(auth)/sign-in': {
-      id: '/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/(dashboard)/$team/': {
-      id: '/(dashboard)/$team/'
-      path: '/$team'
-      fullPath: '/$team'
-      preLoaderRoute: typeof dashboardTeamIndexImport
-      parentRoute: typeof dashboardLayoutImport
-    }
-    '/(dashboard)/$team/$study': {
-      id: '/(dashboard)/$team/$study'
-      path: '/$team/$study'
-      fullPath: '/$team/$study'
-      preLoaderRoute: typeof dashboardTeamStudyLayoutImport
-      parentRoute: typeof dashboardLayoutImport
-    }
-    '/(dashboard)/$team/$study/': {
-      id: '/(dashboard)/$team/$study/'
-      path: '/'
-      fullPath: '/$team/$study/'
-      preLoaderRoute: typeof dashboardTeamStudyIndexImport
-      parentRoute: typeof dashboardTeamStudyLayoutImport
-    }
-    '/(dashboard)/$team/$study/configuration': {
-      id: '/(dashboard)/$team/$study/configuration'
-      path: '/configuration'
-      fullPath: '/$team/$study/configuration'
-      preLoaderRoute: typeof dashboardTeamStudyConfigurationImport
-      parentRoute: typeof dashboardTeamStudyLayoutImport
-    }
-    '/(dashboard)/$team/$study/participants': {
-      id: '/(dashboard)/$team/$study/participants'
-      path: '/participants'
-      fullPath: '/$team/$study/participants'
-      preLoaderRoute: typeof dashboardTeamStudyParticipantsImport
-      parentRoute: typeof dashboardTeamStudyLayoutImport
-    }
-    '/(dashboard)/$team/$study/results': {
-      id: '/(dashboard)/$team/$study/results'
-      path: '/results'
-      fullPath: '/$team/$study/results'
-      preLoaderRoute: typeof dashboardTeamStudyResultsImport
-      parentRoute: typeof dashboardTeamStudyLayoutImport
-    }
+    "/(dashboard)": {
+      id: "/(dashboard)";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof dashboardLayoutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/(dashboard)/": {
+      id: "/(dashboard)/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof dashboardIndexImport;
+      parentRoute: typeof dashboardLayoutImport;
+    };
+    "/(auth)/sign-in": {
+      id: "/(auth)/sign-in";
+      path: "/sign-in";
+      fullPath: "/sign-in";
+      preLoaderRoute: typeof authSignInImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/(dashboard)/$team/": {
+      id: "/(dashboard)/$team/";
+      path: "/$team";
+      fullPath: "/$team";
+      preLoaderRoute: typeof dashboardTeamIndexImport;
+      parentRoute: typeof dashboardLayoutImport;
+    };
+    "/(dashboard)/$team/$study": {
+      id: "/(dashboard)/$team/$study";
+      path: "/$team/$study";
+      fullPath: "/$team/$study";
+      preLoaderRoute: typeof dashboardTeamStudyLayoutImport;
+      parentRoute: typeof dashboardLayoutImport;
+    };
+    "/(dashboard)/$team/$study/": {
+      id: "/(dashboard)/$team/$study/";
+      path: "/";
+      fullPath: "/$team/$study/";
+      preLoaderRoute: typeof dashboardTeamStudyIndexImport;
+      parentRoute: typeof dashboardTeamStudyLayoutImport;
+    };
+    "/(dashboard)/$team/$study/participants": {
+      id: "/(dashboard)/$team/$study/participants";
+      path: "/participants";
+      fullPath: "/$team/$study/participants";
+      preLoaderRoute: typeof dashboardTeamStudyParticipantsImport;
+      parentRoute: typeof dashboardTeamStudyLayoutImport;
+    };
+    "/(dashboard)/$team/$study/results": {
+      id: "/(dashboard)/$team/$study/results";
+      path: "/results";
+      fullPath: "/$team/$study/results";
+      preLoaderRoute: typeof dashboardTeamStudyResultsImport;
+      parentRoute: typeof dashboardTeamStudyLayoutImport;
+    };
+    "/(dashboard)/$team/$study/configuration/": {
+      id: "/(dashboard)/$team/$study/configuration/";
+      path: "/configuration";
+      fullPath: "/$team/$study/configuration";
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationIndexImport;
+      parentRoute: typeof dashboardTeamStudyLayoutImport;
+    };
+    "/(dashboard)/$team/$study/configuration/basic-information": {
+      id: "/(dashboard)/$team/$study/configuration/basic-information";
+      path: "/configuration/basic-information";
+      fullPath: "/$team/$study/configuration/basic-information";
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationBasicInformationImport;
+      parentRoute: typeof dashboardTeamStudyLayoutImport;
+    };
   }
 }
 
 // Create and export the route tree
 
 interface dashboardTeamStudyLayoutRouteChildren {
-  dashboardTeamStudyIndexRoute: typeof dashboardTeamStudyIndexRoute
-  dashboardTeamStudyConfigurationRoute: typeof dashboardTeamStudyConfigurationRoute
-  dashboardTeamStudyParticipantsRoute: typeof dashboardTeamStudyParticipantsRoute
-  dashboardTeamStudyResultsRoute: typeof dashboardTeamStudyResultsRoute
+  dashboardTeamStudyIndexRoute: typeof dashboardTeamStudyIndexRoute;
+  dashboardTeamStudyParticipantsRoute: typeof dashboardTeamStudyParticipantsRoute;
+  dashboardTeamStudyResultsRoute: typeof dashboardTeamStudyResultsRoute;
+  dashboardTeamStudyConfigurationIndexRoute: typeof dashboardTeamStudyConfigurationIndexRoute;
+  dashboardTeamStudyConfigurationBasicInformationRoute: typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildren =
   {
     dashboardTeamStudyIndexRoute: dashboardTeamStudyIndexRoute,
-    dashboardTeamStudyConfigurationRoute: dashboardTeamStudyConfigurationRoute,
     dashboardTeamStudyParticipantsRoute: dashboardTeamStudyParticipantsRoute,
     dashboardTeamStudyResultsRoute: dashboardTeamStudyResultsRoute,
-  }
+    dashboardTeamStudyConfigurationIndexRoute:
+      dashboardTeamStudyConfigurationIndexRoute,
+    dashboardTeamStudyConfigurationBasicInformationRoute:
+      dashboardTeamStudyConfigurationBasicInformationRoute,
+  };
 
 const dashboardTeamStudyLayoutRouteWithChildren =
   dashboardTeamStudyLayoutRoute._addFileChildren(
     dashboardTeamStudyLayoutRouteChildren,
-  )
+  );
 
 interface dashboardLayoutRouteChildren {
-  dashboardIndexRoute: typeof dashboardIndexRoute
-  dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
-  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
+  dashboardIndexRoute: typeof dashboardIndexRoute;
+  dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute;
+  dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren;
 }
 
 const dashboardLayoutRouteChildren: dashboardLayoutRouteChildren = {
   dashboardIndexRoute: dashboardIndexRoute,
   dashboardTeamIndexRoute: dashboardTeamIndexRoute,
   dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
-}
+};
 
 const dashboardLayoutRouteWithChildren = dashboardLayoutRoute._addFileChildren(
   dashboardLayoutRouteChildren,
-)
+);
 
 export interface FileRoutesByFullPath {
-  '/': typeof dashboardIndexRoute
-  '/sign-in': typeof authSignInRoute
-  '/$team': typeof dashboardTeamIndexRoute
-  '/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
-  '/$team/$study/': typeof dashboardTeamStudyIndexRoute
-  '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationRoute
-  '/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
-  '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
+  "/": typeof dashboardIndexRoute;
+  "/sign-in": typeof authSignInRoute;
+  "/$team": typeof dashboardTeamIndexRoute;
+  "/$team/$study": typeof dashboardTeamStudyLayoutRouteWithChildren;
+  "/$team/$study/": typeof dashboardTeamStudyIndexRoute;
+  "/$team/$study/participants": typeof dashboardTeamStudyParticipantsRoute;
+  "/$team/$study/results": typeof dashboardTeamStudyResultsRoute;
+  "/$team/$study/configuration": typeof dashboardTeamStudyConfigurationIndexRoute;
+  "/$team/$study/configuration/basic-information": typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof dashboardIndexRoute
-  '/sign-in': typeof authSignInRoute
-  '/$team': typeof dashboardTeamIndexRoute
-  '/$team/$study': typeof dashboardTeamStudyIndexRoute
-  '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationRoute
-  '/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
-  '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
+  "/": typeof dashboardIndexRoute;
+  "/sign-in": typeof authSignInRoute;
+  "/$team": typeof dashboardTeamIndexRoute;
+  "/$team/$study": typeof dashboardTeamStudyIndexRoute;
+  "/$team/$study/participants": typeof dashboardTeamStudyParticipantsRoute;
+  "/$team/$study/results": typeof dashboardTeamStudyResultsRoute;
+  "/$team/$study/configuration": typeof dashboardTeamStudyConfigurationIndexRoute;
+  "/$team/$study/configuration/basic-information": typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/(dashboard)': typeof dashboardLayoutRouteWithChildren
-  '/(dashboard)/': typeof dashboardIndexRoute
-  '/(auth)/sign-in': typeof authSignInRoute
-  '/(dashboard)/$team/': typeof dashboardTeamIndexRoute
-  '/(dashboard)/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
-  '/(dashboard)/$team/$study/': typeof dashboardTeamStudyIndexRoute
-  '/(dashboard)/$team/$study/configuration': typeof dashboardTeamStudyConfigurationRoute
-  '/(dashboard)/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
-  '/(dashboard)/$team/$study/results': typeof dashboardTeamStudyResultsRoute
+  __root__: typeof rootRoute;
+  "/(dashboard)": typeof dashboardLayoutRouteWithChildren;
+  "/(dashboard)/": typeof dashboardIndexRoute;
+  "/(auth)/sign-in": typeof authSignInRoute;
+  "/(dashboard)/$team/": typeof dashboardTeamIndexRoute;
+  "/(dashboard)/$team/$study": typeof dashboardTeamStudyLayoutRouteWithChildren;
+  "/(dashboard)/$team/$study/": typeof dashboardTeamStudyIndexRoute;
+  "/(dashboard)/$team/$study/participants": typeof dashboardTeamStudyParticipantsRoute;
+  "/(dashboard)/$team/$study/results": typeof dashboardTeamStudyResultsRoute;
+  "/(dashboard)/$team/$study/configuration/": typeof dashboardTeamStudyConfigurationIndexRoute;
+  "/(dashboard)/$team/$study/configuration/basic-information": typeof dashboardTeamStudyConfigurationBasicInformationRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/sign-in'
-    | '/$team'
-    | '/$team/$study'
-    | '/$team/$study/'
-    | '/$team/$study/configuration'
-    | '/$team/$study/participants'
-    | '/$team/$study/results'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/sign-in"
+    | "/$team"
+    | "/$team/$study"
+    | "/$team/$study/"
+    | "/$team/$study/participants"
+    | "/$team/$study/results"
+    | "/$team/$study/configuration"
+    | "/$team/$study/configuration/basic-information";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/sign-in'
-    | '/$team'
-    | '/$team/$study'
-    | '/$team/$study/configuration'
-    | '/$team/$study/participants'
-    | '/$team/$study/results'
+    | "/"
+    | "/sign-in"
+    | "/$team"
+    | "/$team/$study"
+    | "/$team/$study/participants"
+    | "/$team/$study/results"
+    | "/$team/$study/configuration"
+    | "/$team/$study/configuration/basic-information";
   id:
-    | '__root__'
-    | '/(dashboard)'
-    | '/(dashboard)/'
-    | '/(auth)/sign-in'
-    | '/(dashboard)/$team/'
-    | '/(dashboard)/$team/$study'
-    | '/(dashboard)/$team/$study/'
-    | '/(dashboard)/$team/$study/configuration'
-    | '/(dashboard)/$team/$study/participants'
-    | '/(dashboard)/$team/$study/results'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/(dashboard)"
+    | "/(dashboard)/"
+    | "/(auth)/sign-in"
+    | "/(dashboard)/$team/"
+    | "/(dashboard)/$team/$study"
+    | "/(dashboard)/$team/$study/"
+    | "/(dashboard)/$team/$study/participants"
+    | "/(dashboard)/$team/$study/results"
+    | "/(dashboard)/$team/$study/configuration/"
+    | "/(dashboard)/$team/$study/configuration/basic-information";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  dashboardLayoutRoute: typeof dashboardLayoutRouteWithChildren
-  authSignInRoute: typeof authSignInRoute
+  dashboardLayoutRoute: typeof dashboardLayoutRouteWithChildren;
+  authSignInRoute: typeof authSignInRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   dashboardLayoutRoute: dashboardLayoutRouteWithChildren,
   authSignInRoute: authSignInRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -312,17 +337,14 @@ export const routeTree = rootRoute
       "parent": "/(dashboard)",
       "children": [
         "/(dashboard)/$team/$study/",
-        "/(dashboard)/$team/$study/configuration",
         "/(dashboard)/$team/$study/participants",
-        "/(dashboard)/$team/$study/results"
+        "/(dashboard)/$team/$study/results",
+        "/(dashboard)/$team/$study/configuration/",
+        "/(dashboard)/$team/$study/configuration/basic-information"
       ]
     },
     "/(dashboard)/$team/$study/": {
       "filePath": "~(dashboard)/~$team/~$study/~index.tsx",
-      "parent": "/(dashboard)/$team/$study"
-    },
-    "/(dashboard)/$team/$study/configuration": {
-      "filePath": "~(dashboard)/~$team/~$study/~configuration.tsx",
       "parent": "/(dashboard)/$team/$study"
     },
     "/(dashboard)/$team/$study/participants": {
@@ -331,6 +353,14 @@ export const routeTree = rootRoute
     },
     "/(dashboard)/$team/$study/results": {
       "filePath": "~(dashboard)/~$team/~$study/~results.tsx",
+      "parent": "/(dashboard)/$team/$study"
+    },
+    "/(dashboard)/$team/$study/configuration/": {
+      "filePath": "~(dashboard)/~$team/~$study/~configuration/~index.tsx",
+      "parent": "/(dashboard)/$team/$study"
+    },
+    "/(dashboard)/$team/$study/configuration/basic-information": {
+      "filePath": "~(dashboard)/~$team/~$study/~configuration/~basic-information.tsx",
       "parent": "/(dashboard)/$team/$study"
     }
   }

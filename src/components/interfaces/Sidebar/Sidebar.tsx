@@ -541,7 +541,14 @@ const SidebarMenuButton = ({
       data-sidebar="menu-button"
       data-size={size}
       data-active={isActive}
-      className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+      className={cn(
+        sidebarMenuButtonVariants({ variant, size }),
+        // When collapsed, show active state if any descendant sub-item is active
+        "group-data-[collapsible=icon]:group-has-[[data-sidebar=menu-sub-button][data-active=true]]/menu-item:bg-fill",
+        "group-data-[collapsible=icon]:group-has-[[data-sidebar=menu-sub-button][data-active=true]]/menu-item:border",
+        "group-data-[collapsible=icon]:group-has-[[data-sidebar=menu-sub-button][data-active=true]]/menu-item:shadow-xs",
+        className,
+      )}
       {...props}
     />
   );
@@ -656,7 +663,7 @@ const SidebarMenuSub = ({ className, ...props }: ComponentProps<"ul">) => {
       data-slot="sidebar-menu-sub"
       data-sidebar="menu-sub"
       className={cn(
-        "border-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
+        "border-border-secondary mt-1.5 ml-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l pl-2.5",
         "group-data-[collapsible=icon]:hidden",
         className,
       )}
@@ -678,16 +685,16 @@ const SidebarMenuSubItem = ({ className, ...props }: ComponentProps<"li">) => {
 
 const SidebarMenuSubButton = ({
   asChild = false,
-  size = "md",
   isActive = false,
+  variant = "default",
+  size = "default",
   className,
   ...props
-}: ComponentProps<"a"> & {
+}: ComponentProps<"button"> & {
   asChild?: boolean;
-  size?: "sm" | "md";
   isActive?: boolean;
-}) => {
-  const Comp = asChild ? Slot : "a";
+} & VariantProps<typeof sidebarMenuButtonVariants>) => {
+  const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
@@ -696,10 +703,8 @@ const SidebarMenuSubButton = ({
       data-size={size}
       data-active={isActive}
       className={cn(
-        "ring-border-secondary hover:bg-bg-hover active:bg-fill [&>svg]:text-icon-secondary flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
-        "data-[active=true]:bg-fill data-[active=true]:text-text-secondary",
-        size === "sm" && "text-xs",
-        size === "md" && "text-sm",
+        sidebarMenuButtonVariants({ variant, size }),
+        "text-text-tertiary",
         "group-data-[collapsible=icon]:hidden",
         className,
       )}

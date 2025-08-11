@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { mockDatabase } from "@/lib/mockApi";
+import { mockDatabase } from "@/lib/mockDatabase";
 import { expect, test } from "@/lib/playwrightFixtures";
 
 test.describe("Router Tests", () => {
@@ -52,29 +52,29 @@ test.describe("Router Tests", () => {
     await expect(page.getByText("Study Home Route")).toBeVisible();
 
     await page.getByRole("link", { name: "Configuration" }).click();
-    await expect(page.getByText("Study Configuration Route")).toBeVisible();
+    await expect(page.getByText("Study Configuration")).toBeVisible();
   });
 
-  test("displays error page when navigating to non-existent team", async ({
+  test("displays error when navigating to non-existent team", async ({
     page,
   }) => {
     const invalidTeamId = "invalid-team";
 
     await page.goto(`/${invalidTeamId}`);
-    await expect(page.getByText("Error")).toBeVisible();
+    await expect(page.getByText("error")).toBeVisible();
     await expect(
       page.getByText(`Team with id ${invalidTeamId} not found`),
     ).toBeVisible();
   });
 
-  test("displays error page when navigating to non-existent study", async ({
+  test("displays error when navigating to non-existent study", async ({
     page,
   }) => {
     const [team] = mockDatabase.teams;
     const invalidStudyId = "invalid-study";
 
     await page.goto(`/${team.id}/${invalidStudyId}`);
-    await expect(page.getByText("Error")).toBeVisible();
+    await expect(page.getByText("error")).toBeVisible();
     await expect(
       page.getByText(`Study with id ${invalidStudyId} not found`),
     ).toBeVisible();

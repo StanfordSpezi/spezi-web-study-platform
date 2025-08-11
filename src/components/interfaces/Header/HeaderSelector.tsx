@@ -86,7 +86,7 @@ export const HeaderSelector = ({
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate">{selectedItem.title}</span>
           </div>
-          <ChevronsUpDown className="text-icon-tertiary ml-auto" />
+          <ChevronsUpDown className="text-text-tertiary ml-auto" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

@@ -7,7 +7,6 @@
 //
 
 import {
-  Avatar,
   Button,
   DropdownMenu,
   DropdownMenuContent,
@@ -23,12 +22,13 @@ import { Layers2, LogOut, User } from "lucide-react";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
 import { cn } from "@/utils/cn";
+import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 export const UserDropdown = () => {
-  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
 
   const handleSignOut = async () => {
     mockApi.auth.signOut();
@@ -49,15 +49,7 @@ export const UserDropdown = () => {
           className="rounded-md p-1"
           aria-label="User menu"
         >
-          <Avatar
-            className="bg-surface border-border-secondary size-6.5! rounded-full border bg-clip-padding shadow-xs"
-            src={user.imageUrl}
-            fallback={
-              <div className="bg-surface flex-center size-full rounded-full text-xs">
-                {user.name[0].toUpperCase()}
-              </div>
-            }
-          />
+          <UserAvatar user={user} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -67,8 +59,18 @@ export const UserDropdown = () => {
         sideOffset={4}
       >
         <DropdownMenuLabel>
-          <div>{user.name}</div>
-          <div className="text-text-tertiary truncate">{user.email}</div>
+          <div className="flex items-center gap-4 font-normal">
+            <UserAvatar
+              user={user}
+              wrapperClassName="[--avatar-size:--spacing(8)]"
+            />
+            <div>
+              <div className="text-sm">{user.name}</div>
+              <div className="text-text-tertiary text-xs">
+                {user.role === "admin" ? "Administrator" : "User"}
+              </div>
+            </div>
+          </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

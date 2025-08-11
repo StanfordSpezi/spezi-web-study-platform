@@ -31,16 +31,20 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@stanfordspezi/spezi-web-design-system": "^0.14.0",
+    "@stanfordspezi/spezi-web-design-system": "^0.15.0",
     "@tailwindcss/vite": "^4.1.7",
     "@tanstack/react-query": "^5.80.7",
     "@tanstack/react-router": "^1.117.1",
     "class-variance-authority": "^0.7.1",
+    "lucide-react": "^0.525.0",
+    "match-sorter": "^8.0.3",
     "radix-ui": "^1.4.2",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7",
+    "usehooks-ts": "^3.1.1",
+    "virtua": "^0.41.5",
     "zod": "^3.25.67"
   },
   "devDependencies": {

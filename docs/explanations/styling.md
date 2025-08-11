@@ -45,7 +45,7 @@ Without a structured token hierarchy these needs would be met by improvised hex 
 
 To keep intent explicit the platform adopts a semantic token hierarchy, inspired by [Shopify Polaris](https://polaris-react.shopify.com/design/colors), that encodes:
 
-- The physical layer being colored (background, surface, border, text, icon).
+- The physical layer being colored (background, layer, border, text, icon).
 - The color’s purpose (brand, success, warning, neutral, etc.).
 - Optional interaction states (hover, active, disabled) and prominence levels (primary, secondary, tertiary).
 
@@ -58,7 +58,7 @@ color-[concept]-[element]-[role]-[prominence]-[state]
 | Segment    | Meaning (examples)                                                              |
 | ---------- | ------------------------------------------------------------------------------- |
 | concept    | Optional domain context such as nav or sidebar . Omitted for global tokens      |
-| element    | The physical layer: bg, surface, fill, border, text, icon.                      |
+| element    | The physical layer: bg, layer, fill, border, text, icon.                        |
 | role       | Why the color exists: default, brand, info, success, caution, warning, critical |
 | prominence | Visual strength: primary, secondary, tertiary                                   |
 | state      | Interaction state: hover, active, selected, disabled, focus                     |
