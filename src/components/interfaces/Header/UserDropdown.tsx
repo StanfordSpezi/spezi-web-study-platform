@@ -7,6 +7,7 @@
 //
 
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -20,7 +21,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { Layers2, LogOut, User } from "lucide-react";
 import { mockApi } from "@/lib/mockApi";
 import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
-import { cn } from "@/utils/cn";
 import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
@@ -42,17 +42,14 @@ export const UserDropdown = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <button
+        <Button
+          variant="ghost"
+          size={null}
+          className="size-8 rounded-md"
           aria-label="User menu"
-          className={cn(
-            "flex h-8 items-center gap-3 rounded-md p-1 text-left text-sm outline-hidden",
-            "hover:bg-bg-secondary-hover",
-            "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
-            "focus-visible:ring-border-focus focus-visible:ring-2",
-          )}
         >
           <UserAvatar user={user} />
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="min-w-60! rounded-lg"
