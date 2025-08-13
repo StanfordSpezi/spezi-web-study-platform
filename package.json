@@ -28,7 +28,8 @@
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint --output-file eslint_report.json --format json .",
     "prepush": "npm run lint:fix && tsc --noEmit",
-    "test": "playwright test"
+    "test": "playwright test",
+    "server": "tsx src/server/index.ts --port 3001"
   },
   "dependencies": {
     "@stanfordspezi/spezi-web-design-system": "^0.15.0",
@@ -45,10 +46,13 @@
     "tailwindcss": "^4.1.7",
     "usehooks-ts": "^3.1.1",
     "virtua": "^0.41.5",
-    "zod": "^3.25.67"
+    "zod": "^4.0.17"
   },
   "devDependencies": {
+    "@hono/node-server": "^1.18.2",
+    "@hono/zod-openapi": "^1.1.0",
     "@playwright/test": "^1.52.0",
+    "@scalar/hono-api-reference": "^0.9.13",
     "@stanfordspezi/spezi-web-configurations": "^0.5.1",
     "@tanstack/router-plugin": "^1.117.2",
     "@total-typescript/ts-reset": "^0.6.1",
@@ -57,7 +61,9 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.4.1",
     "eslint": "^9",
+    "hono": "^4.9.1",
     "prettier": "^3",
+    "tsx": "^4.20.4",
     "typescript": "^5",
     "vite": "^6.3.3"
   }
