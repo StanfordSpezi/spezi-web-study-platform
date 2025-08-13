@@ -16,7 +16,6 @@ import {
 } from "./schema";
 
 export type ListRoute = typeof list;
-
 export const list = createRoute({
   tags: [openApiTags.studies.name],
   path: "/studies",

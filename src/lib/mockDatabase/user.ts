@@ -11,7 +11,7 @@ import { z } from "zod";
 export const userSchema = z.object({
   id: z.string(),
   name: z.string(),
-  email: z.string().email(),
+  email: z.email(),
   imageUrl: z.string().optional(),
   role: z.enum(["admin", "user"]),
 });

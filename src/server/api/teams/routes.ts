@@ -12,7 +12,6 @@ import { openApiTags } from "@/server/tags";
 import { teamRetrieveParams, teamSelectSchema } from "./schema";
 
 export type ListRoute = typeof list;
-
 export const list = createRoute({
   tags: [openApiTags.teams.name],
   path: "/teams",
