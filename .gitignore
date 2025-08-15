@@ -45,3 +45,6 @@ eslint_report.json
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Server mock database
+/src/server/database/db.json
