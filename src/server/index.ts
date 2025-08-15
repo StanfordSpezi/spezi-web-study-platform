@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { parseArgs } from "node:util";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Scalar } from "@scalar/hono-api-reference";
@@ -17,7 +18,7 @@ import { usersApi } from "./api/users";
 import { respondWithError } from "./error";
 import { authMiddleware } from "./middleware";
 import { openApiTags } from "./tags";
-import { createHonoApp, getPortFromArgs } from "./utils";
+import { createHonoApp } from "./utils";
 
 const app = createHonoApp();
 
@@ -100,7 +101,10 @@ app.onError(async (error, c) => {
   });
 });
 
-const port = getPortFromArgs();
+const args = parseArgs({
+  options: { port: { type: "string", default: "3001" } },
+});
+const port = parseInt(args.values.port);
 console.log(`Scalar is running on http://localhost:${port}/scalar`);
 
 serve({ fetch: app.fetch, port });

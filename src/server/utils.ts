@@ -39,27 +39,3 @@ export const createHonoApp = () =>
       }
     },
   });
-
-/**
- * Retrieves the port number from the command-line arguments.
- *
- * Searches for an argument in the format `--port=<number>` or `--port <number>`.
- * If found, parses and returns the port number.
- * If not found or if the value is not a valid number, returns the default port `3001`.
- */
-export const getPortFromArgs = (): number => {
-  const defaultPort = 3001;
-  const args = process.argv;
-  const portEqArg = args.find((arg) => arg.startsWith("--port="));
-  if (portEqArg) {
-    const portValue = portEqArg.split("=")[1];
-    const parsedPort = Number(portValue);
-    return isNaN(parsedPort) ? defaultPort : parsedPort;
-  }
-  const portFlagIndex = args.findIndex((arg) => arg === "--port");
-  if (portFlagIndex !== -1 && args[portFlagIndex + 1]) {
-    const parsedPort = Number(args[portFlagIndex + 1]);
-    return isNaN(parsedPort) ? defaultPort : parsedPort;
-  }
-  return defaultPort;
-};
