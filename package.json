@@ -23,13 +23,13 @@
   "private": true,
   "scripts": {
     "dev": "vite --port 3000",
+    "dev:server": "tsx src/server/index.ts --port 3001",
     "build": "tsc && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint --output-file eslint_report.json --format json .",
     "prepush": "npm run lint:fix && tsc --noEmit",
-    "test": "playwright test",
-    "server": "tsx src/server/index.ts --port 3001"
+    "test": "playwright test"
   },
   "dependencies": {
     "@stanfordspezi/spezi-web-design-system": "^0.15.0",
