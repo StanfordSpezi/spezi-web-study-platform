@@ -13,7 +13,7 @@ import { type ComponentProps, type ReactNode } from "react";
 import { useIsScrolled } from "@/utils/useIsScrolled";
 import { DashedSeparator } from "./DashedSeparator";
 
-interface RouteHeaderProps {
+interface RouteHeaderProps extends Pick<ComponentProps<"div">, "ref"> {
   title: ReactNode;
   description: ReactNode;
   accessoryLeft?: ReactNode;
@@ -21,6 +21,7 @@ interface RouteHeaderProps {
 }
 
 export const RouteHeader = ({
+  ref,
   title,
   description,
   accessoryLeft,
@@ -29,6 +30,7 @@ export const RouteHeader = ({
   const isScrolled = useIsScrolled();
   return (
     <div
+      ref={ref}
       className={cn(
         "bg-bg/80 sticky top-(--header-height) backdrop-blur-md transition-shadow duration-200",
         isScrolled && "shadow-lg shadow-black/2",
@@ -59,7 +61,8 @@ const BasicRouteHeaderBackLink = ({
   return (
     <a
       className={cn(
-        "text-text-tertiary hover:text-text-tertiary-hover text-sm transition-colors duration-200",
+        "text-text-tertiary hover:text-text-tertiary-hover rounded-md text-sm transition-colors duration-200 outline-none",
+        "focus-visible:ring-border-focus focus-visible:ring-2 focus-visible:ring-offset-4",
         className,
       )}
       {...props}

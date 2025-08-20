@@ -77,7 +77,8 @@ SPDX-License-Identifier: MIT
 
   /* Fill */
   --color-fill: var(--color-zinc-10);
-  --color-fill-secondary: var(--color-zinc-400);
+  --color-fill-secondary: var(--color-zinc-200);
+  --color-fill-tertiary: var(--color-zinc-400);
   --color-fill-brand: var(--color-brand-500);
   --color-fill-brand-hover: var(--color-brand-450);
   --color-fill-brand-active: var(--color-brand-400);
@@ -91,6 +92,7 @@ SPDX-License-Identifier: MIT
   --color-border-secondary: oklch(0% 0 0 / 8%);
   --color-border-tertiary: oklch(0% 0 0 / 6%);
   --color-border-focus: var(--color-brand-500);
+  --color-border-info: var(--color-blue-500);
 
   /* Text */
   --color-text: var(--color-zinc-800);

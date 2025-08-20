@@ -58,6 +58,7 @@ const navBarItems: NavBarItem[] = [
       {
         id: "basic-information",
         title: "Basic Information",
+        linkOptions: { to: "/$team/$study/configuration/basic-information" },
       },
       {
         id: "enrollment",

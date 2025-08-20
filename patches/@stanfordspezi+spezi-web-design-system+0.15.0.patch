@@ -1,0 +1,28 @@
+#
+# This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+#
+# SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+diff --git a/node_modules/@stanfordspezi/spezi-web-design-system/dist/src/forms/useForm/useForm.d.ts b/node_modules/@stanfordspezi/spezi-web-design-system/dist/src/forms/useForm/useForm.d.ts
+index 64da528..77479d9 100644
+--- a/node_modules/@stanfordspezi/spezi-web-design-system/dist/src/forms/useForm/useForm.d.ts
++++ b/node_modules/@stanfordspezi/spezi-web-design-system/dist/src/forms/useForm/useForm.d.ts
+@@ -1,5 +1,6 @@
+ import { ErrorOption, UseFormProps } from 'react-hook-form';
+ import { z } from 'zod';
++import { z as v4 } from 'zod/v4';
+ /**
+  * Special key used for form-level errors.
+  */
+@@ -22,7 +23,7 @@ export declare const FORM_ERROR_KEY = "FORM_ERROR";
+  *   })
+  * });
+  */
+-export declare const useForm: <Schema extends z.ZodTypeAny>({ formSchema, ...props }: UseFormProps<z.infer<Schema>> & {
++export declare const useForm: <Schema extends z.ZodTypeAny | v4.$ZodType>({ formSchema, ...props }: UseFormProps<z.infer<Schema>> & {
+     formSchema: Schema;
+ }) => {
+     submitAsync: () => Promise<z.TypeOf<Schema>>;
