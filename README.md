@@ -14,7 +14,7 @@ SPDX-License-Identifier: MIT
 
 The goal of the project is to build an open-source platform that empowers researchers to manage simple studies without needing deep technical expertise. This repository contains the frontend code for the platform. Visit [spezi-web-service-study-platform](https://github.com/StanfordSpezi/spezi-web-service-study-platform) for the backend code.
 
-<img width="1618" height="939" alt="472883801-04b144c0-4524-4070-9453-7f817cf591f9" src="https://github.com/user-attachments/assets/a96f9151-3d1a-4eaa-bad9-cdf1ad61f9f1" />
+<img width="1618" height="939" alt="Spezi Web Study Platform interface overview" src="https://github.com/user-attachments/assets/a96f9151-3d1a-4eaa-bad9-cdf1ad61f9f1" />
 
 ## Getting Started
 
