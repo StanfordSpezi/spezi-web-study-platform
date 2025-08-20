@@ -38,6 +38,11 @@ export const PhoneMockup = ({ children }: PhoneMockupProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
+  // The parent container is fluid in both width and height, so CSS’s
+  // aspect-ratio alone can’t pick whether to constrain by width or height.
+  // At runtime we measure the parent’s dimensions, compare its W∶H ratio
+  // against 9∶16, and then apply either `width:100%; height:auto;` or
+  // `height:100%; width:auto;` to maintain the aspect and prevent overflow.
   useEffect(() => {
     const parent = parentRef.current;
     const inner = innerRef.current;

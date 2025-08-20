@@ -29,8 +29,7 @@ export const BasicInfoPreview = ({
   form,
   highlightedField,
 }: BasicInfoPreviewProps) => {
-  const title = form.watch("title");
-  const explanation = form.watch("explanation");
+  const [title, explanation] = form.watch(["title", "explanation"]);
   return (
     <>
       <div className="bg-bg-secondary flex-center absolute top-0 left-0 h-1/2 w-full flex-col gap-[8%] px-[10%] pt-(--phone-top-bar-height)">
