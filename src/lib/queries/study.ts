@@ -6,9 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { sleep } from "@stanfordspezi/spezi-web-design-system";
 import { queryOptions } from "@tanstack/react-query";
-import { mockApi } from "../mockApi";
+import type { studiesApi } from "@/server/api/studies";
+import type { ExtractRouteSchemas } from "@/utils/extractRouteSchemas";
+import { apiRequest } from "../apiRequest";
 
 export const studyQueryKeys = {
   list: (params: StudyListQueryOptionsParams) => ["study", "list", params],
@@ -20,8 +21,10 @@ export const studyQueryKeys = {
 };
 
 interface StudyListQueryOptionsParams {
-  teamId?: string;
+  team_id?: string;
 }
+
+type ListStudiesSchemas = ExtractRouteSchemas<typeof studiesApi.routes.list>;
 
 /**
  * Query options for fetching a list of studies. Options include filtering by team id.
@@ -29,20 +32,10 @@ interface StudyListQueryOptionsParams {
 export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
   return queryOptions({
     queryKey: studyQueryKeys.list(params),
-    queryFn: async () => {
-      await sleep(100);
-      const response = mockApi.study.list(params);
-      if (!response.success) {
-        const { message, status } = response.error;
-        if (status === 404) {
-          return [];
-        }
-        if (status === 401) {
-          throw new Error("Unauthorized");
-        }
-        throw new Error(message);
-      }
-      return response.data;
+    queryFn: () => {
+      return apiRequest<ListStudiesSchemas>("/studies", {
+        query: { ...params },
+      });
     },
   });
 };
@@ -50,6 +43,10 @@ export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
 interface StudyRetrieveQueryOptionsParams {
   studyId: string;
 }
+
+type RetrieveStudySchemas = ExtractRouteSchemas<
+  typeof studiesApi.routes.retrieve
+>;
 
 /**
  * Query options for fetching a specific study by id.
@@ -59,17 +56,8 @@ export const studyRetrieveQueryOptions = (
 ) => {
   return queryOptions({
     queryKey: studyQueryKeys.retrieve(params),
-    queryFn: async () => {
-      await sleep(100);
-      const response = mockApi.study.retrieve(params);
-      if (!response.success) {
-        const { message, status } = response.error;
-        if (status === 401) {
-          throw new Error("Unauthorized");
-        }
-        throw new Error(message);
-      }
-      return response.data;
+    queryFn: () => {
+      return apiRequest<RetrieveStudySchemas>(`/studies/${params.studyId}`);
     },
   });
 };

@@ -9,7 +9,7 @@
 import { useParams } from "@tanstack/react-router";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
 import { EditButtonLink } from "@/components/ui/EditButton";
-import type { Study } from "@/lib/mockDatabase/study";
+import type { Study } from "@/server/database/entities/study/schema";
 
 interface BasicInfoCardProps {
   study?: Study;
