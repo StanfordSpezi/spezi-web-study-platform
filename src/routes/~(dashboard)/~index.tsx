@@ -26,7 +26,7 @@ export const Route = createFileRoute("/(dashboard)/")({
     }
 
     const studies = await queryClient.fetchQuery(
-      studyListQueryOptions({ teamId: firstTeam.id }),
+      studyListQueryOptions({ team_id: firstTeam.id }),
     );
     const firstStudy = studies.at(0);
 

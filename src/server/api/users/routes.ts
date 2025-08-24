@@ -16,7 +16,8 @@ export const retrieve = createRoute({
   tags: [openApiTags.users.name],
   path: "/users/:id",
   method: "get",
-  description: "Retrieve a specific user by its id",
+  description:
+    "Retrieve a specific user by its id. Pass `me` to retrieve the logged-in user.",
   request: { params: userRetrieveParams },
   responses: {
     200: {

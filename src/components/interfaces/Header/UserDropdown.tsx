@@ -19,18 +19,18 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Layers2, LogOut, User } from "lucide-react";
-import { mockApi } from "@/lib/mockApi";
-import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
+import { authClient } from "@/lib/authClient";
+import { userRetrieveQueryOptions } from "@/lib/queries/user";
 import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
 export const UserDropdown = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { data: user } = useQuery(currentUserRetrieveQueryOptions());
+  const { data: user } = useQuery(userRetrieveQueryOptions({ userId: "me" }));
 
   const handleSignOut = async () => {
-    mockApi.auth.signOut();
+    await authClient.signOut();
     queryClient.clear();
     await navigate({ to: "/sign-in" });
   };

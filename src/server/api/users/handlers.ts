@@ -17,6 +17,17 @@ export const retrieve: AppRouteHandler<RetrieveRoute> = (c) => {
 
   const db = getDevDatabase();
 
+  if (param.id === "me") {
+    const userEntity = db.users.find((u) => u.id === user.id);
+    if (!userEntity) {
+      return respondWithError(c, 404, {
+        message: `User with id ${user.id} not found.`,
+      });
+    }
+
+    return c.json(userEntity, 200);
+  }
+
   const userEntity = db.users.find((user) => user.id === param.id);
   if (!userEntity) {
     if (user.role === "admin") {

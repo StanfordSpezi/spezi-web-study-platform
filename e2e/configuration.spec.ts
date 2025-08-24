@@ -6,17 +6,17 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { mockDatabase } from "@/lib/mockDatabase";
 import { expect, test } from "@/lib/playwrightFixtures";
+import { studyFixtures } from "@/server/database/entities/study/fixtures";
+import { teamFixtures } from "@/server/database/entities/team/fixtures";
+import { loadApiMocks, mockIsAuthenticated } from "@/server/mocks";
 
-const [team] = mockDatabase.teams;
-const [study] = mockDatabase.studies.filter(
-  (study) => study.teamId === team.id,
-);
+const [team] = teamFixtures;
+const [study] = studyFixtures.filter((study) => study.teamId === team.id);
 
 test.describe("Study Configuration Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.addSignInScript();
+    await Promise.all([mockIsAuthenticated(page), loadApiMocks(page)]);
     await page.goto(`/${team.id}/${study.id}/configuration`);
   });
 

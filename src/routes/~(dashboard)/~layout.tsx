@@ -6,26 +6,21 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { parseUnknownError } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
+import { authClient } from "@/lib/authClient";
 
 // This layout route is used to ensure that the user is authenticated
 // before accessing the dashboard.
 export const Route = createFileRoute("/(dashboard)")({
-  beforeLoad: async ({ context: { queryClient }, location }) => {
-    try {
-      await queryClient.ensureQueryData(currentUserRetrieveQueryOptions());
-    } catch (error) {
-      if (parseUnknownError(error) === "Unauthorized") {
-        // User is not authenticated, allow the sign-in page to load.
-        return redirect({
-          to: "/sign-in",
-          search: { redirect: location.href },
-        });
+  beforeLoad: async ({ location }) => {
+    const { data, error } = await authClient.getSession();
+    if (!data?.session) {
+      if (error && error.status !== 401) {
+        // Handle other errors (e.g., network issues)
+        throw new Error(error.message);
       }
-
-      throw error;
+      // User is not authenticated, redirect to the sign-in page to load.
+      return redirect({ to: "/sign-in", search: { redirect: location.href } });
     }
   },
 });

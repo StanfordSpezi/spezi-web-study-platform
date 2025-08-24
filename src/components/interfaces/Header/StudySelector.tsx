@@ -21,7 +21,7 @@ import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
 export const StudySelector = () => {
   const params = useParams({ from: "/(dashboard)/$team/$study" });
   const { data: studies } = useQuery(
-    studyListQueryOptions({ teamId: params.team }),
+    studyListQueryOptions({ team_id: params.team }),
   );
   const selectedStudy = studies?.find((study) => study.id === params.study);
 

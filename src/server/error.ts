@@ -10,7 +10,7 @@ import { z } from "@hono/zod-openapi";
 import type { Context } from "hono";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 
-interface ErrorPayload {
+export interface ErrorPayload {
   code?: string;
   message: string;
 }

@@ -6,60 +6,31 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { basicAuth } from "hono/basic-auth";
 import { every } from "hono/combine";
 import { createMiddleware } from "hono/factory";
-import { userFixtures } from "./database/entities/user/fixtures";
+import { getDevDatabase } from "./database";
 import { respondWithError } from "./error";
 import { type HonoAppVariables } from "./utils";
 
 /**
- * Middleware for authenticating requests using Basic Auth and setting the authenticated user in the context.
+ * Middleware to authenticate requests by checking for a current user in the development database.
+ *
+ * If no user is found, responds with a 401 Unauthorized error.
+ * Otherwise, attaches the current user to the context under the "user" key and proceeds to the next middleware.
+ *
+ * @example
+ * app.use("*", authMiddleware);
  */
 export const authMiddleware = every(
-  basicAuth(
-    {
-      username: userFixtures[0].username,
-      password: userFixtures[0].password,
-      invalidUserMessage: "Invalid username or password",
-    },
-    ...userFixtures.slice(1).map((user) => ({
-      username: user.username,
-      password: user.password,
-    })),
-  ),
-  // By default, basicAuth is not setting the user in the context
-  // So we need to create a custom middleware to do this
   createMiddleware<{ Variables: HonoAppVariables }>(async (c, next) => {
-    const authHeader = c.req.header("authorization");
-    if (!authHeader) {
+    const db = getDevDatabase();
+    if (!db.currentUser) {
       return respondWithError(c, 401, {
-        message:
-          "Missing authorization header. Add 'Authorization: Basic <credentials>' to your request.",
+        message: "Unauthorized",
       });
     }
 
-    const base64Credentials = authHeader.split(" ").at(1);
-    if (!base64Credentials) {
-      return respondWithError(c, 401, {
-        message:
-          "Invalid authorization header format. Use 'Authorization: Basic <credentials>'",
-      });
-    }
-
-    const credentials = Buffer.from(base64Credentials, "base64").toString(
-      "utf-8",
-    );
-    const [username] = credentials.split(":");
-
-    const user = userFixtures.find((user) => user.username === username);
-    if (!user) {
-      return respondWithError(c, 401, {
-        message: "Invalid username or password",
-      });
-    }
-
-    c.set("user", user);
+    c.set("user", db.currentUser);
     await next();
   }),
 );

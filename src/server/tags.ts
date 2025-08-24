@@ -7,6 +7,11 @@
 //
 
 export const openApiTags = {
+  auth: {
+    name: "Authentication",
+    description:
+      "Manage user authentication, including sign-in, sign-out and session management.",
+  },
   studies: {
     name: "Studies",
     description:

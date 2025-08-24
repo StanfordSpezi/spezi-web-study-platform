@@ -22,6 +22,7 @@ export const UserDropdownSkeleton = () => {
       )}
     >
       <Avatar
+        size={null}
         className="bg-surface border-border-secondary size-6.5 rounded-full border bg-clip-padding shadow-xs"
         fallback={<div className="bg-surface rounded-lg text-xs" />}
       />

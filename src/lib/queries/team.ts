@@ -6,9 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { sleep } from "@stanfordspezi/spezi-web-design-system";
 import { queryOptions } from "@tanstack/react-query";
-import { mockApi } from "../mockApi";
+import type { teamsApi } from "@/server/api/teams";
+import type { ExtractRouteSchemas } from "@/utils/extractRouteSchemas";
+import { apiRequest } from "../apiRequest";
 
 export const teamQueryKeys = {
   list: () => ["team", "list"],
@@ -19,26 +20,16 @@ export const teamQueryKeys = {
   ],
 };
 
+type ListTeamSchemas = ExtractRouteSchemas<typeof teamsApi.routes.list>;
+
 /**
  * Query options for fetching all teams.
  */
 export const teamListQueryOptions = () => {
   return queryOptions({
     queryKey: teamQueryKeys.list(),
-    queryFn: async () => {
-      await sleep(100);
-      const response = mockApi.team.list();
-      if (!response.success) {
-        const { message, status } = response.error;
-        if (status === 404) {
-          return [];
-        }
-        if (status === 401) {
-          throw new Error("Unauthorized");
-        }
-        throw new Error(message);
-      }
-      return response.data;
+    queryFn: () => {
+      return apiRequest<ListTeamSchemas>("/teams");
     },
   });
 };
@@ -46,6 +37,8 @@ export const teamListQueryOptions = () => {
 interface TeamRetrieveQueryOptionsParams {
   teamId: string;
 }
+
+type RetrieveTeamSchemas = ExtractRouteSchemas<typeof teamsApi.routes.retrieve>;
 
 /**
  * Query options for fetching a specific team by id.
@@ -55,17 +48,8 @@ export const teamRetrieveQueryOptions = (
 ) => {
   return queryOptions({
     queryKey: teamQueryKeys.retrieve(params),
-    queryFn: async () => {
-      await sleep(100);
-      const response = mockApi.team.retrieve(params);
-      if (!response.success) {
-        const { message, status } = response.error;
-        if (status === 401) {
-          throw new Error("Unauthorized");
-        }
-        throw new Error(message);
-      }
-      return response.data;
+    queryFn: () => {
+      return apiRequest<RetrieveTeamSchemas>(`/teams/${params.teamId}`);
     },
   });
 };

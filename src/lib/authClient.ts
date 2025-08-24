@@ -6,12 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
-/// <reference types="vite/client" />
+import { createAuthClient } from "better-auth/react";
+import { joinUrlPaths } from "@/utils/joinUrlPaths";
+import { env } from "./env";
 
-interface ImportMetaEnv {
-  readonly VITE_API_BASE_PATH: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
+export const authClient = createAuthClient({
+  baseURL: joinUrlPaths(env.VITE_API_BASE_PATH, "/auth"),
+});
