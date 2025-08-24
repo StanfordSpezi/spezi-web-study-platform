@@ -30,8 +30,8 @@ Check your Node.js version:
 ```bash
 node -v
 ```
-It should print `v22.x.x`.
 
+It should print `v22.x.x`.
 
 ## 2. Ensure npm is available
 
@@ -43,7 +43,6 @@ npm -v
 
 If not installed, [install npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-
 ## 3. Clone the repository
 
 ```bash
@@ -51,20 +50,27 @@ git clone https://github.com/StanfordSpezi/spezi-web-study-platform.git
 cd spezi-web-study-platform
 ```
 
-
 ## 4. Install dependencies
 
 ```bash
 npm install
 ```
 
-
-## 5. Start the development server
+## 5. Start the development servers
 
 ```bash
 npm run dev
 ```
 
+This command starts:
+
+- The UI at http://localhost:3000
+- The development API server at http://localhost:3001
+
 ## 6. Open the app
 
-Open your browser and go to the local server URL shown in the terminal.
+Open your browser and go to http://localhost:3000
+
+## 7. Open the API reference (optional)
+
+Open the interactive API docs at http://localhost:3001/scalar
