@@ -7,11 +7,15 @@
 //
 
 import { expect, test } from "@/lib/playwrightFixtures";
-import { loadApiMocks, mockIsAuthenticated } from "@/server/mocks";
+import {
+  loadApiMocks,
+  mockIsAuthenticated,
+  mockIsNotAuthenticated,
+} from "@/server/mocks";
 
 test.describe("Authentication Flows", () => {
   test.beforeEach(async ({ page }) => {
-    await Promise.all([loadApiMocks(page)]);
+    await Promise.all([loadApiMocks(page), mockIsNotAuthenticated(page)]);
   });
 
   test("redirects to sign-in when not authenticated", async ({ page }) => {
