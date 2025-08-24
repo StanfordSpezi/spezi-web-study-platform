@@ -24,7 +24,6 @@ const authUser: z.infer<typeof authUserSchema> = {
 };
 
 export const mockIsAuthenticated = async (page: Page) => {
-  console.log("Mocking authenticated user");
   await mockApiRoute(page, {
     route: authApi.routes.getSession,
     response: () => ({
@@ -48,7 +47,6 @@ export const mockIsAuthenticated = async (page: Page) => {
 };
 
 export const mockIsNotAuthenticated = async (page: Page) => {
-  console.log("Mocking unauthenticated user");
   await mockApiRoute(page, {
     route: authApi.routes.getSession,
     response: () => ({ status: 200, body: null }),
