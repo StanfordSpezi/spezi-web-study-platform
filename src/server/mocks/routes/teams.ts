@@ -1,3 +1,11 @@
+//
+// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+//
+// SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
+//
+// SPDX-License-Identifier: MIT
+//
+
 import type { Page } from "@playwright/test";
 import { teamsApi } from "@/server/api/teams";
 import { teamFixtures } from "@/server/database/entities/team/fixtures";
