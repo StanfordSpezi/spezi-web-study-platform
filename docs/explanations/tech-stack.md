@@ -64,6 +64,10 @@ Compared with Redux or custom hooks, React Query emerged as the most practical c
 
 For end-to-end testing, we chose Playwright. Playwright provides effective tests that mimic real browser interactions.
 
+## Development server and API contract
+
+We include a small local development server to provide a stable API surface while backend services evolve. Routes are defined with a code-first OpenAPI approach and Zod validation, which keeps implementation and documentation in sync and generates a live spec. Data lives in a simple JSON file to keep scenarios easy to tweak and review. Automated tests use mocked endpoints that mirror the same contract for speed and reliability. Learn more in the [development server explanation](./development-server.md).
+
 ## Hosting: GitHub Pages
 
 We currently host our frontend using GitHub Pages. Its direct integration into GitHub makes deployment straightforward. Simply committing to the source repository deploys the frontend. While other platforms like Netlify or Vercel offer additional server-side features, GitHub Pages provides a suitable level of simplicity and accessibility for our project's needs. Learn more about our deployment strategy in the [deployments documentation](./deployment.md).
