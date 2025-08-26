@@ -7,8 +7,7 @@
 //
 
 import { queryOptions } from "@tanstack/react-query";
-import type { usersApi } from "@/server/api/users";
-import type { ExtractRouteSchemas } from "@/utils/extractRouteSchemas";
+import { usersApi } from "@/server/api/users";
 import { apiRequest } from "../apiRequest";
 
 export const userQueryKeys = {
@@ -23,8 +22,6 @@ interface UserRetrieveQueryOptionsParams {
   userId: "me" | (string & {});
 }
 
-type RetrieveUserSchemas = ExtractRouteSchemas<typeof usersApi.routes.retrieve>;
-
 /**
  * Query options for fetching a user.
  * Pass the user ID as a parameter. If the user ID is "me", the current user's information will be fetched.
@@ -35,7 +32,10 @@ export const userRetrieveQueryOptions = (
   return queryOptions({
     queryKey: userQueryKeys.retrieve(params),
     queryFn: () => {
-      return apiRequest<RetrieveUserSchemas>(`/users/${params.userId}`);
+      return apiRequest({
+        route: usersApi.routes.retrieve,
+        params: { id: params.userId },
+      });
     },
   });
 };

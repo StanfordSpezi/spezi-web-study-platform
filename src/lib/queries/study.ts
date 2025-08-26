@@ -7,8 +7,7 @@
 //
 
 import { queryOptions } from "@tanstack/react-query";
-import type { studiesApi } from "@/server/api/studies";
-import type { ExtractRouteSchemas } from "@/utils/extractRouteSchemas";
+import { studiesApi } from "@/server/api/studies";
 import { apiRequest } from "../apiRequest";
 
 export const studyQueryKeys = {
@@ -24,8 +23,6 @@ interface StudyListQueryOptionsParams {
   team_id?: string;
 }
 
-type ListStudiesSchemas = ExtractRouteSchemas<typeof studiesApi.routes.list>;
-
 /**
  * Query options for fetching a list of studies. Options include filtering by team id.
  */
@@ -33,8 +30,9 @@ export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
   return queryOptions({
     queryKey: studyQueryKeys.list(params),
     queryFn: () => {
-      return apiRequest<ListStudiesSchemas>("/studies", {
-        query: { ...params },
+      return apiRequest({
+        route: studiesApi.routes.list,
+        query: params,
       });
     },
   });
@@ -43,10 +41,6 @@ export const studyListQueryOptions = (params: StudyListQueryOptionsParams) => {
 interface StudyRetrieveQueryOptionsParams {
   studyId: string;
 }
-
-type RetrieveStudySchemas = ExtractRouteSchemas<
-  typeof studiesApi.routes.retrieve
->;
 
 /**
  * Query options for fetching a specific study by id.
@@ -57,7 +51,10 @@ export const studyRetrieveQueryOptions = (
   return queryOptions({
     queryKey: studyQueryKeys.retrieve(params),
     queryFn: () => {
-      return apiRequest<RetrieveStudySchemas>(`/studies/${params.studyId}`);
+      return apiRequest({
+        route: studiesApi.routes.retrieve,
+        params: { id: params.studyId },
+      });
     },
   });
 };

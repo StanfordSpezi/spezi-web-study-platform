@@ -7,8 +7,7 @@
 //
 
 import { queryOptions } from "@tanstack/react-query";
-import type { teamsApi } from "@/server/api/teams";
-import type { ExtractRouteSchemas } from "@/utils/extractRouteSchemas";
+import { teamsApi } from "@/server/api/teams";
 import { apiRequest } from "../apiRequest";
 
 export const teamQueryKeys = {
@@ -20,8 +19,6 @@ export const teamQueryKeys = {
   ],
 };
 
-type ListTeamSchemas = ExtractRouteSchemas<typeof teamsApi.routes.list>;
-
 /**
  * Query options for fetching all teams.
  */
@@ -29,7 +26,9 @@ export const teamListQueryOptions = () => {
   return queryOptions({
     queryKey: teamQueryKeys.list(),
     queryFn: () => {
-      return apiRequest<ListTeamSchemas>("/teams");
+      return apiRequest({
+        route: teamsApi.routes.list,
+      });
     },
   });
 };
@@ -37,8 +36,6 @@ export const teamListQueryOptions = () => {
 interface TeamRetrieveQueryOptionsParams {
   teamId: string;
 }
-
-type RetrieveTeamSchemas = ExtractRouteSchemas<typeof teamsApi.routes.retrieve>;
 
 /**
  * Query options for fetching a specific team by id.
@@ -49,7 +46,10 @@ export const teamRetrieveQueryOptions = (
   return queryOptions({
     queryKey: teamQueryKeys.retrieve(params),
     queryFn: () => {
-      return apiRequest<RetrieveTeamSchemas>(`/teams/${params.teamId}`);
+      return apiRequest({
+        route: teamsApi.routes.retrieve,
+        params: { id: params.teamId },
+      });
     },
   });
 };

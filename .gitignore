@@ -29,7 +29,7 @@ yarn-error.log*
 
 # env files
 .env*
-!.env.template
+!.env.example
 
 # typescript
 *.tsbuildinfo
