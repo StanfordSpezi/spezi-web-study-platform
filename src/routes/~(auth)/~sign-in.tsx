@@ -6,27 +6,32 @@
 // SPDX-License-Identifier: MIT
 //
 
-import {
-  Button,
-  parseUnknownError,
-} from "@stanfordspezi/spezi-web-design-system";
-import { useQueryClient } from "@tanstack/react-query";
+import { Button, toast } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import speziImage from "@/assets/spezi.webp";
 import stanfordImage from "@/assets/stanford.webp";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
-import { mockApi } from "@/lib/mockApi";
-import { currentUserRetrieveQueryOptions } from "@/lib/queries/currentUser";
+import { authClient } from "@/lib/authClient";
+import { userFixtures } from "@/server/database/entities/user/fixtures";
 
 const SignInComponent = () => {
-  const queryClient = useQueryClient();
   const navigate = Route.useNavigate();
   const search = Route.useSearch();
 
   const handleSignIn = async () => {
-    mockApi.auth.signIn();
-    await queryClient.invalidateQueries(currentUserRetrieveQueryOptions());
+    const user =
+      userFixtures.find(({ role }) => role === "admin") ?? userFixtures[0];
+    const { error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
+
+    if (error) {
+      toast.error(error.message, { duration: 5000 });
+      return;
+    }
+
     await navigate({ to: search.redirect ?? "/" });
   };
 
@@ -84,19 +89,17 @@ export const Route = createFileRoute("/(auth)/sign-in")({
   validateSearch: z.object({
     redirect: z.string().optional(),
   }),
-  beforeLoad: async ({ context: { queryClient }, search }) => {
-    try {
-      // Check if the user is already authenticated
-      // if so, redirect them to the specified path or home
-      await queryClient.ensureQueryData(currentUserRetrieveQueryOptions());
-      return redirect({ to: search.redirect ?? "/" });
-    } catch (error) {
-      if (parseUnknownError(error) === "Unauthorized") {
-        // User is not authenticated, allow the sign-in page to load.
-        return;
-      }
+  beforeLoad: async ({ search }) => {
+    // Check if the user is already authenticated
+    // if so, redirect them to the specified path or home
+    const { data, error } = await authClient.getSession();
 
-      throw error;
+    if (error && error.status !== 401) {
+      throw new Error(error.message);
+    }
+    if (data?.session) {
+      // User is authenticated, redirect them to the specified path or home
+      return redirect({ to: search.redirect ?? "/" });
     }
   },
 });

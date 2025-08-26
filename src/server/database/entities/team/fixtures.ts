@@ -29,9 +29,4 @@ export const teamFixtures: Team[] = [
     name: "Team Flower",
     icon: "flower",
   },
-  {
-    id: "team_mountain",
-    name: "Team Mountain",
-    icon: "mountain",
-  },
 ];
