@@ -90,7 +90,7 @@ export const mockApiRoute = <T extends RouteConfig>(
   { route, pathParams, response, onFulfill }: MockApiRouteOptions<T>,
 ) => {
   const cleanPath = convertPathParamsToWildcards(route.path, pathParams);
-  return page.route(`**/api${cleanPath}*`, (mockRoute) => {
+  return page.route(`http://localhost:3001/api${cleanPath}*`, (mockRoute) => {
     const { status, body } = response(mockRoute.request());
     return mockRoute
       .fulfill({
