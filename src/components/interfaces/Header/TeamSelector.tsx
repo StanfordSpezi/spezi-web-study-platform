@@ -11,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import {
   Flower,
-  Mountain,
   Plus,
   TentTree,
   TreePalm,
@@ -27,11 +26,10 @@ import {
 import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
 
 const iconMap: Record<string, LucideIcon> = {
-  TreePine: TreePine,
-  TentTree: TentTree,
-  TreePalm: TreePalm,
-  Flower: Flower,
-  Mountain: Mountain,
+  "tree-pine": TreePine,
+  "tent-tree": TentTree,
+  "tree-palm": TreePalm,
+  flower: Flower,
 };
 
 export const TeamSelector = () => {

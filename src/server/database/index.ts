@@ -18,6 +18,7 @@ import { userSchema } from "./entities/user/schema";
 const devDatabasePath = "src/server/database/db.json";
 
 const devDatabaseSchema = z.object({
+  currentUser: userSchema.nullable(),
   studies: studySchema.array(),
   teams: teamSchema.array(),
   users: userSchema.array(),
@@ -28,11 +29,13 @@ type DevDatabase = z.infer<typeof devDatabaseSchema>;
 // Fixtures with different scenarios for seeding the development database
 const devDatabaseFixtures: Record<string, DevDatabase> = {
   default: {
+    currentUser: null,
     studies: studyFixtures,
     teams: teamFixtures,
     users: userFixtures,
   },
   empty: {
+    currentUser: null,
     studies: [],
     teams: [],
     users: userFixtures,

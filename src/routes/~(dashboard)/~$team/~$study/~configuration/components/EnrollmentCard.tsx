@@ -9,7 +9,7 @@
 import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
 import { EditButton } from "@/components/ui/EditButton";
-import type { Study } from "@/lib/mockDatabase/study";
+import type { Study } from "@/server/database/entities/study/schema";
 import { formatBoolean, formatDateRange } from "@/utils/formatValue";
 
 interface EnrollmentCardProps {
