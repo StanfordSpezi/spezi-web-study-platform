@@ -10,8 +10,10 @@ import { parseArgs } from "node:util";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Scalar } from "@scalar/hono-api-reference";
+import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 import { dedent } from "@/utils/dedent";
+import { authApi } from "./api/auth";
 import { studiesApi } from "./api/studies";
 import { teamsApi } from "./api/teams";
 import { usersApi } from "./api/users";
@@ -22,16 +24,35 @@ import { createHonoApp } from "./utils";
 
 const app = createHonoApp();
 
+app.use(
+  "/api/*",
+  cors({
+    origin: ["http://localhost:3000"], // We only need to point to the local frontend origin
+    allowHeaders: ["Content-Type", "Authorization"],
+    allowMethods: ["POST", "GET", "OPTIONS"],
+    exposeHeaders: ["Content-Length"],
+    maxAge: 600,
+    credentials: true,
+  }),
+);
+
+// We're putting the auth routes first to make sure they are not passed
+// through the auth middleware
+app.route("/api", authApi.router);
+
 app.use("/api/*", authMiddleware);
 
+// These routes require authentication
 const routers = [studiesApi.router, teamsApi.router, usersApi.router] as const;
-routers.forEach((route) => {
-  app.route("/api", route);
+routers.forEach((router) => {
+  app.route("/api", router);
 });
 
-app.openAPIRegistry.registerComponent("securitySchemes", "basicAuth", {
-  type: "http",
-  scheme: "basic",
+app.openAPIRegistry.registerComponent("securitySchemes", "cookieAuth", {
+  type: "apiKey",
+  in: "cookie",
+  scheme: "spezi.session_token",
+  description: "httpOnly session cookie",
 });
 
 app.doc("/doc", {
@@ -45,9 +66,12 @@ app.doc("/doc", {
       This API provides endpoints for managing research studies, including study configuration, team management, and user administration.
       
       ## Authentication
-      
-      The API uses HTTP Basic Authentication. All endpoints except documentation require valid credentials.
-      
+
+      The OpenAPI specification requires authentication via a session cookie.\\
+      \\      
+      For this development server, you can omit the cookie and just hit the [sign-in endpoint](#tag/authentication/post/api/auth/sign-in/email) or add a \`currentUser\` to \`src/server/database/db.json\`.
+      The development server handles the sign-in state using the development database.
+
       ## Related Projects
       
       - [Frontend Repository](https://github.com/StanfordSpezi/spezi-web-study-platform)
@@ -58,7 +82,7 @@ app.doc("/doc", {
       url: "https://opensource.org/licenses/MIT",
     },
   },
-  security: [{ basicAuth: [] }],
+  security: [{ cookieAuth: [] }],
   tags: Object.values(openApiTags),
 });
 
@@ -74,11 +98,13 @@ app.get(
     metaData: { title: "Spezi Study Platform API" },
     favicon: "/favicon.png",
     authentication: {
-      preferredSecurityScheme: "basicAuth",
+      preferredSecurityScheme: "cookieAuth",
       securitySchemes: {
-        basicAuth: {
-          type: "http",
-          scheme: "basic",
+        cookieAuth: {
+          type: "apiKey",
+          in: "cookie",
+          scheme: "spezi.session_token",
+          description: "httpOnly session cookie",
         },
       },
     },

@@ -6,9 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { sleep } from "@stanfordspezi/spezi-web-design-system";
 import { queryOptions } from "@tanstack/react-query";
-import { mockApi } from "../mockApi";
+import { teamsApi } from "@/server/api/teams";
+import { apiRequest } from "../apiRequest";
 
 export const teamQueryKeys = {
   list: () => ["team", "list"],
@@ -25,20 +25,10 @@ export const teamQueryKeys = {
 export const teamListQueryOptions = () => {
   return queryOptions({
     queryKey: teamQueryKeys.list(),
-    queryFn: async () => {
-      await sleep(100);
-      const response = mockApi.team.list();
-      if (!response.success) {
-        const { message, status } = response.error;
-        if (status === 404) {
-          return [];
-        }
-        if (status === 401) {
-          throw new Error("Unauthorized");
-        }
-        throw new Error(message);
-      }
-      return response.data;
+    queryFn: () => {
+      return apiRequest({
+        route: teamsApi.routes.list,
+      });
     },
   });
 };
@@ -55,17 +45,11 @@ export const teamRetrieveQueryOptions = (
 ) => {
   return queryOptions({
     queryKey: teamQueryKeys.retrieve(params),
-    queryFn: async () => {
-      await sleep(100);
-      const response = mockApi.team.retrieve(params);
-      if (!response.success) {
-        const { message, status } = response.error;
-        if (status === 401) {
-          throw new Error("Unauthorized");
-        }
-        throw new Error(message);
-      }
-      return response.data;
+    queryFn: () => {
+      return apiRequest({
+        route: teamsApi.routes.retrieve,
+        params: { id: params.teamId },
+      });
     },
   });
 };
