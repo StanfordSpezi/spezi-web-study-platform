@@ -27,7 +27,11 @@ To get started with the project, follow these steps:
    ```bash
    npm install
    ```
-3. Start the development servers:
+3. Create a `.env` file:
+   ```bash
+   cp .env.example .env
+   ```
+4. Start the development servers:
    ```bash
    npm run dev
    ```

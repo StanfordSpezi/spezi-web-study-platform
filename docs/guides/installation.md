@@ -50,13 +50,21 @@ git clone https://github.com/StanfordSpezi/spezi-web-study-platform.git
 cd spezi-web-study-platform
 ```
 
-## 4. Install dependencies
+## 4. Create a .env file
+
+Create a .env file by copying the example file in the repository root:
+
+```bash
+cp .env.example .env
+```
+
+## 5. Install dependencies
 
 ```bash
 npm install
 ```
 
-## 5. Start the development servers
+## 6. Start the development servers
 
 ```bash
 npm run dev
@@ -67,10 +75,10 @@ This command starts:
 - The UI at http://localhost:3000
 - The development API server at http://localhost:3001
 
-## 6. Open the app
+## 7. Open the app
 
 Open your browser and go to http://localhost:3000
 
-## 7. Open the API reference (optional)
+## 8. Open the API reference (optional)
 
 Open the interactive API docs at http://localhost:3001/scalar
