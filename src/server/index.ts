@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000"], // We only need to point to the local frontend origin
     allowHeaders: ["Content-Type", "Authorization"],
-    allowMethods: ["POST", "GET", "OPTIONS"],
+    allowMethods: ["PUT", "POST", "GET", "OPTIONS"],
     exposeHeaders: ["Content-Length"],
     maxAge: 600,
     credentials: true,

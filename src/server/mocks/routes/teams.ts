@@ -19,11 +19,9 @@ export const mockTeamsRoutes = async (page: Page) => {
 
   await mockApiRoute(page, {
     route: teamsApi.routes.retrieve,
-    pathParams: ["id"],
-    response: (request) => {
-      const url = new URL(request.url());
-      const teamId = url.pathname.split("/").pop();
-      const team = teamFixtures.find((team) => team.id === teamId);
+    response: ({ params }) => {
+      const { id } = params;
+      const team = teamFixtures.find((team) => team.id === id);
       if (!team) {
         return { status: 404, body: { message: "Not found" } };
       }

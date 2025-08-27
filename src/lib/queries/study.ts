@@ -11,6 +11,7 @@ import { studiesApi } from "@/server/api/studies";
 import { apiRequest } from "../apiRequest";
 
 export const studyQueryKeys = {
+  all: ["study"],
   list: (params: StudyListQueryOptionsParams) => ["study", "list", params],
   retrieve: (params: StudyRetrieveQueryOptionsParams) => [
     "study",

@@ -14,17 +14,15 @@ import { mockApiRoute } from "@/utils/mockApiRoute";
 export const mockUserRoutes = async (page: Page) => {
   await mockApiRoute(page, {
     route: usersApi.routes.retrieve,
-    pathParams: ["id"],
-    response: (request) => {
-      const url = new URL(request.url());
-      const userId = url.pathname.split("/").pop();
+    response: ({ params }) => {
+      const { id } = params;
 
-      if (userId === "me") {
+      if (id === "me") {
         // This is the default logged-in user
         return { status: 200, body: userFixtures[0] };
       }
 
-      const user = userFixtures.find((user) => user.id === userId);
+      const user = userFixtures.find((user) => user.id === id);
       if (!user) {
         return { status: 404, body: { message: "Not found" } };
       }
