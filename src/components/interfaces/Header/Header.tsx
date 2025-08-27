@@ -18,7 +18,7 @@ export const Header = () => {
     <header
       className={cn(
         "fixed top-0 z-10",
-        "flex h-14 w-full items-center justify-between gap-2 pr-3 pl-2",
+        "flex h-(--header-height) w-full items-center justify-between gap-2 pr-3 pl-2",
         "bg-bg-secondary border-border-secondary border-b",
       )}
     >

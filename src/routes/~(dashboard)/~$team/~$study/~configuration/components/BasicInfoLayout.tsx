@@ -7,13 +7,7 @@
 //
 
 import { Button } from "@stanfordspezi/spezi-web-design-system";
-import {
-  useRef,
-  type CSSProperties,
-  type ReactNode,
-  type RefObject,
-} from "react";
-import { useResizeObserver } from "usehooks-ts";
+import { type ReactNode } from "react";
 import { RouteHeader, RouteHeaderBackLink } from "@/components/ui/RouteHeader";
 
 interface BasicInfoLayoutProps {
@@ -22,15 +16,9 @@ interface BasicInfoLayoutProps {
 }
 
 export const BasicInfoLayout = ({ children, onSave }: BasicInfoLayoutProps) => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const { height = 0 } = useResizeObserver({
-    ref: headerRef as RefObject<HTMLDivElement>,
-  });
-
   return (
-    <div style={{ "--route-header-height": `${height}px` } as CSSProperties}>
+    <div>
       <RouteHeader
-        ref={headerRef}
         title="Basic Information"
         description="Set your study's title, description, and how it appears to participants."
         accessoryLeft={<RouteHeaderBackLink />}
