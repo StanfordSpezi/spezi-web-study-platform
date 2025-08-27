@@ -16,7 +16,7 @@ import {
   DialogTitle,
 } from "@stanfordspezi/spezi-web-design-system";
 import { useBlocker } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import { FeaturedIconContainer } from "../ui/FeaturedIconContainer";
 
 interface NavigationBlockerProps {
@@ -34,11 +34,9 @@ export const NavigationBlocker = ({ shouldBlock }: NavigationBlockerProps) => {
     <Dialog open={status === "blocked"} onOpenChange={reset}>
       <DialogContent className="max-w-sm">
         <DialogHeader className="items-center sm:items-start">
-          <FeaturedIconContainer className="mb-4 size-10">
-            <div className="size-full p-(--inner-padding) [--inner-padding:--spacing(0.5)]">
-              <div className="flex-center border-border-tertiary size-full rounded-[calc(var(--container-radius)-var(--container-padding)-var(--inner-padding))] border-2">
-                <ArrowLeft className="text-text-tertiary size-4" />
-              </div>
+          <FeaturedIconContainer className="border-border-tertiary mb-4 size-8 rounded-lg shadow-xs">
+            <div className="grid size-full place-items-center">
+              <CircleAlert className="text-text-tertiary size-4" />
             </div>
           </FeaturedIconContainer>
           <DialogTitle>Leave this page?</DialogTitle>

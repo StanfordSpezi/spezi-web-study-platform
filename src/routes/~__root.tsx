@@ -33,7 +33,7 @@ const RootComponent = () => {
         <div className="grid h-svh grid-rows-[1fr]">
           <Outlet />
         </div>
-        <Toaster />
+        <Toaster position="bottom-right" />
       </SpeziProvider>
     </>
   );

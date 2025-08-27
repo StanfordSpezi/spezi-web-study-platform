@@ -111,63 +111,39 @@ const splitUrlPath = (path: string) => {
 /**
  * Extracts path parameters from a URL based on a given pattern.
  *
- * The pattern should use colon-prefixed segments (e.g., `/users/:id/profile`)
- * to indicate parameters to extract from the URL's pathname.
- *
- * This function is robust to additional prefixes in the URL path (e.g., URL `/api/users/123`
- * with pattern `/users/:id`).
- *
  * @example
- * ```typescript
- * const url = new URL('https://example.com/users/123/profile');
- * const params = getPathParamsFromUrl(url, '/users/:id/profile');
- * // params = { id: '123' }
- *
- * const prefixedUrl = new URL('https://example.com/api/users/123');
- * const paramsWithPrefix = getPathParamsFromUrl(prefixedUrl, '/users/:id');
- * // paramsWithPrefix = { id: '123' }
- * ```
+ * ```ts
+ * const url = new URL("http://localhost:3001/api/users/123/posts/456?includeComments=true");
+ * const pattern = "/users/:userId/posts/:postId";
+ * const params = getPathParamsFromUrl(url, pattern);
+ * // params is { userId: "123", postId: "456" }
  */
 const getPathParamsFromUrl = (url: URL, pattern: string) => {
-  const urlParts = splitUrlPath(url.pathname);
+  // The URL pathname always starts with /api, so we need to
+  // remove it to be able to compare the segments
+  const cleanUrlPathname = url.pathname.replace(/^\/api/, "");
+  const urlParts = splitUrlPath(cleanUrlPathname);
   const patternParts = splitUrlPath(pattern);
 
-  // Slide the pattern over the URL segments to allow for prefix mismatches
-  for (
-    let offset = 0;
-    offset + patternParts.length <= urlParts.length;
-    offset++
-  ) {
-    const params: Record<string, string> = {};
-    let isMatch = true;
+  const params: Record<string, string> = {};
+  for (let i = 0; i < patternParts.length; i++) {
+    const patternSegment = patternParts[i];
+    const urlSegment = urlParts[i];
 
-    for (let i = 0; i < patternParts.length; i++) {
-      const patternSegment = patternParts[i];
-      const urlSegment = urlParts[offset + i];
-
-      if (patternSegment.startsWith(":")) {
-        const key = patternSegment.slice(1);
-        if (!key) {
-          isMatch = false;
-          break;
-        }
-        params[key] = urlSegment;
-      } else if (patternSegment === urlSegment) {
-        continue;
-      } else {
-        isMatch = false;
-        break;
+    if (patternSegment.startsWith(":")) {
+      const key = patternSegment.slice(1);
+      if (!key) {
+        throw new Error(`Invalid pattern segment: "${patternSegment}"`);
       }
-    }
-
-    if (isMatch) {
-      return params;
+      params[key] = urlSegment;
+    } else if (patternSegment !== urlSegment) {
+      throw new Error(
+        `URL segment "${urlSegment}" does not match pattern segment "${patternSegment}".`,
+      );
     }
   }
 
-  throw new Error(
-    `URL path "${url.pathname}" does not match the pattern "${pattern}".`,
-  );
+  return params;
 };
 
 /**

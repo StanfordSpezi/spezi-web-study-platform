@@ -8,8 +8,9 @@
 
 import { Button } from "@stanfordspezi/spezi-web-design-system";
 import { Check, CircleAlert } from "lucide-react";
-import { type ComponentProps, useEffect, useRef, useState } from "react";
+import { type ComponentProps } from "react";
 import { cn } from "@/utils/cn";
+import { useTimedFlag } from "@/utils/useTimedFlag";
 
 interface SaveButtonProps
   extends Omit<ComponentProps<typeof Button>, "children"> {
@@ -29,46 +30,8 @@ export const SaveButton = ({
   errorTimeout = 5000,
   ...props
 }: SaveButtonProps) => {
-  const [localIsSuccess, setLocalIsSuccess] = useState(false);
-  const [localIsError, setLocalIsError] = useState(false);
-  const successTimeoutRef = useRef<NodeJS.Timeout>(null);
-  const errorTimeoutRef = useRef<NodeJS.Timeout>(null);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setLocalIsSuccess(true);
-      if (successTimeoutRef.current) {
-        clearTimeout(successTimeoutRef.current);
-      }
-      successTimeoutRef.current = setTimeout(() => {
-        setLocalIsSuccess(false);
-      }, successTimeout);
-    }
-
-    return () => {
-      if (successTimeoutRef.current) {
-        clearTimeout(successTimeoutRef.current);
-      }
-    };
-  }, [isSuccess, successTimeout]);
-
-  useEffect(() => {
-    if (isError) {
-      setLocalIsError(true);
-      if (errorTimeoutRef.current) {
-        clearTimeout(errorTimeoutRef.current);
-      }
-      errorTimeoutRef.current = setTimeout(() => {
-        setLocalIsError(false);
-      }, errorTimeout);
-    }
-
-    return () => {
-      if (errorTimeoutRef.current) {
-        clearTimeout(errorTimeoutRef.current);
-      }
-    };
-  }, [isError, errorTimeout]);
+  const localIsSuccess = useTimedFlag(isSuccess, successTimeout);
+  const localIsError = useTimedFlag(isError, errorTimeout);
 
   return (
     <Button
@@ -84,19 +47,17 @@ export const SaveButton = ({
       )}
       {...props}
     >
-      {localIsSuccess && (
+      {localIsSuccess ?
         <div className="flex items-center gap-2">
           <span>Saved</span>
           <Check className="top-px size-4" strokeWidth={2.5} />
         </div>
-      )}
-      {localIsError && (
+      : localIsError ?
         <div className="flex w-full items-center gap-2">
           <CircleAlert className="relative top-[0.5px] size-4.5" />
           Error
         </div>
-      )}
-      {!localIsSuccess && !localIsError && "Save"}
+      : "Save"}
     </Button>
   );
 };

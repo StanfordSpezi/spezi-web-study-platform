@@ -6,8 +6,14 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { queryOptions } from "@tanstack/react-query";
+import { toast } from "@stanfordspezi/spezi-web-design-system";
+import {
+  queryOptions,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { studiesApi } from "@/server/api/studies";
+import type { ExtractZod, PathValue } from "@/utils/types";
 import { apiRequest } from "../apiRequest";
 
 export const studyQueryKeys = {
@@ -55,6 +61,43 @@ export const studyRetrieveQueryOptions = (
       return apiRequest({
         route: studiesApi.routes.retrieve,
         params: { id: params.studyId },
+      });
+    },
+  });
+};
+
+interface UseUpdateStudyMutationFnParams
+  extends ExtractZod<
+    PathValue<
+      typeof studiesApi.routes.update,
+      ["request", "body", "content", "application/json", "schema"]
+    >
+  > {
+  studyId: string;
+}
+
+/**
+ * Mutation for updating a study's basic information and enrollment settings.
+ */
+export const useUpdateStudyMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ studyId, ...data }: UseUpdateStudyMutationFnParams) => {
+      return apiRequest({
+        route: studiesApi.routes.update,
+        params: { id: studyId },
+        body: data,
+      });
+    },
+    onSuccess: () => {
+      return queryClient.invalidateQueries({
+        queryKey: studyQueryKeys.all,
+      });
+    },
+    onError: (error) => {
+      toast.error("Error saving basic information", {
+        description: error.message,
+        duration: 5000,
       });
     },
   });
