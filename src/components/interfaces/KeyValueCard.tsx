@@ -19,7 +19,7 @@ interface KeyValueCardProps {
   items: Array<{
     key: string;
     tooltip?: string;
-    value?: string | number;
+    value?: string | number | null;
   }>;
 }
 
