@@ -61,7 +61,7 @@ export const UserDropdown = () => {
           <div className="flex items-center gap-4 font-normal">
             <UserAvatar
               user={user}
-              wrapperClassName="[--avatar-size:--spacing(8)]"
+              className="text-sm [--avatar-size:--spacing(8)]"
             />
             <div>
               <div className="text-sm">{user.name}</div>
