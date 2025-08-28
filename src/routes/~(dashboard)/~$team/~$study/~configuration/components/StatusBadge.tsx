@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Badge, cn } from "@stanfordspezi/spezi-web-design-system";
+import { Badge, StatusDot } from "@stanfordspezi/spezi-web-design-system";
 
 interface StatusBadgeProps {
   isPublished?: boolean;
@@ -16,17 +16,12 @@ export const StatusBadge = ({ isPublished }: StatusBadgeProps) => {
   return (
     <Badge variant="outline">
       <div className="flex items-center gap-2 py-0.5">
-        <div className="bg-layer size-4 rounded-full border bg-clip-padding p-1 shadow-xs">
-          <div
-            className={cn(
-              "size-full rounded-full",
-              isPublished ? "bg-fill-success" : "bg-fill-tertiary",
-              isPublished && "shadow-fill-success/5",
-            )}
-            style={{ boxShadow: "0 0 6px 6px var(--tw-shadow-color)" }}
-          />
-        </div>
-        <div>{isPublished ? "Published" : "Draft"}</div>
+        <StatusDot
+          aria-hidden
+          status={isPublished ? "success" : "default"}
+          appearance="glow"
+        />
+        <p>{isPublished ? "Published" : "Draft"}</p>
       </div>
     </Badge>
   );

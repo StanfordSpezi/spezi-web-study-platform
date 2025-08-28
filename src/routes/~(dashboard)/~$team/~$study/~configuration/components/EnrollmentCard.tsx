@@ -6,11 +6,14 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { notImplementedAlert } from "@stanfordspezi/spezi-web-design-system";
+import {
+  formatNilBoolean,
+  formatNilDateRange,
+  notImplementedAlert,
+} from "@stanfordspezi/spezi-web-design-system";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
 import { EditButton } from "@/components/ui/EditButton";
 import type { Study } from "@/server/database/entities/study/schema";
-import { formatBoolean, formatDateRange } from "@/utils/formatValue";
 
 interface EnrollmentCardProps {
   study?: Study;
@@ -28,7 +31,14 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
         {
           key: "Enrollment period",
           tooltip: "The date range when new participants can join your study.",
-          value: formatDateRange(study?.enrollmentPeriod),
+          value: formatNilDateRange(
+            study?.enrollmentPeriod,
+            new Intl.DateTimeFormat("en", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            }),
+          ),
         },
         {
           key: "Study duration",
@@ -40,7 +50,7 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
           key: "Private study",
           tooltip:
             "When enabled, only people with an invitation link can join. No public enrollment.",
-          value: formatBoolean(study?.isPrivateStudy),
+          value: formatNilBoolean(study?.isPrivateStudy),
         },
       ]}
     />
