@@ -10,6 +10,7 @@ import { createRoute, z } from "@hono/zod-openapi";
 import { error404Schema } from "@/server/error";
 import { openApiTags } from "@/server/tags";
 import {
+  studyInsertSchema,
   studyListQuerySchema,
   studyRetrieveParams,
   studySelectSchema,
@@ -49,6 +50,43 @@ export const retrieve = createRoute({
         },
       },
       description: "The study details",
+    },
+    404: {
+      content: {
+        "application/json": {
+          schema: error404Schema,
+        },
+      },
+      description: "Study not found",
+    },
+  },
+});
+
+export type UpdateRoute = typeof update;
+export const update = createRoute({
+  tags: [openApiTags.studies.name],
+  path: "/studies/:id",
+  method: "put",
+  description: "Update a specific study by its id",
+  request: {
+    params: studyRetrieveParams,
+    body: {
+      content: {
+        "application/json": {
+          schema: studyInsertSchema,
+        },
+      },
+      description: "The study data to update",
+    },
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: studySelectSchema,
+        },
+      },
+      description: "The updated study details",
     },
     404: {
       content: {

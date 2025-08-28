@@ -159,4 +159,63 @@ test.describe("Study Configuration Basic Information Tests", () => {
       await expect(highlightElement).not.toBeVisible();
     });
   });
+
+  test.describe("Update and Save", () => {
+    test("saves updated basic info and persists after reload", async ({
+      page,
+    }) => {
+      const newTitle = `${study.title} — Updated`;
+      const newExplanation = "Updated explanation for persistence test.";
+
+      const titleInput = page.getByRole("textbox", { name: /^title/i });
+      await titleInput.clear();
+      await titleInput.fill(newTitle);
+
+      const explanationTextarea = page.getByRole("textbox", {
+        name: /^explanation/i,
+      });
+      await explanationTextarea.clear();
+      await explanationTextarea.fill(newExplanation);
+
+      await page.getByRole("button", { name: /^save$/i }).click();
+
+      // Saved state feedback appears on the button
+      await expect(page.getByRole("button", { name: /saved/i })).toBeVisible();
+
+      // Reload the page and verify values are persisted by the API mocks
+      await page.reload();
+      await expect(
+        page.getByRole("heading", { name: "Basic Information" }),
+      ).toBeVisible();
+
+      await expect(titleInput).toHaveValue(newTitle);
+      await expect(explanationTextarea).toHaveValue(newExplanation);
+    });
+
+    test("does not block navigation after saving changes", async ({ page }) => {
+      const titleInput = page.getByRole("textbox", { name: /^title/i });
+      await titleInput.clear();
+      await titleInput.fill("Title to navigate after saving");
+
+      // Attempt to navigate with unsaved changes -> expect blocker dialog
+      await page.getByRole("link", { name: "Back" }).click();
+      await expect(
+        page.getByText("Leave this page?", { exact: false }),
+      ).toBeVisible();
+      await page.getByRole("button", { name: /^stay$/i }).click();
+      await expect(
+        page.getByText("Leave this page?", { exact: false }),
+      ).not.toBeVisible();
+
+      // Save changes
+      await page.getByRole("button", { name: /^save$/i }).click();
+      await expect(page.getByRole("button", { name: /saved/i })).toBeVisible();
+
+      // Navigate again -> should not show the blocker and should navigate
+      await page.getByRole("link", { name: "Back" }).click();
+      await expect(page).toHaveURL((url) =>
+        url.pathname.endsWith(`/${team.id}/${study.id}/configuration`),
+      );
+    });
+  });
 });

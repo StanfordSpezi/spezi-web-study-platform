@@ -225,6 +225,14 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 
 - `text-on-fill`: Used for text that appears on elements with a neutral fill color.
 
+###### Secondary
+
+- `text-secondary-on-fill`: Used for text that appears on elements with a neutral secondary fill color.
+
+###### Tertiary
+
+- `text-tertiary-on-fill`: Used for text that appears on elements with a neutral tertiary fill color.
+
 ##### Info
 
 ###### Primary
@@ -270,7 +278,11 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 ```
 
 ```tsx
-<Tag className="bg-fill text-text-on-fill" />
+<TagGroup>
+  <Tag className="bg-fill text-text-on-fill" />
+  <Tag className="bg-fill-secondary text-text-secondary-on-fill" />
+  <Tag className="bg-fill-tertiary text-text-tertiary-on-fill" />
+</TagGroup>
 ```
 
 ```tsx
