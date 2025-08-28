@@ -17,16 +17,12 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="[--header-height:--spacing(14)]">
-      <SidebarProvider className="flex flex-col">
-        <Header />
-        <div className="flex flex-1">
-          <AppSidebar className="top-(--header-height) !h-[calc(100svh-var(--header-height))]" />
-          <SidebarInset className="pt-(--header-height)">
-            {children}
-          </SidebarInset>
-        </div>
-      </SidebarProvider>
-    </div>
+    <SidebarProvider className="flex flex-col">
+      <Header />
+      <div className="flex flex-1">
+        <AppSidebar className="top-(--header-height) !h-[calc(100svh-var(--header-height))]" />
+        <SidebarInset className="pt-(--header-height)">{children}</SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 };

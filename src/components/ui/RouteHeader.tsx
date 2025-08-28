@@ -9,11 +9,17 @@
 import { cn } from "@stanfordspezi/spezi-web-design-system";
 import { createLink, type LinkComponentProps } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { type ComponentProps, type ReactNode } from "react";
+import {
+  useRef,
+  type ComponentProps,
+  type ReactNode,
+  type RefObject,
+} from "react";
+import { useResizeObserver } from "usehooks-ts";
 import { useIsScrolled } from "@/utils/useIsScrolled";
 import { DashedSeparator } from "./DashedSeparator";
 
-interface RouteHeaderProps extends Pick<ComponentProps<"div">, "ref"> {
+interface RouteHeaderProps {
   title: ReactNode;
   description: ReactNode;
   accessoryLeft?: ReactNode;
@@ -21,16 +27,27 @@ interface RouteHeaderProps extends Pick<ComponentProps<"div">, "ref"> {
 }
 
 export const RouteHeader = ({
-  ref,
   title,
   description,
   accessoryLeft,
   accessoryRight,
 }: RouteHeaderProps) => {
   const isScrolled = useIsScrolled();
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useResizeObserver({
+    ref: headerRef as RefObject<HTMLDivElement>,
+    onResize: ({ height = 0 }) => {
+      document.documentElement.style.setProperty(
+        "--route-header-height",
+        `${height}px`,
+      );
+    },
+  });
+
   return (
     <div
-      ref={ref}
+      ref={headerRef}
       className={cn(
         "bg-bg/80 sticky top-(--header-height) backdrop-blur-md transition-shadow duration-200",
         isScrolled && "shadow-lg shadow-black/2",
