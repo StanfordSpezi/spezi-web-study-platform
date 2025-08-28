@@ -30,8 +30,7 @@
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint --output-file eslint_report.json --format json .",
     "prepush": "npm run lint:fix && tsc --noEmit",
-    "test": "playwright test",
-    "postinstall": "patch-package"
+    "test": "playwright test"
   },
   "dependencies": {
     "@stanfordspezi/spezi-web-design-system": "^0.16.0",
@@ -67,7 +66,6 @@
     "concurrently": "^9.2.0",
     "eslint": "^9",
     "hono": "^4.9.1",
-    "patch-package": "^8.0.0",
     "prettier": "^3",
     "tsx": "^4.20.4",
     "typescript": "^5",
