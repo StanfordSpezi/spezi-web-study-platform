@@ -80,3 +80,5 @@ export const studyRetrieveParams = z.object({
     description: "The unique identifier of the study",
   }),
 });
+
+export const studyInsertSchema = studySelectSchema.omit({ id: true }).partial();

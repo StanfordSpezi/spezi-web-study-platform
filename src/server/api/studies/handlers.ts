@@ -6,10 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { getDevDatabase } from "@/server/database";
+import { getDevDatabase, setDevDatabase } from "@/server/database";
 import { respondWithError } from "@/server/error";
 import { type AppRouteHandler } from "@/server/utils";
-import type { ListRoute, RetrieveRoute } from "./routes";
+import type { ListRoute, RetrieveRoute, UpdateRoute } from "./routes";
 
 export const list: AppRouteHandler<ListRoute> = (c) => {
   const query = c.req.valid("query");
@@ -60,4 +60,43 @@ export const retrieve: AppRouteHandler<RetrieveRoute> = (c) => {
   }
 
   return c.json(study, 200);
+};
+
+export const update: AppRouteHandler<UpdateRoute> = (c) => {
+  const param = c.req.valid("param");
+  const body = c.req.valid("json");
+  const user = c.get("user");
+
+  const db = getDevDatabase();
+
+  const study = db.studies.find((study) => study.id === param.id);
+  if (!study) {
+    return respondWithError(c, 404, {
+      message: `Study with id ${param.id} not found. Make sure it exists and ${user.id} has access to it.`,
+    });
+  }
+
+  const updateStudies = () => {
+    const updatedStudy = { ...study, ...body };
+    const newStudies = db.studies.map((study) =>
+      study.id === param.id ? updatedStudy : study,
+    );
+    setDevDatabase({ studies: newStudies });
+    return updatedStudy;
+  };
+
+  if (user.role === "admin") {
+    const updatedStudy = updateStudies();
+    return c.json(updatedStudy, 200);
+  }
+
+  const isMember = user.teamIds?.includes(study.teamId);
+  if (!isMember) {
+    return respondWithError(c, 404, {
+      message: `Study with id ${param.id} not found. Make sure it exists and ${user.id} has access to it.`,
+    });
+  }
+
+  const updatedStudy = updateStudies();
+  return c.json(updatedStudy, 200);
 };

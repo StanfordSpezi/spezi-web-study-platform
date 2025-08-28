@@ -28,7 +28,7 @@ export const HeaderSelectorSkeleton = ({ hasIcon }: { hasIcon: boolean }) => {
         </div>
       )}
       <div className="grid h-4 w-20 flex-1">
-        <Skeleton className="bg-fill-tertiary size-full rounded-sm" />
+        <Skeleton className="bg-fill-secondary size-full rounded-sm" />
       </div>
       <ChevronsUpDown className="ml-auto" />
     </div>

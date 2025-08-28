@@ -6,23 +6,25 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Button } from "@stanfordspezi/spezi-web-design-system";
 import { type ReactNode } from "react";
 import { RouteHeader, RouteHeaderBackLink } from "@/components/ui/RouteHeader";
 
 interface BasicInfoLayoutProps {
   children: ReactNode;
-  onSave: () => void;
+  saveButton: ReactNode;
 }
 
-export const BasicInfoLayout = ({ children, onSave }: BasicInfoLayoutProps) => {
+export const BasicInfoLayout = ({
+  children,
+  saveButton,
+}: BasicInfoLayoutProps) => {
   return (
     <div>
       <RouteHeader
         title="Basic Information"
         description="Set your study's title, description, and how it appears to participants."
         accessoryLeft={<RouteHeaderBackLink />}
-        accessoryRight={<Button onClick={onSave}>Save</Button>}
+        accessoryRight={saveButton}
       />
       {children}
     </div>

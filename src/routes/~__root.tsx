@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { SpeziProvider } from "@stanfordspezi/spezi-web-design-system";
+import { SpeziProvider, Toaster } from "@stanfordspezi/spezi-web-design-system";
 import type { QueryClient } from "@tanstack/react-query";
 import {
   createRootRouteWithContext,
@@ -33,6 +33,7 @@ const RootComponent = () => {
         <div className="grid h-svh grid-rows-[1fr]">
           <Outlet />
         </div>
+        <Toaster position="bottom-right" />
       </SpeziProvider>
     </>
   );
