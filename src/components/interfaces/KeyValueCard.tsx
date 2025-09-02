@@ -6,7 +6,11 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Skeleton, Tooltip } from "@stanfordspezi/spezi-web-design-system";
+import {
+  Skeleton,
+  Tooltip,
+  type Nil,
+} from "@stanfordspezi/spezi-web-design-system";
 import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
 import { Card, CardHeader } from "../ui/Card";
@@ -19,7 +23,7 @@ interface KeyValueCardProps {
   items: Array<{
     key: string;
     tooltip?: string;
-    value?: string | number | null;
+    value: Nil<string | number>;
   }>;
 }
 
