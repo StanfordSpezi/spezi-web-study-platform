@@ -83,7 +83,7 @@ const CreateTeamRoute = () => {
               className="flex-1"
               render={({ field: { onChange, value, ...field } }) => (
                 <Input
-                  placeholder="Team name"
+                  placeholder="Enter team name"
                   value={value}
                   onChange={onChange}
                   {...field}

@@ -9,7 +9,6 @@
 import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { Plus } from "lucide-react";
 import { studyListQueryOptions } from "@/lib/queries/study";
 import {
   HeaderSelector,
@@ -52,7 +51,7 @@ export const StudySelector = () => {
       ))}
       <DropdownMenuSeparator />
       <HeaderSelectorMenuItem
-        icon={Plus}
+        icon="plus"
         linkOptions={{ to: "." }}
         className="text-text-tertiary"
       >

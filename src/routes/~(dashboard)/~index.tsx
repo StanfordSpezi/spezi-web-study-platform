@@ -24,6 +24,7 @@ export const Route = createFileRoute("/(dashboard)/")({
       queryClient.ensureQueryData(userRetrieveQueryOptions({ userId: "me" })),
       queryClient.ensureQueryData(teamListQueryOptions()),
     ]);
+
     const firstTeam = teams.at(0);
 
     if (!firstTeam) {
@@ -39,7 +40,10 @@ export const Route = createFileRoute("/(dashboard)/")({
     const firstStudy = studies.at(0);
 
     if (!firstStudy) {
-      throw new Error(`No studies found for team ${firstTeam.id}`);
+      return redirect({
+        to: "/$team",
+        params: { team: firstTeam.id },
+      });
     }
 
     return redirect({

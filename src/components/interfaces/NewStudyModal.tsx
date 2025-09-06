@@ -67,7 +67,9 @@ export const NewStudyModal = ({ children, teamId }: NewStudyModalProps) => {
               control={form.control}
               name="title"
               label={<FieldLabel title="Study title" />}
-              render={({ field }) => <Input {...field} />}
+              render={({ field }) => (
+                <Input placeholder="Enter study title" {...field} />
+              )}
             />
           </div>
           <DialogFooter>
