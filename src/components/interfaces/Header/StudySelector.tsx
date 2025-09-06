@@ -19,11 +19,15 @@ import {
 import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
 
 export const StudySelector = () => {
-  const params = useParams({ from: "/(dashboard)/$team/$study" });
+  const params = useParams({ strict: false });
   const { data: studies } = useQuery(
     studyListQueryOptions({ team_id: params.team }),
   );
   const selectedStudy = studies?.find((study) => study.id === params.study);
+
+  if (!params.study) {
+    return null;
+  }
 
   if (!studies || !selectedStudy) {
     return <HeaderSelectorSkeleton hasIcon={false} />;
@@ -38,7 +42,7 @@ export const StudySelector = () => {
           linkOptions={{
             to: "/$team/$study",
             params: {
-              team: params.team,
+              team: study.teamId,
               study: study.id,
             },
           }}

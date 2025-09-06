@@ -6,8 +6,14 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { queryOptions } from "@tanstack/react-query";
+import { toast } from "@stanfordspezi/spezi-web-design-system";
+import {
+  queryOptions,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { teamsApi } from "@/server/api/teams";
+import type { ExtractZod, PathValue } from "@/utils/types";
 import { apiRequest } from "../apiRequest";
 
 export const teamQueryKeys = {
@@ -49,6 +55,40 @@ export const teamRetrieveQueryOptions = (
       return apiRequest({
         route: teamsApi.routes.retrieve,
         params: { id: params.teamId },
+      });
+    },
+  });
+};
+
+interface UseCreateTeamMutationFnParams
+  extends ExtractZod<
+    PathValue<
+      typeof teamsApi.routes.create,
+      ["request", "body", "content", "application/json", "schema"]
+    >
+  > {}
+
+/**
+ * Mutation for creating a new team.
+ */
+export const useCreateTeamMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: UseCreateTeamMutationFnParams) => {
+      return apiRequest<typeof teamsApi.routes.create, 201>({
+        route: teamsApi.routes.create,
+        body: data,
+      });
+    },
+    onSuccess: () => {
+      return queryClient.invalidateQueries({
+        queryKey: teamQueryKeys.list(),
+      });
+    },
+    onError: (error) => {
+      toast.error("Error creating team", {
+        description: error.message,
+        duration: 5000,
       });
     },
   });

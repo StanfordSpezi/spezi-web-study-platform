@@ -9,20 +9,28 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { studyListQueryOptions } from "@/lib/queries/study";
 import { teamListQueryOptions } from "@/lib/queries/team";
+import { userRetrieveQueryOptions } from "@/lib/queries/user";
 
 /*
- If a user lands on the root path, we want to redirect them to the
- first team and study they have access to. If they have no teams or studies,
- we redirect them to an error page for now. In the future this will route to
- a "create team" or "create study" page.
+  If a user lands on the root path, we want to redirect them to the
+  first team and study they have access to. If they have no teams and they have
+  admin rights, they will be redirected to the onboarding flow. If they have no
+  teams and they don't have admin rights, they will be redirected to the access
+  pending page.
  */
 export const Route = createFileRoute("/(dashboard)/")({
   beforeLoad: async ({ context: { queryClient } }) => {
-    const teams = await queryClient.fetchQuery(teamListQueryOptions());
+    const [user, teams] = await Promise.all([
+      queryClient.ensureQueryData(userRetrieveQueryOptions({ userId: "me" })),
+      queryClient.ensureQueryData(teamListQueryOptions()),
+    ]);
     const firstTeam = teams.at(0);
 
     if (!firstTeam) {
-      throw new Error("No teams found");
+      if (user.role === "admin") {
+        return redirect({ to: "/onboarding" });
+      }
+      return redirect({ to: "/onboarding/access-pending" });
     }
 
     const studies = await queryClient.fetchQuery(
