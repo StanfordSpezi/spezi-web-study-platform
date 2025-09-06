@@ -27,7 +27,6 @@ import { Route as dashboardOnboardingInviteRouteImport } from './routes/~(dashbo
 import { Route as dashboardOnboardingAccessPendingRouteImport } from './routes/~(dashboard)/~onboarding/~access-pending'
 import { Route as dashboardTeamStudyLayoutRouteImport } from './routes/~(dashboard)/~$team/~$study/~layout'
 import { Route as dashboardOnboardingIndexRouteImport } from './routes/~(dashboard)/~onboarding/~index'
-import { Route as dashboardNewIndexRouteImport } from './routes/~(dashboard)/~new/~index'
 import { Route as dashboardTeamIndexRouteImport } from './routes/~(dashboard)/~$team/~index'
 import { Route as dashboardTeamStudyResultsRouteImport } from './routes/~(dashboard)/~$team/~$study/~results'
 import { Route as dashboardTeamStudyParticipantsRouteImport } from './routes/~(dashboard)/~$team/~$study/~participants'
@@ -79,11 +78,6 @@ const dashboardOnboardingIndexRoute =
     path: '/',
     getParentRoute: () => dashboardOnboardingLayoutRoute,
   } as any)
-const dashboardNewIndexRoute = dashboardNewIndexRouteImport.update({
-  id: '/new/',
-  path: '/new/',
-  getParentRoute: () => dashboardLayoutRoute,
-} as any)
 const dashboardTeamIndexRoute = dashboardTeamIndexRouteImport.update({
   id: '/$team/',
   path: '/$team/',
@@ -124,7 +118,6 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof authSignInRoute
   '/onboarding': typeof dashboardOnboardingLayoutRouteWithChildren
   '/$team': typeof dashboardTeamIndexRoute
-  '/new': typeof dashboardNewIndexRoute
   '/onboarding/': typeof dashboardOnboardingIndexRoute
   '/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
   '/onboarding/access-pending': typeof dashboardOnboardingAccessPendingRoute
@@ -139,7 +132,6 @@ export interface FileRoutesByTo {
   '/': typeof dashboardIndexRoute
   '/sign-in': typeof authSignInRoute
   '/$team': typeof dashboardTeamIndexRoute
-  '/new': typeof dashboardNewIndexRoute
   '/onboarding': typeof dashboardOnboardingIndexRoute
   '/onboarding/access-pending': typeof dashboardOnboardingAccessPendingRoute
   '/onboarding/invite': typeof dashboardOnboardingInviteRoute
@@ -156,7 +148,6 @@ export interface FileRoutesById {
   '/(auth)/sign-in': typeof authSignInRoute
   '/(dashboard)/onboarding': typeof dashboardOnboardingLayoutRouteWithChildren
   '/(dashboard)/$team/': typeof dashboardTeamIndexRoute
-  '/(dashboard)/new/': typeof dashboardNewIndexRoute
   '/(dashboard)/onboarding/': typeof dashboardOnboardingIndexRoute
   '/(dashboard)/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
   '/(dashboard)/onboarding/access-pending': typeof dashboardOnboardingAccessPendingRoute
@@ -174,7 +165,6 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/onboarding'
     | '/$team'
-    | '/new'
     | '/onboarding/'
     | '/$team/$study'
     | '/onboarding/access-pending'
@@ -189,7 +179,6 @@ export interface FileRouteTypes {
     | '/'
     | '/sign-in'
     | '/$team'
-    | '/new'
     | '/onboarding'
     | '/onboarding/access-pending'
     | '/onboarding/invite'
@@ -205,7 +194,6 @@ export interface FileRouteTypes {
     | '/(auth)/sign-in'
     | '/(dashboard)/onboarding'
     | '/(dashboard)/$team/'
-    | '/(dashboard)/new/'
     | '/(dashboard)/onboarding/'
     | '/(dashboard)/$team/$study'
     | '/(dashboard)/onboarding/access-pending'
@@ -279,13 +267,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/onboarding/'
       preLoaderRoute: typeof dashboardOnboardingIndexRouteImport
       parentRoute: typeof dashboardOnboardingLayoutRoute
-    }
-    '/(dashboard)/new/': {
-      id: '/(dashboard)/new/'
-      path: '/new'
-      fullPath: '/new'
-      preLoaderRoute: typeof dashboardNewIndexRouteImport
-      parentRoute: typeof dashboardLayoutRoute
     }
     '/(dashboard)/$team/': {
       id: '/(dashboard)/$team/'
@@ -379,7 +360,6 @@ interface dashboardLayoutRouteChildren {
   dashboardIndexRoute: typeof dashboardIndexRoute
   dashboardOnboardingLayoutRoute: typeof dashboardOnboardingLayoutRouteWithChildren
   dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
-  dashboardNewIndexRoute: typeof dashboardNewIndexRoute
   dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
 }
 
@@ -387,7 +367,6 @@ const dashboardLayoutRouteChildren: dashboardLayoutRouteChildren = {
   dashboardIndexRoute: dashboardIndexRoute,
   dashboardOnboardingLayoutRoute: dashboardOnboardingLayoutRouteWithChildren,
   dashboardTeamIndexRoute: dashboardTeamIndexRoute,
-  dashboardNewIndexRoute: dashboardNewIndexRoute,
   dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
 }
 

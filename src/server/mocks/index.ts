@@ -42,11 +42,13 @@ interface ClearMockDataParams {
  * clear endpoint. This is useful for testing onboarding or setup flows.
  */
 export const clearMockData = ({ page, entity }: ClearMockDataParams) => {
-  return page.evaluate(async (url) => {
-    const response = await fetch(url, { method: "GET" });
+  return page.evaluate(async (entity) => {
+    const response = await fetch(`http://localhost:3001/api/${entity}/_clear`, {
+      method: "GET",
+    });
     if (!response.ok) {
       throw new Error(`Failed to clear mock data for ${entity}`);
     }
     return response;
-  }, `http://localhost:3001/api/${entity}/_clear`);
+  }, entity);
 };
