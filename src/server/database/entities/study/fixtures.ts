@@ -22,6 +22,7 @@ export const studyFixtures: Study[] = [
       start: "2025-01-01",
       end: "2025-12-31",
     },
+    icon: "tree-pine",
   },
   {
     id: "study_sleep_patterns",
