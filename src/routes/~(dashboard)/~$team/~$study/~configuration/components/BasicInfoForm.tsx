@@ -6,8 +6,16 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Input, Field, Textarea } from "@stanfordspezi/spezi-web-design-system";
+import {
+  Input,
+  Field,
+  Textarea,
+  Button,
+  Label,
+} from "@stanfordspezi/spezi-web-design-system";
+import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { FieldLabel } from "@/components/ui/FieldLabel";
+import { IconPicker } from "@/components/ui/IconPicker";
 import type { BasicInfoForm as BasicInfoFormType } from "../lib/useBasicInfoForm";
 
 interface BasicInfoFormProps {
@@ -47,18 +55,39 @@ export const BasicInfoForm = ({
         )}
         className="border-border-tertiary border-b px-6"
       />
-      <Field
-        control={form.control}
-        name="shortTitle"
-        label={
-          <FieldLabel
-            title="Short Title"
-            description="Used in tight spaces where the full title won't fit."
-          />
-        }
-        render={({ field }) => <Input {...field} />}
-        className="border-border-tertiary border-b px-6 pt-6"
-      />
+      <Label className="mb-2 flex px-6 pt-6">
+        <FieldLabel
+          title="Team icon & name"
+          description="Used in tight spaces where the full title won't fit."
+        />
+      </Label>
+      <div className="border-border-tertiary flex gap-4 border-b px-6">
+        <Field
+          control={form.control}
+          name="icon"
+          render={({ field: { value, onChange, ...field } }) => (
+            <IconPicker
+              value={value as IconName}
+              onValueChange={onChange}
+              {...field}
+            >
+              <Button
+                size={null}
+                variant="outline"
+                className="bg-bg size-10 rounded-md"
+              >
+                <DynamicIcon name={value as IconName} className="size-4" />
+              </Button>
+            </IconPicker>
+          )}
+        />
+        <Field
+          control={form.control}
+          name="shortTitle"
+          render={({ field }) => <Input {...field} />}
+          className="flex-1"
+        />
+      </div>
       <Field
         control={form.control}
         name="explanation"
