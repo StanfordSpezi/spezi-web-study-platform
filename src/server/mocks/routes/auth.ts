@@ -13,17 +13,14 @@ import { mockApiRoute } from "@/utils/mockApiRoute";
 import { authApi } from "../../api/auth";
 import type { authUserSchema } from "../../api/auth/schema";
 
-const authUser: z.infer<typeof authUserSchema> = {
-  id: userFixtures[0].id,
-  email: userFixtures[0].email,
-  name: userFixtures[0].name,
-  image: userFixtures[0].imageUrl ?? null,
-  emailVerified: false,
-  createdAt: "2025-08-21T11:28:34.000Z",
-  updatedAt: "2025-08-21T11:28:34.000Z",
-};
+interface MockIsAuthenticatedOptions {
+  authUser: z.infer<typeof authUserSchema>;
+}
 
-export const mockIsAuthenticated = async (page: Page) => {
+const mockIsAuthenticated = async (
+  page: Page,
+  options: MockIsAuthenticatedOptions,
+) => {
   await mockApiRoute(page, {
     route: authApi.routes.getSession,
     response: () => ({
@@ -37,23 +34,52 @@ export const mockIsAuthenticated = async (page: Page) => {
           ipAddress: "192.168.1.1",
           userAgent:
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
-          userId: userFixtures[0].id,
+          userId: options.authUser.id,
           id: "zdcXIFbz4iwA30KDct1PZ6mT4gF22LDI",
         },
-        user: authUser,
+        user: options.authUser,
       },
     }),
   });
 };
 
-export const mockIsNotAuthenticated = async (page: Page) => {
+const mockIsNotAuthenticated = async (page: Page) => {
   await mockApiRoute(page, {
     route: authApi.routes.getSession,
     response: () => ({ status: 200, body: null }),
   });
 };
 
-export const mockAuthRoutes = async (page: Page) => {
+interface MockAuthRoutesOptions {
+  isAuthenticated: boolean;
+  role: "admin" | "user";
+}
+
+export const mockAuthRoutes = async (
+  page: Page,
+  options: MockAuthRoutesOptions,
+) => {
+  const userFixture = userFixtures.find((user) => user.role === options.role);
+  if (!userFixture) {
+    throw new Error(`No user found with role ${options.role}`);
+  }
+
+  const authUser = {
+    id: userFixture.id,
+    email: userFixture.email,
+    name: userFixture.name,
+    image: userFixture.imageUrl ?? null,
+    emailVerified: false,
+    createdAt: "2025-08-21T11:28:34.000Z",
+    updatedAt: "2025-08-21T11:28:34.000Z",
+  };
+
+  if (options.isAuthenticated) {
+    await mockIsAuthenticated(page, { authUser });
+  } else {
+    await mockIsNotAuthenticated(page);
+  }
+
   await mockApiRoute(page, {
     route: authApi.routes.signIn,
     response: () => ({
@@ -64,7 +90,7 @@ export const mockAuthRoutes = async (page: Page) => {
         user: authUser,
       },
     }),
-    onFulfill: () => mockIsAuthenticated(page),
+    onFulfill: () => mockIsAuthenticated(page, { authUser }),
   });
 
   await mockApiRoute(page, {

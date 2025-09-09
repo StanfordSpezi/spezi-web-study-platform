@@ -6,10 +6,11 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { getDevDatabase } from "@/server/database";
+import { getDevDatabase, setDevDatabase } from "@/server/database";
+import type { Team } from "@/server/database/entities/team/schema";
 import { respondWithError } from "@/server/error";
 import { type AppRouteHandler } from "@/server/utils";
-import type { ListRoute, RetrieveRoute } from "./routes";
+import type { CreateRoute, ListRoute, RetrieveRoute } from "./routes";
 
 export const list: AppRouteHandler<ListRoute> = (c) => {
   const user = c.get("user");
@@ -52,4 +53,35 @@ export const retrieve: AppRouteHandler<RetrieveRoute> = (c) => {
   }
 
   return c.json(team, 200);
+};
+
+export const create: AppRouteHandler<CreateRoute> = (c) => {
+  const body = c.req.valid("json");
+  const user = c.get("user");
+
+  if (user.role !== "admin") {
+    return respondWithError(c, 403, {
+      message: "Insufficient permissions to create teams",
+    });
+  }
+
+  const db = getDevDatabase();
+
+  if (db.teams.some((team) => team.name === body.name)) {
+    return respondWithError(c, 409, {
+      message: `Team with name ${body.name} already exists.`,
+    });
+  }
+
+  const newTeam: Team = {
+    id: `team_${Date.now()}`,
+    ...body,
+  };
+
+  const newTeams = [...db.teams, newTeam];
+  setDevDatabase({ teams: newTeams });
+
+  // No need to add the team to the user's teamIds, as this is an admin action.
+
+  return c.json(newTeam, 201);
 };

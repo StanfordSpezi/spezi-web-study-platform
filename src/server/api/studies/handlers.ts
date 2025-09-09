@@ -7,9 +7,15 @@
 //
 
 import { getDevDatabase, setDevDatabase } from "@/server/database";
+import type { Study } from "@/server/database/entities/study/schema";
 import { respondWithError } from "@/server/error";
 import { type AppRouteHandler } from "@/server/utils";
-import type { ListRoute, RetrieveRoute, UpdateRoute } from "./routes";
+import type {
+  CreateRoute,
+  ListRoute,
+  RetrieveRoute,
+  UpdateRoute,
+} from "./routes";
 
 export const list: AppRouteHandler<ListRoute> = (c) => {
   const query = c.req.valid("query");
@@ -60,6 +66,32 @@ export const retrieve: AppRouteHandler<RetrieveRoute> = (c) => {
   }
 
   return c.json(study, 200);
+};
+
+export const create: AppRouteHandler<CreateRoute> = (c) => {
+  const body = c.req.valid("json");
+
+  const db = getDevDatabase();
+
+  const titleExists = db.studies.some(
+    (study) =>
+      study.title.toLowerCase().trim() === body.title.toLowerCase().trim(),
+  );
+  if (titleExists) {
+    return respondWithError(c, 409, {
+      message: `A study with title ${body.title} already exists.`,
+    });
+  }
+
+  const newStudy: Study = {
+    id: `study_${Date.now()}`,
+    ...body,
+  };
+
+  const newStudies = [...db.studies, newStudy];
+  setDevDatabase({ studies: newStudies });
+
+  return c.json(newStudy, 201);
 };
 
 export const update: AppRouteHandler<UpdateRoute> = (c) => {
