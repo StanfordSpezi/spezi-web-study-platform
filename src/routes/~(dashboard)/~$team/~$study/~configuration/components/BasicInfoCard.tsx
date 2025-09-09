@@ -7,6 +7,7 @@
 //
 
 import { useParams } from "@tanstack/react-router";
+import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
 import { EditButtonLink } from "@/components/ui/EditButton";
 import type { Study } from "@/server/database/entities/study/schema";
@@ -49,7 +50,13 @@ export const BasicInfoCard = ({ study, isLoading }: BasicInfoCardProps) => {
         {
           key: "Icon",
           tooltip: "The icon representing your study.",
-          value: study?.icon,
+          value:
+            study?.icon ?
+              <DynamicIcon
+                name={study.icon as IconName}
+                className="size-4 opacity-80"
+              />
+            : null,
         },
         {
           key: "Explanation",

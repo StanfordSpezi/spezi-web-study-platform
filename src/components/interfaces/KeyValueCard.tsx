@@ -23,7 +23,7 @@ interface KeyValueCardProps {
   items: Array<{
     key: string;
     tooltip?: string;
-    value: Nil<string | number>;
+    value: Nil<ReactNode>;
   }>;
 }
 
