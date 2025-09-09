@@ -57,7 +57,7 @@ export const BasicInfoForm = ({
       />
       <Label className="mb-2 flex px-6 pt-6">
         <FieldLabel
-          title="Team icon & name"
+          title="Study icon & name"
           description="Used in tight spaces where the full title won't fit."
         />
       </Label>
