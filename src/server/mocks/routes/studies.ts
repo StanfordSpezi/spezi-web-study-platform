@@ -40,6 +40,15 @@ export const mockStudiesRoutes = async (page: Page) => {
   });
 
   await mockApiRoute(page, {
+    route: studiesApi.routes.create,
+    response: ({ body }) => {
+      const newStudy = { id: "new-study-id", ...body };
+      studies.push(newStudy);
+      return { status: 201, body: newStudy };
+    },
+  });
+
+  await mockApiRoute(page, {
     route: studiesApi.routes.update,
     response: ({ params, body }) => {
       const { id } = params;
@@ -51,5 +60,10 @@ export const mockStudiesRoutes = async (page: Page) => {
       studies[studyIndex] = updatedStudy;
       return { status: 200, body: updatedStudy };
     },
+  });
+
+  await page.route("http://localhost:3001/api/studies/_clear", (route) => {
+    studies.length = 0;
+    return route.fulfill({ status: 200 });
   });
 };

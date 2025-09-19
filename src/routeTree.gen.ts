@@ -20,9 +20,13 @@
 
 import { Route as rootRouteImport } from './routes/~__root'
 import { Route as dashboardLayoutRouteImport } from './routes/~(dashboard)/~layout'
+import { Route as dashboardOnboardingLayoutRouteImport } from './routes/~(dashboard)/~onboarding/~layout'
 import { Route as authSignInRouteImport } from './routes/~(auth)/~sign-in'
 import { Route as dashboardIndexRouteImport } from './routes/~(dashboard)/~index'
+import { Route as dashboardOnboardingInviteRouteImport } from './routes/~(dashboard)/~onboarding/~invite'
+import { Route as dashboardOnboardingAccessPendingRouteImport } from './routes/~(dashboard)/~onboarding/~access-pending'
 import { Route as dashboardTeamStudyLayoutRouteImport } from './routes/~(dashboard)/~$team/~$study/~layout'
+import { Route as dashboardOnboardingIndexRouteImport } from './routes/~(dashboard)/~onboarding/~index'
 import { Route as dashboardTeamIndexRouteImport } from './routes/~(dashboard)/~$team/~index'
 import { Route as dashboardTeamStudyResultsRouteImport } from './routes/~(dashboard)/~$team/~$study/~results'
 import { Route as dashboardTeamStudyParticipantsRouteImport } from './routes/~(dashboard)/~$team/~$study/~participants'
@@ -34,6 +38,12 @@ const dashboardLayoutRoute = dashboardLayoutRouteImport.update({
   id: '/(dashboard)',
   getParentRoute: () => rootRouteImport,
 } as any)
+const dashboardOnboardingLayoutRoute =
+  dashboardOnboardingLayoutRouteImport.update({
+    id: '/onboarding',
+    path: '/onboarding',
+    getParentRoute: () => dashboardLayoutRoute,
+  } as any)
 const authSignInRoute = authSignInRouteImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
@@ -44,11 +54,29 @@ const dashboardIndexRoute = dashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => dashboardLayoutRoute,
 } as any)
+const dashboardOnboardingInviteRoute =
+  dashboardOnboardingInviteRouteImport.update({
+    id: '/invite',
+    path: '/invite',
+    getParentRoute: () => dashboardOnboardingLayoutRoute,
+  } as any)
+const dashboardOnboardingAccessPendingRoute =
+  dashboardOnboardingAccessPendingRouteImport.update({
+    id: '/access-pending',
+    path: '/access-pending',
+    getParentRoute: () => dashboardOnboardingLayoutRoute,
+  } as any)
 const dashboardTeamStudyLayoutRoute =
   dashboardTeamStudyLayoutRouteImport.update({
     id: '/$team/$study',
     path: '/$team/$study',
     getParentRoute: () => dashboardLayoutRoute,
+  } as any)
+const dashboardOnboardingIndexRoute =
+  dashboardOnboardingIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => dashboardOnboardingLayoutRoute,
   } as any)
 const dashboardTeamIndexRoute = dashboardTeamIndexRouteImport.update({
   id: '/$team/',
@@ -88,8 +116,12 @@ const dashboardTeamStudyConfigurationIndexRoute =
 export interface FileRoutesByFullPath {
   '/': typeof dashboardIndexRoute
   '/sign-in': typeof authSignInRoute
+  '/onboarding': typeof dashboardOnboardingLayoutRouteWithChildren
   '/$team': typeof dashboardTeamIndexRoute
+  '/onboarding/': typeof dashboardOnboardingIndexRoute
   '/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
+  '/onboarding/access-pending': typeof dashboardOnboardingAccessPendingRoute
+  '/onboarding/invite': typeof dashboardOnboardingInviteRoute
   '/$team/$study/': typeof dashboardTeamStudyIndexRoute
   '/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
   '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
@@ -100,6 +132,9 @@ export interface FileRoutesByTo {
   '/': typeof dashboardIndexRoute
   '/sign-in': typeof authSignInRoute
   '/$team': typeof dashboardTeamIndexRoute
+  '/onboarding': typeof dashboardOnboardingIndexRoute
+  '/onboarding/access-pending': typeof dashboardOnboardingAccessPendingRoute
+  '/onboarding/invite': typeof dashboardOnboardingInviteRoute
   '/$team/$study': typeof dashboardTeamStudyIndexRoute
   '/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
   '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
@@ -111,8 +146,12 @@ export interface FileRoutesById {
   '/(dashboard)': typeof dashboardLayoutRouteWithChildren
   '/(dashboard)/': typeof dashboardIndexRoute
   '/(auth)/sign-in': typeof authSignInRoute
+  '/(dashboard)/onboarding': typeof dashboardOnboardingLayoutRouteWithChildren
   '/(dashboard)/$team/': typeof dashboardTeamIndexRoute
+  '/(dashboard)/onboarding/': typeof dashboardOnboardingIndexRoute
   '/(dashboard)/$team/$study': typeof dashboardTeamStudyLayoutRouteWithChildren
+  '/(dashboard)/onboarding/access-pending': typeof dashboardOnboardingAccessPendingRoute
+  '/(dashboard)/onboarding/invite': typeof dashboardOnboardingInviteRoute
   '/(dashboard)/$team/$study/': typeof dashboardTeamStudyIndexRoute
   '/(dashboard)/$team/$study/participants': typeof dashboardTeamStudyParticipantsRoute
   '/(dashboard)/$team/$study/results': typeof dashboardTeamStudyResultsRoute
@@ -124,8 +163,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/sign-in'
+    | '/onboarding'
     | '/$team'
+    | '/onboarding/'
     | '/$team/$study'
+    | '/onboarding/access-pending'
+    | '/onboarding/invite'
     | '/$team/$study/'
     | '/$team/$study/participants'
     | '/$team/$study/results'
@@ -136,6 +179,9 @@ export interface FileRouteTypes {
     | '/'
     | '/sign-in'
     | '/$team'
+    | '/onboarding'
+    | '/onboarding/access-pending'
+    | '/onboarding/invite'
     | '/$team/$study'
     | '/$team/$study/participants'
     | '/$team/$study/results'
@@ -146,8 +192,12 @@ export interface FileRouteTypes {
     | '/(dashboard)'
     | '/(dashboard)/'
     | '/(auth)/sign-in'
+    | '/(dashboard)/onboarding'
     | '/(dashboard)/$team/'
+    | '/(dashboard)/onboarding/'
     | '/(dashboard)/$team/$study'
+    | '/(dashboard)/onboarding/access-pending'
+    | '/(dashboard)/onboarding/invite'
     | '/(dashboard)/$team/$study/'
     | '/(dashboard)/$team/$study/participants'
     | '/(dashboard)/$team/$study/results'
@@ -169,6 +219,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(dashboard)/onboarding': {
+      id: '/(dashboard)/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof dashboardOnboardingLayoutRouteImport
+      parentRoute: typeof dashboardLayoutRoute
+    }
     '/(auth)/sign-in': {
       id: '/(auth)/sign-in'
       path: '/sign-in'
@@ -183,12 +240,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardIndexRouteImport
       parentRoute: typeof dashboardLayoutRoute
     }
+    '/(dashboard)/onboarding/invite': {
+      id: '/(dashboard)/onboarding/invite'
+      path: '/invite'
+      fullPath: '/onboarding/invite'
+      preLoaderRoute: typeof dashboardOnboardingInviteRouteImport
+      parentRoute: typeof dashboardOnboardingLayoutRoute
+    }
+    '/(dashboard)/onboarding/access-pending': {
+      id: '/(dashboard)/onboarding/access-pending'
+      path: '/access-pending'
+      fullPath: '/onboarding/access-pending'
+      preLoaderRoute: typeof dashboardOnboardingAccessPendingRouteImport
+      parentRoute: typeof dashboardOnboardingLayoutRoute
+    }
     '/(dashboard)/$team/$study': {
       id: '/(dashboard)/$team/$study'
       path: '/$team/$study'
       fullPath: '/$team/$study'
       preLoaderRoute: typeof dashboardTeamStudyLayoutRouteImport
       parentRoute: typeof dashboardLayoutRoute
+    }
+    '/(dashboard)/onboarding/': {
+      id: '/(dashboard)/onboarding/'
+      path: '/'
+      fullPath: '/onboarding/'
+      preLoaderRoute: typeof dashboardOnboardingIndexRouteImport
+      parentRoute: typeof dashboardOnboardingLayoutRoute
     }
     '/(dashboard)/$team/': {
       id: '/(dashboard)/$team/'
@@ -235,6 +313,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface dashboardOnboardingLayoutRouteChildren {
+  dashboardOnboardingIndexRoute: typeof dashboardOnboardingIndexRoute
+  dashboardOnboardingAccessPendingRoute: typeof dashboardOnboardingAccessPendingRoute
+  dashboardOnboardingInviteRoute: typeof dashboardOnboardingInviteRoute
+}
+
+const dashboardOnboardingLayoutRouteChildren: dashboardOnboardingLayoutRouteChildren =
+  {
+    dashboardOnboardingIndexRoute: dashboardOnboardingIndexRoute,
+    dashboardOnboardingAccessPendingRoute:
+      dashboardOnboardingAccessPendingRoute,
+    dashboardOnboardingInviteRoute: dashboardOnboardingInviteRoute,
+  }
+
+const dashboardOnboardingLayoutRouteWithChildren =
+  dashboardOnboardingLayoutRoute._addFileChildren(
+    dashboardOnboardingLayoutRouteChildren,
+  )
+
 interface dashboardTeamStudyLayoutRouteChildren {
   dashboardTeamStudyIndexRoute: typeof dashboardTeamStudyIndexRoute
   dashboardTeamStudyParticipantsRoute: typeof dashboardTeamStudyParticipantsRoute
@@ -261,12 +358,14 @@ const dashboardTeamStudyLayoutRouteWithChildren =
 
 interface dashboardLayoutRouteChildren {
   dashboardIndexRoute: typeof dashboardIndexRoute
+  dashboardOnboardingLayoutRoute: typeof dashboardOnboardingLayoutRouteWithChildren
   dashboardTeamIndexRoute: typeof dashboardTeamIndexRoute
   dashboardTeamStudyLayoutRoute: typeof dashboardTeamStudyLayoutRouteWithChildren
 }
 
 const dashboardLayoutRouteChildren: dashboardLayoutRouteChildren = {
   dashboardIndexRoute: dashboardIndexRoute,
+  dashboardOnboardingLayoutRoute: dashboardOnboardingLayoutRouteWithChildren,
   dashboardTeamIndexRoute: dashboardTeamIndexRoute,
   dashboardTeamStudyLayoutRoute: dashboardTeamStudyLayoutRouteWithChildren,
 }

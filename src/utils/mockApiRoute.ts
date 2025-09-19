@@ -185,6 +185,11 @@ export const mockApiRoute = <T extends RouteConfig>(
   return page.route(`http://localhost:3001/api${cleanPath}*`, (mockRoute) => {
     const request = mockRoute.request();
     const url = new URL(request.url());
+    const requestMethod = request.method().toLowerCase();
+
+    if (requestMethod !== route.method) {
+      return mockRoute.fallback();
+    }
 
     const pathParams = getPathParamsFromUrl(url, route.path);
     const query = Object.fromEntries(url.searchParams);

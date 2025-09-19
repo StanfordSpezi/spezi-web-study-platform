@@ -9,13 +9,11 @@
 import { Button, toast } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
-import speziImage from "@/assets/spezi.webp";
-import stanfordImage from "@/assets/stanford.webp";
-import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
+import { BrandIconGroup } from "@/components/interfaces/BrandIconGroup";
 import { authClient } from "@/lib/authClient";
 import { userFixtures } from "@/server/database/entities/user/fixtures";
 
-const SignInComponent = () => {
+const SignInRoute = () => {
   const navigate = Route.useNavigate();
   const search = Route.useSearch();
 
@@ -36,29 +34,10 @@ const SignInComponent = () => {
   };
 
   return (
-    <div className="flex-center relative isolate size-full flex-col gap-10">
+    <div className="flex-center relative size-full flex-col gap-10 p-4">
       <div className="bg-dots absolute inset-0 -z-10" />
       <div className="bg-bg absolute inset-0 -z-10 mask-radial-from-10% mask-radial-to-140%" />
-      <div className="flex -space-x-2">
-        <FeaturedIconContainer className="translate-y-1 -rotate-12">
-          <div className="flex-center size-full inset-shadow-sm">
-            {/* Compensate the round Spezi Image */}
-            <img src={speziImage} alt="Spezi Logo" className="scale-125" />
-          </div>
-        </FeaturedIconContainer>
-        <FeaturedIconContainer className="z-10">
-          <div className="flex-center bg-brand-500 text-brand-50 size-full inset-shadow-sm">
-            <div className="scale-y-110 font-serif text-2xl font-semibold text-shadow-xs">
-              S
-            </div>
-          </div>
-        </FeaturedIconContainer>
-        <FeaturedIconContainer className="translate-y-1 rotate-12">
-          <div className="flex-center bg-bg size-full inset-shadow-sm">
-            <img src={stanfordImage} alt="Stanford Logo" />
-          </div>
-        </FeaturedIconContainer>
-      </div>
+      <BrandIconGroup />
       <div className="flex-center flex-col gap-6">
         <h1 className="text-text max-w-48 text-center text-xl/snug font-medium text-balance">
           Welcome to the Spezi Study Platform
@@ -85,7 +64,7 @@ const SignInComponent = () => {
 };
 
 export const Route = createFileRoute("/(auth)/sign-in")({
-  component: SignInComponent,
+  component: SignInRoute,
   validateSearch: z.object({
     redirect: z.string().optional(),
   }),

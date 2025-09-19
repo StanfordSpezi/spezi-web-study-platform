@@ -7,6 +7,7 @@
 //
 
 import type { RouteConfig } from "@hono/zod-openapi";
+import type { StatusCode } from "hono/utils/http-status";
 import type { ErrorPayload } from "@/server/error";
 import { joinUrlPaths } from "@/utils/joinUrlPaths";
 import type {
@@ -49,20 +50,24 @@ import { env } from "./env";
  * // Schemas["Response"]-> { id: string; name: string }
  * ```
  */
-interface ExtractRouteSchemas<T extends RouteConfig> {
+interface ExtractRouteSchemas<
+  T extends RouteConfig,
+  C extends StatusCode = 200,
+> {
   Params: ExtractZod<PathValue<T, ["request", "params"]>>;
   Query: ExtractZod<PathValue<T, ["request", "query"]>>;
   Body: ExtractZod<
     PathValue<T, ["request", "body", "content", "application/json", "schema"]>
   >;
   Response: ExtractZod<
-    PathValue<T, ["responses", 200, "content", "application/json", "schema"]>
+    PathValue<T, ["responses", C, "content", "application/json", "schema"]>
   >;
 }
 
 type ApiRequestOptions<
   T extends RouteConfig,
-  S extends ExtractRouteSchemas<T>,
+  S extends ExtractRouteSchemas<T, C>,
+  C extends StatusCode = 200,
 > = {
   route: T;
   headers?: Record<string, string>;
@@ -205,13 +210,14 @@ const getRequestValue = (
  */
 export const apiRequest = async <
   T extends RouteConfig,
-  S extends ExtractRouteSchemas<T> = ExtractRouteSchemas<T>,
+  C extends StatusCode = 200,
+  S extends ExtractRouteSchemas<T, C> = ExtractRouteSchemas<T, C>,
 >({
   route: { method, path },
   headers,
   signal,
   ...request
-}: ApiRequestOptions<T, S>): Promise<S["Response"]> => {
+}: ApiRequestOptions<T, S, C>): Promise<S["Response"]> => {
   const query = getRequestValue(request, "query");
   const params = getRequestValue(request, "params");
   const body = getRequestValue(request, "body");

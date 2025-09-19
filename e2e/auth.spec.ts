@@ -7,18 +7,11 @@
 //
 
 import { expect, test } from "@/lib/playwrightFixtures";
-import {
-  loadApiMocks,
-  mockIsAuthenticated,
-  mockIsNotAuthenticated,
-} from "@/server/mocks";
+import { loadApiMocks } from "@/server/mocks";
 
 test.describe("Authentication Flows", () => {
-  test.beforeEach(async ({ page }) => {
-    await Promise.all([loadApiMocks(page), mockIsNotAuthenticated(page)]);
-  });
-
   test("redirects to sign-in when not authenticated", async ({ page }) => {
+    await loadApiMocks(page, { isAuthenticated: false });
     await page.goto("/");
     await expect(page).toHaveURL(/\/sign-in/);
     await expect(
@@ -27,6 +20,7 @@ test.describe("Authentication Flows", () => {
   });
 
   test("can sign in and access protected route", async ({ page }) => {
+    await loadApiMocks(page, { isAuthenticated: false });
     await page.goto("/sign-in");
     await page.getByRole("button", { name: /sign into/i }).click();
     await expect(page).not.toHaveURL(/\/sign-in/);
@@ -37,7 +31,7 @@ test.describe("Authentication Flows", () => {
   test("logging out redirects to sign-in and blocks dashboard", async ({
     page,
   }) => {
-    await mockIsAuthenticated(page);
+    await loadApiMocks(page, { isAuthenticated: true });
     await page.goto("/");
     // Open user dropdown and click sign out
     await page.getByRole("button", { name: /user menu/i }).click();
@@ -49,7 +43,7 @@ test.describe("Authentication Flows", () => {
   });
 
   test("auth state persists across reloads", async ({ page }) => {
-    await mockIsAuthenticated(page);
+    await loadApiMocks(page, { isAuthenticated: true });
     await page.goto("/");
     await expect(page).not.toHaveURL(/\/sign-in/);
     await page.reload();
