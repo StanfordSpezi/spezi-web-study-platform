@@ -150,10 +150,10 @@ test.describe("Study Configuration Basic Information Tests", () => {
     });
 
     test("does not highlight non-preview field", async ({ page }) => {
-      const shortTitleInput = page.getByRole("textbox", {
-        name: /^short title/i,
+      const shortExplanationInput = page.getByRole("textbox", {
+        name: /^short explanation/i,
       });
-      await shortTitleInput.focus();
+      await shortExplanationInput.focus();
 
       const highlightElement = page.getByTestId("phone-preview-highlight");
       await expect(highlightElement).not.toBeVisible();
