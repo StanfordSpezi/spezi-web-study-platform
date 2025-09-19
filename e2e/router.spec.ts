@@ -28,7 +28,7 @@ test.describe("Router Tests", () => {
     page,
   }) => {
     await page.goto("/");
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
     await expect(page.getByText(team.name)).toBeVisible();
     await expect(page.getByText(study.title)).toBeVisible();
   });
@@ -37,7 +37,7 @@ test.describe("Router Tests", () => {
     page,
   }) => {
     await page.goto(`/${team.id}`);
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
     await expect(page.getByText(team.name)).toBeVisible();
 
     await expect(page.getByText(study.title)).toBeVisible();
@@ -47,7 +47,7 @@ test.describe("Router Tests", () => {
     page,
   }) => {
     await page.goto("/");
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
 
     await page.getByRole("link", { name: "Configuration" }).click();
     await expect(page.getByText("Study Configuration")).toBeVisible();
