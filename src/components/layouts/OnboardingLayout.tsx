@@ -11,7 +11,7 @@ import { cn } from "@/utils/cn";
 import { MinimalUserDropdown } from "../interfaces/Header/MinimalUserDropdown";
 
 interface OnboardingLayoutProps {
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
 }
 
 export const OnboardingLayout = ({ children }: OnboardingLayoutProps) => {

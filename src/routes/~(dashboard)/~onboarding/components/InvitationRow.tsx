@@ -8,6 +8,7 @@
 
 import {
   Button,
+  Field,
   Input,
   Select,
   SelectContent,
@@ -16,75 +17,60 @@ import {
   SelectValue,
 } from "@stanfordspezi/spezi-web-design-system";
 import { Trash } from "lucide-react";
-import type { User } from "@/server/database/entities/user/schema";
-import type { Invitation } from "../lib/useInvitationForm";
-
-const roles: Array<{ label: string; value: User["role"] }> = [
-  {
-    label: "User",
-    value: "user",
-  },
-  {
-    label: "Admin",
-    value: "admin",
-  },
-];
+import type { useInvitationForm } from "../lib/useInvitationForm";
 
 interface InvitationRowProps {
-  invitation: Invitation;
   index: number;
-  invitationCount: number;
-  update: (index: number, data: Partial<Invitation>) => void;
-  remove: (index: number) => void;
+  form: ReturnType<typeof useInvitationForm>["form"];
 }
 
-export const InvitationRow = ({
-  invitation,
-  index,
-  invitationCount,
-  update,
-  remove,
-}: InvitationRowProps) => {
+export const InvitationRow = ({ index, form }: InvitationRowProps) => {
+  const formValues = form.getValues();
+
+  const removeInvitation = () => {
+    const invitations = form.getValues("invitations");
+    invitations.splice(index, 1);
+    form.setValue("invitations", invitations);
+  };
   return (
-    <div className="flex gap-2">
+    <li className="flex gap-2">
       <div className="flex flex-1 gap-4">
-        <Input
-          type="email"
-          required
-          placeholder="Enter email"
-          value={invitation.email}
-          onChange={(event) => update(index, { email: event.target.value })}
+        <Field
+          control={form.control}
+          name={`invitations.${index}.email`}
+          className="flex-1"
+          render={({ field }) => (
+            <Input type="email" placeholder="Enter email" {...field} />
+          )}
         />
-        <Select
-          value={invitation.role}
-          onValueChange={(value) =>
-            update(index, { role: value as User["role"] })
-          }
-        >
-          <SelectTrigger className="!w-44">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {roles.map((role) => (
-              <SelectItem key={role.value} value={role.value}>
-                {role.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Field
+          control={form.control}
+          name={`invitations.${index}.role`}
+          render={({ field: { onChange, ...field } }) => (
+            <Select onValueChange={onChange} {...field}>
+              <SelectTrigger className="!w-44">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="user">User</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
       </div>
       {index > 0 ?
         <Button
           variant="ghost"
           size={null}
-          onClick={() => remove(index)}
+          onClick={removeInvitation}
           className="size-10 rounded-md p-3"
         >
           <Trash className="text-text-tertiary opacity-80" />
         </Button>
-      : invitationCount > 1 ?
+      : formValues.invitations.length > 1 ?
         <div className="size-10" />
       : null}
-    </div>
+    </li>
   );
 };

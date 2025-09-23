@@ -30,20 +30,20 @@ const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
 });
 
-interface NewStudyModalProps {
+interface NewStudyDialogProps {
   teamId: string;
   children: ReactNode;
 }
 
-export const NewStudyModal = ({ children, teamId }: NewStudyModalProps) => {
-  const { mutate, isPending } = useCreateStudyMutation();
+export const NewStudyDialog = ({ children, teamId }: NewStudyDialogProps) => {
+  const createStudy = useCreateStudyMutation();
   const form = useForm({
     formSchema,
     defaultValues: { title: "" },
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    mutate({ teamId, ...data });
+    createStudy.mutate({ teamId, ...data });
   });
 
   return (
@@ -77,7 +77,7 @@ export const NewStudyModal = ({ children, teamId }: NewStudyModalProps) => {
               type="submit"
               variant="default"
               size="sm"
-              isPending={isPending}
+              isPending={createStudy.isPending}
             >
               Create study
             </Button>

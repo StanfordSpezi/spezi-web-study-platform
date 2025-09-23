@@ -9,7 +9,7 @@
 import { Button, cn } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { ListPlus } from "lucide-react";
-import { NewStudyModal } from "@/components/interfaces/NewStudyModal";
+import { NewStudyDialog } from "@/components/interfaces/NewStudyDialog";
 import { MinimalDashboardLayout } from "@/components/layouts/MinimalDashboardLayout";
 import { Card } from "@/components/ui/Card";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
@@ -40,9 +40,9 @@ const TeamRoute = () => {
                 </h1>
                 <p>Create and launch your first study today.</p>
               </div>
-              <NewStudyModal teamId={params.team}>
+              <NewStudyDialog teamId={params.team}>
                 <Button>Create study</Button>
-              </NewStudyModal>
+              </NewStudyDialog>
             </div>
           </div>
         </Card>

@@ -22,14 +22,14 @@ import { useBasicInfoForm } from "./lib/useBasicInfoForm";
 const BasicInformationRouteComponent = () => {
   const params = Route.useParams();
   const form = useBasicInfoForm();
-  const { mutate, isPending, isSuccess, isError } = useUpdateStudyMutation();
+  const updateStudy = useUpdateStudyMutation();
 
   const [highlightedField, setHighlightedField] = useState<
     string | undefined
   >();
 
   const handleSave = form.handleSubmit((data) => {
-    mutate(
+    updateStudy.mutate(
       { studyId: params.study, ...data },
       {
         onSuccess: (data) => {
@@ -51,9 +51,9 @@ const BasicInformationRouteComponent = () => {
       saveButton={
         <SaveButton
           onClick={handleSave}
-          isPending={isPending}
-          isSuccess={isSuccess}
-          isError={isError}
+          isPending={updateStudy.isPending}
+          isSuccess={updateStudy.isSuccess}
+          isError={updateStudy.isError}
         />
       }
     >

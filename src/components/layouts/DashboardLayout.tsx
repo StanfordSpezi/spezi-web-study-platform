@@ -12,7 +12,7 @@ import { AppSidebar } from "../interfaces/Sidebar/AppSidebar";
 import { SidebarInset, SidebarProvider } from "../interfaces/Sidebar/Sidebar";
 
 interface DashboardLayoutProps {
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
 }
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {

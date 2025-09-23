@@ -36,7 +36,7 @@ export const HeaderSelectorMenuItem = <
   TOptions = unknown,
 >({
   children,
-  icon: Icon,
+  icon,
   linkOptions,
   className,
 }: {
@@ -48,9 +48,9 @@ export const HeaderSelectorMenuItem = <
   return (
     <DropdownMenuItem className={cn("gap-2 p-2!", className)} asChild>
       <Link {...linkOptions}>
-        {Icon && (
+        {icon && (
           <div className="flex-center size-6 rounded-sm border">
-            <DynamicIcon name={Icon} className="size-4 shrink-0" />
+            <DynamicIcon name={icon} className="size-4 shrink-0" />
           </div>
         )}
         {children}

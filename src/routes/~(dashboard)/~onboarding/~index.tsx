@@ -28,14 +28,14 @@ const formSchema = z.object({
 
 const CreateTeamRoute = () => {
   const navigate = useNavigate();
-  const { mutateAsync: createTeam } = useCreateTeamMutation();
+  const createTeam = useCreateTeamMutation();
   const form = useForm({
     formSchema,
     defaultValues: { icon: "tree-pine", name: "" },
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    const { id } = await createTeam({ ...data });
+    const { id } = await createTeam.mutateAsync({ ...data });
     await navigate({
       from: "/onboarding",
       to: "/onboarding/invite",
@@ -81,13 +81,8 @@ const CreateTeamRoute = () => {
               control={form.control}
               name="name"
               className="flex-1"
-              render={({ field: { onChange, value, ...field } }) => (
-                <Input
-                  placeholder="Enter team name"
-                  value={value}
-                  onChange={onChange}
-                  {...field}
-                />
+              render={({ field: { ...field } }) => (
+                <Input placeholder="Enter team name" {...field} />
               )}
             />
           </div>

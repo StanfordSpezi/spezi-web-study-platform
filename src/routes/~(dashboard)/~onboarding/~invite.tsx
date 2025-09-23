@@ -35,12 +35,22 @@ const InviteTeamRoute = () => {
         to: "/",
       });
 
-  const { formRef, invitations, add, update, remove, submit } =
-    useInvitationForm({
-      onSubmit: async () => {
-        await navigate(linkOptions);
-      },
-    });
+  const { form, defaultInvitation } = useInvitationForm();
+  const formValues = form.watch();
+
+  const addInvitation = () => {
+    form.setValue("invitations", [
+      ...formValues.invitations,
+      defaultInvitation,
+    ]);
+  };
+
+  const submit = form.handleSubmit(async (data) => {
+    // Here we would typically send the invitations to your server
+    // For now, we just log them to the console
+    console.log("Invitations to send:", data.invitations);
+    await navigate(linkOptions);
+  });
 
   return (
     <div className="flex size-full flex-col">
@@ -63,20 +73,13 @@ const InviteTeamRoute = () => {
             <Label className="mb-2 flex">
               <FieldLabel title="Emails" />
             </Label>
-            <form ref={formRef} className="flex flex-col gap-2">
-              {invitations.map((invitation, index) => (
-                <InvitationRow
-                  key={index}
-                  invitation={invitation}
-                  index={index}
-                  invitationCount={invitations.length}
-                  update={update}
-                  remove={remove}
-                />
+            <ul className="flex flex-col">
+              {formValues.invitations.map((_, index) => (
+                <InvitationRow key={index} index={index} form={form} />
               ))}
-            </form>
+            </ul>
             <div className="py-4">
-              <Button variant="outline" size="xs" onClick={add}>
+              <Button variant="outline" size="xs" onClick={addInvitation}>
                 <Plus className="size-2.5" />
                 Add another
               </Button>
