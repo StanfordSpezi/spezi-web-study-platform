@@ -42,8 +42,20 @@ export const NewStudyDialog = ({ children, teamId }: NewStudyDialogProps) => {
     defaultValues: { title: "" },
   });
 
-  const handleSubmit = form.handleSubmit((data) => {
-    createStudy.mutate({ teamId, ...data });
+  const handleSubmit = form.handleSubmit(({ title }) => {
+    createStudy.mutate({
+      teamId,
+      title,
+      shortTitle: null,
+      icon: null,
+      explanation: null,
+      shortExplanation: null,
+      isPublished: false,
+      enrollmentPeriod: null,
+      studyDuration: null,
+      isPrivateStudy: false,
+      participationCriteria: null,
+    });
   });
 
   return (

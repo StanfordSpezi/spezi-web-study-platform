@@ -561,7 +561,8 @@ const SidebarMenuButton = ({
     <Tooltip
       side="right"
       tooltip={tooltip}
-      className={cn((state !== "collapsed" || isMobile) && "hidden")}
+      variant="inverted"
+      className={cn((state !== "collapsed" || isMobile) && "hidden", "text-sm")}
     >
       {button}
     </Tooltip>

@@ -18,7 +18,7 @@ export const Card = ({ className, ...props }: CardProps) => {
         "[--card-padding:--spacing(5)]",
         "bg-layer flex w-full flex-col rounded-xl border",
         "bg-clip-padding",
-        "shadow-lg shadow-black/4",
+        "shadow-lg/3",
         className,
       )}
       {...props}

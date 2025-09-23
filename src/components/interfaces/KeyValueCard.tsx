@@ -51,6 +51,7 @@ export const KeyValueCard = ({
             <div className="flex-1">
               <Tooltip
                 side="right"
+                variant="inverted"
                 delayDuration={500}
                 className="max-w-lg text-sm"
                 sideOffset={10}

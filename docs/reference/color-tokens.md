@@ -263,6 +263,12 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 
 - `text-critical-on-fill`: Used for text that appears on elements with a critical fill color.
 
+##### Inverted
+
+###### Primary
+
+- `text-inverted-on-fill`: Used for text that appears on elements with an inverted fill color.
+
 ##### Examples
 
 ```tsx
@@ -313,4 +319,10 @@ These styles apply to the text color of elements, ensuring good contrast and rea
 <Button className="bg-fill-critical text-text-critical-on-fill">
   Delete Study
 </Button>
+```
+
+```tsx
+<Tooltip className="bg-fill-inverted text-text-inverted-on-fill">
+  Additional Info
+</Tooltip>
 ```

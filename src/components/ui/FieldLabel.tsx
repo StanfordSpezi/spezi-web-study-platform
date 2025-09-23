@@ -7,15 +7,21 @@
 //
 
 import type { ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
 interface FieldLabelProps {
   title: ReactNode;
   description?: ReactNode;
+  className?: string;
 }
 
-export const FieldLabel = ({ title, description }: FieldLabelProps) => {
+export const FieldLabel = ({
+  title,
+  description,
+  className,
+}: FieldLabelProps) => {
   return (
-    <div className="space-y-1.5 pb-1">
+    <div className={cn("space-y-1.5 pb-1", className)}>
       <div className="font-normal">{title}</div>
       {description && (
         <div className="text-text-tertiary leading-tight font-normal text-pretty">
