@@ -105,7 +105,7 @@ test.describe("Create study flow", () => {
 
     // Navigates to the newly created study's home
     await expect(page).toHaveURL(new RegExp("new-study-id"));
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
   });
 });
 
@@ -118,6 +118,6 @@ test.describe("Onboarding redirect when teams already exist", () => {
   test("navigating to /onboarding redirects to dashboard", async ({ page }) => {
     await page.goto("/onboarding");
     // Will be redirected to team route, then to first available study
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
   });
 });
