@@ -123,7 +123,7 @@ SPDX-License-Identifier: MIT
   --color-secondary: var(--color-fill);
   --color-secondary-foreground: var(--color-text-on-fill);
   --color-muted: var(--color-bg-secondary);
-  --color-muted-foreground: var(--color-text-secondary);
+  --color-muted-foreground: var(--color-text-tertiary);
   --color-accent: var(--color-bg-secondary-hover);
   --color-accent-foreground: var(--color-text-secondary);
   --color-input: var(--color-border);

@@ -12,17 +12,43 @@ import { mockStudiesRoutes } from "./routes/studies";
 import { mockTeamsRoutes } from "./routes/teams";
 import { mockUserRoutes } from "./routes/user";
 
+interface LoadApiMocksOptions {
+  /** Defaults to `true` */
+  isAuthenticated?: boolean;
+  /** Defaults to `admin` */
+  role?: "admin" | "user";
+}
+
 /**
  * Loads and initializes all API route mocks for the given Playwright page.
  */
-export const loadApiMocks = (page: Page) => {
+export const loadApiMocks = (page: Page, options: LoadApiMocksOptions = {}) => {
+  const { isAuthenticated = true, role = "admin" } = options;
   return Promise.all([
-    mockAuthRoutes(page),
-    mockUserRoutes(page),
+    mockAuthRoutes(page, { isAuthenticated, role }),
+    mockUserRoutes(page, { role }),
     mockTeamsRoutes(page),
     mockStudiesRoutes(page),
   ]);
 };
 
-// Re-export for convenience
-export { mockIsAuthenticated, mockIsNotAuthenticated } from "./routes/auth";
+interface ClearMockDataParams {
+  page: Page;
+  entity: "teams" | "studies";
+}
+
+/**
+ * Clears mock data for the specified entity by sending a request to the corresponding
+ * clear endpoint. This is useful for testing onboarding or setup flows.
+ */
+export const clearMockData = ({ page, entity }: ClearMockDataParams) => {
+  return page.evaluate(async (entity) => {
+    const response = await fetch(`http://localhost:3001/api/${entity}/_clear`, {
+      method: "GET",
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to clear mock data for ${entity}`);
+    }
+    return response;
+  }, entity);
+};

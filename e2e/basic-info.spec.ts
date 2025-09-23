@@ -9,14 +9,14 @@
 import { expect, test } from "@/lib/playwrightFixtures";
 import { studyFixtures } from "@/server/database/entities/study/fixtures";
 import { teamFixtures } from "@/server/database/entities/team/fixtures";
-import { loadApiMocks, mockIsAuthenticated } from "@/server/mocks";
+import { loadApiMocks } from "@/server/mocks";
 
 const [team] = teamFixtures;
 const [study] = studyFixtures.filter((study) => study.teamId === team.id);
 
 test.describe("Study Configuration Basic Information Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await Promise.all([mockIsAuthenticated(page), loadApiMocks(page)]);
+    await loadApiMocks(page);
     await page.goto(`/${team.id}/${study.id}/configuration/basic-information`);
   });
 
@@ -150,10 +150,10 @@ test.describe("Study Configuration Basic Information Tests", () => {
     });
 
     test("does not highlight non-preview field", async ({ page }) => {
-      const shortTitleInput = page.getByRole("textbox", {
-        name: /^short title/i,
+      const shortExplanationInput = page.getByRole("textbox", {
+        name: /^short explanation/i,
       });
-      await shortTitleInput.focus();
+      await shortExplanationInput.focus();
 
       const highlightElement = page.getByTestId("phone-preview-highlight");
       await expect(highlightElement).not.toBeVisible();

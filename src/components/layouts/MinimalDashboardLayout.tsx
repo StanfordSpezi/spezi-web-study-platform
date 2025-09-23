@@ -8,21 +8,17 @@
 
 import type { ReactNode } from "react";
 import { Header } from "../interfaces/Header/Header";
-import { AppSidebar } from "../interfaces/Sidebar/AppSidebar";
-import { SidebarInset, SidebarProvider } from "../interfaces/Sidebar/Sidebar";
+import { SidebarProvider } from "../interfaces/Sidebar/Sidebar";
 
 interface DashboardLayoutProps {
-  children: ReactNode;
+  children: ReactNode | ReactNode[];
 }
 
-export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+export const MinimalDashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <SidebarProvider className="flex flex-col">
       <Header />
-      <div className="flex flex-1">
-        <AppSidebar className="top-(--header-height) !h-[calc(100svh-var(--header-height))]" />
-        <SidebarInset className="pt-(--header-height)">{children}</SidebarInset>
-      </div>
+      <div className="flex flex-1 pt-(--header-height)">{children}</div>
     </SidebarProvider>
   );
 };

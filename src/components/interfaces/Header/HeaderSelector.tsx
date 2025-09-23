@@ -18,8 +18,9 @@ import {
   type RegisteredRouter,
   type ValidateLinkOptions,
 } from "@tanstack/react-router";
-import { ChevronsUpDown, type LucideIcon } from "lucide-react";
-import type { ComponentProps, ComponentType, ReactNode } from "react";
+import { ChevronsUpDown } from "lucide-react";
+import { DynamicIcon, type IconName } from "lucide-react/dynamic";
+import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
 
 export const HeaderSelectorMenuLabel = ({
@@ -35,21 +36,21 @@ export const HeaderSelectorMenuItem = <
   TOptions = unknown,
 >({
   children,
-  icon: Icon,
+  icon,
   linkOptions,
   className,
 }: {
   children: ReactNode;
-  icon?: ComponentType<ComponentProps<"svg">>;
+  icon?: IconName;
   linkOptions: ValidateLinkOptions<TRouter, TOptions>;
   className?: string;
 }) => {
   return (
     <DropdownMenuItem className={cn("gap-2 p-2!", className)} asChild>
       <Link {...linkOptions}>
-        {Icon && (
+        {icon && (
           <div className="flex-center size-6 rounded-sm border">
-            <Icon className="size-4 shrink-0" />
+            <DynamicIcon name={icon} className="size-4 shrink-0" />
           </div>
         )}
         {children}
@@ -62,13 +63,14 @@ export const HeaderSelector = ({
   selectedItem,
   children,
 }: {
-  selectedItem: { title: string; icon?: LucideIcon };
+  selectedItem: { title: string; icon?: IconName };
   children: ReactNode;
 }) => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <button
+          data-element="header-selector"
           className={cn(
             "flex h-8 items-center gap-3 rounded-md p-2.5 text-left text-sm outline-hidden transition-colors",
             "hover:bg-bg-secondary-hover",
@@ -80,7 +82,11 @@ export const HeaderSelector = ({
         >
           {selectedItem.icon && (
             <div className="bg-surface border-border-secondary flex-center -ml-1.5 aspect-square size-6 rounded-md border bg-clip-padding shadow-xs">
-              <selectedItem.icon className="size-3.5" strokeWidth={2} />
+              <DynamicIcon
+                name={selectedItem.icon}
+                className="size-3.5"
+                strokeWidth={2}
+              />
             </div>
           )}
           <div className="grid flex-1 text-left text-sm leading-tight">

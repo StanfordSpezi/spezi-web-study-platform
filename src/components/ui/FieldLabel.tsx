@@ -10,16 +10,18 @@ import type { ReactNode } from "react";
 
 interface FieldLabelProps {
   title: ReactNode;
-  description: ReactNode;
+  description?: ReactNode;
 }
 
 export const FieldLabel = ({ title, description }: FieldLabelProps) => {
   return (
     <div className="space-y-1.5 pb-1">
       <div className="font-normal">{title}</div>
-      <div className="text-text-tertiary leading-tight font-normal text-pretty">
-        {description}
-      </div>
+      {description && (
+        <div className="text-text-tertiary leading-tight font-normal text-pretty">
+          {description}
+        </div>
+      )}
     </div>
   );
 };

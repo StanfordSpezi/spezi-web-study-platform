@@ -9,14 +9,14 @@
 import { expect, test } from "@/lib/playwrightFixtures";
 import { studyFixtures } from "@/server/database/entities/study/fixtures";
 import { teamFixtures } from "@/server/database/entities/team/fixtures";
-import { loadApiMocks, mockIsAuthenticated } from "@/server/mocks";
+import { loadApiMocks } from "@/server/mocks";
 
 const [team] = teamFixtures;
 const [study] = studyFixtures.filter((study) => study.teamId === team.id);
 
 test.describe("Router Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await Promise.all([mockIsAuthenticated(page), loadApiMocks(page)]);
+    await loadApiMocks(page);
   });
 
   test("has title", async ({ page }) => {
@@ -28,7 +28,7 @@ test.describe("Router Tests", () => {
     page,
   }) => {
     await page.goto("/");
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
     await expect(page.getByText(team.name)).toBeVisible();
     await expect(page.getByText(study.title)).toBeVisible();
   });
@@ -37,7 +37,7 @@ test.describe("Router Tests", () => {
     page,
   }) => {
     await page.goto(`/${team.id}`);
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
     await expect(page.getByText(team.name)).toBeVisible();
 
     await expect(page.getByText(study.title)).toBeVisible();
@@ -47,7 +47,7 @@ test.describe("Router Tests", () => {
     page,
   }) => {
     await page.goto("/");
-    await expect(page.getByText("Study Home Route")).toBeVisible();
+    await expect(page.getByText("Welcome")).toBeVisible();
 
     await page.getByRole("link", { name: "Configuration" }).click();
     await expect(page.getByText("Study Configuration")).toBeVisible();

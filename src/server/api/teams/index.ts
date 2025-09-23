@@ -14,7 +14,8 @@ const router = createHonoApp();
 
 router
   .openapi(routes.list, handlers.list)
-  .openapi(routes.retrieve, handlers.retrieve);
+  .openapi(routes.retrieve, handlers.retrieve)
+  .openapi(routes.create, handlers.create);
 
 export const teamsApi = {
   router,
