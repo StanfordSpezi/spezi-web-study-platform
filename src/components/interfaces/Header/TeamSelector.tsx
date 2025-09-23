@@ -9,14 +9,7 @@
 import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import {
-  Flower,
-  Plus,
-  TentTree,
-  TreePalm,
-  TreePine,
-  type LucideIcon,
-} from "lucide-react";
+import type { IconName } from "lucide-react/dynamic";
 import { teamListQueryOptions } from "@/lib/queries/team";
 import {
   HeaderSelector,
@@ -25,17 +18,14 @@ import {
 } from "./HeaderSelector";
 import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
 
-const iconMap: Record<string, LucideIcon> = {
-  "tree-pine": TreePine,
-  "tent-tree": TentTree,
-  "tree-palm": TreePalm,
-  flower: Flower,
-};
-
 export const TeamSelector = () => {
-  const params = useParams({ from: "/(dashboard)/$team/$study" });
+  const params = useParams({ strict: false });
   const { data: teams } = useQuery(teamListQueryOptions());
   const selectedTeam = teams?.find((team) => team.id === params.team);
+
+  if (!params.team) {
+    return null;
+  }
 
   if (!teams || !selectedTeam) {
     return <HeaderSelectorSkeleton hasIcon={true} />;
@@ -45,14 +35,14 @@ export const TeamSelector = () => {
     <HeaderSelector
       selectedItem={{
         title: selectedTeam.name,
-        icon: iconMap[selectedTeam.icon] ?? TreePine,
+        icon: selectedTeam.icon as IconName,
       }}
     >
       <HeaderSelectorMenuLabel>Teams</HeaderSelectorMenuLabel>
       {teams.map((team) => (
         <HeaderSelectorMenuItem
           key={team.id}
-          icon={iconMap[team.icon] ?? TreePine}
+          icon={team.icon as IconName}
           linkOptions={{
             to: "/$team",
             params: {
@@ -65,7 +55,7 @@ export const TeamSelector = () => {
       ))}
       <DropdownMenuSeparator />
       <HeaderSelectorMenuItem
-        icon={Plus}
+        icon="plus"
         linkOptions={{ to: "." }}
         className="text-text-tertiary"
       >

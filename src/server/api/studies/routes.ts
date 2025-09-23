@@ -7,13 +7,14 @@
 //
 
 import { createRoute, z } from "@hono/zod-openapi";
-import { error404Schema } from "@/server/error";
+import { createErrorSchema, error404Schema } from "@/server/error";
 import { openApiTags } from "@/server/tags";
 import {
   studyInsertSchema,
   studyListQuerySchema,
   studyRetrieveParams,
   studySelectSchema,
+  studyUpdateSchema,
 } from "./schema";
 
 export type ListRoute = typeof list;
@@ -62,6 +63,43 @@ export const retrieve = createRoute({
   },
 });
 
+export type CreateRoute = typeof create;
+export const create = createRoute({
+  tags: [openApiTags.studies.name],
+  path: "/studies",
+  method: "post",
+  description: "Create a new study",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: studyInsertSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    201: {
+      content: {
+        "application/json": {
+          schema: studySelectSchema,
+        },
+      },
+      description: "The created study details",
+    },
+    409: {
+      content: {
+        "application/json": {
+          schema: createErrorSchema({
+            message: "A study with title <title> already exists.",
+          }),
+        },
+      },
+      description: "Study with the given title already exists",
+    },
+  },
+});
+
 export type UpdateRoute = typeof update;
 export const update = createRoute({
   tags: [openApiTags.studies.name],
@@ -73,7 +111,7 @@ export const update = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: studyInsertSchema,
+          schema: studyUpdateSchema,
         },
       },
       description: "The study data to update",

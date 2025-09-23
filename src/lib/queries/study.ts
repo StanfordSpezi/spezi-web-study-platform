@@ -12,6 +12,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { studiesApi } from "@/server/api/studies";
 import type { ExtractZod, PathValue } from "@/utils/types";
 import { apiRequest } from "../apiRequest";
@@ -61,6 +62,45 @@ export const studyRetrieveQueryOptions = (
       return apiRequest({
         route: studiesApi.routes.retrieve,
         params: { id: params.studyId },
+      });
+    },
+  });
+};
+
+interface UseCreateStudyMutationFnParams
+  extends ExtractZod<
+    PathValue<
+      typeof studiesApi.routes.create,
+      ["request", "body", "content", "application/json", "schema"]
+    >
+  > {}
+
+/**
+ * Mutation for creating a new study.
+ */
+export const useCreateStudyMutation = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (params: UseCreateStudyMutationFnParams) => {
+      return apiRequest<typeof studiesApi.routes.create, 201>({
+        route: studiesApi.routes.create,
+        body: params,
+      });
+    },
+    onSuccess: async ({ id, teamId }) => {
+      await queryClient.invalidateQueries({
+        queryKey: studyQueryKeys.all,
+      });
+      await navigate({
+        to: "/$team/$study",
+        params: { team: teamId, study: id },
+      });
+    },
+    onError: (error) => {
+      toast.error("Error creating study", {
+        description: error.message,
+        duration: 5000,
       });
     },
   });

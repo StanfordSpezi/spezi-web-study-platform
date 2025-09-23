@@ -30,9 +30,19 @@ export const Header = () => {
             className="size-full object-contain"
           />
         </div>
-        <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
+        <div
+          className={cn(
+            "bg-border h-5 w-px rotate-12 rounded-full",
+            "hidden [&:has(+_[data-element='header-selector'])]:block",
+          )}
+        ></div>
         <TeamSelector />
-        <div className="bg-border h-5 w-px rotate-12 rounded-full"></div>
+        <div
+          className={cn(
+            "bg-border h-5 w-px rotate-12 rounded-full",
+            "hidden [&:has(+_[data-element='header-selector'])]:block",
+          )}
+        ></div>
         <StudySelector />
       </div>
       <div className="flex items-center gap-2">

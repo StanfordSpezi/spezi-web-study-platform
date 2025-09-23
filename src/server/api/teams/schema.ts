@@ -29,3 +29,11 @@ export const teamRetrieveParams = z.object({
     description: "The unique identifier of the team",
   }),
 });
+
+export const teamInsertSchema = teamSelectSchema.omit({ id: true }).extend({
+  id: z.string().optional().openapi({
+    example: "team_tree",
+    description:
+      "The unique identifier of the team. If not provided, it will be auto-generated.",
+  }),
+});
