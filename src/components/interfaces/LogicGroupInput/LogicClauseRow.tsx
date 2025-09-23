@@ -15,18 +15,12 @@ import {
   SelectValue,
 } from "@stanfordspezi/spezi-web-design-system";
 import { Trash } from "lucide-react";
-import type { ComponentProps } from "react";
 import { ClauseValueInput } from "./ClauseValueInput";
-import type { AttributeOption, LogicClause, OperatorOption } from "./types";
+import { useLogicGroupContext } from "./LogicGroupContext";
+import type { LogicClause } from "./types";
 
 export interface LogicClauseRowProps {
   clause: LogicClause;
-  attributeOptions: AttributeOption[];
-  operatorsForAttribute: OperatorOption[];
-  operatorConfig?: OperatorOption;
-  attributePlaceholder: string;
-  operatorPlaceholder: string;
-  valuePlaceholder: string;
   canRemove: boolean;
   canAddNext: boolean;
   onChangeAttribute: (value: string) => void;
@@ -34,17 +28,10 @@ export interface LogicClauseRowProps {
   onChangeValue: (values: string[]) => void;
   onRemove: () => void;
   onAddNext: () => void;
-  andButtonProps?: ComponentProps<typeof Button>;
 }
 
 export const LogicClauseRow = ({
   clause,
-  attributeOptions,
-  operatorsForAttribute,
-  operatorConfig,
-  attributePlaceholder,
-  operatorPlaceholder,
-  valuePlaceholder,
   canRemove,
   canAddNext,
   onChangeAttribute,
@@ -52,8 +39,13 @@ export const LogicClauseRow = ({
   onChangeValue,
   onRemove,
   onAddNext,
-  andButtonProps,
 }: LogicClauseRowProps) => {
+  const { attributeOptions, getOperatorsForAttribute, getOperatorConfig } =
+    useLogicGroupContext();
+
+  const operatorsForAttribute = getOperatorsForAttribute(clause.attribute);
+  const operatorConfig = getOperatorConfig(clause.attribute, clause.operator);
+
   return (
     <div className="flex flex-col items-start gap-4">
       <div className="flex w-full flex-col gap-2.5">
@@ -63,7 +55,7 @@ export const LogicClauseRow = ({
             onValueChange={onChangeAttribute}
           >
             <SelectTrigger className="w-full sm:flex-1">
-              <SelectValue placeholder={attributePlaceholder} />
+              <SelectValue placeholder="Select attribute" />
             </SelectTrigger>
             <SelectContent>
               {attributeOptions.map((opt) => (
@@ -84,7 +76,7 @@ export const LogicClauseRow = ({
             disabled={!clause.attribute}
           >
             <SelectTrigger className="w-full sm:flex-1">
-              <SelectValue placeholder={operatorPlaceholder} />
+              <SelectValue placeholder="Select operator" />
             </SelectTrigger>
             <SelectContent>
               {operatorsForAttribute.map((op) => (
@@ -100,7 +92,7 @@ export const LogicClauseRow = ({
           <ClauseValueInput
             clause={clause}
             operatorConfig={operatorConfig}
-            placeholder={valuePlaceholder}
+            placeholder="Select values"
             disabled={!clause.operator}
             onChangeValue={onChangeValue}
           />
@@ -123,7 +115,6 @@ export const LogicClauseRow = ({
         className="font-mono text-sm tracking-wide"
         onClick={onAddNext}
         disabled={!canAddNext}
-        {...andButtonProps}
       >
         AND
       </Button>

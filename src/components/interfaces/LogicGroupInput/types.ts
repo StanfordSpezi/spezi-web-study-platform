@@ -39,10 +39,11 @@ export interface OperatorOption {
 export interface AttributeOption {
   value: string;
   label: string;
-  operators?: OperatorOption[]; // optional per-attribute operator override
+  operators: OperatorOption[];
 }
 
 export interface LogicClause {
+  id?: string;
   attribute?: string;
   operator?: string;
   value: string[];

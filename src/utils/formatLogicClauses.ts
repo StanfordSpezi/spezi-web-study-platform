@@ -1,5 +1,5 @@
 //
-// This source file is part of the Stanford Biodesign Digital Health Spezi Web Study Platform open-source project
+// This source file is part of the Stanford Biodesign Digit  const attr = options?.attributeOptions?.find(\n    (a) => a.value === attributeValue,\n  );\n  const fromAttr = attr?.operators.find(\n    (operator) => operator.value === operatorValue,\n  );lth Spezi Web Study Platform open-source project
 //
 // SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
@@ -15,7 +15,6 @@ import type {
 
 interface FormatLogicClausesOptions {
   attributeOptions?: AttributeOption[];
-  operatorOptions?: OperatorOption[];
   joiner?: string;
   maxListItems?: number | null; // clamp list length for multiselect; null for unlimited
   formatAsSentence?: boolean;
@@ -41,9 +40,7 @@ const getAttributeLabel = (
 };
 
 /**
- * Retrieves the operator configuration for a given operator value,
- * first checking the attribute's operators, then falling back to global
- * operator options.
+ * Retrieves the operator configuration for a given operator value from the attribute's operators.
  *
  * @example
  * const attrOptions = [
@@ -60,14 +57,10 @@ const getOperatorConfig = (
   operatorValue: string,
   options?: FormatLogicClausesOptions,
 ): OperatorOption | undefined => {
-  const attr = options?.attributeOptions?.find(
-    (a) => a.value === attributeValue,
+  const attribute = options?.attributeOptions?.find(
+    (attribute) => attribute.value === attributeValue,
   );
-  const fromAttr = attr?.operators?.find(
-    (operator) => operator.value === operatorValue,
-  );
-  if (fromAttr) return fromAttr;
-  return options?.operatorOptions?.find(
+  return attribute?.operators.find(
     (operator) => operator.value === operatorValue,
   );
 };
@@ -222,19 +215,33 @@ const formatClause = (
  *   { attribute: 'age', operator: '>', value: ['18'] }
  * ];
  * const attributeOptions = [
- *   { value: 'country', label: 'Country' },
- *   { value: 'age', label: 'Age' }
- * ];
- * const operatorOptions = [
- *   { value: 'in', label: 'is in', input: { type: 'multiselect', options: [
- *     { value: 'us', label: 'United States' },
- *     { value: 'ca', label: 'Canada' }
- *   ] } },
- *   { value: '>', label: 'is greater than', input: { type: 'number' } }
+ *   {
+ *     value: 'country',
+ *     label: 'Country',
+ *     operators: [{
+ *       value: 'in',
+ *       label: 'is in',
+ *       input: {
+ *         type: 'multiselect',
+ *         options: [
+ *           { value: 'us', label: 'United States' },
+ *           { value: 'ca', label: 'Canada' }
+ *         ]
+ *       }
+ *     }]
+ *   },
+ *   {
+ *     value: 'age',
+ *     label: 'Age',
+ *     operators: [{
+ *       value: '>',
+ *       label: 'is greater than',
+ *       input: { type: 'number' }
+ *     }]
+ *   }
  * ];
  * formatLogicClauses(clauses, {
- *   attributeOptions,
- *   operatorOptions
+ *   attributeOptions
  * }); // Returns 'Country is in United States or Canada and Age is greater than 18'
  */
 export const formatLogicClauses = (
