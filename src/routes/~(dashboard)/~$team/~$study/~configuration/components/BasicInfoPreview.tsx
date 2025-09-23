@@ -61,7 +61,7 @@ export const BasicInfoPreview = ({
             )}
           >
             {highlightedField === "explanation" && <HighlightOverlay />}
-            <span>{explanation || "Explanation"}</span>
+            <span>{explanation ?? "Explanation"}</span>
           </div>
         </div>
       </div>
