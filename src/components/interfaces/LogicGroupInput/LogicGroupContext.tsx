@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import type { AttributeOption, OperatorOption } from "./types";
 
 interface LogicGroupContextValue {
@@ -18,7 +18,29 @@ interface LogicGroupContextValue {
   ) => OperatorOption | undefined;
 }
 
-const LogicGroupContext = createContext<LogicGroupContextValue | null>(null);
+const useLogicGroupContextValue = (
+  attributeOptions: AttributeOption[],
+): LogicGroupContextValue => {
+  const getOperatorsForAttribute = (attribute?: string) => {
+    const attr = attributeOptions.find((option) => option.value === attribute);
+    return attr?.operators ?? [];
+  };
+
+  const getOperatorConfig = (attribute?: string, operator?: string) => {
+    const operators = getOperatorsForAttribute(attribute);
+    return operators.find((op) => op.value === operator);
+  };
+
+  return {
+    attributeOptions,
+    getOperatorsForAttribute,
+    getOperatorConfig,
+  };
+};
+
+const LogicGroupContext = createContext<ReturnType<
+  typeof useLogicGroupContextValue
+> | null>(null);
 
 export const useLogicGroupContext = () => {
   const context = useContext(LogicGroupContext);
@@ -31,7 +53,7 @@ export const useLogicGroupContext = () => {
 };
 
 interface LogicGroupProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   attributeOptions: AttributeOption[];
 }
 
@@ -42,24 +64,10 @@ export const LogicGroupProvider = ({
   children,
   attributeOptions,
 }: LogicGroupProviderProps) => {
-  const getOperatorsForAttribute = (attribute?: string) => {
-    const attr = attributeOptions.find((attr) => attr.value === attribute);
-    return attr?.operators ?? [];
-  };
-
-  const getOperatorConfig = (attribute?: string, operator?: string) => {
-    const operators = getOperatorsForAttribute(attribute);
-    return operators.find((op) => op.value === operator);
-  };
+  const value = useLogicGroupContextValue(attributeOptions);
 
   return (
-    <LogicGroupContext.Provider
-      value={{
-        attributeOptions,
-        getOperatorsForAttribute,
-        getOperatorConfig,
-      }}
-    >
+    <LogicGroupContext.Provider value={value}>
       {children}
     </LogicGroupContext.Provider>
   );

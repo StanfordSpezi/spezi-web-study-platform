@@ -12,23 +12,23 @@ import {
   Label,
   Switch,
 } from "@stanfordspezi/spezi-web-design-system";
+import { formatLogicClausesError } from "@/components/interfaces/LogicGroupInput/formatLogicClausesError";
 import { LogicGroupInput } from "@/components/interfaces/LogicGroupInput/LogicGroupInput";
 import { Card } from "@/components/ui/Card";
 import { FieldLabel } from "@/components/ui/FieldLabel";
 import { enhanceField } from "@/utils/enhanceField";
-import { formatLogicClausesError } from "@/utils/formatLogicClausesError";
 import { EnrollmentPeriodDatePicker } from "./EnrollmentPeriodDatePicker";
 import { participationAttributeOptions } from "../lib/participationAttributeOptions";
 import type { EnrollmentForm as EnrollmentFormType } from "../lib/useEnrollmentForm";
 
 interface EnrollmentFormProps {
   form: EnrollmentFormType;
-  onSave: () => void;
+  onSubmit: () => void;
 }
 
-export const EnrollmentForm = ({ form, onSave }: EnrollmentFormProps) => {
+export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
   return (
-    <form onSubmit={onSave} className="space-y-6">
+    <form onSubmit={onSubmit} className="space-y-6">
       <Card className="py-6">
         <Label className="mb-2 flex px-6">
           <FieldLabel

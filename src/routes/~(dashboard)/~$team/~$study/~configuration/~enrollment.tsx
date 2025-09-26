@@ -49,7 +49,7 @@ const EnrollmentRouteComponent = () => {
       }
     >
       <div className="max-w-4xl p-6">
-        <EnrollmentForm form={form} onSave={handleSave} />
+        <EnrollmentForm form={form} onSubmit={handleSave} />
       </div>
       <NavigationBlocker shouldBlock={form.formState.isDirty} />
     </EnrollmentLayout>

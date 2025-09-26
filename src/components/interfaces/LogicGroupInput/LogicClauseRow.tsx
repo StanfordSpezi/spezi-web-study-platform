@@ -13,6 +13,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Tooltip,
 } from "@stanfordspezi/spezi-web-design-system";
 import { Trash } from "lucide-react";
 import { ClauseValueInput } from "./ClauseValueInput";
@@ -109,15 +110,25 @@ export const LogicClauseRow = ({
         </div>
       </div>
 
-      <Button
-        variant="outline"
-        size="xs"
-        className="font-mono text-sm tracking-wide"
-        onClick={onAddNext}
-        disabled={!canAddNext}
+      <Tooltip
+        open={!canAddNext ? false : undefined}
+        tooltip="Add new criteria"
+        variant="inverted"
+        side="right"
+        delayDuration={500}
+        className="text-sm"
+        sideOffset={10}
       >
-        AND
-      </Button>
+        <Button
+          variant="outline"
+          size="xs"
+          className="font-mono text-sm tracking-wide"
+          onClick={onAddNext}
+          disabled={!canAddNext}
+        >
+          AND
+        </Button>
+      </Tooltip>
     </div>
   );
 };

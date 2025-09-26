@@ -22,19 +22,19 @@ import type { BasicInfoForm as BasicInfoFormType } from "../lib/useBasicInfoForm
 
 interface BasicInfoFormProps {
   form: BasicInfoFormType;
-  onSave: () => void;
+  onSubmit: () => void;
   onFieldFocus?: (fieldName: string) => void;
   onFieldBlur?: () => void;
 }
 
 export const BasicInfoForm = ({
   form,
-  onSave,
+  onSubmit,
   onFieldFocus,
   onFieldBlur,
 }: BasicInfoFormProps) => {
   return (
-    <form onSubmit={onSave} className="py-6">
+    <form onSubmit={onSubmit} className="py-6">
       <Field
         control={form.control}
         name="title"
