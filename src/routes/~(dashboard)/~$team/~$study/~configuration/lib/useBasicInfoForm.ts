@@ -14,10 +14,10 @@ import { studyRetrieveQueryOptions } from "@/lib/queries/study";
 
 const basicInfoFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  shortTitle: z.string().min(1, "Short title is required"),
-  icon: z.string().min(1, "Icon is required"),
-  explanation: z.string().min(1, "Explanation is required"),
-  shortExplanation: z.string().min(1, "Short explanation is required"),
+  shortTitle: z.string().nullable(),
+  icon: z.string().nullable(),
+  explanation: z.string().nullable(),
+  shortExplanation: z.string().nullable(),
 });
 
 export type BasicInfoForm = ReturnType<typeof useBasicInfoForm>;

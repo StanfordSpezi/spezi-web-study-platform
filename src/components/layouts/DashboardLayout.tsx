@@ -21,7 +21,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <Header />
       <div className="flex flex-1">
         <AppSidebar className="top-(--header-height) !h-[calc(100svh-var(--header-height))]" />
-        <SidebarInset className="pt-(--header-height)">{children}</SidebarInset>
+        <SidebarInset className="isolate pt-(--header-height)">
+          {children}
+        </SidebarInset>
       </div>
     </SidebarProvider>
   );

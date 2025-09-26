@@ -11,20 +11,29 @@ import { z } from "zod";
 export const studySchema = z.object({
   id: z.string(),
   teamId: z.string(),
-  isPublished: z.boolean().optional(),
+  isPublished: z.boolean(),
   title: z.string(),
-  shortTitle: z.string().optional(),
-  icon: z.string().optional(),
-  explanation: z.string().optional(),
-  shortExplanation: z.string().optional(),
+  shortTitle: z.string().nullable(),
+  icon: z.string().nullable(),
+  explanation: z.string().nullable(),
+  shortExplanation: z.string().nullable(),
   enrollmentPeriod: z
     .object({
-      start: z.string().optional(),
-      end: z.string().optional(),
+      start: z.string().nullable(),
+      end: z.string().nullable(),
     })
-    .optional(),
-  studyDuration: z.number().optional(),
-  isPrivateStudy: z.boolean().optional(),
+    .nullable(),
+  studyDuration: z.number().nullable(),
+  isPrivateStudy: z.boolean(),
+  participationCriteria: z
+    .array(
+      z.object({
+        attribute: z.string(),
+        operator: z.string(),
+        value: z.string().array(),
+      }),
+    )
+    .nullable(),
 });
 
 export type Study = z.infer<typeof studySchema>;

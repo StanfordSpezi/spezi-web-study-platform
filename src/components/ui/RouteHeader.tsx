@@ -49,7 +49,7 @@ export const RouteHeader = ({
     <div
       ref={headerRef}
       className={cn(
-        "bg-bg/80 sticky top-(--header-height) backdrop-blur-md transition-shadow duration-200",
+        "bg-bg/80 sticky top-(--header-height) z-10 backdrop-blur-md transition-shadow duration-200",
         isScrolled && "shadow-lg shadow-black/2",
       )}
     >

@@ -24,7 +24,7 @@ export const studySelectSchema = z.object({
     example: "team_tree",
     description: "The id of the team associated with the study",
   }),
-  isPublished: z.boolean().optional().openapi({
+  isPublished: z.boolean().openapi({
     example: true,
     description: "Indicates if the study is published",
   }),
@@ -32,46 +32,65 @@ export const studySelectSchema = z.object({
     example: "Sleep Patterns Study",
     description: "The full title of the study",
   }),
-  shortTitle: z.string().optional().openapi({
+  shortTitle: z.string().nullable().openapi({
     example: "Sleep Study",
     description: "A short version of the study title",
   }),
-  icon: z.string().optional().openapi({
+  icon: z.string().nullable().openapi({
     example: "moon",
     description: "Icon representing the study",
   }),
-  explanation: z.string().optional().openapi({
+  explanation: z.string().nullable().openapi({
     example: "This study investigates sleep patterns in adults.",
     description: "Detailed explanation of the study",
   }),
-  shortExplanation: z.string().optional().openapi({
+  shortExplanation: z.string().nullable().openapi({
     example: "Study on adult sleep habits.",
     description: "Brief explanation of the study",
   }),
   enrollmentPeriod: z
     .object({
-      start: z.string().optional().openapi({
+      start: z.string().nullable().openapi({
         example: "2025-01-01",
         description: "Enrollment period start date (YYYY-MM-DD)",
       }),
-      end: z.string().optional().openapi({
+      end: z.string().nullable().openapi({
         example: "2025-03-31",
         description: "Enrollment period end date (YYYY-MM-DD)",
       }),
     })
-    .optional()
+    .nullable()
     .openapi({
       example: { start: "2025-01-01", end: "2025-03-31" },
       description: "Period during which participants can enroll",
     }),
-  studyDuration: z.number().optional().openapi({
+  studyDuration: z.number().nullable().openapi({
     example: 90,
     description: "Duration of the study in days",
   }),
-  isPrivateStudy: z.boolean().optional().openapi({
+  isPrivateStudy: z.boolean().openapi({
     example: false,
     description: "Indicates if the study is private",
   }),
+  participationCriteria: z
+    .array(
+      z.object({
+        attribute: z.string(),
+        operator: z.string(),
+        value: z.string().array(),
+      }),
+    )
+    .nullable()
+    .openapi({
+      example: [
+        {
+          attribute: "age",
+          operator: "greater_than",
+          value: ["18"],
+        },
+      ],
+      description: "Criteria for participant eligibility",
+    }),
 });
 
 export const studyRetrieveParams = z.object({

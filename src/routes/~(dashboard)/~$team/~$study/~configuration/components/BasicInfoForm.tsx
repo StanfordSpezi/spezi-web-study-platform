@@ -10,29 +10,31 @@ import {
   Input,
   Field,
   Textarea,
-  Button,
   Label,
+  Button,
+  cn,
 } from "@stanfordspezi/spezi-web-design-system";
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { FieldLabel } from "@/components/ui/FieldLabel";
 import { IconPicker } from "@/components/ui/IconPicker";
+import { enhanceField } from "@/utils/enhanceField";
 import type { BasicInfoForm as BasicInfoFormType } from "../lib/useBasicInfoForm";
 
 interface BasicInfoFormProps {
   form: BasicInfoFormType;
-  onSave: () => void;
+  onSubmit: () => void;
   onFieldFocus?: (fieldName: string) => void;
   onFieldBlur?: () => void;
 }
 
 export const BasicInfoForm = ({
   form,
-  onSave,
+  onSubmit,
   onFieldFocus,
   onFieldBlur,
 }: BasicInfoFormProps) => {
   return (
-    <form onSubmit={onSave} className="py-6">
+    <form onSubmit={onSubmit} className="py-6">
       <Field
         control={form.control}
         name="title"
@@ -42,15 +44,11 @@ export const BasicInfoForm = ({
             description="Be descriptive but keep it under 100 characters."
           />
         }
-        render={({ field: { onBlur, ...field } }) => (
+        render={({ field }) => (
           <Input
             className="focus:ring-border-info"
             onFocus={() => onFieldFocus?.("title")}
-            onBlur={() => {
-              onBlur();
-              onFieldBlur?.();
-            }}
-            {...field}
+            {...enhanceField(field, { onBlur: onFieldBlur })}
           />
         )}
         className="border-border-tertiary border-b px-6"
@@ -76,7 +74,10 @@ export const BasicInfoForm = ({
                 variant="outline"
                 className="bg-bg size-10 rounded-md"
               >
-                <DynamicIcon name={value as IconName} className="size-4" />
+                <DynamicIcon
+                  name={(value ?? "box-select") as IconName}
+                  className={cn("size-4", !value && "text-text-tertiary")}
+                />
               </Button>
             </IconPicker>
           )}
@@ -84,7 +85,7 @@ export const BasicInfoForm = ({
         <Field
           control={form.control}
           name="shortTitle"
-          render={({ field }) => <Input {...field} />}
+          render={({ field }) => <Input {...enhanceField(field)} />}
           className="flex-1"
         />
       </div>
@@ -97,15 +98,11 @@ export const BasicInfoForm = ({
             description="This helps participants decide if they want to join."
           />
         }
-        render={({ field: { onBlur, ...field } }) => (
+        render={({ field }) => (
           <Textarea
             className="focus:ring-border-info"
             onFocus={() => onFieldFocus?.("explanation")}
-            onBlur={() => {
-              onBlur();
-              onFieldBlur?.();
-            }}
-            {...field}
+            {...enhanceField(field, { onBlur: onFieldBlur })}
           />
         )}
         className="border-border-tertiary border-b px-6 pt-6"
@@ -119,7 +116,7 @@ export const BasicInfoForm = ({
             description="A short summary for preview cards and search results."
           />
         }
-        render={({ field }) => <Textarea {...field} />}
+        render={({ field }) => <Textarea {...enhanceField(field)} />}
         className="px-6 pt-6"
       />
     </form>

@@ -31,6 +31,7 @@ import { Route as dashboardTeamIndexRouteImport } from './routes/~(dashboard)/~$
 import { Route as dashboardTeamStudyResultsRouteImport } from './routes/~(dashboard)/~$team/~$study/~results'
 import { Route as dashboardTeamStudyParticipantsRouteImport } from './routes/~(dashboard)/~$team/~$study/~participants'
 import { Route as dashboardTeamStudyIndexRouteImport } from './routes/~(dashboard)/~$team/~$study/~index'
+import { Route as dashboardTeamStudyConfigurationEnrollmentRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~enrollment'
 import { Route as dashboardTeamStudyConfigurationBasicInformationRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~basic-information'
 import { Route as dashboardTeamStudyConfigurationIndexRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~index'
 
@@ -100,6 +101,12 @@ const dashboardTeamStudyIndexRoute = dashboardTeamStudyIndexRouteImport.update({
   path: '/',
   getParentRoute: () => dashboardTeamStudyLayoutRoute,
 } as any)
+const dashboardTeamStudyConfigurationEnrollmentRoute =
+  dashboardTeamStudyConfigurationEnrollmentRouteImport.update({
+    id: '/configuration/enrollment',
+    path: '/configuration/enrollment',
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any)
 const dashboardTeamStudyConfigurationBasicInformationRoute =
   dashboardTeamStudyConfigurationBasicInformationRouteImport.update({
     id: '/configuration/basic-information',
@@ -127,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
   '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationIndexRoute
   '/$team/$study/configuration/basic-information': typeof dashboardTeamStudyConfigurationBasicInformationRoute
+  '/$team/$study/configuration/enrollment': typeof dashboardTeamStudyConfigurationEnrollmentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof dashboardIndexRoute
@@ -140,6 +148,7 @@ export interface FileRoutesByTo {
   '/$team/$study/results': typeof dashboardTeamStudyResultsRoute
   '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationIndexRoute
   '/$team/$study/configuration/basic-information': typeof dashboardTeamStudyConfigurationBasicInformationRoute
+  '/$team/$study/configuration/enrollment': typeof dashboardTeamStudyConfigurationEnrollmentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -157,6 +166,7 @@ export interface FileRoutesById {
   '/(dashboard)/$team/$study/results': typeof dashboardTeamStudyResultsRoute
   '/(dashboard)/$team/$study/configuration/': typeof dashboardTeamStudyConfigurationIndexRoute
   '/(dashboard)/$team/$study/configuration/basic-information': typeof dashboardTeamStudyConfigurationBasicInformationRoute
+  '/(dashboard)/$team/$study/configuration/enrollment': typeof dashboardTeamStudyConfigurationEnrollmentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/$team/$study/results'
     | '/$team/$study/configuration'
     | '/$team/$study/configuration/basic-information'
+    | '/$team/$study/configuration/enrollment'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -187,6 +198,7 @@ export interface FileRouteTypes {
     | '/$team/$study/results'
     | '/$team/$study/configuration'
     | '/$team/$study/configuration/basic-information'
+    | '/$team/$study/configuration/enrollment'
   id:
     | '__root__'
     | '/(dashboard)'
@@ -203,6 +215,7 @@ export interface FileRouteTypes {
     | '/(dashboard)/$team/$study/results'
     | '/(dashboard)/$team/$study/configuration/'
     | '/(dashboard)/$team/$study/configuration/basic-information'
+    | '/(dashboard)/$team/$study/configuration/enrollment'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -296,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardTeamStudyIndexRouteImport
       parentRoute: typeof dashboardTeamStudyLayoutRoute
     }
+    '/(dashboard)/$team/$study/configuration/enrollment': {
+      id: '/(dashboard)/$team/$study/configuration/enrollment'
+      path: '/configuration/enrollment'
+      fullPath: '/$team/$study/configuration/enrollment'
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationEnrollmentRouteImport
+      parentRoute: typeof dashboardTeamStudyLayoutRoute
+    }
     '/(dashboard)/$team/$study/configuration/basic-information': {
       id: '/(dashboard)/$team/$study/configuration/basic-information'
       path: '/configuration/basic-information'
@@ -338,6 +358,7 @@ interface dashboardTeamStudyLayoutRouteChildren {
   dashboardTeamStudyResultsRoute: typeof dashboardTeamStudyResultsRoute
   dashboardTeamStudyConfigurationIndexRoute: typeof dashboardTeamStudyConfigurationIndexRoute
   dashboardTeamStudyConfigurationBasicInformationRoute: typeof dashboardTeamStudyConfigurationBasicInformationRoute
+  dashboardTeamStudyConfigurationEnrollmentRoute: typeof dashboardTeamStudyConfigurationEnrollmentRoute
 }
 
 const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildren =
@@ -349,6 +370,8 @@ const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildr
       dashboardTeamStudyConfigurationIndexRoute,
     dashboardTeamStudyConfigurationBasicInformationRoute:
       dashboardTeamStudyConfigurationBasicInformationRoute,
+    dashboardTeamStudyConfigurationEnrollmentRoute:
+      dashboardTeamStudyConfigurationEnrollmentRoute,
   }
 
 const dashboardTeamStudyLayoutRouteWithChildren =

@@ -61,7 +61,7 @@ const BasicInformationRouteComponent = () => {
         <Card>
           <BasicInfoForm
             form={form}
-            onSave={handleSave}
+            onSubmit={handleSave}
             onFieldFocus={setHighlightedField}
             onFieldBlur={() => setHighlightedField(undefined)}
           />

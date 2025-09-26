@@ -9,11 +9,13 @@
 import {
   formatNilBoolean,
   formatNilDateRange,
-  notImplementedAlert,
 } from "@stanfordspezi/spezi-web-design-system";
+import { useParams } from "@tanstack/react-router";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
-import { EditButton } from "@/components/ui/EditButton";
+import { formatLogicClauses } from "@/components/interfaces/LogicGroupInput/formatLogicClauses";
+import { EditButtonLink } from "@/components/ui/EditButton";
 import type { Study } from "@/server/database/entities/study/schema";
+import { participationAttributeOptions } from "../lib/participationAttributeOptions";
 
 interface EnrollmentCardProps {
   study?: Study;
@@ -21,11 +23,22 @@ interface EnrollmentCardProps {
 }
 
 export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
+  const params = useParams({
+    from: "/(dashboard)/$team/$study/configuration/",
+  });
   return (
     <KeyValueCard
       title="Enrollment"
       description="Control who can join your study and how they get access."
-      actions={<EditButton onClick={notImplementedAlert} />}
+      actions={
+        <EditButtonLink
+          aria-label="Edit Enrollment"
+          data-testid="edit-enrollment"
+          from="/"
+          to="/$team/$study/configuration/enrollment"
+          params={params}
+        />
+      }
       isLoading={isLoading}
       items={[
         {
@@ -51,6 +64,15 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
           tooltip:
             "When enabled, only people with an invitation link can join. No public enrollment.",
           value: formatNilBoolean(study?.isPrivateStudy),
+        },
+        {
+          key: "Participation criteria",
+          tooltip:
+            "Filter who can join based on age, location, or other demographics. Only for public studies.",
+          value: formatLogicClauses(study?.participationCriteria, {
+            attributeOptions: participationAttributeOptions,
+            formatAsSentence: true,
+          }),
         },
       ]}
     />

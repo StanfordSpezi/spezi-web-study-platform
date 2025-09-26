@@ -87,6 +87,8 @@ export const setDevDatabase = (data: Partial<DevDatabase>): void => {
   if (parsed.success) {
     fs.writeFileSync(devDatabasePath, JSON.stringify(parsed.data, null, 2));
   } else {
-    throw new Error("Invalid database schema");
+    throw new Error("Invalid database schema", {
+      cause: z.treeifyError(parsed.error).errors.join(", "),
+    });
   }
 };
