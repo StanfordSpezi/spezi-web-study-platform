@@ -12,9 +12,9 @@ import {
 } from "@stanfordspezi/spezi-web-design-system";
 import { useParams } from "@tanstack/react-router";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
+import { formatLogicClauses } from "@/components/interfaces/LogicGroupInput/formatLogicClauses";
 import { EditButtonLink } from "@/components/ui/EditButton";
 import type { Study } from "@/server/database/entities/study/schema";
-import { formatLogicClauses } from "@/components/interfaces/LogicGroupInput/formatLogicClauses";
 import { participationAttributeOptions } from "../lib/participationAttributeOptions";
 
 interface EnrollmentCardProps {

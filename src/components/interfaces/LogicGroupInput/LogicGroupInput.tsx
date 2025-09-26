@@ -16,7 +16,7 @@ import type { AttributeOption, LogicClause } from "./types";
 interface LogicGroupInputProps {
   className?: string;
   attributeOptions: AttributeOption[];
-  value: Nil<LogicClause[]>; // controlled
+  value?: Nil<LogicClause[]>; // controlled
   defaultValue?: LogicClause[]; // uncontrolled initial
   onChange?: (value: LogicClause[]) => void;
 }
