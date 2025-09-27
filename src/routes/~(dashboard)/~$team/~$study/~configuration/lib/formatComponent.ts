@@ -61,12 +61,16 @@ const getComponentSummary = (component: Component): string => {
     case "information":
       return truncate(component.content, 200);
     case "questionnaire": {
-      const jsonString = JSON.stringify(
-        JSON.parse(component.fhirQuestionnaireJson),
-        null,
-        2,
-      );
-      return truncate(jsonString, 200);
+      try {
+        const jsonString = JSON.stringify(
+          JSON.parse(component.fhirQuestionnaireJson),
+          null,
+          2,
+        );
+        return truncate(jsonString, 200);
+      } catch {
+        return "Invalid questionnaire data";
+      }
     }
     case "health-data": {
       const healthDataTypeItems = Object.values(healthDataTypes).flat();
