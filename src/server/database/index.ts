@@ -8,6 +8,8 @@
 
 import fs from "node:fs";
 import { z } from "zod";
+import { componentFixtures } from "./entities/component/fixtures";
+import { componentSchema } from "./entities/component/schema";
 import { studyFixtures } from "./entities/study/fixtures";
 import { studySchema } from "./entities/study/schema";
 import { teamFixtures } from "./entities/team/fixtures";
@@ -15,11 +17,14 @@ import { teamSchema } from "./entities/team/schema";
 import { userFixtures } from "./entities/user/fixtures";
 import { userSchema } from "./entities/user/schema";
 
-const devDatabasePath = "src/server/database/db.json";
+const devDataPath = ".dev-data";
+const devDatabasePath = `${devDataPath}/db.json`;
+const devAssetsPath = `${devDataPath}/assets`;
 
 const devDatabaseSchema = z.object({
   currentUser: userSchema.nullable(),
   studies: studySchema.array(),
+  components: componentSchema.array(),
   teams: teamSchema.array(),
   users: userSchema.array(),
 });
@@ -31,12 +36,14 @@ const devDatabaseFixtures: Record<string, DevDatabase> = {
   default: {
     currentUser: null,
     studies: studyFixtures,
+    components: componentFixtures,
     teams: teamFixtures,
     users: userFixtures,
   },
   empty: {
     currentUser: null,
     studies: [],
+    components: [],
     teams: [],
     users: userFixtures,
   },
@@ -44,6 +51,18 @@ const devDatabaseFixtures: Record<string, DevDatabase> = {
 
 // Current development database, change this to test different scenarios
 const initialDevDatabase: DevDatabase = devDatabaseFixtures.default;
+
+/**
+ * Ensures the development data folder structure exists.
+ */
+const ensureDevDataStructure = (): void => {
+  if (!fs.existsSync(devDataPath)) {
+    fs.mkdirSync(devDataPath, { recursive: true });
+  }
+  if (!fs.existsSync(devAssetsPath)) {
+    fs.mkdirSync(devAssetsPath, { recursive: true });
+  }
+};
 
 /**
  * Retrieves the development database from the file system.
@@ -54,6 +73,8 @@ const initialDevDatabase: DevDatabase = devDatabaseFixtures.default;
  * it with the default development database and returns it.
  */
 export const getDevDatabase = (): DevDatabase => {
+  ensureDevDataStructure();
+
   const hasDatabase = fs.existsSync(devDatabasePath);
   if (hasDatabase) {
     const data = fs.readFileSync(devDatabasePath, "utf-8");
@@ -91,4 +112,12 @@ export const setDevDatabase = (data: Partial<DevDatabase>): void => {
       cause: z.treeifyError(parsed.error).errors.join(", "),
     });
   }
+};
+
+/**
+ * Get the path to the development assets folder.
+ */
+export const getDevAssetsPath = (): string => {
+  ensureDevDataStructure();
+  return devAssetsPath;
 };

@@ -50,6 +50,8 @@ const BasicInformationRouteComponent = () => {
     <BasicInfoLayout
       saveButton={
         <SaveButton
+          size="sm"
+          className="text-sm"
           onClick={handleSave}
           isPending={updateStudy.isPending}
           isSuccess={updateStudy.isSuccess}

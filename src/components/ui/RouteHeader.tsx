@@ -53,12 +53,16 @@ export const RouteHeader = ({
         isScrolled && "shadow-lg shadow-black/2",
       )}
     >
-      <div className="flex max-w-7xl items-center justify-between p-6">
+      <div className="flex max-w-7xl items-center justify-between gap-2 p-6">
         <div className="flex gap-6">
           {accessoryLeft}
           <div className="space-y-1">
-            <h1 className="text-text leading-none font-medium">{title}</h1>
-            <p className="text-text-tertiary text-sm">{description}</p>
+            <h1 className="text-text line-clamp-1 leading-none font-medium">
+              {title}
+            </h1>
+            <p className="text-text-tertiary line-clamp-2 text-sm leading-tight">
+              {description}
+            </p>
           </div>
         </div>
         {accessoryRight}

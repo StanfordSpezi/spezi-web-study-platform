@@ -14,8 +14,10 @@ import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 import { dedent } from "@/utils/dedent";
 import { authApi } from "./api/auth";
+import { componentsApi } from "./api/components";
 import { studiesApi } from "./api/studies";
 import { teamsApi } from "./api/teams";
+import { uploadsApi } from "./api/uploads";
 import { usersApi } from "./api/users";
 import { respondWithError } from "./error";
 import { authMiddleware } from "./middleware";
@@ -29,7 +31,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000"], // We only need to point to the local frontend origin
     allowHeaders: ["Content-Type", "Authorization"],
-    allowMethods: ["OPTIONS", "GET", "POST", "PUT", "DELETE"],
+    allowMethods: ["OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE"],
     exposeHeaders: ["Content-Length"],
     maxAge: 600,
     credentials: true,
@@ -43,7 +45,13 @@ app.route("/api", authApi.router);
 app.use("/api/*", authMiddleware);
 
 // These routes require authentication
-const routers = [studiesApi.router, teamsApi.router, usersApi.router] as const;
+const routers = [
+  studiesApi.router,
+  componentsApi.router,
+  teamsApi.router,
+  usersApi.router,
+  uploadsApi.router,
+];
 routers.forEach((router) => {
   app.route("/api", router);
 });

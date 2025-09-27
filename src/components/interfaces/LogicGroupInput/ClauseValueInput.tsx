@@ -45,7 +45,7 @@ export const ClauseValueInput = ({
         <MultiSelectTrigger className="w-full sm:flex-1">
           <MultiSelectValue
             placeholder={placeholder}
-            className="[&_[data-selected-item=true]]:bg-fill-secondary"
+            className="*:bg-fill-tertiary"
           />
         </MultiSelectTrigger>
         <MultiSelectContent>

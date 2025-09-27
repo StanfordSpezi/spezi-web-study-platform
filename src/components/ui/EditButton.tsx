@@ -23,7 +23,7 @@ export const EditButton = ({
 }: EditButtonProps) => {
   return (
     <Button size={size} variant={variant} {...props}>
-      <Edit className="size-3.5" />
+      <Edit className="size-3.5 opacity-80" />
       Edit
     </Button>
   );
@@ -41,7 +41,7 @@ const BasicEditButtonLink = ({
 }: BasicEditButtonLinkProps) => {
   return (
     <a className={cn(buttonVariance({ variant, size }), className)} {...props}>
-      <Edit className="size-3.5" />
+      <Edit className="size-3.5 opacity-80" />
       Edit
     </a>
   );

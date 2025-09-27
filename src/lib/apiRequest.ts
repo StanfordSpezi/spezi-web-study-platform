@@ -114,7 +114,7 @@ const isValidParamValue = (
  * // => "https://.../users/123?includePosts=true"
  * ```
  */
-const buildApiUrl = ({
+export const buildApiUrl = ({
   apiPath,
   queryParams,
   pathParams,
@@ -169,6 +169,45 @@ const getRequestValue = (
   key: string,
 ): Record<string, unknown> | undefined => {
   return key in req ? (req[key] as Record<string, unknown>) : undefined;
+};
+
+/**
+ * Handles an API response by checking its status and parsing the content based on the content type.
+ * If the response is not ok, it attempts to extract error details from JSON or text and throws an Error.
+ * For successful responses, it returns the parsed JSON or text as the specified type T.
+ */
+export const handleApiResponse = async <T>(response: Response): Promise<T> => {
+  if (!response.ok) {
+    const responseContentType = response.headers.get("content-type");
+    const baseErrorMessage = `API error: ${response.status}`;
+
+    try {
+      const isJsonResponse = responseContentType?.includes("application/json");
+      if (isJsonResponse) {
+        const errorPayload = (await response.json()) as ErrorPayload;
+        throw new Error(`${baseErrorMessage} - ${errorPayload.message}`);
+      } else {
+        const errorText = await response.text();
+        throw new Error(`${baseErrorMessage} - ${errorText}`);
+      }
+    } catch (parseError) {
+      const isApiError =
+        parseError instanceof Error && parseError.message.includes("API error");
+      if (isApiError) {
+        throw parseError;
+      }
+      // If JSON parsing fails, fall back to text
+      const fallbackErrorText = await response.text();
+      throw new Error(`${baseErrorMessage} - ${fallbackErrorText}`);
+    }
+  }
+
+  const responseContentType = response.headers.get("content-type");
+  const isJsonResponse = responseContentType?.includes("application/json");
+  if (isJsonResponse) {
+    return response.json() as T;
+  }
+  return response.text() as T;
 };
 
 /**
@@ -229,7 +268,9 @@ export const apiRequest = async <
   });
 
   const fetchOptions: RequestInit = {
-    method,
+    // Without this transformation a "patch" request is not allowed through CORS
+    // For some reason the "PATCH" is accepted, the "patch" not
+    method: method.toUpperCase(),
     headers,
     signal,
     credentials: "include",
@@ -244,36 +285,5 @@ export const apiRequest = async <
   }
 
   const apiResponse = await fetch(requestUrl, fetchOptions);
-
-  if (!apiResponse.ok) {
-    const responseContentType = apiResponse.headers.get("content-type");
-    const baseErrorMessage = `API error: ${apiResponse.status}`;
-
-    try {
-      const isJsonResponse = responseContentType?.includes("application/json");
-      if (isJsonResponse) {
-        const errorPayload = (await apiResponse.json()) as ErrorPayload;
-        throw new Error(`${baseErrorMessage} - ${errorPayload.message}`);
-      } else {
-        const errorText = await apiResponse.text();
-        throw new Error(`${baseErrorMessage} - ${errorText}`);
-      }
-    } catch (parseError) {
-      const isApiError =
-        parseError instanceof Error && parseError.message.includes("API error");
-      if (isApiError) {
-        throw parseError;
-      }
-      // If JSON parsing fails, fall back to text
-      const fallbackErrorText = await apiResponse.text();
-      throw new Error(`${baseErrorMessage} - ${fallbackErrorText}`);
-    }
-  }
-
-  const responseContentType = apiResponse.headers.get("content-type");
-  const isJsonResponse = responseContentType?.includes("application/json");
-  if (isJsonResponse) {
-    return apiResponse.json() as Promise<S["Response"]>;
-  }
-  return apiResponse.text() as unknown as S["Response"];
+  return handleApiResponse<S["Response"]>(apiResponse);
 };

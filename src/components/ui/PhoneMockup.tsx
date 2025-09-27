@@ -16,15 +16,15 @@ const PhoneTopBar = () => {
       className="absolute top-(--phone-top-bar-padding-top) left-0 flex h-(--phone-top-bar-content-height) w-full items-center justify-between"
     >
       <div className="flex h-full flex-1 items-center justify-start pl-[8%]">
-        <div className="bg-fill-secondary h-1/3 w-1/2 rounded-full" />
+        <div className="bg-fill-tertiary h-1/3 w-1/2 rounded-full" />
       </div>
       <div className="flex-center h-full flex-1">
-        <div className="bg-fill-secondary h-3/5 w-full rounded-full" />
+        <div className="bg-fill-tertiary h-3/5 w-full rounded-full" />
       </div>
       <div className="flex h-full flex-1 items-center justify-end gap-[8%] pr-[8%]">
-        <div className="bg-fill-secondary aspect-square h-1/3 rounded-full" />
-        <div className="bg-fill-secondary aspect-square h-1/3 rounded-full" />
-        <div className="bg-fill-secondary aspect-square h-1/3 rounded-full" />
+        <div className="bg-fill-tertiary aspect-square h-1/3 rounded-full" />
+        <div className="bg-fill-tertiary aspect-square h-1/3 rounded-full" />
+        <div className="bg-fill-tertiary aspect-square h-1/3 rounded-full" />
       </div>
     </div>
   );

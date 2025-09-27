@@ -41,6 +41,8 @@ const EnrollmentRouteComponent = () => {
     <EnrollmentLayout
       saveButton={
         <SaveButton
+          size="sm"
+          className="text-sm"
           onClick={handleSave}
           isPending={isPending}
           isSuccess={isSuccess}

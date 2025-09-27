@@ -33,6 +33,7 @@ interface NavBarItem {
   id?: string;
   title: string;
   linkOptions?: ValidateLinkOptions;
+  fuzzy?: boolean;
   icon?: LucideIcon;
   subMenu?: NavBarItem[];
 }
@@ -68,6 +69,8 @@ const navBarItems: NavBarItem[] = [
       {
         id: "components",
         title: "Components",
+        linkOptions: { to: "/$team/$study/configuration/components" },
+        fuzzy: true,
       },
     ],
   },
@@ -99,7 +102,7 @@ const MainNavButton = ({
       <Comp
         asChild
         tooltip={item.title}
-        isActive={!!matchRoute({ to: item.linkOptions.to })}
+        isActive={!!matchRoute({ to: item.linkOptions.to, fuzzy: item.fuzzy })}
       >
         <Link from="/" {...item.linkOptions}>
           {item.icon && <item.icon />}

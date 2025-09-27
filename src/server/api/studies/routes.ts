@@ -104,7 +104,7 @@ export type UpdateRoute = typeof update;
 export const update = createRoute({
   tags: [openApiTags.studies.name],
   path: "/studies/:id",
-  method: "put",
+  method: "patch",
   description: "Update a specific study by its id",
   request: {
     params: studyRetrieveParams,

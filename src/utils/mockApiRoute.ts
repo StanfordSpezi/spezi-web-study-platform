@@ -7,7 +7,7 @@
 //
 
 import type { RouteConfig } from "@hono/zod-openapi";
-import type { Page } from "@playwright/test";
+import type { Page, Route } from "@playwright/test";
 import type { StatusCode } from "hono/utils/http-status";
 import type { ExtractZod, PathValue } from "./types";
 
@@ -177,12 +177,13 @@ const convertPathParamsToWildcards = (path: string) => {
  * });
  * ```
  */
-export const mockApiRoute = <T extends RouteConfig>(
+export const mockApiRoute = async <T extends RouteConfig>(
   page: Page,
   { route, response, onFulfill }: MockApiRouteOptions<T>,
 ) => {
   const cleanPath = convertPathParamsToWildcards(route.path);
-  return page.route(`http://localhost:3001/api${cleanPath}*`, (mockRoute) => {
+
+  const handler = (mockRoute: Route) => {
     const request = mockRoute.request();
     const url = new URL(request.url());
     const requestMethod = request.method().toLowerCase();
@@ -200,7 +201,6 @@ export const mockApiRoute = <T extends RouteConfig>(
       query: query as ExtractRouteSchemas<T>["Query"],
       body: requestBody as ExtractRouteSchemas<T>["Body"],
     });
-
     return mockRoute
       .fulfill({
         status,
@@ -208,5 +208,8 @@ export const mockApiRoute = <T extends RouteConfig>(
         body: JSON.stringify(body),
       })
       .then(onFulfill);
-  });
+  };
+
+  await page.route(`http://localhost:3001/api${cleanPath}`, handler);
+  await page.route(`http://localhost:3001/api${cleanPath}?*`, handler);
 };
