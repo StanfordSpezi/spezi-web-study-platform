@@ -52,14 +52,14 @@ test.describe("Study Configuration Tests", () => {
     ).toBeVisible();
 
     await expect(
-      page.getByRole("link", { name: "Questionnaire" }),
+      page.getByRole("link", { name: "Morning Check-in" }),
     ).toBeVisible();
   });
 
   test("navigates to the component detail page from the list", async ({
     page,
   }) => {
-    await page.getByRole("link", { name: "Questionnaire" }).click();
+    await page.getByRole("link", { name: "Morning Check-in" }).click();
     await expect(page).toHaveURL((url) =>
       url.pathname.endsWith(
         `/${team.id}/${study.id}/configuration/components/${component.id}`,
