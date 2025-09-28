@@ -23,12 +23,14 @@ export const componentFixtures: Component[] = [
     studyId: "study_sleep_patterns",
     type: "health-data",
     sampleTypes: ["HKCategoryType;HKCategoryTypeIdentifierAppleStandHour"],
+    historicalDataCollection: 7,
     schedule: {
       startOffset: 0,
       repeatType: "daily",
       repeatInterval: 1,
       displayHour: 8,
       displayMinute: 0,
+      completionPolicy: "anytime",
     },
   },
   {
@@ -46,6 +48,7 @@ export const componentFixtures: Component[] = [
       repeatInterval: 1,
       displayHour: 9,
       displayMinute: 0,
+      completionPolicy: "anytime",
     },
   },
 ];

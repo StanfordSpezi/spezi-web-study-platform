@@ -68,7 +68,7 @@ export const formatSchedule = ({
       const ordinal = getOrdinalSuffix(repeatInterval);
       frequencyString = `Every ${repeatInterval}${ordinal} day`;
     }
-  } else {
+  } else if (repeatType === "weekly") {
     // weekly
     if (repeatInterval === 1) {
       frequencyString = "Weekly";
@@ -76,6 +76,8 @@ export const formatSchedule = ({
       const ordinal = getOrdinalSuffix(repeatInterval);
       frequencyString = `Every ${repeatInterval}${ordinal} week`;
     }
+  } else {
+    frequencyString = "One-time";
   }
 
   const startString =

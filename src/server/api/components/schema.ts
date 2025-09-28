@@ -11,10 +11,18 @@ import { z } from "@hono/zod-openapi";
 const scheduleSchema = z
   .object({
     startOffset: z.number().openapi({ example: 0 }),
-    repeatType: z.enum(["daily", "weekly"]).openapi({ example: "daily" }),
+    repeatType: z
+      .enum(["none", "daily", "weekly"])
+      .openapi({ example: "daily" }),
     repeatInterval: z.number().openapi({ example: 1 }),
     displayHour: z.number().openapi({ example: 9 }),
     displayMinute: z.number().openapi({ example: 0 }),
+    completionPolicy: z
+      .enum(["after-start", "anytime", "same-day-after-start"])
+      .openapi({
+        description: "Determines when users can mark tasks as complete",
+        example: "anytime",
+      }),
   })
   .nullable()
   .openapi({
@@ -40,6 +48,10 @@ const healthDataComponentSchema = baseComponentSchema.extend({
     .string()
     .array()
     .openapi({ example: ["heart_rate"] }),
+  historicalDataCollection: z.number().nullable().openapi({
+    description: "The number of past days to collect data for before start.",
+    example: null,
+  }),
 });
 
 const questionnaireComponentSchema = baseComponentSchema.extend({
@@ -66,6 +78,7 @@ const informationCreateSchema = baseCreateSchema.extend({
 const healthDataCreateSchema = baseCreateSchema.extend({
   type: z.literal("health-data"),
   sampleTypes: z.string().array(),
+  historicalDataCollection: z.number().nullable(),
 });
 const questionnaireCreateSchema = baseCreateSchema.extend({
   type: z.literal("questionnaire"),
@@ -88,6 +101,7 @@ const informationUpdateSchema = baseUpdateSchema.extend({
 const healthDataUpdateSchema = baseUpdateSchema.extend({
   type: z.literal("health-data"),
   sampleTypes: z.string().array().optional(),
+  historicalDataCollection: z.number().nullable().optional(),
 });
 
 const questionnaireUpdateSchema = baseUpdateSchema.extend({

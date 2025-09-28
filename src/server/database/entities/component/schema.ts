@@ -11,10 +11,15 @@ import { z } from "zod";
 export const scheduleSchema = z
   .object({
     startOffset: z.number(),
-    repeatType: z.enum(["daily", "weekly"]),
+    repeatType: z.enum(["none", "daily", "weekly"]),
     repeatInterval: z.number(),
     displayHour: z.number(),
     displayMinute: z.number(),
+    completionPolicy: z.enum([
+      "after-start",
+      "anytime",
+      "same-day-after-start",
+    ]),
   })
   .nullable();
 
@@ -34,6 +39,7 @@ const informationComponentSchema = baseComponentSchema.extend({
 const healthDataComponentSchema = baseComponentSchema.extend({
   type: z.literal("health-data"),
   sampleTypes: z.string().array(),
+  historicalDataCollection: z.number().nullable(),
 });
 
 const questionnaireComponentSchema = baseComponentSchema.extend({

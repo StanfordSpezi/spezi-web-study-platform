@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import { isObject } from "@stanfordspezi/spezi-web-design-system";
 import {
   Activity,
   CheckSquare,
@@ -36,6 +37,23 @@ const getComponentLabel = (component: Component): ComponentLabel => {
         className: cn("bg-blue-500 text-blue-50"),
       };
     case "questionnaire":
+      try {
+        const parsedJson = JSON.parse(component.fhirQuestionnaireJson);
+        if (
+          isObject(parsedJson) &&
+          "title" in parsedJson &&
+          typeof parsedJson.title === "string"
+        ) {
+          const title = parsedJson.title || "Questionnaire";
+          return {
+            icon: CheckSquare,
+            text: title,
+            className: cn("bg-orange-500 text-orange-50"),
+          };
+        }
+      } catch {
+        // Fall through to default label below
+      }
       return {
         icon: CheckSquare,
         text: "Questionnaire",
@@ -62,15 +80,22 @@ const getComponentSummary = (component: Component): string => {
       return truncate(component.content, 200);
     case "questionnaire": {
       try {
-        const jsonString = JSON.stringify(
-          JSON.parse(component.fhirQuestionnaireJson),
-          null,
-          2,
-        );
-        return truncate(jsonString, 200);
+        const parsedJson = JSON.parse(component.fhirQuestionnaireJson);
+        const stringifiedJson = JSON.stringify(parsedJson, null, 2);
+        if (
+          isObject(parsedJson) &&
+          "description" in parsedJson &&
+          typeof parsedJson.description === "string"
+        ) {
+          const description = parsedJson.description || stringifiedJson;
+          return truncate(description, 200);
+        }
+
+        return stringifiedJson;
       } catch {
-        return "Invalid questionnaire data";
+        // Fall through to default label below
       }
+      return "Invalid questionnaire data";
     }
     case "health-data": {
       const healthDataTypeItems = Object.values(healthDataTypes).flat();
@@ -88,6 +113,9 @@ const getComponentSummary = (component: Component): string => {
 };
 
 const getComponentSchedule = (component: Component): string => {
+  if (component.type === "health-data") {
+    return "Continuous";
+  }
   if (!component.schedule) {
     return "Not scheduled";
   }
