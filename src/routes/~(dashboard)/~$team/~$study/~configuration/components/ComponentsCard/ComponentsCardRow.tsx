@@ -18,19 +18,95 @@ import { Link, useParams } from "@tanstack/react-router";
 import { Ellipsis } from "lucide-react";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
 import { useDeleteComponentMutation } from "@/lib/queries/component";
-import type { Component } from "@/server/database/entities/component/schema";
 import { cn } from "@/utils/cn";
-import { formatComponent } from "../../lib/formatComponent";
+import {
+  type getComponentLabel,
+  type getComponentSchedule,
+  type getComponentSummary,
+} from "../../lib/formatComponent";
 
-interface ComponentsCardRowProps {
-  component: Component;
+interface ComponentsCardRowLabelProps {
+  label: ReturnType<typeof getComponentLabel>;
+  componentId: string;
 }
 
-export const ComponentsCardRow = ({ component }: ComponentsCardRowProps) => {
+export const ComponentsCardRowLabel = ({
+  label,
+  componentId,
+}: ComponentsCardRowLabelProps) => {
+  const params = useParams({ strict: false });
+  if (!params.team || !params.study) {
+    console.warn("Missing team or study parameter");
+    return null;
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <div>
+        <FeaturedIconContainer
+          className={cn(
+            "[--container-radius:var(--radius-md)]",
+            "border-border-tertiary size-6 shadow-xs",
+          )}
+        >
+          <label.icon
+            className={cn("size-full rounded p-[3px]", label.className)}
+          />
+        </FeaturedIconContainer>
+      </div>
+      <Link
+        to="/$team/$study/configuration/components/$component"
+        params={{
+          team: params.team,
+          study: params.study,
+          component: componentId,
+        }}
+        className="focus-ring hover:text-text decoration-text-tertiary min-w-0 truncate rounded-sm underline-offset-2 hover:underline"
+      >
+        {label.text}
+      </Link>
+    </div>
+  );
+};
+
+interface ComponentsCardRowSummaryProps {
+  summary: ReturnType<typeof getComponentSummary>;
+}
+
+export const ComponentsCardRowSummary = (
+  props: ComponentsCardRowSummaryProps,
+) => {
+  return (
+    <Tooltip
+      tooltip={props.summary}
+      className="whitespace-break-spaces"
+      variant="inverted"
+      delayDuration={1000}
+    >
+      <span className="line-clamp-1">{props.summary}</span>
+    </Tooltip>
+  );
+};
+
+interface ComponentsCardRowScheduleProps {
+  schedule: ReturnType<typeof getComponentSchedule>;
+}
+
+export const ComponentsCardRowSchedule = (
+  props: ComponentsCardRowScheduleProps,
+) => {
+  return <div className="min-w-0 truncate">{props.schedule}</div>;
+};
+
+interface ComponentsCardRowActionsProps {
+  componentId: string;
+}
+
+export const ComponentsCardRowActions = ({
+  componentId,
+}: ComponentsCardRowActionsProps) => {
   const params = useParams({ strict: false });
   const deleteComponent = useDeleteComponentMutation();
-
-  const { label, summary, schedule } = formatComponent(component);
 
   if (!params.team || !params.study) {
     console.warn("Missing team or study parameter");
@@ -38,83 +114,34 @@ export const ComponentsCardRow = ({ component }: ComponentsCardRowProps) => {
   }
 
   return (
-    <li
-      className={cn(
-        "h-(--row-h) px-(--card-padding) text-sm",
-        "grid grid-cols-(--cols) items-center gap-4",
-        "border-border-tertiary border-b",
-      )}
-    >
-      <div className="flex items-center gap-2">
-        <div>
-          <FeaturedIconContainer
-            className={cn(
-              "[--container-radius:var(--radius-md)]",
-              "border-border-tertiary size-6 shadow-xs",
-            )}
+    <div className="flex-center h-full">
+      <DropdownMenu modal={false}>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size={null} className="size-8 rounded-sm p-2">
+            <Ellipsis className="opacity-80" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side="left" align="start">
+          <DropdownMenuItem asChild>
+            <Link
+              to="/$team/$study/configuration/components/$component"
+              params={{
+                team: params.team,
+                study: params.study,
+                component: componentId,
+              }}
+            >
+              Edit
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            disabled={deleteComponent.isPending}
+            onClick={() => deleteComponent.mutate({ componentId })}
           >
-            <label.icon
-              className={cn("size-full rounded p-[3px]", label.className)}
-            />
-          </FeaturedIconContainer>
-        </div>
-        <Link
-          to="/$team/$study/configuration/components/$component"
-          params={{
-            team: params.team,
-            study: params.study,
-            component: component.id,
-          }}
-          className="focus-ring hover:text-text decoration-text-tertiary min-w-0 truncate rounded-sm underline-offset-2 hover:underline"
-        >
-          {label.text}
-        </Link>
-      </div>
-      <div className="min-w-0">
-        <Tooltip
-          tooltip={summary}
-          className="whitespace-break-spaces"
-          variant="inverted"
-        >
-          <div className="max-w-fit truncate">{summary}</div>
-        </Tooltip>
-      </div>
-      <div className="min-w-0 truncate">{schedule}</div>
-      <div className="flex-center h-full">
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size={null}
-              className="size-8 rounded-sm p-2"
-            >
-              <Ellipsis className="opacity-80" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="left" align="start">
-            <DropdownMenuItem asChild>
-              <Link
-                to="/$team/$study/configuration/components/$component"
-                params={{
-                  team: params.team,
-                  study: params.study,
-                  component: component.id,
-                }}
-              >
-                Edit
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              disabled={deleteComponent.isPending}
-              onClick={() =>
-                deleteComponent.mutate({ componentId: component.id })
-              }
-            >
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </li>
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };

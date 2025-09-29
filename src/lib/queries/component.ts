@@ -206,8 +206,8 @@ export const useDeleteComponentMutation = ({
   onSuccess,
 }: {
   // We need this callback to allow for an async navigation after deletion
-  // but before the query invalidation happens. The mutater's onSuccess
-  // cannot be async because react-query does not await it.
+  // but before the query invalidation happens. The .mutate method's onSuccess
+  // parameter cannot be async because react-query does not await it.
   onSuccess?: () => Promise<void>;
 } = {}) => {
   const queryClient = useQueryClient();

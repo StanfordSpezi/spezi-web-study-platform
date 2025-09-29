@@ -7,6 +7,7 @@
 //
 
 import { isObject } from "@stanfordspezi/spezi-web-design-system";
+import { truncate } from "es-toolkit/compat";
 import {
   Activity,
   CheckSquare,
@@ -16,7 +17,6 @@ import {
 } from "lucide-react";
 import type { Component } from "@/server/database/entities/component/schema";
 import { cn } from "@/utils/cn";
-import { truncate } from "@/utils/truncate";
 import { formatSchedule } from "./formatSchedule";
 import { healthDataTypes } from "./healthDataTypes";
 
@@ -26,7 +26,7 @@ interface ComponentLabel {
   className: string;
 }
 
-const getComponentLabel = (component: Component): ComponentLabel => {
+export const getComponentLabel = (component: Component): ComponentLabel => {
   switch (component.type) {
     case "information":
       return {
@@ -74,10 +74,10 @@ const getComponentLabel = (component: Component): ComponentLabel => {
   }
 };
 
-const getComponentSummary = (component: Component): string => {
+export const getComponentSummary = (component: Component): string => {
   switch (component.type) {
     case "information":
-      return truncate(component.content, 200);
+      return truncate(component.content, { length: 200, omission: "…" });
     case "questionnaire": {
       try {
         const parsedJson = JSON.parse(component.fhirQuestionnaireJson);
@@ -88,7 +88,7 @@ const getComponentSummary = (component: Component): string => {
           typeof parsedJson.description === "string"
         ) {
           const description = parsedJson.description || stringifiedJson;
-          return truncate(description, 200);
+          return truncate(description, { length: 200, omission: "…" });
         }
 
         return stringifiedJson;
@@ -112,7 +112,7 @@ const getComponentSummary = (component: Component): string => {
   }
 };
 
-const getComponentSchedule = (component: Component): string => {
+export const getComponentSchedule = (component: Component): string => {
   if (component.type === "health-data") {
     return "Continuous";
   }
@@ -120,15 +120,4 @@ const getComponentSchedule = (component: Component): string => {
     return "Not scheduled";
   }
   return formatSchedule(component.schedule);
-};
-
-/**
- * Formats a component by extracting values for label, summary, and schedule.
- */
-export const formatComponent = (component: Component) => {
-  const label = getComponentLabel(component);
-  const summary = getComponentSummary(component);
-  const schedule = getComponentSchedule(component);
-
-  return { label, summary, schedule };
 };

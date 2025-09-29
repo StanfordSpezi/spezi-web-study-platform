@@ -18,10 +18,10 @@ import { StatusBadge } from "./components/StatusBadge";
 
 const StudyConfigurationRoute = () => {
   const params = Route.useParams();
-  const { data: study, isLoading: isStudyLoading } = useQuery(
+  const { data: study, ...studyQuery } = useQuery(
     studyRetrieveQueryOptions({ studyId: params.study }),
   );
-  const { data: components, isLoading: isComponentsLoading } = useQuery(
+  const { data: components, ...componentQuery } = useQuery(
     componentListQueryOptions({ studyId: params.study }),
   );
   return (
@@ -32,11 +32,11 @@ const StudyConfigurationRoute = () => {
         accessoryRight={<StatusBadge isPublished={study?.isPublished} />}
       />
       <div className="flex max-w-7xl flex-col gap-14 p-6 pb-12">
-        <BasicInfoCard study={study} isLoading={isStudyLoading} />
-        <EnrollmentCard study={study} isLoading={isStudyLoading} />
+        <BasicInfoCard study={study} isLoading={studyQuery.isLoading} />
+        <EnrollmentCard study={study} isLoading={studyQuery.isLoading} />
         <ComponentsCard
           components={components}
-          isLoading={isComponentsLoading}
+          isLoading={componentQuery.isLoading}
         />
       </div>
     </div>

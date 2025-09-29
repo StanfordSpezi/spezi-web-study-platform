@@ -6,15 +6,92 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { Button } from "@stanfordspezi/spezi-web-design-system";
+import { Button, DataTable } from "@stanfordspezi/spezi-web-design-system";
+import { createColumnHelper } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
 import { Card, CardHeader } from "@/components/ui/Card";
 import type { Component } from "@/server/database/entities/component/schema";
 import { cn } from "@/utils/cn";
 import { ComponentsCardEmpty } from "./ComponentsCardEmpty";
-import { ComponentsCardRow } from "./ComponentsCardRow";
+import {
+  ComponentsCardRowActions,
+  ComponentsCardRowLabel,
+  ComponentsCardRowSchedule,
+  ComponentsCardRowSummary,
+} from "./ComponentsCardRow";
 import { ComponentsCardSkeleton } from "./ComponentsCardSkeleton";
 import { NewComponentDialog } from "./NewComponentDialog";
+import {
+  getComponentLabel,
+  getComponentSchedule,
+  getComponentSummary,
+} from "../../lib/formatComponent";
+
+const columnHelper = createColumnHelper<Component>();
+
+const columnDefinition = {
+  label: columnHelper.accessor(getComponentLabel, {
+    id: "label",
+    header: "Component",
+    cell: (props) => {
+      const label = props.getValue();
+      return (
+        <ComponentsCardRowLabel
+          label={label}
+          componentId={props.row.original.id}
+        />
+      );
+    },
+    maxSize: 200,
+  }),
+  summary: columnHelper.accessor(getComponentSummary, {
+    id: "summary",
+    header: "Summary",
+    cell: (props) => {
+      const summary = props.getValue();
+      return <ComponentsCardRowSummary summary={summary} />;
+    },
+  }),
+  schedule: columnHelper.accessor(getComponentSchedule, {
+    id: "schedule",
+    header: "Schedule",
+    cell: (props) => {
+      const schedule = props.getValue();
+      return <ComponentsCardRowSchedule schedule={schedule} />;
+    },
+  }),
+  actions: columnHelper.accessor("id", {
+    id: "actions",
+    header: "Actions",
+    cell: (props) => {
+      const componentId = props.getValue();
+      return <ComponentsCardRowActions componentId={componentId} />;
+    },
+    minSize: 50,
+    maxSize: 50,
+  }),
+};
+
+const ComponentsCardContent = ({ components }: { components: Component[] }) => {
+  return (
+    <DataTable
+      entityName="components"
+      columns={[
+        columnDefinition.label,
+        columnDefinition.summary,
+        columnDefinition.schedule,
+        columnDefinition.actions,
+      ]}
+      data={components}
+      bordered={false}
+      className={cn([
+        "!bg-layer",
+        "[&_th]:bg-fill-secondary",
+        "[&_th:last-of-type_button]:!hidden", // Hide the "Action" header button
+      ])}
+    />
+  );
+};
 
 const ComponentsCardHeader = () => {
   return (
@@ -29,31 +106,6 @@ const ComponentsCardHeader = () => {
         </Button>
       </NewComponentDialog>
     </CardHeader>
-  );
-};
-
-const ComponentsCardContent = ({ components }: { components: Component[] }) => {
-  return (
-    <ul
-      className={cn(
-        "[--cols:200px_1fr_1fr_50px] [--row-h:--spacing(12)]",
-        "flex flex-col pb-(--card-padding)",
-      )}
-    >
-      <li
-        className={cn(
-          "bg-fill-secondary text-text-tertiary border-border-tertiary h-(--row-h) border-b px-(--card-padding) text-sm",
-          "grid grid-cols-(--cols) items-center gap-4",
-        )}
-      >
-        <p>Component</p>
-        <p>Summary</p>
-        <p>Schedule</p>
-      </li>
-      {components.map((component) => (
-        <ComponentsCardRow key={component.id} component={component} />
-      ))}
-    </ul>
   );
 };
 
