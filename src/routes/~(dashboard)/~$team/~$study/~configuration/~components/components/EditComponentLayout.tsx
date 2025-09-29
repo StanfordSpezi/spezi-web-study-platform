@@ -12,7 +12,7 @@ import {
   useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { RouteHeader, RouteHeaderBackLink } from "@/components/ui/RouteHeader";
 import { useDeleteComponentMutation } from "@/lib/queries/component";
 import { ScheduleDialog } from "./ScheduleDialog";
