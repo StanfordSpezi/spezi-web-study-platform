@@ -7,7 +7,7 @@
 //
 
 import { Button, Separator } from "@stanfordspezi/spezi-web-design-system";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, useEditor, type Storage } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import {
   Bold,
@@ -52,6 +52,10 @@ const Toggle = ({
   );
 };
 
+interface MarkdownStorage extends Storage {
+  markdown: { getMarkdown: () => string };
+}
+
 interface MarkdownEditorProps extends Omit<ComponentProps<"div">, "onChange"> {
   value?: string;
   onChange?: (value: string) => void;
@@ -67,11 +71,8 @@ export const MarkdownEditor = ({
     extensions: [StarterKit, Markdown],
     content: value,
     onUpdate: ({ editor }) => {
-      const markdown = (
-        editor.storage as unknown as {
-          markdown: { getMarkdown: () => string };
-        }
-      ).markdown.getMarkdown();
+      const storage = editor.storage as MarkdownStorage;
+      const markdown = storage.markdown.getMarkdown();
       onChange?.(markdown);
     },
     editorProps: {

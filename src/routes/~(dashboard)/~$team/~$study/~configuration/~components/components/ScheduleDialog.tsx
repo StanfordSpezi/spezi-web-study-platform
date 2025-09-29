@@ -148,13 +148,10 @@ export const ScheduleDialog = () => {
                   onValueChange={(value) => {
                     onChange(value);
                     if (value === "none") {
-                      const currentInterval = form.getValues("repeatInterval");
-                      if (currentInterval !== 0) {
-                        form.setValue("repeatInterval", 0, {
-                          shouldDirty: true,
-                          shouldValidate: true,
-                        });
-                      }
+                      form.setValue("repeatInterval", 0, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
                     }
                   }}
                   {...field}
