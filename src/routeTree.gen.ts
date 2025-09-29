@@ -34,6 +34,9 @@ import { Route as dashboardTeamStudyIndexRouteImport } from './routes/~(dashboar
 import { Route as dashboardTeamStudyConfigurationEnrollmentRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~enrollment'
 import { Route as dashboardTeamStudyConfigurationBasicInformationRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~basic-information'
 import { Route as dashboardTeamStudyConfigurationIndexRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~index'
+import { Route as dashboardTeamStudyConfigurationComponentsNewRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~components/~new'
+import { Route as dashboardTeamStudyConfigurationComponentsComponentRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~components/~$component'
+import { Route as dashboardTeamStudyConfigurationComponentsIndexRouteImport } from './routes/~(dashboard)/~$team/~$study/~configuration/~components/~index'
 
 const dashboardLayoutRoute = dashboardLayoutRouteImport.update({
   id: '/(dashboard)',
@@ -119,6 +122,24 @@ const dashboardTeamStudyConfigurationIndexRoute =
     path: '/configuration/',
     getParentRoute: () => dashboardTeamStudyLayoutRoute,
   } as any)
+const dashboardTeamStudyConfigurationComponentsNewRoute =
+  dashboardTeamStudyConfigurationComponentsNewRouteImport.update({
+    id: '/configuration/components/new',
+    path: '/configuration/components/new',
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any)
+const dashboardTeamStudyConfigurationComponentsComponentRoute =
+  dashboardTeamStudyConfigurationComponentsComponentRouteImport.update({
+    id: '/configuration/components/$component',
+    path: '/configuration/components/$component',
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any)
+const dashboardTeamStudyConfigurationComponentsIndexRoute =
+  dashboardTeamStudyConfigurationComponentsIndexRouteImport.update({
+    id: '/configuration/components/',
+    path: '/configuration/components/',
+    getParentRoute: () => dashboardTeamStudyLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof dashboardIndexRoute
@@ -135,6 +156,9 @@ export interface FileRoutesByFullPath {
   '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationIndexRoute
   '/$team/$study/configuration/basic-information': typeof dashboardTeamStudyConfigurationBasicInformationRoute
   '/$team/$study/configuration/enrollment': typeof dashboardTeamStudyConfigurationEnrollmentRoute
+  '/$team/$study/configuration/components': typeof dashboardTeamStudyConfigurationComponentsIndexRoute
+  '/$team/$study/configuration/components/$component': typeof dashboardTeamStudyConfigurationComponentsComponentRoute
+  '/$team/$study/configuration/components/new': typeof dashboardTeamStudyConfigurationComponentsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof dashboardIndexRoute
@@ -149,6 +173,9 @@ export interface FileRoutesByTo {
   '/$team/$study/configuration': typeof dashboardTeamStudyConfigurationIndexRoute
   '/$team/$study/configuration/basic-information': typeof dashboardTeamStudyConfigurationBasicInformationRoute
   '/$team/$study/configuration/enrollment': typeof dashboardTeamStudyConfigurationEnrollmentRoute
+  '/$team/$study/configuration/components': typeof dashboardTeamStudyConfigurationComponentsIndexRoute
+  '/$team/$study/configuration/components/$component': typeof dashboardTeamStudyConfigurationComponentsComponentRoute
+  '/$team/$study/configuration/components/new': typeof dashboardTeamStudyConfigurationComponentsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -167,6 +194,9 @@ export interface FileRoutesById {
   '/(dashboard)/$team/$study/configuration/': typeof dashboardTeamStudyConfigurationIndexRoute
   '/(dashboard)/$team/$study/configuration/basic-information': typeof dashboardTeamStudyConfigurationBasicInformationRoute
   '/(dashboard)/$team/$study/configuration/enrollment': typeof dashboardTeamStudyConfigurationEnrollmentRoute
+  '/(dashboard)/$team/$study/configuration/components/': typeof dashboardTeamStudyConfigurationComponentsIndexRoute
+  '/(dashboard)/$team/$study/configuration/components/$component': typeof dashboardTeamStudyConfigurationComponentsComponentRoute
+  '/(dashboard)/$team/$study/configuration/components/new': typeof dashboardTeamStudyConfigurationComponentsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -185,6 +215,9 @@ export interface FileRouteTypes {
     | '/$team/$study/configuration'
     | '/$team/$study/configuration/basic-information'
     | '/$team/$study/configuration/enrollment'
+    | '/$team/$study/configuration/components'
+    | '/$team/$study/configuration/components/$component'
+    | '/$team/$study/configuration/components/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -199,6 +232,9 @@ export interface FileRouteTypes {
     | '/$team/$study/configuration'
     | '/$team/$study/configuration/basic-information'
     | '/$team/$study/configuration/enrollment'
+    | '/$team/$study/configuration/components'
+    | '/$team/$study/configuration/components/$component'
+    | '/$team/$study/configuration/components/new'
   id:
     | '__root__'
     | '/(dashboard)'
@@ -216,6 +252,9 @@ export interface FileRouteTypes {
     | '/(dashboard)/$team/$study/configuration/'
     | '/(dashboard)/$team/$study/configuration/basic-information'
     | '/(dashboard)/$team/$study/configuration/enrollment'
+    | '/(dashboard)/$team/$study/configuration/components/'
+    | '/(dashboard)/$team/$study/configuration/components/$component'
+    | '/(dashboard)/$team/$study/configuration/components/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -330,6 +369,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardTeamStudyConfigurationIndexRouteImport
       parentRoute: typeof dashboardTeamStudyLayoutRoute
     }
+    '/(dashboard)/$team/$study/configuration/components/new': {
+      id: '/(dashboard)/$team/$study/configuration/components/new'
+      path: '/configuration/components/new'
+      fullPath: '/$team/$study/configuration/components/new'
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationComponentsNewRouteImport
+      parentRoute: typeof dashboardTeamStudyLayoutRoute
+    }
+    '/(dashboard)/$team/$study/configuration/components/$component': {
+      id: '/(dashboard)/$team/$study/configuration/components/$component'
+      path: '/configuration/components/$component'
+      fullPath: '/$team/$study/configuration/components/$component'
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationComponentsComponentRouteImport
+      parentRoute: typeof dashboardTeamStudyLayoutRoute
+    }
+    '/(dashboard)/$team/$study/configuration/components/': {
+      id: '/(dashboard)/$team/$study/configuration/components/'
+      path: '/configuration/components'
+      fullPath: '/$team/$study/configuration/components'
+      preLoaderRoute: typeof dashboardTeamStudyConfigurationComponentsIndexRouteImport
+      parentRoute: typeof dashboardTeamStudyLayoutRoute
+    }
   }
 }
 
@@ -359,6 +419,9 @@ interface dashboardTeamStudyLayoutRouteChildren {
   dashboardTeamStudyConfigurationIndexRoute: typeof dashboardTeamStudyConfigurationIndexRoute
   dashboardTeamStudyConfigurationBasicInformationRoute: typeof dashboardTeamStudyConfigurationBasicInformationRoute
   dashboardTeamStudyConfigurationEnrollmentRoute: typeof dashboardTeamStudyConfigurationEnrollmentRoute
+  dashboardTeamStudyConfigurationComponentsIndexRoute: typeof dashboardTeamStudyConfigurationComponentsIndexRoute
+  dashboardTeamStudyConfigurationComponentsComponentRoute: typeof dashboardTeamStudyConfigurationComponentsComponentRoute
+  dashboardTeamStudyConfigurationComponentsNewRoute: typeof dashboardTeamStudyConfigurationComponentsNewRoute
 }
 
 const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildren =
@@ -372,6 +435,12 @@ const dashboardTeamStudyLayoutRouteChildren: dashboardTeamStudyLayoutRouteChildr
       dashboardTeamStudyConfigurationBasicInformationRoute,
     dashboardTeamStudyConfigurationEnrollmentRoute:
       dashboardTeamStudyConfigurationEnrollmentRoute,
+    dashboardTeamStudyConfigurationComponentsIndexRoute:
+      dashboardTeamStudyConfigurationComponentsIndexRoute,
+    dashboardTeamStudyConfigurationComponentsComponentRoute:
+      dashboardTeamStudyConfigurationComponentsComponentRoute,
+    dashboardTeamStudyConfigurationComponentsNewRoute:
+      dashboardTeamStudyConfigurationComponentsNewRoute,
   }
 
 const dashboardTeamStudyLayoutRouteWithChildren =

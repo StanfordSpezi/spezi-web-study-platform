@@ -9,15 +9,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { RouteHeader } from "@/components/ui/RouteHeader";
+import { componentListQueryOptions } from "@/lib/queries/component";
 import { studyRetrieveQueryOptions } from "@/lib/queries/study";
 import { BasicInfoCard } from "./components/BasicInfoCard";
+import { ComponentsCard } from "./components/ComponentsCard/ComponentsCard";
 import { EnrollmentCard } from "./components/EnrollmentCard";
 import { StatusBadge } from "./components/StatusBadge";
 
 const StudyConfigurationRoute = () => {
   const params = Route.useParams();
-  const { data: study, isLoading } = useQuery(
+  const { data: study, ...studyQuery } = useQuery(
     studyRetrieveQueryOptions({ studyId: params.study }),
+  );
+  const { data: components, ...componentQuery } = useQuery(
+    componentListQueryOptions({ studyId: params.study }),
   );
   return (
     <div>
@@ -26,9 +31,13 @@ const StudyConfigurationRoute = () => {
         description="Configure your study and everything related to it."
         accessoryRight={<StatusBadge isPublished={study?.isPublished} />}
       />
-      <div className="flex max-w-7xl flex-col gap-14 p-6">
-        <BasicInfoCard study={study} isLoading={isLoading} />
-        <EnrollmentCard study={study} isLoading={isLoading} />
+      <div className="flex max-w-7xl flex-col gap-14 p-6 pb-12">
+        <BasicInfoCard study={study} isLoading={studyQuery.isLoading} />
+        <EnrollmentCard study={study} isLoading={studyQuery.isLoading} />
+        <ComponentsCard
+          components={components}
+          isLoading={componentQuery.isLoading}
+        />
       </div>
     </div>
   );

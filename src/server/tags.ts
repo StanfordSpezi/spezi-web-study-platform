@@ -26,4 +26,14 @@ export const openApiTags = {
     name: "Users",
     description: "Retrieve user information.",
   },
+  components: {
+    name: "Components",
+    description:
+      "Manage study components such as informational screens, health data collection, and questionnaires.",
+  },
+  uploads: {
+    name: "Uploads",
+    description:
+      "Handle image uploads. For example, upload and retrieve images used in study components.",
+  },
 };

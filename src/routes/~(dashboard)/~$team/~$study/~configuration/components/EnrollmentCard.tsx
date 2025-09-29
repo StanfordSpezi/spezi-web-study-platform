@@ -37,6 +37,7 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
           from="/"
           to="/$team/$study/configuration/enrollment"
           params={params}
+          className="h-8 text-sm"
         />
       }
       isLoading={isLoading}

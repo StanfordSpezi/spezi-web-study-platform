@@ -41,7 +41,7 @@ If you get a 404 or the page does not load, confirm `npm run dev` is still runni
 All development data lives in a JSON file. We can inspect it at any time.
 
 ```bash
-head -n 40 src/server/database/db.json
+head -n 40 .dev-data/db.json
 ```
 
 ## 4. Sign in from the API reference
@@ -64,7 +64,7 @@ What to notice: subsequent requests are now authorized because the dev server re
 
 Call `GET /api/studies`. If you signed in as an admin user, you will see all studies. If you signed in as a non-admin, you will see only studies for your teams.
 
-Variation: sign out with `POST /api/auth/sign-out`, then sign in as a different user from `db.json` and repeat the request to observe filtered results.
+Variation: sign out with `POST /api/auth/sign-out`, then sign in as a different user from `.dev-data/db.json` and repeat the request to observe filtered results.
 
 ## 7. Optional command line checks
 
@@ -87,10 +87,10 @@ curl -s -X POST http://localhost:3001/api/auth/sign-out | jq
 To fully reset data back to fixtures:
 
 ```bash
-rm -f src/server/database/db.json
+rm -rf .dev-data
 ```
 
-Issue a new request once you have removed the file. The server will recreate `db.json` with the default data.
+Issue a new request once you have removed the file. The server will recreate `.dev-data/db.json` with the default data.
 
 ## What we built
 

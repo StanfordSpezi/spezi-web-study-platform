@@ -8,6 +8,7 @@
 
 import type { Page } from "@playwright/test";
 import { mockAuthRoutes } from "./routes/auth";
+import { mockComponentsRoutes } from "./routes/components";
 import { mockStudiesRoutes } from "./routes/studies";
 import { mockTeamsRoutes } from "./routes/teams";
 import { mockUserRoutes } from "./routes/user";
@@ -29,12 +30,13 @@ export const loadApiMocks = (page: Page, options: LoadApiMocksOptions = {}) => {
     mockUserRoutes(page, { role }),
     mockTeamsRoutes(page),
     mockStudiesRoutes(page),
+    mockComponentsRoutes(page),
   ]);
 };
 
 interface ClearMockDataParams {
   page: Page;
-  entity: "teams" | "studies";
+  entity: "teams" | "studies" | "components";
 }
 
 /**

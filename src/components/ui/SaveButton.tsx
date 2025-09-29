@@ -42,7 +42,7 @@ export const SaveButton = ({
         localIsSuccess &&
           "border-fill-success text-text-success-on-fill w-28 shadow-[inset_0_0_16px_--alpha(var(--color-fill-success)_/_50%)]",
         localIsError &&
-          "border-fill-tertiary !bg-fill-tertiary text-text-tertiary-on-fill w-28",
+          "border-fill-critical !bg-fill-critical text-text-critical-on-fill w-28",
         className,
       )}
       {...props}

@@ -32,6 +32,7 @@ export const BasicInfoCard = ({ study, isLoading }: BasicInfoCardProps) => {
           from="/"
           to="/$team/$study/configuration/basic-information"
           params={params}
+          className="h-8 text-sm"
         />
       }
       isLoading={isLoading}
