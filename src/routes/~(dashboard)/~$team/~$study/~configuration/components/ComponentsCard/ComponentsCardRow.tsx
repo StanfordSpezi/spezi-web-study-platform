@@ -14,10 +14,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   Tooltip,
+  useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { Link, useParams } from "@tanstack/react-router";
 import { Ellipsis } from "lucide-react";
-import { useState } from "react";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
 import { useDeleteComponentMutation } from "@/lib/queries/component";
 import { cn } from "@/utils/cn";
@@ -108,7 +108,7 @@ export const ComponentsCardRowActions = ({
   componentId,
 }: ComponentsCardRowActionsProps) => {
   const params = useParams({ strict: false });
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const deleteDialog = useOpenState();
   const deleteComponent = useDeleteComponentMutation();
 
   if (!params.team || !params.study) {
@@ -144,7 +144,7 @@ export const ComponentsCardRowActions = ({
             </DropdownMenuItem>
             <DropdownMenuItem
               disabled={deleteComponent.isPending}
-              onClick={() => setIsDeleteModalOpen(true)}
+              onClick={deleteDialog.open}
             >
               Delete
             </DropdownMenuItem>
@@ -152,12 +152,12 @@ export const ComponentsCardRowActions = ({
         </DropdownMenu>
       </div>
       <ConfirmDeleteDialog
-        open={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
+        open={deleteDialog.isOpen}
+        onOpenChange={deleteDialog.setIsOpen}
         entityName="component"
         onDelete={() => {
           deleteComponent.mutate({ componentId });
-          setIsDeleteModalOpen(false);
+          deleteDialog.close();
         }}
       />
     </>

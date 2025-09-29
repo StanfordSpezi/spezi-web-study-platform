@@ -25,9 +25,9 @@ import {
   SelectTrigger,
   SelectValue,
   Tooltip,
+  useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { CalendarSync } from "lucide-react";
-import { useState } from "react";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
 import { FieldLabel } from "@/components/ui/FieldLabel";
 import { TimeSelect } from "@/components/ui/TimeSelect";
@@ -37,7 +37,7 @@ import { formatSchedule } from "../../lib/formatSchedule";
 import { useScheduleForm } from "../../lib/useScheduleForm";
 
 export const ScheduleDialog = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const dialog = useOpenState();
   const updateComponent = useUpdateComponentMutation();
   const { form, component } = useScheduleForm();
   const formValues = form.watch();
@@ -58,7 +58,7 @@ export const ScheduleDialog = () => {
       },
       {
         onSuccess: (data) => {
-          setIsOpen(false);
+          dialog.close();
           form.reset(
             data.schedule ?? {
               repeatType: "daily",
@@ -72,7 +72,7 @@ export const ScheduleDialog = () => {
     );
   });
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const deleteDialog = useOpenState();
   const handleDelete = () => {
     if (!component) return;
     updateComponent.mutate(
@@ -83,19 +83,19 @@ export const ScheduleDialog = () => {
       },
       {
         onSuccess: () => {
-          setIsOpen(false);
+          dialog.close();
           form.reset();
         },
       },
     );
-    setIsDeleteModalOpen(false);
+    deleteDialog.close();
   };
 
   if (!component) return null;
 
   return (
     <>
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog open={dialog.isOpen} onOpenChange={dialog.setIsOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" size="sm" className="text-sm">
             {mode === "create" ? "Add schedule" : "Edit schedule"}
@@ -187,9 +187,7 @@ export const ScheduleDialog = () => {
                     variant="inverted"
                     delayDuration={200}
                     open={isRepeatTypeNone ? undefined : false}
-                    tooltip={
-                      isRepeatTypeNone ? repeatIntervalTooltip : undefined
-                    }
+                    tooltip={repeatIntervalTooltip}
                   >
                     <div className="w-full">
                       <Input
@@ -267,7 +265,7 @@ export const ScheduleDialog = () => {
                     type="button"
                     variant="outline"
                     size="sm"
-                    onClick={() => setIsDeleteModalOpen(true)}
+                    onClick={deleteDialog.open}
                   >
                     Delete
                   </Button>
@@ -281,8 +279,8 @@ export const ScheduleDialog = () => {
         </DialogContent>
       </Dialog>
       <ConfirmDeleteDialog
-        open={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
+        open={deleteDialog.isOpen}
+        onOpenChange={deleteDialog.setIsOpen}
         entityName="schedule"
         onDelete={handleDelete}
       />

@@ -9,6 +9,7 @@
 import {
   Button,
   ConfirmDeleteDialog,
+  useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
@@ -29,7 +30,7 @@ export const EditComponentLayout = ({
     from: "/(dashboard)/$team/$study/configuration/components/$component",
   });
   const navigate = useNavigate();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const deleteDialog = useOpenState();
   const deleteComponent = useDeleteComponentMutation({
     onSuccess: () => {
       return navigate({
@@ -51,9 +52,7 @@ export const EditComponentLayout = ({
                 variant="ghost"
                 size="sm"
                 className="text-sm"
-                onClick={() => {
-                  setIsDeleteModalOpen(true);
-                }}
+                onClick={deleteDialog.open}
               >
                 Delete
               </Button>
@@ -65,12 +64,12 @@ export const EditComponentLayout = ({
         {children}
       </div>
       <ConfirmDeleteDialog
-        open={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
+        open={deleteDialog.isOpen}
+        onOpenChange={deleteDialog.setIsOpen}
         entityName="component"
         onDelete={() => {
           deleteComponent.mutate({ componentId: params.component });
-          setIsDeleteModalOpen(false);
+          deleteDialog.close();
         }}
       />
     </>
