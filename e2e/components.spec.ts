@@ -95,6 +95,7 @@ test.describe("Study Component Tests", () => {
     ).toBeVisible();
 
     await page.getByRole("button", { name: "Delete" }).click();
+    await page.getByRole("button", { name: "Delete component" }).click();
 
     await page.goto(componentsRoute);
     await expect(
