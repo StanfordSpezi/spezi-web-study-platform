@@ -8,6 +8,7 @@
 
 import {
   Button,
+  ConfirmDeleteDialog,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -71,6 +72,7 @@ export const ScheduleDialog = () => {
     );
   });
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const handleDelete = () => {
     if (!component) return;
     updateComponent.mutate(
@@ -86,193 +88,204 @@ export const ScheduleDialog = () => {
         },
       },
     );
+    setIsDeleteModalOpen(false);
   };
 
   if (!component) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="text-sm">
-          {mode === "create" ? "Add schedule" : "Edit schedule"}
-        </Button>
-      </DialogTrigger>
-      <DialogContent size="3xl" className="px-0">
-        <form onSubmit={handleSubmit}>
-          <DialogHeader className="items-center px-6 pb-6 sm:items-start">
-            <FeaturedIconContainer className="border-border-tertiary mb-4 size-8 rounded-lg shadow-xs">
-              <div className="grid size-full place-items-center">
-                <CalendarSync className="text-text-tertiary size-4" />
-              </div>
-            </FeaturedIconContainer>
-            <DialogTitle className="leading-none">Schedule</DialogTitle>
-            <DialogDescription>
-              Define when this component becomes active during the study.
-            </DialogDescription>
-          </DialogHeader>
-          <Field
-            control={form.control}
-            name="startOffset"
-            label={
-              <FieldLabel
-                title="Start offset"
-                description="Number of days to wait after enrollment before showing this component."
-              />
-            }
-            render={({ field }) => (
-              <div className="relative">
-                <Input
-                  type="number"
-                  className="pr-14"
-                  {...enhanceField(field, { valueAsNumber: true })}
-                />
-                <div className="text-text-tertiary absolute top-1/2 right-4 -translate-y-1/2 text-sm select-none">
-                  days
+    <>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <Button variant="outline" size="sm" className="text-sm">
+            {mode === "create" ? "Add schedule" : "Edit schedule"}
+          </Button>
+        </DialogTrigger>
+        <DialogContent size="3xl" className="px-0">
+          <form onSubmit={handleSubmit}>
+            <DialogHeader className="items-center px-6 pb-6 sm:items-start">
+              <FeaturedIconContainer className="border-border-tertiary mb-4 size-8 rounded-lg shadow-xs">
+                <div className="grid size-full place-items-center">
+                  <CalendarSync className="text-text-tertiary size-4" />
                 </div>
-              </div>
-            )}
-            className="border-border-tertiary bg-layer border-y px-6 pt-6"
-          />
-          <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">
+              </FeaturedIconContainer>
+              <DialogTitle className="leading-none">Schedule</DialogTitle>
+              <DialogDescription>
+                Define when this component becomes active during the study.
+              </DialogDescription>
+            </DialogHeader>
             <Field
               control={form.control}
-              name="repeatType"
+              name="startOffset"
               label={
                 <FieldLabel
-                  title="Repeat type"
-                  description="None, daily or specific weekdays."
-                />
-              }
-              render={({ field: { onChange, ...field } }) => (
-                <Select
-                  onValueChange={(value) => {
-                    onChange(value);
-                    if (value === "none") {
-                      form.setValue("repeatInterval", 0, {
-                        shouldDirty: true,
-                        shouldValidate: true,
-                      });
-                    }
-                  }}
-                  {...field}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">None</SelectItem>
-                    <SelectItem value="daily">Daily</SelectItem>
-                    <SelectItem value="weekly">Weekly</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-              className="flex-1"
-            />
-            <Field
-              control={form.control}
-              name="repeatInterval"
-              label={
-                <FieldLabel
-                  title="Repeat interval"
-                  description="The spacing between each occurrence."
+                  title="Start offset"
+                  description="Number of days to wait after enrollment before showing this component."
                 />
               }
               render={({ field }) => (
-                <Tooltip
-                  className="max-w-xs text-sm"
-                  variant="inverted"
-                  delayDuration={200}
-                  open={isRepeatTypeNone ? undefined : false}
-                  tooltip={isRepeatTypeNone ? repeatIntervalTooltip : undefined}
-                >
-                  <div className="w-full">
-                    <Input
-                      type="number"
-                      disabled={isRepeatTypeNone}
-                      placeholder={
-                        isRepeatTypeNone ? "Not applicable" : undefined
-                      }
-                      aria-disabled={isRepeatTypeNone}
-                      {...enhanceField(field, { valueAsNumber: true })}
-                    />
+                <div className="relative">
+                  <Input
+                    type="number"
+                    className="pr-14"
+                    {...enhanceField(field, { valueAsNumber: true })}
+                  />
+                  <div className="text-text-tertiary absolute top-1/2 right-4 -translate-y-1/2 text-sm select-none">
+                    days
                   </div>
-                </Tooltip>
+                </div>
               )}
-              className="flex-1"
+              className="border-border-tertiary bg-layer border-y px-6 pt-6"
             />
-          </div>
-          <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">
-            <div className="flex-1">
-              <Label htmlFor="schedule-time" className="mb-2 flex">
-                <FieldLabel
-                  title="Schedule time"
-                  description="Time of day when this component becomes active."
-                />
-              </Label>
-              <TimeSelect
-                id="schedule-time"
-                value={{
-                  hours: formValues.displayHour,
-                  minutes: formValues.displayMinute as 0 | 30,
-                }}
-                onChange={({ hours, minutes }) => {
-                  form.setValue("displayHour", hours);
-                  form.setValue("displayMinute", minutes);
-                }}
+            <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">
+              <Field
+                control={form.control}
+                name="repeatType"
+                label={
+                  <FieldLabel
+                    title="Repeat type"
+                    description="None, daily or specific weekdays."
+                  />
+                }
+                render={({ field: { onChange, ...field } }) => (
+                  <Select
+                    onValueChange={(value) => {
+                      onChange(value);
+                      if (value === "none") {
+                        form.setValue("repeatInterval", 0, {
+                          shouldDirty: true,
+                          shouldValidate: true,
+                        });
+                      }
+                    }}
+                    {...field}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
+                      <SelectItem value="daily">Daily</SelectItem>
+                      <SelectItem value="weekly">Weekly</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+                className="flex-1"
               />
-              <Error>
-                {form.formState.errors.displayHour?.message ??
-                  form.formState.errors.displayMinute?.message}
-              </Error>
+              <Field
+                control={form.control}
+                name="repeatInterval"
+                label={
+                  <FieldLabel
+                    title="Repeat interval"
+                    description="The spacing between each occurrence."
+                  />
+                }
+                render={({ field }) => (
+                  <Tooltip
+                    className="max-w-xs text-sm"
+                    variant="inverted"
+                    delayDuration={200}
+                    open={isRepeatTypeNone ? undefined : false}
+                    tooltip={
+                      isRepeatTypeNone ? repeatIntervalTooltip : undefined
+                    }
+                  >
+                    <div className="w-full">
+                      <Input
+                        type="number"
+                        disabled={isRepeatTypeNone}
+                        placeholder={
+                          isRepeatTypeNone ? "Not applicable" : undefined
+                        }
+                        aria-disabled={isRepeatTypeNone}
+                        {...enhanceField(field, { valueAsNumber: true })}
+                      />
+                    </div>
+                  </Tooltip>
+                )}
+                className="flex-1"
+              />
             </div>
-            <Field
-              control={form.control}
-              name="completionPolicy"
-              label={
-                <FieldLabel
-                  title="Completion policy"
-                  description="When users can mark tasks as complete."
+            <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">
+              <div className="flex-1">
+                <Label htmlFor="schedule-time" className="mb-2 flex">
+                  <FieldLabel
+                    title="Schedule time"
+                    description="Time of day when this component becomes active."
+                  />
+                </Label>
+                <TimeSelect
+                  id="schedule-time"
+                  value={{
+                    hours: formValues.displayHour,
+                    minutes: formValues.displayMinute as 0 | 30,
+                  }}
+                  onChange={({ hours, minutes }) => {
+                    form.setValue("displayHour", hours);
+                    form.setValue("displayMinute", minutes);
+                  }}
                 />
-              }
-              render={({ field: { onChange, ...field } }) => (
-                <Select onValueChange={onChange} {...field}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="after-start">After start</SelectItem>
-                    <SelectItem value="anytime">Anytime</SelectItem>
-                    <SelectItem value="same-day-after-start">
-                      Same day after start
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-              className="flex-1"
-            />
-          </div>
-          <div className="flex items-center justify-between gap-4 px-6 pt-6">
-            <p className="text-text-tertiary text-sm">
-              {form.formState.isValid && formatSchedule(formValues)}
-            </p>
-            <div className="flex gap-4">
-              {mode === "edit" && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={handleDelete}
-                >
-                  Delete
-                </Button>
-              )}
-              <Button type="submit" variant="default" size="sm">
-                {mode === "create" ? "Add schedule" : "Save changes"}
-              </Button>
+                <Error>
+                  {form.formState.errors.displayHour?.message ??
+                    form.formState.errors.displayMinute?.message}
+                </Error>
+              </div>
+              <Field
+                control={form.control}
+                name="completionPolicy"
+                label={
+                  <FieldLabel
+                    title="Completion policy"
+                    description="When users can mark tasks as complete."
+                  />
+                }
+                render={({ field: { onChange, ...field } }) => (
+                  <Select onValueChange={onChange} {...field}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="after-start">After start</SelectItem>
+                      <SelectItem value="anytime">Anytime</SelectItem>
+                      <SelectItem value="same-day-after-start">
+                        Same day after start
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+                className="flex-1"
+              />
             </div>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+            <div className="flex items-center justify-between gap-4 px-6 pt-6">
+              <p className="text-text-tertiary text-sm">
+                {form.formState.isValid && formatSchedule(formValues)}
+              </p>
+              <div className="flex gap-4">
+                {mode === "edit" && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setIsDeleteModalOpen(true)}
+                  >
+                    Delete
+                  </Button>
+                )}
+                <Button type="submit" variant="default" size="sm">
+                  {mode === "create" ? "Add schedule" : "Save changes"}
+                </Button>
+              </div>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+      <ConfirmDeleteDialog
+        open={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        entityName="schedule"
+        onDelete={handleDelete}
+      />
+    </>
   );
 };
