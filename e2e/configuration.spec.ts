@@ -51,15 +51,13 @@ test.describe("Study Configuration Tests", () => {
       page.getByRole("heading", { name: "Components" }),
     ).toBeVisible();
 
-    await expect(
-      page.getByRole("link", { name: "Morning Check-in" }),
-    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Welcome" })).toBeVisible();
   });
 
   test("navigates to the component detail page from the list", async ({
     page,
   }) => {
-    await page.getByRole("link", { name: "Morning Check-in" }).click();
+    await page.getByRole("link", { name: "Welcome" }).click();
     await expect(page).toHaveURL((url) =>
       url.pathname.endsWith(
         `/${team.id}/${study.id}/configuration/components/${component.id}`,
