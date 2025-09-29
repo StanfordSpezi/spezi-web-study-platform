@@ -8,11 +8,13 @@
 
 import {
   Button,
+  ConfirmDeleteDialog,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   Tooltip,
+  useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { Link, useParams } from "@tanstack/react-router";
 import { Ellipsis } from "lucide-react";
@@ -106,6 +108,7 @@ export const ComponentsCardRowActions = ({
   componentId,
 }: ComponentsCardRowActionsProps) => {
   const params = useParams({ strict: false });
+  const deleteDialog = useOpenState();
   const deleteComponent = useDeleteComponentMutation();
 
   if (!params.team || !params.study) {
@@ -114,34 +117,49 @@ export const ComponentsCardRowActions = ({
   }
 
   return (
-    <div className="flex-center h-full">
-      <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size={null} className="size-8 rounded-sm p-2">
-            <Ellipsis className="opacity-80" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent side="left" align="start">
-          <DropdownMenuItem asChild>
-            <Link
-              to="/$team/$study/configuration/components/$component"
-              params={{
-                team: params.team,
-                study: params.study,
-                component: componentId,
-              }}
+    <>
+      <div className="flex-center h-full">
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size={null}
+              className="size-8 rounded-sm p-2"
             >
-              Edit
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            disabled={deleteComponent.isPending}
-            onClick={() => deleteComponent.mutate({ componentId })}
-          >
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+              <Ellipsis className="opacity-80" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side="left" align="start">
+            <DropdownMenuItem asChild>
+              <Link
+                to="/$team/$study/configuration/components/$component"
+                params={{
+                  team: params.team,
+                  study: params.study,
+                  component: componentId,
+                }}
+              >
+                Edit
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              disabled={deleteComponent.isPending}
+              onClick={deleteDialog.open}
+            >
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <ConfirmDeleteDialog
+        open={deleteDialog.isOpen}
+        onOpenChange={deleteDialog.setIsOpen}
+        entityName="component"
+        onDelete={() => {
+          deleteComponent.mutate({ componentId });
+          deleteDialog.close();
+        }}
+      />
+    </>
   );
 };
