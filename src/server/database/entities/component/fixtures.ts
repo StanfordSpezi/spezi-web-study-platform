@@ -10,15 +10,6 @@ import type { Component } from "./schema";
 
 export const componentFixtures: Component[] = [
   {
-    id: "comp_welcome",
-    studyId: "study_sleep_patterns",
-    type: "information",
-    title: "Welcome",
-    content: "# Welcome to the Sleep Patterns Study\nWe're glad you're here!",
-    image: null,
-    schedule: null,
-  },
-  {
     id: "comp_daily_hr",
     studyId: "study_sleep_patterns",
     type: "health-data",
@@ -32,6 +23,15 @@ export const componentFixtures: Component[] = [
       displayMinute: 0,
       completionPolicy: "anytime",
     },
+  },
+  {
+    id: "comp_welcome",
+    studyId: "study_activity",
+    type: "information",
+    title: "Welcome",
+    content: "# Welcome to the Sleep Patterns Study\nWe're glad you're here!",
+    image: null,
+    schedule: null,
   },
   {
     id: "comp_morning_survey",

@@ -7,10 +7,71 @@
 //
 
 import { createFileRoute } from "@tanstack/react-router";
+import { useHotkeys } from "react-hotkeys-hook";
 import { z } from "zod";
+import { NavigationBlocker } from "@/components/interfaces/NavigationBlocker";
+import { Card } from "@/components/ui/Card";
+import { SaveButton } from "@/components/ui/SaveButton";
+import { useCreateComponentMutation } from "@/lib/queries/component";
+import { InformationComponentForm } from "./components/InformationComponentForm";
+import { NewComponentLayout } from "./components/NewComponentLayout";
+import { useComponentForm } from "../lib/useComponentForm";
 
 const NewComponentRoute = () => {
-  return <p>New Component Route</p>;
+  const { componentType = "information" } = Route.useSearch();
+  const params = Route.useParams();
+  const navigate = Route.useNavigate();
+
+  const createComponent = useCreateComponentMutation();
+  const form = useComponentForm();
+
+  const handleSave = form.handleSubmit((data) => {
+    createComponent.mutate(
+      { ...data, schedule: null },
+      {
+        onSuccess: (data) => {
+          form.reset(data);
+          void navigate({
+            to: "/$team/$study/configuration/components",
+            params: { team: params.team, study: params.study },
+          });
+        },
+      },
+    );
+  });
+
+  useHotkeys(
+    "meta+enter",
+    () => void handleSave(),
+    { enableOnFormTags: ["input", "textarea"] },
+    [form],
+  );
+
+  return (
+    <NewComponentLayout
+      saveButton={
+        <SaveButton
+          size="sm"
+          className="text-sm"
+          onClick={handleSave}
+          isPending={createComponent.isPending}
+          isSuccess={createComponent.isSuccess}
+          isError={createComponent.isError}
+        />
+      }
+    >
+      <div className="flex max-w-4xl p-6">
+        <Card>
+          {componentType === "information" && (
+            <InformationComponentForm form={form} onSave={handleSave} />
+          )}
+        </Card>
+      </div>
+      <NavigationBlocker
+        shouldBlock={form.formState.isDirty && createComponent.isIdle}
+      />
+    </NewComponentLayout>
+  );
 };
 
 export const Route = createFileRoute(
