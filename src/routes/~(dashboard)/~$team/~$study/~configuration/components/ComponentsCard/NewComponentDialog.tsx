@@ -19,7 +19,12 @@ import {
   RadioGroup,
   useForm,
 } from "@stanfordspezi/spezi-web-design-system";
-import { Link, useNavigate, useParams } from "@tanstack/react-router";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearch,
+} from "@tanstack/react-router";
 import { Component } from "lucide-react";
 import { type ReactNode } from "react";
 import { z } from "zod";
@@ -48,10 +53,13 @@ interface NewComponentDialogProps {
 export const NewComponentDialog = ({ children }: NewComponentDialogProps) => {
   const navigate = useNavigate();
   const { team, study } = useParams({ strict: false });
+  const searchQuery = useSearch({ strict: false });
 
   const form = useForm({
     formSchema,
-    defaultValues: { componentType: "information" },
+    defaultValues: {
+      componentType: searchQuery.componentType ?? "information",
+    },
   });
   const { componentType } = form.watch();
 

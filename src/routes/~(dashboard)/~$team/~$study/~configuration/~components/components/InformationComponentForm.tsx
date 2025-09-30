@@ -40,8 +40,8 @@ export const InformationComponentForm = ({
               description="The heading participants see for this information section."
             />
           }
-          render={({ field }) => <Input {...enhanceField(field)} />}
           className="border-border-tertiary border-b px-6"
+          render={({ field }) => <Input {...enhanceField(field)} />}
         />
         <Field
           control={form.control}
@@ -55,6 +55,7 @@ export const InformationComponentForm = ({
               <p className="text-text-tertiary font-normal">Optional</p>
             </div>
           }
+          className="border-border-tertiary border-b px-6 pt-6 [&_label]:flex-1"
           render={({ field }) => (
             <ImageUpload
               key={field.value}
@@ -63,7 +64,6 @@ export const InformationComponentForm = ({
               {...field}
             />
           )}
-          className="border-border-tertiary border-b px-6 pt-6 [&_label]:flex-1"
         />
         <Field
           control={form.control}
@@ -74,8 +74,8 @@ export const InformationComponentForm = ({
               description="The main content participants will read."
             />
           }
-          render={({ field }) => <MarkdownEditor {...enhanceField(field)} />}
           className="px-6 pt-6"
+          render={({ field }) => <MarkdownEditor {...enhanceField(field)} />}
         />
       </form>
     </>

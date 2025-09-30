@@ -24,7 +24,7 @@ const EditComponentRoute = () => {
   const form = useComponentForm();
   const componentType = form.watch("type");
 
-  const handleSave = form.handleSubmit((data) => {
+  const handleSubmit = form.handleSubmit((data) => {
     updateComponent.mutate(
       {
         componentId: params.component,
@@ -40,7 +40,7 @@ const EditComponentRoute = () => {
 
   useHotkeys(
     "meta+enter",
-    () => void handleSave(),
+    () => void handleSubmit(),
     { enableOnFormTags: ["input", "textarea"] },
     [form],
   );
@@ -52,7 +52,7 @@ const EditComponentRoute = () => {
         <SaveButton
           size="sm"
           className="text-sm"
-          onClick={handleSave}
+          onClick={handleSubmit}
           isPending={updateComponent.isPending}
           isSuccess={updateComponent.isSuccess}
           isError={updateComponent.isError}
@@ -62,13 +62,13 @@ const EditComponentRoute = () => {
       <div className="flex max-w-4xl p-6">
         <Card>
           {componentType === "information" && (
-            <InformationComponentForm form={form} onSubmit={handleSave} />
+            <InformationComponentForm form={form} onSubmit={handleSubmit} />
           )}
           {componentType === "questionnaire" && (
-            <QuestionnaireComponentForm form={form} onSubmit={handleSave} />
+            <QuestionnaireComponentForm form={form} onSubmit={handleSubmit} />
           )}
           {componentType === "health-data" && (
-            <HealthDataComponentForm form={form} onSubmit={handleSave} />
+            <HealthDataComponentForm form={form} onSubmit={handleSubmit} />
           )}
         </Card>
       </div>

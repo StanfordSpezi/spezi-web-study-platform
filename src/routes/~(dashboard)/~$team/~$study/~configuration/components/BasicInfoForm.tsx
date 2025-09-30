@@ -44,6 +44,7 @@ export const BasicInfoForm = ({
             description="Be descriptive but keep it under 100 characters."
           />
         }
+        className="border-border-tertiary border-b px-6"
         render={({ field }) => (
           <Input
             className="focus:ring-border-info"
@@ -51,7 +52,6 @@ export const BasicInfoForm = ({
             {...enhanceField(field, { onBlur: onFieldBlur })}
           />
         )}
-        className="border-border-tertiary border-b px-6"
       />
       <Label className="mb-2 flex px-6 pt-6">
         <FieldLabel
@@ -85,8 +85,8 @@ export const BasicInfoForm = ({
         <Field
           control={form.control}
           name="shortTitle"
-          render={({ field }) => <Input {...enhanceField(field)} />}
           className="flex-1"
+          render={({ field }) => <Input {...enhanceField(field)} />}
         />
       </div>
       <Field
@@ -98,6 +98,7 @@ export const BasicInfoForm = ({
             description="This helps participants decide if they want to join."
           />
         }
+        className="border-border-tertiary border-b px-6 pt-6"
         render={({ field }) => (
           <Textarea
             className="focus:ring-border-info"
@@ -105,7 +106,6 @@ export const BasicInfoForm = ({
             {...enhanceField(field, { onBlur: onFieldBlur })}
           />
         )}
-        className="border-border-tertiary border-b px-6 pt-6"
       />
       <Field
         control={form.control}
@@ -116,8 +116,8 @@ export const BasicInfoForm = ({
             description="A short summary for preview cards and search results."
           />
         }
-        render={({ field }) => <Textarea {...enhanceField(field)} />}
         className="px-6 pt-6"
+        render={({ field }) => <Textarea {...enhanceField(field)} />}
       />
     </form>
   );

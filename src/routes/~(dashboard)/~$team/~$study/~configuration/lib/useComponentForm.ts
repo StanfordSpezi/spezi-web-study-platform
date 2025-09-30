@@ -81,6 +81,21 @@ const componentSchema = z.discriminatedUnion("type", [
 ]);
 
 export type ComponentForm = ReturnType<typeof useComponentForm>;
+type ComponentType = z.infer<typeof componentSchema>["type"];
+
+/**
+ * Returns default form values for the given component type.
+ */
+const getDefaultValuesForType = (type: ComponentType, studyId?: string) => {
+  switch (type) {
+    case "information":
+      return { ...defaultInformationValues, studyId, type } as const;
+    case "health-data":
+      return { ...defaultHealthDataValues, studyId, type } as const;
+    case "questionnaire":
+      return { ...defaultQuestionnaireValues, studyId, type } as const;
+  }
+};
 
 export const useComponentForm = () => {
   const { componentType = "information" } = useSearch({ strict: false });
@@ -92,20 +107,20 @@ export const useComponentForm = () => {
 
   const form = useForm({
     formSchema: componentSchema,
-    defaultValues: {
-      ...defaultInformationValues,
-      ...defaultHealthDataValues,
-      ...defaultQuestionnaireValues,
-      studyId: params.study,
-      type: componentType,
-      ...component,
-    },
+    defaultValues:
+      component ?? getDefaultValuesForType(componentType, params.study),
   });
 
   useEffect(() => {
     if (component) form.reset(component);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [component]);
+
+  useEffect(() => {
+    if (component) return; // don't override existing component data
+    form.reset(getDefaultValuesForType(componentType, params.study));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [componentType, params.study, component]);
 
   return form;
 };

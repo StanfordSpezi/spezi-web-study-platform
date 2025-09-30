@@ -48,8 +48,8 @@ export const HealthDataComponentForm = ({
               description="The amount of past health data to collect when a participant first enrolls in the study."
             />
           }
-          render={({ field }) => <DurationInput {...enhanceField(field)} />}
           className="border-border-tertiary border-b px-6"
+          render={({ field }) => <DurationInput {...enhanceField(field)} />}
         />
         <Field
           control={form.control}
@@ -60,6 +60,7 @@ export const HealthDataComponentForm = ({
               description="The types of health data to collect from participants."
             />
           }
+          className="px-6 pt-6"
           render={({ field }) => (
             <MultiSelect values={field.value} onValuesChange={field.onChange}>
               <MultiSelectTrigger>
@@ -85,7 +86,6 @@ export const HealthDataComponentForm = ({
               </MultiSelectContent>
             </MultiSelect>
           )}
-          className="px-6 pt-6"
         />
       </form>
     </>

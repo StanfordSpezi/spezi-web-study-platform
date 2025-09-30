@@ -28,7 +28,7 @@ const BasicInformationRouteComponent = () => {
     string | undefined
   >();
 
-  const handleSave = form.handleSubmit((data) => {
+  const handleSubmit = form.handleSubmit((data) => {
     updateStudy.mutate(
       { studyId: params.study, ...data },
       {
@@ -41,7 +41,7 @@ const BasicInformationRouteComponent = () => {
 
   useHotkeys(
     "meta+enter",
-    () => void handleSave(),
+    () => void handleSubmit(),
     { enableOnFormTags: ["input", "textarea"] },
     [form],
   );
@@ -52,7 +52,7 @@ const BasicInformationRouteComponent = () => {
         <SaveButton
           size="sm"
           className="text-sm"
-          onClick={handleSave}
+          onClick={handleSubmit}
           isPending={updateStudy.isPending}
           isSuccess={updateStudy.isSuccess}
           isError={updateStudy.isError}
@@ -63,7 +63,7 @@ const BasicInformationRouteComponent = () => {
         <Card>
           <BasicInfoForm
             form={form}
-            onSubmit={handleSave}
+            onSubmit={handleSubmit}
             onFieldFocus={setHighlightedField}
             onFieldBlur={() => setHighlightedField(undefined)}
           />

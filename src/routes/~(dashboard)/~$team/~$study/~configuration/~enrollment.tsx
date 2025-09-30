@@ -19,7 +19,7 @@ const EnrollmentRouteComponent = () => {
   const params = Route.useParams();
   const form = useEnrollmentForm();
   const { mutate, isPending, isSuccess, isError } = useUpdateStudyMutation();
-  const handleSave = form.handleSubmit((data) => {
+  const handleSubmit = form.handleSubmit((data) => {
     mutate(
       { studyId: params.study, ...data },
       {
@@ -32,7 +32,7 @@ const EnrollmentRouteComponent = () => {
 
   useHotkeys(
     "meta+enter",
-    () => void handleSave(),
+    () => void handleSubmit(),
     { enableOnFormTags: ["input", "textarea"] },
     [form],
   );
@@ -43,7 +43,7 @@ const EnrollmentRouteComponent = () => {
         <SaveButton
           size="sm"
           className="text-sm"
-          onClick={handleSave}
+          onClick={handleSubmit}
           isPending={isPending}
           isSuccess={isSuccess}
           isError={isError}
@@ -51,7 +51,7 @@ const EnrollmentRouteComponent = () => {
       }
     >
       <div className="max-w-4xl p-6">
-        <EnrollmentForm form={form} onSubmit={handleSave} />
+        <EnrollmentForm form={form} onSubmit={handleSubmit} />
       </div>
       <NavigationBlocker shouldBlock={form.formState.isDirty} />
     </EnrollmentLayout>

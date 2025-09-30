@@ -124,8 +124,8 @@ export const ScheduleDialog = () => {
                   description="Duration to wait after enrollment before showing this component."
                 />
               }
-              render={({ field }) => <DurationInput {...enhanceField(field)} />}
               className="border-border-tertiary bg-layer border-y px-6 pt-6"
+              render={({ field }) => <DurationInput {...enhanceField(field)} />}
             />
             <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">
               <Field
@@ -137,6 +137,7 @@ export const ScheduleDialog = () => {
                     description="None, daily or specific weekdays."
                   />
                 }
+                className="flex-1"
                 render={({ field: { onChange, ...field } }) => (
                   <Select
                     onValueChange={(value) => {
@@ -160,7 +161,6 @@ export const ScheduleDialog = () => {
                     </SelectContent>
                   </Select>
                 )}
-                className="flex-1"
               />
               <Field
                 control={form.control}
@@ -171,6 +171,7 @@ export const ScheduleDialog = () => {
                     description="The spacing between each occurrence."
                   />
                 }
+                className="flex-1"
                 render={({ field }) => (
                   <Tooltip
                     className="max-w-xs text-sm"
@@ -192,7 +193,6 @@ export const ScheduleDialog = () => {
                     </div>
                   </Tooltip>
                 )}
-                className="flex-1"
               />
             </div>
             <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">
@@ -228,6 +228,7 @@ export const ScheduleDialog = () => {
                     description="When users can mark tasks as complete."
                   />
                 }
+                className="flex-1"
                 render={({ field: { onChange, ...field } }) => (
                   <Select onValueChange={onChange} {...field}>
                     <SelectTrigger>
@@ -242,7 +243,6 @@ export const ScheduleDialog = () => {
                     </SelectContent>
                   </Select>
                 )}
-                className="flex-1"
               />
             </div>
             <div className="flex items-center justify-between gap-4 px-6 pt-6">

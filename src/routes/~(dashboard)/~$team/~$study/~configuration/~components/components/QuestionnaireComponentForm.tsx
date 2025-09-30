@@ -121,6 +121,7 @@ export const QuestionnaireComponentForm = ({
               description="The FHIR Questionnaire JSON to collect responses from participants."
             />
           }
+          className="px-6"
           render={({ field }) => (
             <div>
               <Textarea {...field} rows={10} className="w-full font-mono" />
@@ -159,7 +160,6 @@ export const QuestionnaireComponentForm = ({
               </div>
             </div>
           )}
-          className="px-6"
         />
       </form>
     </>
