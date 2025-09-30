@@ -17,6 +17,8 @@ import {
   DialogTrigger,
   Field,
   Input,
+  parseUnknownError,
+  toast,
   useForm,
 } from "@stanfordspezi/spezi-web-design-system";
 import { ListPlus } from "lucide-react";
@@ -47,20 +49,26 @@ export const NewStudyDialogContent = ({
   });
 
   const handleSubmit = form.handleSubmit(async ({ title }) => {
-    const study = await createStudy.mutateAsync({
-      teamId,
-      title,
-      shortTitle: null,
-      icon: null,
-      explanation: null,
-      shortExplanation: null,
-      isPublished: false,
-      enrollmentPeriod: null,
-      studyDuration: null,
-      isPrivateStudy: false,
-      participationCriteria: null,
-    });
-    await onSuccess?.(study);
+    try {
+      const study = await createStudy.mutateAsync({
+        teamId,
+        title,
+        shortTitle: null,
+        icon: null,
+        explanation: null,
+        shortExplanation: null,
+        isPublished: false,
+        enrollmentPeriod: null,
+        studyDuration: null,
+        isPrivateStudy: false,
+        participationCriteria: null,
+      });
+      await onSuccess?.(study);
+    } catch (error) {
+      toast.error("Failed to create study.", {
+        description: parseUnknownError(error),
+      });
+    }
   });
 
   return (

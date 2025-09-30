@@ -55,3 +55,7 @@ This document provides a collection of screenshots showcasing various parts of t
 #### Component schedule
 
 ![Component schedule](../../images/schedule.webp)
+
+## API playground
+
+![API playground](../../images/api-playground.webp)

@@ -9,6 +9,8 @@
 import {
   Button,
   ConfirmDeleteDialog,
+  parseUnknownError,
+  toast,
   useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { useNavigate, useParams } from "@tanstack/react-router";
@@ -64,12 +66,20 @@ export const EditComponentLayout = ({
         onOpenChange={deleteDialog.setIsOpen}
         entityName="component"
         onDelete={async () => {
-          await deleteComponent.mutateAsync({ componentId: params.component });
-          await navigate({
-            to: "/$team/$study/configuration/components",
-            params: { team: params.team, study: params.study },
-          });
-          deleteDialog.close();
+          try {
+            await deleteComponent.mutateAsync({
+              componentId: params.component,
+            });
+            await navigate({
+              to: "/$team/$study/configuration/components",
+              params: { team: params.team, study: params.study },
+            });
+            deleteDialog.close();
+          } catch (error) {
+            toast.error("Failed to delete component.", {
+              description: parseUnknownError(error),
+            });
+          }
         }}
       />
     </>

@@ -17,6 +17,8 @@ import {
   DialogTrigger,
   Field,
   Input,
+  parseUnknownError,
+  toast,
   useForm,
 } from "@stanfordspezi/spezi-web-design-system";
 import { ListPlus } from "lucide-react";
@@ -47,8 +49,14 @@ export const NewTeamDialogContent = ({
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    const team = await createTeam.mutateAsync(data);
-    await onSuccess?.(team);
+    try {
+      const team = await createTeam.mutateAsync(data);
+      await onSuccess?.(team);
+    } catch (error) {
+      toast.error("Failed to create team.", {
+        description: parseUnknownError(error),
+      });
+    }
   });
 
   return (
