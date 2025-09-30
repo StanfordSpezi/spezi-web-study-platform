@@ -24,6 +24,9 @@ const scheduleSchema = z.object({
 
 export type ScheduleForm = ReturnType<typeof useScheduleForm>;
 
+/**
+ * Creates a schedule form that loads the component schedule once available and resets when the backend data changes.
+ */
 export const useScheduleForm = () => {
   const params = useParams({
     from: "/(dashboard)/$team/$study/configuration/components/$component",

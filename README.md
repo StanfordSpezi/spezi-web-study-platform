@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 
 [![Build and Test](https://github.com/StanfordSpezi/spezi-web-study-platform/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/StanfordSpezi/spezi-web-study-platform/actions/workflows/build-and-test.yml)
 
-The project aims to build an open‑source platform that enables researchers to run simple studies without deep technical expertise. Users define studies by specifying metadata, participant criteria, and app components. These study definitions then configure the companion iOS and Android apps that participants use to take part in the study.
+The project aims to build an open‑source platform that enables researchers to run simple studies without deep technical expertise. Users define studies by specifying metadata, participant criteria, and app components. These study definitions then configure the companion iOS and Android apps that participants use to take part in the study. Get a quick overview of the platform by checking out the [screenshots](docs/reference/screenshots.md).
 
 This repository contains the frontend code for the platform. Visit [spezi-web-service-study-platform](https://github.com/StanfordSpezi/spezi-web-service-study-platform) for the backend code.
 
@@ -62,6 +62,7 @@ For more detailed instructions, check out the [installation guide](docs/guides/i
 
 ## Reference
 
+- [App screenshots](docs/reference/screenshots.md)
 - [Color tokens reference](docs/reference/color-tokens.md)
 
 ## Contributing

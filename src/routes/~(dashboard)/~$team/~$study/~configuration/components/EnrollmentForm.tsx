@@ -58,7 +58,7 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
           name="studyDuration"
           label={
             <FieldLabel
-              title="Study Duration"
+              title="Study duration"
               description="The duration each participant stays in the study from their individual start date."
             />
           }

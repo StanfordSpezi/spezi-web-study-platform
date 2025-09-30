@@ -97,6 +97,10 @@ const getDefaultValuesForType = (type: ComponentType, studyId?: string) => {
   }
 };
 
+/**
+ * Builds a component form instance that pre-populates default values, hydrates remote data,
+ * and keeps the form state in sync with the currently selected component.
+ */
 export const useComponentForm = () => {
   const { componentType = "information" } = useSearch({ strict: false });
   const params = useParams({ strict: false });

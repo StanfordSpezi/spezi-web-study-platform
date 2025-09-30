@@ -19,6 +19,7 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { notImplementedToast } from "@/utils/notImplementedToast";
 import {
   SidebarGroup,
   SidebarMenu,
@@ -33,6 +34,7 @@ interface NavBarItem {
   id?: string;
   title: string;
   linkOptions?: ValidateLinkOptions;
+  onClick?: () => void;
   fuzzy?: boolean;
   icon?: LucideIcon;
   subMenu?: NavBarItem[];
@@ -43,6 +45,7 @@ const navBarItems: NavBarItem[] = [
     id: "search",
     title: "Search",
     icon: Search,
+    onClick: () => notImplementedToast("Search"),
   },
   {
     id: "home",
@@ -78,13 +81,13 @@ const navBarItems: NavBarItem[] = [
     id: "participants",
     title: "Participants",
     icon: Users,
-    linkOptions: { to: "/$team/$study/participants" },
+    onClick: () => notImplementedToast("Participants"),
   },
   {
     id: "results",
     title: "Results",
     icon: ChartBar,
-    linkOptions: { to: "/$team/$study/results" },
+    onClick: () => notImplementedToast("Results"),
   },
 ];
 
@@ -105,7 +108,7 @@ const MainNavButton = ({
         isActive={!!matchRoute({ to: item.linkOptions.to, fuzzy: item.fuzzy })}
       >
         <Link from="/" {...item.linkOptions}>
-          {item.icon && <item.icon />}
+          {item.icon && <item.icon className="opacity-80" />}
           <span>{item.title}</span>
         </Link>
       </Comp>
@@ -113,8 +116,8 @@ const MainNavButton = ({
   }
 
   return (
-    <Comp tooltip={item.title}>
-      {item.icon && <item.icon />}
+    <Comp tooltip={item.title} onClick={item.onClick}>
+      {item.icon && <item.icon className="opacity-80" />}
       <span>{item.title}</span>
     </Comp>
   );

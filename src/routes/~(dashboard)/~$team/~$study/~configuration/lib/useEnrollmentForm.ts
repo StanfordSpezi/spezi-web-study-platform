@@ -50,6 +50,9 @@ const enrollmentFormSchema = z.object({
 
 export type EnrollmentForm = ReturnType<typeof useEnrollmentForm>;
 
+/**
+ * Creates an enrollment form that loads the study enrollment settings once available.
+ */
 export const useEnrollmentForm = () => {
   const params = useParams({
     from: "/(dashboard)/$team/$study/configuration/enrollment",

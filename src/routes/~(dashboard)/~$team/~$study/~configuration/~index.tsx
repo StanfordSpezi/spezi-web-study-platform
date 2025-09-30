@@ -27,7 +27,7 @@ const StudyConfigurationRoute = () => {
   return (
     <div>
       <RouteHeader
-        title="Study Configuration"
+        title="Study configuration"
         description="Configure your study and everything related to it."
         accessoryRight={<StatusBadge isPublished={study?.isPublished} />}
       />

@@ -80,7 +80,7 @@ export const NewComponentDialog = ({ children }: NewComponentDialogProps) => {
           <DialogHeader className="items-center sm:items-start">
             <FeaturedIconContainer className="border-border-tertiary mb-4 size-8 rounded-lg shadow-xs">
               <div className="grid size-full place-items-center">
-                <Component className="text-text-tertiary size-4" />
+                <Component className="text-text-tertiary size-4 opacity-80" />
               </div>
             </FeaturedIconContainer>
             <DialogTitle>Choose a component type</DialogTitle>
@@ -119,7 +119,7 @@ export const NewComponentDialog = ({ children }: NewComponentDialogProps) => {
                       value: "health-data",
                       label: (
                         <RadioGroupOption
-                          title="Health Data"
+                          title="Health data"
                           description="Gather biomarker data from participants' connected devices. Define which health metrics to track and set collection frequency."
                         />
                       ),

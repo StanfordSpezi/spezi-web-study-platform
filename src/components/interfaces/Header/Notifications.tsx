@@ -27,7 +27,7 @@ export const Notifications = () => {
           aria-label="Notifications"
           className="size-8 rounded-md"
         >
-          <Bell className="size-4" />
+          <Bell className="size-4 opacity-80" />
         </Button>
       </SheetTrigger>
       <SheetContent>

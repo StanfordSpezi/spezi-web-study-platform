@@ -80,7 +80,7 @@ const InviteTeamRoute = () => {
             </ul>
             <div className="py-4">
               <Button variant="outline" size="xs" onClick={addInvitation}>
-                <Plus className="size-2.5" />
+                <Plus className="size-2.5 opacity-80" />
                 Add another
               </Button>
             </div>

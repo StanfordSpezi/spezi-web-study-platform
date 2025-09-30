@@ -108,7 +108,7 @@ export const QuestionnaireComponentForm = ({
   return (
     <>
       <CardHeader
-        title="Questionnaire Component"
+        title="Questionnaire component"
         description="Collect questionnaire responses from participants."
       />
       <form onSubmit={onSubmit} className="py-6">
@@ -117,7 +117,7 @@ export const QuestionnaireComponentForm = ({
           name="fhirQuestionnaireJson"
           label={
             <FieldLabel
-              title="FHIR Questionnaire JSON"
+              title="FHIR questionnaire JSON"
               description="The FHIR Questionnaire JSON to collect responses from participants."
             />
           }

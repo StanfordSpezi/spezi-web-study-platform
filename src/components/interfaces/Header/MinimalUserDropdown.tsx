@@ -75,7 +75,7 @@ export const MinimalUserDropdown = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut}>
-          <LogOut />
+          <LogOut className="size-3.5 opacity-80" />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

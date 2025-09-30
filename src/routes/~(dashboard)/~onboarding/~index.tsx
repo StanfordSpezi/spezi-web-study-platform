@@ -72,7 +72,10 @@ const CreateTeamRoute = () => {
                     variant="outline"
                     className="bg-bg size-10 rounded-md"
                   >
-                    <DynamicIcon name={value as IconName} className="size-4" />
+                    <DynamicIcon
+                      name={value as IconName}
+                      className="size-4 opacity-80"
+                    />
                   </Button>
                 </IconPicker>
               )}

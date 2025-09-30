@@ -19,7 +19,6 @@ import {
   ComponentsCardRowSchedule,
   ComponentsCardRowSummary,
 } from "./ComponentsCardRow";
-import { ComponentsCardSkeleton } from "./ComponentsCardSkeleton";
 import { NewComponentDialog } from "./NewComponentDialog";
 import {
   getComponentLabel,
@@ -72,9 +71,18 @@ const columnDefinition = {
   }),
 };
 
-const ComponentsCardContent = ({ components }: { components: Component[] }) => {
+interface ComponentsCardContentProps {
+  components?: Component[];
+  isLoading?: boolean;
+}
+
+const ComponentsCardContent = ({
+  components,
+  isLoading,
+}: ComponentsCardContentProps) => {
   return (
     <DataTable
+      loading={isLoading}
       entityName="components"
       columns={[
         columnDefinition.label,
@@ -82,7 +90,7 @@ const ComponentsCardContent = ({ components }: { components: Component[] }) => {
         columnDefinition.schedule,
         columnDefinition.actions,
       ]}
-      data={components}
+      data={components ?? []}
       bordered={false}
       className={cn([
         "!bg-layer",
@@ -120,18 +128,14 @@ export const ComponentsCard = ({
   isLoading,
   showHeader = true,
 }: ComponentsCardProps) => {
-  if (isLoading || !components) {
-    return <ComponentsCardSkeleton />;
-  }
-
-  if (components.length === 0) {
+  if (components && components.length === 0) {
     return <ComponentsCardEmpty />;
   }
 
   return (
     <Card className="overflow-hidden">
       {showHeader && <ComponentsCardHeader />}
-      <ComponentsCardContent components={components} />
+      <ComponentsCardContent components={components} isLoading={isLoading} />
     </Card>
   );
 };
