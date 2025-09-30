@@ -6,12 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import {
-  Input,
-  Field,
-  Label,
-  Switch,
-} from "@stanfordspezi/spezi-web-design-system";
+import { Field, Label, Switch } from "@stanfordspezi/spezi-web-design-system";
+import { DurationInput } from "@/components/interfaces/DurationInput";
 import { formatLogicClausesError } from "@/components/interfaces/LogicGroupInput/formatLogicClausesError";
 import { LogicGroupInput } from "@/components/interfaces/LogicGroupInput/LogicGroupInput";
 import { Card } from "@/components/ui/Card";
@@ -63,21 +59,10 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
           label={
             <FieldLabel
               title="Study Duration"
-              description="The number of days each participant stays in the study from their individual start date."
+              description="The duration each participant stays in the study from their individual start date."
             />
           }
-          render={({ field }) => (
-            <div className="relative">
-              <Input
-                type="number"
-                className="pr-14"
-                {...enhanceField(field, { valueAsNumber: true })}
-              />
-              <div className="text-text-tertiary absolute top-1/2 right-4 -translate-y-1/2 text-sm select-none">
-                days
-              </div>
-            </div>
-          )}
+          render={({ field }) => <DurationInput {...enhanceField(field)} />}
           className="px-6 pt-6"
         />
       </Card>

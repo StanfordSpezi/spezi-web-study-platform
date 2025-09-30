@@ -7,6 +7,7 @@
 //
 
 import type { z } from "zod";
+import { formatDuration } from "@/components/interfaces/DurationInput";
 import type { scheduleSchema } from "@/server/database/entities/component/schema";
 
 /**
@@ -82,7 +83,7 @@ export const formatSchedule = ({
 
   const startString =
     startOffset === 0 ? "Starts immediately" : (
-      `Starts after ${startOffset} ${startOffset === 1 ? "day" : "days"}`
+      `Starts after ${formatDuration(startOffset)}`
     );
 
   return `${frequencyString} at ${timeString}. ${startString}.`;

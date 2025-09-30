@@ -28,6 +28,7 @@ import {
   useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { CalendarSync } from "lucide-react";
+import { DurationInput } from "@/components/interfaces/DurationInput";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
 import { FieldLabel } from "@/components/ui/FieldLabel";
 import { TimeSelect } from "@/components/ui/TimeSelect";
@@ -120,21 +121,10 @@ export const ScheduleDialog = () => {
               label={
                 <FieldLabel
                   title="Start offset"
-                  description="Number of days to wait after enrollment before showing this component."
+                  description="Duration to wait after enrollment before showing this component."
                 />
               }
-              render={({ field }) => (
-                <div className="relative">
-                  <Input
-                    type="number"
-                    className="pr-14"
-                    {...enhanceField(field, { valueAsNumber: true })}
-                  />
-                  <div className="text-text-tertiary absolute top-1/2 right-4 -translate-y-1/2 text-sm select-none">
-                    days
-                  </div>
-                </div>
-              )}
+              render={({ field }) => <DurationInput {...enhanceField(field)} />}
               className="border-border-tertiary bg-layer border-y px-6 pt-6"
             />
             <div className="border-border-tertiary bg-layer flex gap-8 border-b px-6 pt-6">

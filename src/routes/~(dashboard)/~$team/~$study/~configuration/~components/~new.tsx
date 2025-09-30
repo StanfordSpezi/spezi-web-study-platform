@@ -16,6 +16,8 @@ import { useCreateComponentMutation } from "@/lib/queries/component";
 import { InformationComponentForm } from "./components/InformationComponentForm";
 import { NewComponentLayout } from "./components/NewComponentLayout";
 import { useComponentForm } from "../lib/useComponentForm";
+import { HealthDataComponentForm } from "./components/HealthDataComponentForm";
+import { QuestionnaireComponentForm } from "./components/QuestionnaireComponentForm";
 
 const NewComponentRoute = () => {
   const { componentType = "information" } = Route.useSearch();
@@ -63,7 +65,13 @@ const NewComponentRoute = () => {
       <div className="flex max-w-4xl p-6">
         <Card>
           {componentType === "information" && (
-            <InformationComponentForm form={form} onSave={handleSave} />
+            <InformationComponentForm form={form} onSubmit={handleSave} />
+          )}
+          {componentType === "questionnaire" && (
+            <QuestionnaireComponentForm form={form} onSubmit={handleSave} />
+          )}
+          {componentType === "health-data" && (
+            <HealthDataComponentForm form={form} onSubmit={handleSave} />
           )}
         </Card>
       </div>

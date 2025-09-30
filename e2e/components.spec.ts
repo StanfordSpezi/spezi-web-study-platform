@@ -88,6 +88,81 @@ test.describe("Study Component Tests", () => {
     await expect(page.getByRole("link", { name: updatedTitle })).toBeVisible();
   });
 
+  test("updates a health data component configuration", async ({ page }) => {
+    await expect(
+      page.getByRole("heading", { name: "Components", level: 1 }),
+    ).toBeVisible();
+
+    await page.getByRole("link", { name: "Health Data" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Health Data Component" }),
+    ).toBeVisible();
+
+    const historicalInput = page.getByRole("spinbutton", {
+      name: "Historical data collection",
+    });
+    await historicalInput.fill("14");
+
+    const sampleTypesTrigger = page
+      .getByRole("combobox")
+      .filter({ hasText: "Apple Stand Hour" })
+      .first();
+    await expect(sampleTypesTrigger).toContainText("Apple Stand Hour");
+
+    await sampleTypesTrigger.click();
+    await page
+      .getByRole("option")
+      .filter({ hasText: /^Heart Rate$/ })
+      .click();
+    await page
+      .getByRole("option")
+      .filter({ hasText: /^Sleep Analysis$/ })
+      .click();
+    await page.keyboard.press("Escape");
+
+    await expect(sampleTypesTrigger).toContainText("Heart Rate");
+    await expect(sampleTypesTrigger).toContainText("Sleep Analysis");
+
+    await page.getByRole("button", { name: /^save$/i }).click();
+    await expect(page.getByRole("button", { name: "Saved" })).toBeVisible();
+
+    await page.getByRole("link", { name: "Back" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Components", level: 1 }),
+    ).toBeVisible();
+  });
+
+  test("formats questionnaire JSON before saving", async ({ page }) => {
+    await page.getByRole("link", { name: "Morning Check-in" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Questionnaire Component" }),
+    ).toBeVisible();
+
+    const questionnaireTextarea = page.getByRole("textbox", {
+      name: "FHIR Questionnaire JSON",
+    });
+
+    const rawJson =
+      '{"resourceType":"Questionnaire","title":"Daily Mood","item":[]}';
+    const formattedJson = `{
+  "resourceType": "Questionnaire",
+  "title": "Daily Mood",
+  "item": []
+}`;
+
+    await questionnaireTextarea.fill(rawJson);
+    await page.getByRole("button", { name: "Format JSON" }).click();
+    await expect(questionnaireTextarea).toHaveValue(formattedJson);
+
+    await page.getByRole("button", { name: /^save$/i }).click();
+    await expect(page.getByRole("button", { name: "Saved" })).toBeVisible();
+
+    await page.getByRole("link", { name: "Back" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Components", level: 1 }),
+    ).toBeVisible();
+  });
+
   test("deletes an information component", async ({ page }) => {
     await page.getByRole("link", { name: "Welcome" }).click();
     await expect(

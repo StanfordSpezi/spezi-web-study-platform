@@ -17,12 +17,12 @@ import type { ComponentForm } from "../../lib/useComponentForm";
 
 interface InformationComponentFormProps {
   form: ComponentForm;
-  onSave: (event?: BaseSyntheticEvent) => Promise<void>;
+  onSubmit: (event?: BaseSyntheticEvent) => Promise<void>;
 }
 
 export const InformationComponentForm = ({
   form,
-  onSave,
+  onSubmit,
 }: InformationComponentFormProps) => {
   return (
     <>
@@ -30,7 +30,7 @@ export const InformationComponentForm = ({
         title="Information Component"
         description="Display text and images to provide instructions, explanations, or context to participants."
       />
-      <form onSubmit={onSave} className="py-6">
+      <form onSubmit={onSubmit} className="py-6">
         <Field
           control={form.control}
           name="title"

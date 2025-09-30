@@ -20,11 +20,13 @@ import { ScheduleDialog } from "./ScheduleDialog";
 interface ComponentsLayoutProps {
   children: ReactNode;
   saveButton: ReactNode;
+  showScheduleButton?: boolean;
 }
 
 export const EditComponentLayout = ({
   children,
   saveButton,
+  showScheduleButton = true,
 }: ComponentsLayoutProps) => {
   const params = useParams({
     from: "/(dashboard)/$team/$study/configuration/components/$component",
@@ -56,7 +58,7 @@ export const EditComponentLayout = ({
               >
                 Delete
               </Button>
-              <ScheduleDialog />
+              {showScheduleButton && <ScheduleDialog />}
               {saveButton}
             </div>
           }
