@@ -11,6 +11,7 @@ import {
   formatNilDateRange,
 } from "@stanfordspezi/spezi-web-design-system";
 import { useParams } from "@tanstack/react-router";
+import { formatDuration } from "@/components/interfaces/DurationInput";
 import { KeyValueCard } from "@/components/interfaces/KeyValueCard";
 import { formatLogicClauses } from "@/components/interfaces/LogicGroupInput/formatLogicClauses";
 import { EditButtonLink } from "@/components/ui/EditButton";
@@ -58,7 +59,7 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
           key: "Study duration",
           tooltip:
             "The number of days each participant stays in the study from their individual start date.",
-          value: study?.studyDuration,
+          value: formatDuration(study?.studyDuration),
         },
         {
           key: "Private study",

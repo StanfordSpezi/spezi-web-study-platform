@@ -17,12 +17,12 @@ import type { ComponentForm } from "../../lib/useComponentForm";
 
 interface InformationComponentFormProps {
   form: ComponentForm;
-  onSave: (event?: BaseSyntheticEvent) => Promise<void>;
+  onSubmit: (event?: BaseSyntheticEvent) => Promise<void>;
 }
 
 export const InformationComponentForm = ({
   form,
-  onSave,
+  onSubmit,
 }: InformationComponentFormProps) => {
   return (
     <>
@@ -30,7 +30,7 @@ export const InformationComponentForm = ({
         title="Information Component"
         description="Display text and images to provide instructions, explanations, or context to participants."
       />
-      <form onSubmit={onSave} className="py-6">
+      <form onSubmit={onSubmit} className="py-6">
         <Field
           control={form.control}
           name="title"
@@ -40,8 +40,8 @@ export const InformationComponentForm = ({
               description="The heading participants see for this information section."
             />
           }
-          render={({ field }) => <Input {...enhanceField(field)} />}
           className="border-border-tertiary border-b px-6"
+          render={({ field }) => <Input {...enhanceField(field)} />}
         />
         <Field
           control={form.control}
@@ -55,6 +55,7 @@ export const InformationComponentForm = ({
               <p className="text-text-tertiary font-normal">Optional</p>
             </div>
           }
+          className="border-border-tertiary border-b px-6 pt-6 [&_label]:flex-1"
           render={({ field }) => (
             <ImageUpload
               key={field.value}
@@ -63,7 +64,6 @@ export const InformationComponentForm = ({
               {...field}
             />
           )}
-          className="border-border-tertiary border-b px-6 pt-6 [&_label]:flex-1"
         />
         <Field
           control={form.control}
@@ -74,8 +74,8 @@ export const InformationComponentForm = ({
               description="The main content participants will read."
             />
           }
-          render={({ field }) => <MarkdownEditor {...enhanceField(field)} />}
           className="px-6 pt-6"
+          render={({ field }) => <MarkdownEditor {...enhanceField(field)} />}
         />
       </form>
     </>

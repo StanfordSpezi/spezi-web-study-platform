@@ -6,12 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import {
-  Input,
-  Field,
-  Label,
-  Switch,
-} from "@stanfordspezi/spezi-web-design-system";
+import { Field, Label, Switch } from "@stanfordspezi/spezi-web-design-system";
+import { DurationInput } from "@/components/interfaces/DurationInput";
 import { formatLogicClausesError } from "@/components/interfaces/LogicGroupInput/formatLogicClausesError";
 import { LogicGroupInput } from "@/components/interfaces/LogicGroupInput/LogicGroupInput";
 import { Card } from "@/components/ui/Card";
@@ -40,10 +36,10 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
           <Field
             control={form.control}
             name="enrollmentPeriod.start"
+            className="w-full"
             render={({ field }) => (
               <EnrollmentPeriodDatePicker type="start" {...field} />
             )}
-            className="w-full"
           />
           <div className="flex-center h-10">
             <div className="bg-border h-0.5 w-5" />
@@ -51,10 +47,10 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
           <Field
             control={form.control}
             name="enrollmentPeriod.end"
+            className="w-full"
             render={({ field }) => (
               <EnrollmentPeriodDatePicker type="end" {...field} />
             )}
-            className="w-full"
           />
         </div>
         <Field
@@ -63,28 +59,18 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
           label={
             <FieldLabel
               title="Study Duration"
-              description="The number of days each participant stays in the study from their individual start date."
+              description="The duration each participant stays in the study from their individual start date."
             />
           }
-          render={({ field }) => (
-            <div className="relative">
-              <Input
-                type="number"
-                className="pr-14"
-                {...enhanceField(field, { valueAsNumber: true })}
-              />
-              <div className="text-text-tertiary absolute top-1/2 right-4 -translate-y-1/2 text-sm select-none">
-                days
-              </div>
-            </div>
-          )}
           className="px-6 pt-6"
+          render={({ field }) => <DurationInput {...enhanceField(field)} />}
         />
       </Card>
       <Card className="py-6">
         <Field
           control={form.control}
           name="isPrivateStudy"
+          className="border-border-tertiary border-b px-6"
           render={({ field: { value, onChange, ...field } }) => (
             <div className="flex items-center justify-between gap-6">
               <Label htmlFor={field.name}>
@@ -97,7 +83,6 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
               <Switch checked={value} onCheckedChange={onChange} {...field} />
             </div>
           )}
-          className="border-border-tertiary border-b px-6"
         />
         <Field
           control={form.control}
@@ -108,18 +93,18 @@ export const EnrollmentForm = ({ form, onSubmit }: EnrollmentFormProps) => {
               description="Filter who can join based on age, location, or other demographics. Only for public studies."
             />
           }
-          render={({ field }) => (
-            <LogicGroupInput
-              attributeOptions={participationAttributeOptions}
-              {...field}
-            />
-          )}
           className="px-6 pt-6"
           error={{
             message: formatLogicClausesError(
               form.formState.errors.participationCriteria,
             ),
           }}
+          render={({ field }) => (
+            <LogicGroupInput
+              attributeOptions={participationAttributeOptions}
+              {...field}
+            />
+          )}
         />
       </Card>
     </form>

@@ -15,6 +15,8 @@ import { useUpdateComponentMutation } from "@/lib/queries/component";
 import { EditComponentLayout } from "./components/EditComponentLayout";
 import { InformationComponentForm } from "./components/InformationComponentForm";
 import { useComponentForm } from "../lib/useComponentForm";
+import { HealthDataComponentForm } from "./components/HealthDataComponentForm";
+import { QuestionnaireComponentForm } from "./components/QuestionnaireComponentForm";
 
 const EditComponentRoute = () => {
   const params = Route.useParams();
@@ -22,7 +24,7 @@ const EditComponentRoute = () => {
   const form = useComponentForm();
   const componentType = form.watch("type");
 
-  const handleSave = form.handleSubmit((data) => {
+  const handleSubmit = form.handleSubmit((data) => {
     updateComponent.mutate(
       {
         componentId: params.component,
@@ -38,18 +40,19 @@ const EditComponentRoute = () => {
 
   useHotkeys(
     "meta+enter",
-    () => void handleSave(),
+    () => void handleSubmit(),
     { enableOnFormTags: ["input", "textarea"] },
     [form],
   );
 
   return (
     <EditComponentLayout
+      showScheduleButton={componentType !== "health-data"}
       saveButton={
         <SaveButton
           size="sm"
           className="text-sm"
-          onClick={handleSave}
+          onClick={handleSubmit}
           isPending={updateComponent.isPending}
           isSuccess={updateComponent.isSuccess}
           isError={updateComponent.isError}
@@ -59,7 +62,13 @@ const EditComponentRoute = () => {
       <div className="flex max-w-4xl p-6">
         <Card>
           {componentType === "information" && (
-            <InformationComponentForm form={form} onSave={handleSave} />
+            <InformationComponentForm form={form} onSubmit={handleSubmit} />
+          )}
+          {componentType === "questionnaire" && (
+            <QuestionnaireComponentForm form={form} onSubmit={handleSubmit} />
+          )}
+          {componentType === "health-data" && (
+            <HealthDataComponentForm form={form} onSubmit={handleSubmit} />
           )}
         </Card>
       </div>

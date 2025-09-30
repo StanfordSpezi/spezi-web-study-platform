@@ -51,4 +51,12 @@ export const componentFixtures: Component[] = [
       completionPolicy: "anytime",
     },
   },
+  {
+    id: "comp_health_data",
+    studyId: "study_activity",
+    type: "health-data",
+    sampleTypes: ["HKCategoryType;HKCategoryTypeIdentifierAppleStandHour"],
+    historicalDataCollection: 7,
+    schedule: null,
+  },
 ];

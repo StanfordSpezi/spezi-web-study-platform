@@ -16,6 +16,8 @@ import { useCreateComponentMutation } from "@/lib/queries/component";
 import { InformationComponentForm } from "./components/InformationComponentForm";
 import { NewComponentLayout } from "./components/NewComponentLayout";
 import { useComponentForm } from "../lib/useComponentForm";
+import { HealthDataComponentForm } from "./components/HealthDataComponentForm";
+import { QuestionnaireComponentForm } from "./components/QuestionnaireComponentForm";
 
 const NewComponentRoute = () => {
   const { componentType = "information" } = Route.useSearch();
@@ -25,7 +27,7 @@ const NewComponentRoute = () => {
   const createComponent = useCreateComponentMutation();
   const form = useComponentForm();
 
-  const handleSave = form.handleSubmit((data) => {
+  const handleSubmit = form.handleSubmit((data) => {
     createComponent.mutate(
       { ...data, schedule: null },
       {
@@ -42,7 +44,7 @@ const NewComponentRoute = () => {
 
   useHotkeys(
     "meta+enter",
-    () => void handleSave(),
+    () => void handleSubmit(),
     { enableOnFormTags: ["input", "textarea"] },
     [form],
   );
@@ -53,7 +55,7 @@ const NewComponentRoute = () => {
         <SaveButton
           size="sm"
           className="text-sm"
-          onClick={handleSave}
+          onClick={handleSubmit}
           isPending={createComponent.isPending}
           isSuccess={createComponent.isSuccess}
           isError={createComponent.isError}
@@ -63,7 +65,13 @@ const NewComponentRoute = () => {
       <div className="flex max-w-4xl p-6">
         <Card>
           {componentType === "information" && (
-            <InformationComponentForm form={form} onSave={handleSave} />
+            <InformationComponentForm form={form} onSubmit={handleSubmit} />
+          )}
+          {componentType === "questionnaire" && (
+            <QuestionnaireComponentForm form={form} onSubmit={handleSubmit} />
+          )}
+          {componentType === "health-data" && (
+            <HealthDataComponentForm form={form} onSubmit={handleSubmit} />
           )}
         </Card>
       </div>
