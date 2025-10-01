@@ -6,7 +6,11 @@
 // SPDX-License-Identifier: MIT
 //
 
-import { DropdownMenuSeparator } from "@stanfordspezi/spezi-web-design-system";
+import {
+  Dialog,
+  DropdownMenuSeparator,
+  useOpenState,
+} from "@stanfordspezi/spezi-web-design-system";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { studyListQueryOptions } from "@/lib/queries/study";
@@ -16,6 +20,7 @@ import {
   HeaderSelectorMenuLabel,
 } from "./HeaderSelector";
 import { HeaderSelectorSkeleton } from "./HeaderSelectorSkeleton";
+import { NewStudyDialogContent } from "../NewStudyDialog";
 
 export const StudySelector = () => {
   const params = useParams({ strict: false });
@@ -24,7 +29,9 @@ export const StudySelector = () => {
   );
   const selectedStudy = studies?.find((study) => study.id === params.study);
 
-  if (!params.study) {
+  const newStudyDialog = useOpenState();
+
+  if (!params.study || !params.team) {
     return null;
   }
 
@@ -33,30 +40,41 @@ export const StudySelector = () => {
   }
 
   return (
-    <HeaderSelector selectedItem={{ title: selectedStudy.title }}>
-      <HeaderSelectorMenuLabel>Studies</HeaderSelectorMenuLabel>
-      {studies.map((study) => (
+    <>
+      <HeaderSelector selectedItem={{ title: selectedStudy.title }}>
+        <HeaderSelectorMenuLabel>Studies</HeaderSelectorMenuLabel>
+        {studies.map((study) => (
+          <HeaderSelectorMenuItem
+            key={study.id}
+            linkOptions={{
+              to: "/$team/$study",
+              params: {
+                team: study.teamId,
+                study: study.id,
+              },
+            }}
+          >
+            {study.title}
+          </HeaderSelectorMenuItem>
+        ))}
+        <DropdownMenuSeparator />
         <HeaderSelectorMenuItem
-          key={study.id}
-          linkOptions={{
-            to: "/$team/$study",
-            params: {
-              team: study.teamId,
-              study: study.id,
-            },
-          }}
+          icon="plus"
+          className="text-text-tertiary"
+          onSelect={newStudyDialog.open}
         >
-          {study.title}
+          Add study
         </HeaderSelectorMenuItem>
-      ))}
-      <DropdownMenuSeparator />
-      <HeaderSelectorMenuItem
-        icon="plus"
-        linkOptions={{ to: "." }}
-        className="text-text-tertiary"
+      </HeaderSelector>
+      <Dialog
+        open={newStudyDialog.isOpen}
+        onOpenChange={newStudyDialog.setIsOpen}
       >
-        Add Study
-      </HeaderSelectorMenuItem>
-    </HeaderSelector>
+        <NewStudyDialogContent
+          teamId={params.team}
+          onSuccess={newStudyDialog.close}
+        />
+      </Dialog>
+    </>
   );
 };

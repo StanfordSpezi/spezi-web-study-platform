@@ -35,7 +35,7 @@ export const HealthDataComponentForm = ({
   return (
     <>
       <CardHeader
-        title="Health Data Component"
+        title="Health data component"
         description="Collect health data from participants."
       />
       <form onSubmit={onSubmit} className="py-6">

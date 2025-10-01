@@ -12,6 +12,7 @@ import {
   PanelLeft,
   type LucideIcon,
 } from "lucide-react";
+import { notImplementedToast } from "@/utils/notImplementedToast";
 import {
   SidebarGroup,
   SidebarMenu,
@@ -46,7 +47,12 @@ export const FooterNav = () => {
     <SidebarGroup>
       <SidebarMenu>
         {navBarItems.map((item) => (
-          <SidebarMenuItem key={item.id}>
+          <SidebarMenuItem
+            key={item.id}
+            onClick={() => {
+              notImplementedToast(item.title);
+            }}
+          >
             <SidebarMenuButton tooltip={item.title}>
               {item.icon && <item.icon />}
               <span>{item.title}</span>

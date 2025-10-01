@@ -22,6 +22,9 @@ const basicInfoFormSchema = z.object({
 
 export type BasicInfoForm = ReturnType<typeof useBasicInfoForm>;
 
+/**
+ * Creates a basic info form that loads the study basic information once available.
+ */
 export const useBasicInfoForm = () => {
   const params = useParams({
     from: "/(dashboard)/$team/$study/configuration/basic-information",

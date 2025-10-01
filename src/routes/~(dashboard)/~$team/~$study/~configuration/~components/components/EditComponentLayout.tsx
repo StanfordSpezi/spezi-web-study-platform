@@ -9,6 +9,8 @@
 import {
   Button,
   ConfirmDeleteDialog,
+  parseUnknownError,
+  toast,
   useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { useNavigate, useParams } from "@tanstack/react-router";
@@ -33,19 +35,13 @@ export const EditComponentLayout = ({
   });
   const navigate = useNavigate();
   const deleteDialog = useOpenState();
-  const deleteComponent = useDeleteComponentMutation({
-    onSuccess: () => {
-      return navigate({
-        to: "/$team/$study/configuration/components",
-        params: { team: params.team, study: params.study },
-      });
-    },
-  });
+  const deleteComponent = useDeleteComponentMutation();
+
   return (
     <>
       <div>
         <RouteHeader
-          title="Edit Component"
+          title="Edit component"
           description="Configure the details of your component."
           accessoryLeft={<RouteHeaderBackLink />}
           accessoryRight={
@@ -69,9 +65,21 @@ export const EditComponentLayout = ({
         open={deleteDialog.isOpen}
         onOpenChange={deleteDialog.setIsOpen}
         entityName="component"
-        onDelete={() => {
-          deleteComponent.mutate({ componentId: params.component });
-          deleteDialog.close();
+        onDelete={async () => {
+          try {
+            await deleteComponent.mutateAsync({
+              componentId: params.component,
+            });
+            await navigate({
+              to: "/$team/$study/configuration/components",
+              params: { team: params.team, study: params.study },
+            });
+            deleteDialog.close();
+          } catch (error) {
+            toast.error("Failed to delete component.", {
+              description: parseUnknownError(error),
+            });
+          }
         }}
       />
     </>

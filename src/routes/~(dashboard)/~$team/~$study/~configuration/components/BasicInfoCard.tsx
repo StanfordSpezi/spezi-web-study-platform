@@ -23,11 +23,11 @@ export const BasicInfoCard = ({ study, isLoading }: BasicInfoCardProps) => {
   });
   return (
     <KeyValueCard
-      title="Basic Information"
+      title="Basic information"
       description="Set your study's title, description, and how it appears to participants."
       actions={
         <EditButtonLink
-          aria-label="Edit Basic Information"
+          aria-label="Edit basic information"
           data-testid="edit-basic-information"
           from="/"
           to="/$team/$study/configuration/basic-information"
@@ -44,7 +44,7 @@ export const BasicInfoCard = ({ study, isLoading }: BasicInfoCardProps) => {
           value: study?.title,
         },
         {
-          key: "Short Title",
+          key: "Short title",
           tooltip: "Used in tight spaces where the full title won't fit.",
           value: study?.shortTitle,
         },
@@ -65,7 +65,7 @@ export const BasicInfoCard = ({ study, isLoading }: BasicInfoCardProps) => {
           value: study?.explanation,
         },
         {
-          key: "Short Explanation",
+          key: "Short explanation",
           tooltip: "A short summary for preview cards and search results.",
           value: study?.shortExplanation,
         },

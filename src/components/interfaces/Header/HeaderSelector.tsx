@@ -31,6 +31,17 @@ export const HeaderSelectorMenuLabel = ({
   return <DropdownMenuLabel className="text-xs">{children}</DropdownMenuLabel>;
 };
 
+interface HeaderSelectorMenuItemProps<
+  TRouter extends RegisteredRouter = RegisteredRouter,
+  TOptions = unknown,
+> {
+  children: ReactNode;
+  icon?: IconName;
+  linkOptions?: ValidateLinkOptions<TRouter, TOptions>;
+  onSelect?: () => void;
+  className?: string;
+}
+
 export const HeaderSelectorMenuItem = <
   TRouter extends RegisteredRouter = RegisteredRouter,
   TOptions = unknown,
@@ -38,23 +49,34 @@ export const HeaderSelectorMenuItem = <
   children,
   icon,
   linkOptions,
+  onSelect,
   className,
-}: {
-  children: ReactNode;
-  icon?: IconName;
-  linkOptions: ValidateLinkOptions<TRouter, TOptions>;
-  className?: string;
-}) => {
+}: HeaderSelectorMenuItemProps<TRouter, TOptions>) => {
+  const content = (
+    <>
+      {icon && (
+        <div className="flex-center size-6 rounded-sm border">
+          <DynamicIcon name={icon} className="size-4 shrink-0 opacity-80" />
+        </div>
+      )}
+      {children}
+    </>
+  );
+
+  if (linkOptions) {
+    return (
+      <DropdownMenuItem className={cn("gap-2 p-2!", className)} asChild>
+        <Link {...linkOptions}>{content}</Link>
+      </DropdownMenuItem>
+    );
+  }
+
   return (
-    <DropdownMenuItem className={cn("gap-2 p-2!", className)} asChild>
-      <Link {...linkOptions}>
-        {icon && (
-          <div className="flex-center size-6 rounded-sm border">
-            <DynamicIcon name={icon} className="size-4 shrink-0" />
-          </div>
-        )}
-        {children}
-      </Link>
+    <DropdownMenuItem
+      className={cn("gap-2 p-2!", className)}
+      onSelect={onSelect}
+    >
+      {content}
     </DropdownMenuItem>
   );
 };
@@ -84,7 +106,7 @@ export const HeaderSelector = ({
             <div className="bg-surface border-border-secondary flex-center -ml-1.5 aspect-square size-6 rounded-md border bg-clip-padding shadow-xs">
               <DynamicIcon
                 name={selectedItem.icon}
-                className="size-3.5"
+                className="size-3.5 opacity-80"
                 strokeWidth={2}
               />
             </div>

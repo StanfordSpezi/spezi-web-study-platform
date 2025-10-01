@@ -107,7 +107,7 @@ export const ScheduleDialog = () => {
             <DialogHeader className="items-center px-6 pb-6 sm:items-start">
               <FeaturedIconContainer className="border-border-tertiary mb-4 size-8 rounded-lg shadow-xs">
                 <div className="grid size-full place-items-center">
-                  <CalendarSync className="text-text-tertiary size-4" />
+                  <CalendarSync className="text-text-tertiary size-4 opacity-80" />
                 </div>
               </FeaturedIconContainer>
               <DialogTitle className="leading-none">Schedule</DialogTitle>

@@ -30,7 +30,7 @@ export const HeaderSelectorSkeleton = ({ hasIcon }: { hasIcon: boolean }) => {
       <div className="grid h-4 w-20 flex-1">
         <Skeleton className="bg-fill-tertiary size-full rounded-sm" />
       </div>
-      <ChevronsUpDown className="ml-auto" />
+      <ChevronsUpDown className="ml-auto opacity-80" />
     </div>
   );
 };

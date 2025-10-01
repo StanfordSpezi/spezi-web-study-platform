@@ -10,6 +10,8 @@ import {
   Field,
   Input,
   Label,
+  parseUnknownError,
+  toast,
   useForm,
 } from "@stanfordspezi/spezi-web-design-system";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -35,12 +37,18 @@ const CreateTeamRoute = () => {
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    const { id } = await createTeam.mutateAsync({ ...data });
-    await navigate({
-      from: "/onboarding",
-      to: "/onboarding/invite",
-      search: { team: id },
-    });
+    try {
+      const { id } = await createTeam.mutateAsync({ ...data });
+      await navigate({
+        from: "/onboarding",
+        to: "/onboarding/invite",
+        search: { team: id },
+      });
+    } catch (error) {
+      toast.error("Failed to create team.", {
+        description: parseUnknownError(error),
+      });
+    }
   });
 
   return (
@@ -72,7 +80,10 @@ const CreateTeamRoute = () => {
                     variant="outline"
                     className="bg-bg size-10 rounded-md"
                   >
-                    <DynamicIcon name={value as IconName} className="size-4" />
+                    <DynamicIcon
+                      name={value as IconName}
+                      className="size-4 opacity-80"
+                    />
                   </Button>
                 </IconPicker>
               )}

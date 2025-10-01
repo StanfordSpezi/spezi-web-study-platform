@@ -202,14 +202,7 @@ interface UseDeleteComponentMutationFnParams {
 /**
  * Mutation for deleting a component.
  */
-export const useDeleteComponentMutation = ({
-  onSuccess,
-}: {
-  // We need this callback to allow for an async navigation after deletion
-  // but before the query invalidation happens. The .mutate method's onSuccess
-  // parameter cannot be async because react-query does not await it.
-  onSuccess?: () => Promise<void>;
-} = {}) => {
+export const useDeleteComponentMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ componentId }: UseDeleteComponentMutationFnParams) => {
@@ -219,7 +212,6 @@ export const useDeleteComponentMutation = ({
       });
     },
     onSuccess: async () => {
-      await onSuccess?.();
       await queryClient.invalidateQueries({
         queryKey: componentsQueryKeys.all,
       });

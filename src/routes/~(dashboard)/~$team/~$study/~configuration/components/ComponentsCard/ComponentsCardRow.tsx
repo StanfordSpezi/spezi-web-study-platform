@@ -17,7 +17,7 @@ import {
   useOpenState,
 } from "@stanfordspezi/spezi-web-design-system";
 import { Link, useParams } from "@tanstack/react-router";
-import { Ellipsis } from "lucide-react";
+import { Edit, Ellipsis, Trash } from "lucide-react";
 import { FeaturedIconContainer } from "@/components/ui/FeaturedIconContainer";
 import { useDeleteComponentMutation } from "@/lib/queries/component";
 import { cn } from "@/utils/cn";
@@ -85,7 +85,7 @@ export const ComponentsCardRowSummary = (
       variant="inverted"
       delayDuration={1000}
     >
-      <span className="line-clamp-1">{props.summary}</span>
+      <span className="line-clamp-1 max-w-fit">{props.summary}</span>
     </Tooltip>
   );
 };
@@ -139,6 +139,7 @@ export const ComponentsCardRowActions = ({
                   component: componentId,
                 }}
               >
+                <Edit className="size-3.5 opacity-80" />
                 Edit
               </Link>
             </DropdownMenuItem>
@@ -146,6 +147,7 @@ export const ComponentsCardRowActions = ({
               disabled={deleteComponent.isPending}
               onClick={deleteDialog.open}
             >
+              <Trash className="size-3.5 opacity-80" />
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -211,7 +211,7 @@ export const ImageUpload = ({
                   Choose an image or drag & drop it here
                 </p>
                 <p className="text-text-tertiary text-xs">
-                  JPG, JPEG, PNG up to {maxSizeInMB}MB
+                  JPG, JPEG, PNG up to {maxSizeInMB}&nbsp;MB
                 </p>
               </div>
             </div>

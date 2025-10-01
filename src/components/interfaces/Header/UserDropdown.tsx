@@ -21,6 +21,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Layers2, LogOut, User } from "lucide-react";
 import { authClient } from "@/lib/authClient";
 import { userRetrieveQueryOptions } from "@/lib/queries/user";
+import { notImplementedToast } from "@/utils/notImplementedToast";
 import { UserAvatar } from "./UserAvatar";
 import { UserDropdownSkeleton } from "./UserDropdownSkeleton";
 
@@ -73,18 +74,26 @@ export const UserDropdown = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User className="size-3.5" />
-            Profile Settings
+          <DropdownMenuItem
+            onSelect={() => {
+              notImplementedToast("Managing profile settings");
+            }}
+          >
+            <User className="size-3.5 opacity-80" />
+            Profile settings
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Layers2 />
+          <DropdownMenuItem
+            onSelect={() => {
+              notImplementedToast("Viewing keyboard shortcuts");
+            }}
+          >
+            <Layers2 className="size-3.5 opacity-80" />
             Shortcuts
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut}>
-          <LogOut />
+          <LogOut className="size-3.5 opacity-80" />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

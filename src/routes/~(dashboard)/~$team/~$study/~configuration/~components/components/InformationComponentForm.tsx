@@ -27,7 +27,7 @@ export const InformationComponentForm = ({
   return (
     <>
       <CardHeader
-        title="Information Component"
+        title="Information component"
         description="Display text and images to provide instructions, explanations, or context to participants."
       />
       <form onSubmit={onSubmit} className="py-6">

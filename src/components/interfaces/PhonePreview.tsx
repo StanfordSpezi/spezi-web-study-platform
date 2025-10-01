@@ -22,6 +22,7 @@ export const PhonePreview = ({ children }: PhonePreviewProps) => {
         "sticky",
         "top-[calc(var(--header-height)+var(--route-header-height)+var(--card-padding))]",
         "h-[calc(100vh-var(--header-height)-var(--route-header-height)-var(--card-padding)*2)]",
+        "max-h-[36rem]",
       )}
     >
       <PhoneMockup>{children}</PhoneMockup>

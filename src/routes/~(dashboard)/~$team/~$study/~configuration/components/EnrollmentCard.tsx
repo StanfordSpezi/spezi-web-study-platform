@@ -33,7 +33,7 @@ export const EnrollmentCard = ({ study, isLoading }: EnrollmentCardProps) => {
       description="Control who can join your study and how they get access."
       actions={
         <EditButtonLink
-          aria-label="Edit Enrollment"
+          aria-label="Edit enrollment"
           data-testid="edit-enrollment"
           from="/"
           to="/$team/$study/configuration/enrollment"

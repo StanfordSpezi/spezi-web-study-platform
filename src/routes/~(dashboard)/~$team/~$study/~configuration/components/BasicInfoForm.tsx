@@ -76,7 +76,10 @@ export const BasicInfoForm = ({
               >
                 <DynamicIcon
                   name={(value ?? "box-select") as IconName}
-                  className={cn("size-4", !value && "text-text-tertiary")}
+                  className={cn(
+                    "size-4 opacity-80",
+                    !value && "text-text-tertiary",
+                  )}
                 />
               </Button>
             </IconPicker>
@@ -112,7 +115,7 @@ export const BasicInfoForm = ({
         name="shortExplanation"
         label={
           <FieldLabel
-            title="Short Explanation"
+            title="Short explanation"
             description="A short summary for preview cards and search results."
           />
         }

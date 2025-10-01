@@ -26,6 +26,15 @@ interface ComponentLabel {
   className: string;
 }
 
+/**
+ * Derives a visual label (icon, text, and styling) for a component based on its type and metadata.
+ *
+ * @example
+ * ```ts
+ * const label = getComponentLabel(component);
+ * // label.text might be "Health data" and label.icon Activity
+ * ```
+ */
 export const getComponentLabel = (component: Component): ComponentLabel => {
   switch (component.type) {
     case "information":
@@ -62,7 +71,7 @@ export const getComponentLabel = (component: Component): ComponentLabel => {
     case "health-data":
       return {
         icon: Activity,
-        text: "Health Data",
+        text: "Health data",
         className: cn("bg-green-500 text-green-50"),
       };
     default:
@@ -74,6 +83,9 @@ export const getComponentLabel = (component: Component): ComponentLabel => {
   }
 };
 
+/**
+ * Generates a concise, human-friendly summary for a component by inspecting its type-specific fields.
+ */
 export const getComponentSummary = (component: Component): string => {
   switch (component.type) {
     case "information":
@@ -112,6 +124,9 @@ export const getComponentSummary = (component: Component): string => {
   }
 };
 
+/**
+ * Produces schedule copy for a component, falling back to sensible defaults when no schedule is configured.
+ */
 export const getComponentSchedule = (component: Component): string => {
   if (component.type === "health-data") {
     return "Continuous";

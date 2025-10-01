@@ -21,7 +21,7 @@ export const BasicInfoLayout = ({
   return (
     <div>
       <RouteHeader
-        title="Basic Information"
+        title="Basic information"
         description="Set your study's title, description, and how it appears to participants."
         accessoryLeft={<RouteHeaderBackLink />}
         accessoryRight={saveButton}
